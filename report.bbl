@@ -1,0 +1,30 @@
+\begin{thebibliography}{1}
+
+\bibitem{migliore1995computer}
+M~Migliore, EP~Cook, DB~Jae, DA~Turner, and D~Johnston.
+\newblock Computer simulations of morphologically reconstructed ca3 hippocampal
+  neurons.
+\newblock {\em Journal of neurophysiology}, Vol.~73, No.~3, 1995.
+
+\bibitem{prusinkiewicz1990}
+P~Prusinkiewicz and A~Lindenmayer.
+\newblock A.[1990] the algorithmic beauty of plants.
+
+\bibitem{torben2007evolving}
+Benjamin Torben-Nielsen.
+\newblock Evolving virtual neuronal morphologies: a case study in genetic
+  l-systems programming.
+\newblock In {\em Advances in Artificial Life}, pp. 1089--1099. Springer, 2007.
+
+\bibitem{torben2009systematic}
+Benjamin Torben-Nielsen and Klaus~M Stiefel.
+\newblock Systematic mapping between dendritic function and structure.
+\newblock {\em Network: Computation in Neural Systems}, Vol.~20, No.~2, pp.
+  69--105, 2009.
+
+\bibitem{三宮信夫1998遺伝アルゴリズムと最適化}
+三宮信夫, 喜多一, 玉置久, 岩本貴司.
+\newblock 遺伝アルゴリズムと最適化.
+\newblock 朝倉書店, 1998.
+
+\end{thebibliography}

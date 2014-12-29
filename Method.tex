@@ -1,0 +1,419 @@
+%#!platex report.tex
+
+ \section{方法}
+ Torben-Nielsen et al\cite{torben2009systematic}の方法をもとに, 以下のよ
+ うにして追試を行った. 方法の概要としては, 遺伝的アルゴリズムを用いてあ
+ らかじめ設定した機能をうまく実現するような細胞の形態やコンダクタンスの
+ 分布を探索するというものである. 神経細胞の形態生成には確率的な手法を用
+ い, その際に用いる確率分布を遺伝的アルゴリズムの遺伝子として用いる. 
+
+ \subsection{神経細胞の機能}
+ 神経細胞に設定する機能は時間差のある2つの入力刺激に対して, その入力の順
+ 番に応じて細胞体での脱分極の大きさを変化させる機能, input-order
+ detectionである. 具体的には, 神経細胞の上下にシナプティックゾーンを設定
+ し, その上下からのシナプス入力の順番を脱分極量の大小によって識別する
+ 機能である. 以下の図\ref{Neuron}に神経細胞と, シナプティックゾーンを例
+ 示する. この機能を持った神経細胞について, 時間的に
+ 上シナプティックゾーン、下シナプティックゾーンの順番で入力刺激を受け取
+ り, 細胞体での最大脱分極量を$R_{u{\to}l}$とする. また逆の順番で入力を与えられ
+ た場合の最大脱分極量を$R_{l{\to}u}$と定義すると, input-order detectionの機
+ 能$F$は
+ \begin{equation}
+  F = \frac{R_{l{\to}u}}{R_{u{\to}l}}
+   \label{F}
+ \end{equation}
+ と表すことができる. ここでは大きい$F$の
+ 値を示す神経細胞について, 機能性の高い神経細胞であると定義する. 
+ input-order detectionについての概念図を以下の図
+ \ref{input-order_detection}に示す. 
+   \begin{figure}[h]
+    \centering
+    \begin{minipage}{0.4\columnwidth}
+     \includegraphics[width=\columnwidth]{./Images/temp.png} 
+     \caption{神経細胞の例}
+     \label{Neuron}
+    \end{minipage}
+    \begin{minipage}{0.4\columnwidth}
+     \centering
+     \includegraphics[width=\columnwidth]{./Images/temp.png} 
+     \caption{input-order detection}
+     \label{input-order_detection}
+    \end{minipage}
+   \end{figure}
+   また, 神経細胞の細胞膜の電気的特性については,特定のイオンチャネルを考
+   慮ないpassiveなパターン, Kaチャネルが存在するパターン, CaTチャネルが
+   存在するパターン, Kaチャネル, CaTチャネルが両方存在するパターンの4つ
+   を仮定した. 
+  \subsection{神経細胞形態の作成方法}
+  簡単のため, 神経細胞の形態は細胞体と樹状突起のみからなるとする.細胞体
+  の形態はあらかじめ設定しておくので, 神経細胞の形態生成とは樹状突起形
+  態を生成することである. また樹状突起形態の生成は確率的に行う. 
+   \subsubsection{神経細胞形態の表現}
+   神経細胞の形態を3次元空間上に再現する. ここで細胞体は直径25${\mu}m$の
+   球として表現し, 樹状突起は円柱の集合体として表現する. 円柱端部の中心
+   は他の円柱や細胞体と結合し, 樹状の構造を形成する. ここで, 細胞体に直接結合
+   している円柱をStem, それ以外の円柱をBranchとし, Stemと, その
+   後に伸びるBranchからなる樹状構造を1つの樹状突起であると定義する. よっ
+   て1つの神経細胞は複数の樹状突起を持つ. この神経細胞形態に関する定義を
+   以下の図\ref{morpho}に示す.
+   \begin{figure}[h]
+    \centering
+    \includegraphics[width=5cm]{./Images/temp.png} 
+    \caption{神経細胞形態に関する定義}
+    \label{morpho}
+   \end{figure}
+   \subsubsection{樹状突起形態生成手法の基本概念}
+   樹状突起形態生成手法の基本はL-system\cite{prusinkiewicz1990}である. 
+   L-systemは, ある記号の集合とその置き換え規則からなり, 初期状態が与え
+   られると, それを再起的に変更していくシステムである. L-systemの例
+   \cite{torben2007evolving}をあげる. まず記号の集合$\{B,F,X,Y\}$定義す
+   る. 次にその置き換え規則として
+   \begin{align*}
+    rules: \hspace{0.2cm} & F \to YF\\
+    & X \to BX
+   \end{align*}
+   を定義する. 初期状態として文字列$FX$が与えられたとすると,
+   L-systemは置き換え規則に従ってこの文字列の置き換えを再起的に行う. 2回
+   目の置き換え終了までの文字列の変化は以下のようになる.
+   \begin{align*}
+    initial:\hspace{0.2cm} & FX \\
+    1^{st} cycle:\hspace{0.2cm} & YFBX \\
+    2^{nd} cycel:\hspace{0.2cm} & YYFBBX
+   \end{align*}
+   1つの樹状突起形態の生成方法として, 三宮 et al\cite{三宮信夫1998遺伝
+   アルゴリズムと最適化}を参考にすると以下のようなL-systemが考えられる.
+   使用する記号の集合として$\{1,2\}$を定義する.置き換え規則としては
+   \begin{align*}
+    rules: \hspace{0.2cm}
+    & 1 \to
+    \begin{cases}
+     2 & \text{if-Termination}\\
+     \begin{cases}
+      21<21> &\text{if-Bifurcation} \tag{$*$}\\
+      21 &\text{else}
+     \end{cases} & \text{else}
+    \end{cases}\\
+    & 2 \to 2
+   \end{align*}
+   が考えられる. 記号$1,2$を樹状突起構造に置き換えて考えると, 記号$1$は樹状
+   構造における未成長の点を表し, 記号$2$は伸張済みの円柱構造を表すと考えられ
+   る. また$<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. 記号$1$の置き換
+   え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
+   される. 樹状突起構造は初期状態$\{1\}$から開始し, 樹状構造が変
+   化しなくなるまで置き換えを行うことで得られる.
+   ただし最初の置き換えは必ず記号$1$が含まれるようにする.\\
+   最終的に得られる文字列は記号$2$のみからなり, 文字列の先端の記号$2$がStemを表し,
+   それ以外はBranchを表す. 
+   \subsubsection{パラメータセットからのStem, Branch生成}
+   1つの樹状突起は1組のパラメータセットから作成される. このパラメータセットは前
+   項の樹状突起生成L-systemにおける記号$\{1\}$の置き換え($*$)や生成される
+   Stem, Branchの形態の決定に使用する. 1つの神経細胞は複数のパラメータセッ
+   トを持ち, 複数の樹状突起が生成される. パラメータセットの項目を以下の
+   表\ref{parameter_set}に示す. 
+   \begin{table}[h]
+    \caption{パラメータセット}
+    \label{parameter_set}
+    \begin{center}
+     \begin{tabular}[t]{|c|c|} \hline
+      パラメータ名 & 説明 \\ \hline \hline
+      Stem elevation MIEW [$^{\circ}$]& Stemの仰角決定に用いる平均値 \\
+      \hline
+      Stem elevation SIGMA[$^{\circ}$] & Stemの仰角決定に用いる標準偏差値  \\ \hline
+      Stem rotation MIEW  [$^{\circ}$]& Stemの回転角決定に用いる平均値 \\ \hline
+      Stem rotation SIGMA [$^{\circ}$]& Stemの回転角決定に用いる標準偏差
+	  値 \\ \hline  \hline
+      Stem diameter  [${\mu}m$]& Stemの直径 \\ \hline  \hline
+      Segment Length [${\mu}m$]& StemおよびBranchの長さ \\ \hline  \hline
+      Branch elevation MIEW [$^{\circ}$]& Branchの仰角決定に用いる平均値 \\ \hline
+      Branch elevation SIGMA[$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 \\ \hline
+      Branch rotation MIEW  [$^{\circ}$]& Branchの回転角決定に用いる平均値 \\ \hline
+      Branch rotation SIGMA [$^{\circ}$] & Branchの回転角決定に用いる標
+	  準偏差値  \\ \hline  \hline
+      Bifurcation $\alpha$ & 樹状構造の分岐導入判定に用いる$k$値 \\ \hline
+      Bifurcation $\beta$  & 樹状構造の分岐導入判定に用いる$\theta$値 \\
+      \hline  \hline
+      Termination $\alpha$ & 樹状構造の終端点導入判定に用いる$k$値 \\ \hline
+      Termination $\beta$  & 樹状構造の終端点導入判定に用いる$theta$値
+	  \\ \hline  \hline
+      K Stem conductance [$S/cm^2$]& StemのKaコンダクタンス値 \\ \hline
+      K taper rate  & Kaコンダクタンスの伝搬率 \\ \hline  \hline
+      Ca Stem conductance [$S/cm^2$]& StemのCaTコンダクタンス値 \\ \hline
+      Ca taper rate  & CaTコンダクタンスの伝搬率 \\ \hline
+     \end{tabular}
+    \end{center}
+   \end{table}
+
+   以下にStem, Branchの生成方法を述べる. 
+   \begin{itemize}
+    \item \textbf{長さの決定}\\
+	  Stem, Branchの長さはパラメータセットにある
+	  $Segment\hspace{0.1cm}Length$の値そのものである. 
+    \item \textbf{太さの決定}\\
+	  Stem, Branchの太さを決定する. Stemの場合は, 
+	  \begin{itemize}
+	   \item 太さ: $Stem\hspace{0.1cm}diameter$
+	  \end{itemize}
+	  Branchの場合は, そのBranchの親となるStem, Branchの太さを
+	  $diam_P$とし, 
+	  \begin{itemize}
+	   \item 太さ: $diam_P + diam_P \times taper\hspace{0.1cm}rate$
+	  \end{itemize}
+	  ここで, $taper\hspace{0.1cm}rate = -0.125$である. 
+
+    \item \textbf{仰角の決定}\\
+	  Stem, Branchの仰角は正規分布から確率的に決定する. 使用するパラ
+	  メータはStemの場合,
+	  \begin{itemize}
+	   \item 平均値: $Stem\hspace{0.1cm}elevation\hspace{0.1cm}MIEW$
+	   \item 標準偏差: $Stem\hspace{0.1cm}elevation\hspace{0.1cm}SIGMA$
+	  \end{itemize}
+	  Branchの場合, 
+	  \begin{itemize}
+	   \item 平均値: $Branch\hspace{0.1cm}elevation\hspace{0.1cm}MIEW$
+	   \item 標準偏差: $Branch\hspace{0.1cm}elevation\hspace{0.1cm}SIGMA$
+	  \end{itemize}
+
+    \item \textbf{回転角の決定}\\
+	  Stem, Branchの回転角は正規分布から確率的に決定する. 使用するパラ
+	  メータはStemの場合,
+	  \begin{itemize}
+	   \item 平均値: $Stem\hspace{0.1cm}rotation\hspace{0.1cm}MIEW$
+	   \item 標準偏差: $Stem\hspace{0.1cm}rotation\hspace{0.1cm}SIGMA$
+	  \end{itemize}
+	  Branchの場合, 
+	  \begin{itemize}
+	   \item 平均値: $Branch\hspace{0.1cm}rotation\hspace{0.1cm}MIEW$
+	   \item 標準偏差: $Branch\hspace{0.1cm}rotation\hspace{0.1cm}SIGMA$
+	  \end{itemize}
+
+    \item \textbf{コンダクタンスの決定}\\
+	  Stem, Branchが持つコンダクタンスの値について決定する. 各種のコ
+	  ンダクタンスについて, Stemのコンダクタンス値は
+	  \begin{itemize}
+	   \item コンダクタンス値: $Stem\hspace{0.1cm}conductance$
+	  \end{itemize}
+	  である. Branchの場合はそのBranchの親のBranchやStemのコンダクタンス
+	  値を$Conductance_{P}$とし、
+	  \begin{itemize}
+	   \item コンダクタンス値: $Conductance_{P} \times taper\hspace{0.1cm}rate$
+	  \end{itemize}
+	  で算出する. 
+   \end{itemize}
+   形態生成L-systemにおける記号$2$はStemやBranchなどの形態情報に対応する. 
+   よって記号$1$には3次元空間上の座標情報を設定することができる. 初
+   期状態の記号$1$の座標を原点$(0,0,0)$とする. また原点から記号$1_x$に至
+   るまでに通過するStemやBranchの長さの和を$path(1_x)$とする. ここで記号
+   $1$の置き換え規則($*$)の選択方法を以下に示す.
+   \begin{enumerate}
+    \item \textbf{Termination $ 1 \to 2$} \\
+	  $[0,1]$の範囲で一様乱数を一つ生成し, その値を$rand$とする.
+	  累積ガンマ分布$Cumulative\hspace{0.1cm}\gamma\hspace{0.05cm}(x)$を用いて, 
+	  \begin{equation*}
+	   Cumulative\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
+	  \end{equation*}
+	  のとき慎重停止とする. ただし累積ガンマ分布のパラメータとして, 
+	  \begin{itemize}
+	   \item $k$: $Termination\hspace{0.1cm}alfa$
+	   \item $\theta$: $Termination\hspace{0.1cm}beta$
+	  \end{itemize}	  
+	  を用いる
+
+    \item \textbf{Bifurcation $ 1 \to 21<21>$} \\
+	  上記の条件を満たさなかった場合のみBifurcationの判断を行う. 
+	  $[0,1]$の範囲で一様乱数を一つ生成し, その値を$rand$とする.
+	  最大値が0.8になるように実数倍したガンマ分布
+	  $Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(x))$を用いて,
+	  \begin{equation*}
+	   Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
+	  \end{equation*}
+	  のとき分岐を行う. ただしガンマ分布のパラメータとして, 
+	  \begin{itemize}
+	   \item $k$: $Bifurcation\hspace{0.1cm}alfa$
+	   \item $\theta$: $Bifurcation\hspace{0.1cm}beta$
+	  \end{itemize}	  
+	  を用いる
+
+    \item \textbf{Elongation $1 \to 21$} \\
+	  上記の条件を満たさなかった場合, Stem, Branchを伸張させる.
+
+%
+% ヒューリスティックスについても書く
+%
+   \end{enumerate}
+   \subsubsection{仰角, 回転角について}
+   Stem, Branchの角度の設定には, 親となるStem, Branchの向きにあわせた相
+   対的な座標軸を用いる. 具体的には以下のようにする. 
+   \begin{itemize}
+    \item \textbf{Stemの角度設定}
+	  \begin{enumerate}
+	   \item 仰角の設定 \\
+		 仰角を$elevation^{\circ}$とする. まず, Stemは3次元空間
+		 の原点からx軸と同じ方向に伸びているとする. ここからz軸
+		 を中心として右ねじの方向に$elevation^{\circ}$回転させる.
+		 この際y軸, x軸も同様に回転を行い, それぞれy'軸, z'軸と
+		 する.
+	   \item 回転角 \\
+		 次に, 回転角を$rotation^{\circ}$とする. 仰角と同様に,
+		 y'軸の右ねじの向きに$rotation^{\circ}$回転させる. また,
+		 x'軸, z軸についても同様の回転を行い, それぞれx''軸, z'
+		 軸とする.
+	  \end{enumerate}
+    \item \textbf{Branchの角度設定} \\
+	  Stemと同様に行う. ただし, そのBranchの親となるStem, Branchによっ
+	  て回転を与えたx'',y',z'軸を用いる. 
+   \end{itemize}
+   最終的に得られた樹状突起形態は, 細胞体の表面までStemの方向に平行移動
+   させる. 
+   \subsubsection{シナプティックゾーンとシナプスの付与}
+   3次元空間上の原点に細胞体を配置し, y軸方向の$170 < y < 190$の範囲を
+   Redシナプテックゾーン, y軸方向の$-170 > y > 190$の範囲をBlueシナプテック
+   ゾーンと定義する. 上記の手法で形成した樹状突起が上下のシナプテックゾー
+   ンに入った場合, 樹状突起上の$5{\mu}m$ごとに1つのシナプスを付与する. 上下のシ
+   ナプテックゾーン, シナプスが付与された樹状突起の例を図\ref{synapse}に示す.
+      \begin{figure}[h]
+       \centering
+       \includegraphics[width=5cm]{./Images/temp.png} 
+       \caption{シナプテックゾーン, シナプス}
+       \label{synapse}
+      \end{figure}
+      
+  \subsection{シミュレーション}
+  前項の神経細胞形態によって作成した神経細胞に対して, 機能性を検証するた
+  めの数理シミュレーションを行った. このシミュレーションにはNEURONシミュ
+  レータを用いた. 以下にシミュレーションに用いた神経細胞モデルの詳細を述
+  べる
+   \subsubsection{数理モデル}
+   L-systemによって作成された神経細胞形態は, 数理シミュレーションを行える
+   ように$5{\mu}m$ごとに1つのコンパートメントとして, その膜電位の挙動を
+   数理モデル化した. 神経細胞全体ではマルチコンパートモデルを形成してい
+   る. コンパートメントの膜上にシナプスや, 特定のイオンチャネルが分布し
+   ていない場合, 単一コンパートメントの膜電位($V_i$)は以下の式によって計算
+   される.
+   \begin{equation}
+    cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + g_{i,i - 1}(V_{i - 1}
+     %このcmは小文字か大文字か?
+     - V_i) + g_{i,i + 1}(V_{i + 1} - V_i)
+     \label{V_i}
+   \end{equation}
+   コンパートメントの膜上にシナプスが分布している場合は上式\ref{V_i}の右
+   辺に以下の項を追加する.
+   \begin{equation}
+    (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}})g_{syn}(V_i
+     - E_{syn})
+     \label{eq_syn}
+   \end{equation}
+   細胞膜上にKaチャネル, CaTチャネルを分布させる場合は, Migliore et
+   al\cite{migliore1995computer}に示されるイオンチャネルのモデルを用いた. 
+
+   また, シミュレーションに関わるパラメータを以下の表\ref{sim_para}に示す.
+      \begin{table}[h]
+       \caption{シミュレーションパラメータ}
+       \label{sim_para}
+       \begin{center}
+	\begin{tabular}[t]{|c|c|} \hline
+	 パラメータ名 & 説明 \\ \hline \hline
+	 Simulation time [$ms$]& 50 または 100 \\\hline
+	 $Ra$  [${\Omega}cm$] & 100 \\ \hline
+	 $Cm$  [${\mu}F/cm^2$] & 0.8 \\ \hline
+	 ${\tau}_{1}$ [$ms$]& 0.5\\ \hline
+	 ${\tau}_{2}$ [$ms$]& 2\\ \hline
+	 $V_{init}$ [$mV$]& -70\\ \hline
+	 $g_{pas}$ [$S/cm^2$]& $2.5 \times 10^{-5}$\\ \hline
+	 $E_{pas}$ [$mV$]& -70\\ \hline
+	 $T$ [$^{\circ}C$] & 37\\ \hline
+	\end{tabular}
+       \end{center}
+      \end{table}
+      シミュレーションはNEURONを用いて, CVodeアルゴリズムを用いて行った.
+      CVodeアルゴリズムを用いる際のエラーは$10^{-5}$未満に設定した. 
+  \subsection{遺伝アルゴリズム}
+  神経細胞を個体として200個体, 世代数650で遺伝アルゴリズムを用いたパラメー
+  タ最適化を行った. この遺伝アルゴリズムにおける遺伝子とは個体の持つパラ
+  メータセット\ref{parameter_set}である. 遺伝アルゴリズムでは, エリート
+  保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
+   \subsubsection{個体評価}
+   上述の通り各神経細胞の形態を生成しシミュレーションを行い, その結果を
+   もとに個体の評価を行う. しかし個体によっては上下のシナプティックゾー
+   ンに樹状突起を伸ばせず, そもそもシミュレーションを行うことができない
+   こともある. また神経細胞をより実物に近づけることと, 妥当なシミュレー
+   ションを行うことを目的としていくつかのヒューリステックスを導入した.\\
+   以下に個体の評価方法を述べる. まず個体の評価としてペナルティが与えられ
+   る場合を以下に示す. 
+
+   \begin{itemize}
+    \item \textbf{形態的エラー}\\
+	  以下の場合はシミュレーションを行わず, 平均値-100, 標準偏差5の
+	  ガウス分布から乱数を発生させ, その値を評価値とした. 
+	  \begin{itemize}
+	   \item 神経細胞全体でStemとBranchの個数が合計15未満の場合
+	   \item 神経細胞全体で樹状突起の分岐が一つもない場合
+	   \item 上下のシナプティックゾーンにシナプスを作れなかった場合
+	  \end{itemize}
+    \item \textbf{EPSPエラー}\\
+	  シミュレーションを行った場合でも以下の場合は平均値-50, 標準偏
+	  差5のガウス分布から乱数を発生させ, その値を評価値とした.
+	  \begin{itemize}
+	   \item 各シナプティックゾーン単体での発火による細胞体での膜電
+		 位の脱分極が2mV以下の場合
+	  \end{itemize}
+	  以下の項目は神経細胞の膜状にKaチャネル, CaTチャネルを分布させ
+	  る場合にのみ考慮する. これは神経細胞での発火や, 膜電位の振動を
+	  抑制するためである.
+	  \begin{itemize}
+	   \item 細胞体での脱分極量が25mVを超えた場合
+	   \item シミュレーションの最後の5ステップで膜電位の上昇が起こっ
+		 た場合
+	  \end{itemize}
+   \end{itemize}
+
+   以上の場合は個体のinput-order detectionの機能性について考慮することな
+   くペナルティを与える. \\
+   次にそれ以外の場合を述べる.
+   \begin{itemize}
+    \item \textbf{Bad performance}\\
+	  式\ref{F}における$F$の逆数$F^(-1)$が0.9以上の場合, 以下の式により評
+	  価値を与える.
+	  \begin{equation}
+	   評価値: -F^{-1}
+	  \end{equation}
+	  
+    \item \textbf{Good performance}\\
+	  式\ref{F}における$F$の逆数$F^(-1)$が0.9未満の場合, 以下の式により評
+	  価値を与える.
+	  \begin{align}
+	   評価値: 100 - Function\hspace{0.1cm}ratio \times F^{-1} -
+	   Morphology \hspace{0.1cm} ratio \times (1 - \frac{L_0}{Neuro\hspace{0.1cm}size})
+	  \end{align}
+	  ここで$L_0$は細胞体から上下のシナプティックゾーンまでの距離の
+	  和($340{\mu}m$)であり, $Neuro\hspace{0.1cm}size$は神経細胞の
+	  樹状突起の長さの総和である. また$Function\hspace{0.1cm}ratio$
+	  と$Morphology \hspace{0.1cm} ratio$はそれぞれ評価値に体する機
+	  能性, 細胞サイズの影響度を表し, $Function\hspace{0.1cm}ratio =
+	  75$, $Morphology \hspace{0.1cm} ratio = 25$とした. 
+   \end{itemize}
+   よって評価値は100に近いほど良い評価であるとする. 
+   \subsubsection{エリート保存}
+   各世代において最大の評価値をとった個体の遺伝子はそのまま次世代に引き
+   継がれる. 
+   \subsubsection{一点交叉, 突然変異}
+   %交叉、突然変異を起こす個体の数は中心極限定理的な考えで求められる
+   次世代の個体は一点交叉または突然変異のどちらかの手法によって作成され
+   る. 一点交叉は評価値上位$\mu$個の個体を親として, $\lambda$個の子個体
+   を生成する. この$\lambda$個の子個体は評価値下位$\lambda$個の個体と交
+   換される. 突然変異は残りの$200 - \lambda$個の個体に対して適用される. 
+   ここで$\mu = 10$
+   \begin{itemize}
+    \item 一点交叉\\
+	  評価値上位の$\mu$個体から確率的に親を2個体選択する. 評価値i番目の
+	  個体が選択される可能性を$P_i$とすると,
+	  \begin{equation}
+	   P_i =  
+	    \begin{cases}
+	     (\frac{1}{2})^i & \text{$(i < \mu$)}\\
+	     (\frac{1}{2})^{i - 1} & \text{$(i = \mu)$}
+	    \end{cases}\\
+	  \end{equation}
+	  なお, 同じ個体が重複して選択されないようにした. 
+    \item 突然変異\\
+	  
+   \end{itemize}

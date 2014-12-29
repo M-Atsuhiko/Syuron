@@ -1,0 +1,144 @@
+\documentclass[]{jarticle}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{float}
+\usepackage{subcaption}
+\usepackage[dvipdfmx]{graphicx,xcolor}
+
+\begin{document}
+\title{研究進捗報告}
+\author{計算神経科学研究室\\M2 村上敦彦}
+\maketitle
+ \section{研究背景}
+ \section{方法}
+ 本研究の方法は主にTorben-Nielsen et al\cite{torben2009systematic}を参考にし
+ ている. 方法の概略は, あらかじめ設定した神経細胞の機能をうまく実現する
+ 神経細胞形態を進化的アルゴリズムを用いて探索するというものである. 神経細胞の形
+ 態は確率的に与えられ, その形態生成の際に用いるパラメータを進化的アルゴ
+ リズムにおける遺伝子とする. 方法の概略図を以下の図\ref{inverse_approach}に示す. 
+
+  %inverse approachの概略図をのせる
+ \begin{figure}[h]
+  \centering
+  \includegraphics[width=5cm]{./Images/temp.png} 
+  \caption{inverse approach}
+  \label{inverse_approach}
+ \end{figure}
+
+ 以下の節において, 方法の詳細(形態生成, 進化的アルゴリ
+ ズム, シミュレーション)を述べる. 
+
+  \subsection{形態生成}
+   \subsubsection{神経細胞形態の表現方法}
+   %一応これにも参考文献がある?
+   %L-systemを使っていると言った方がよいか?
+   神経細胞の形態を計算機上で表現するために, 神経細胞の形態は三次元空間
+   上に配置された立体図形の集合として扱う.以下の図
+   \ref{reconstructed-neuron}に再現した神経細胞の例を示す. 本研究では神
+   経細胞の細胞体および樹状突起のみを用いるので, 軸索については扱わない. 
+   
+   \begin{figure}[h]
+    \centering
+    \includegraphics[width=5cm]{./Images/temp.png} 
+    \caption{再現された神経細胞の例}
+  \label{reconstructed-neuron}
+   \end{figure}
+   
+   神経細胞の細胞体は球として表現し, その他の樹状突起は円柱の集合として
+   表現する. 細胞体の直径は$25{\mu}m$とした. 樹状突起を表す円柱は末端部
+   分で他の円柱や細胞体と接しており, この部分で他と結合しているとみなす.
+   その部分以外で複数の円柱が空間的に重なっていたとしてもその部分は結合
+   しているとはみなさない. 
+
+   細胞体と直接結合している円柱をStemと呼び, それ以外の円柱をbranchと呼
+   ぶ. Stemから伸びる一つの樹状構造を, Stemも含めて一つの樹状突起と定義する. 
+   すなわち神経細胞はひとつの細胞体と複数の樹状突起を持つ. これらの定義を図
+   \ref{reconstructed-neuron}に示す. 
+
+   \begin{figure}[h]
+    \centering
+    \includegraphics[width=5cm]{./Images/temp.png} 
+    \caption{細胞体, Stem, 樹状突起の例}
+  \label{mor-determination}
+   \end{figure}
+
+   神経細胞形態の生成は, 最初に三次元空間の原点に細胞体を配置しそれに個々
+   の樹状突起を確率的に生成することで行う.以下で単一樹状突起の生成方法を
+   述べる. 
+   \subsubsection{単一樹状突起形態の生成方法}
+   %アルゴリズミックに書く
+   樹状突起の生成方法は基本的にDOL-system\cite{prusinkiewicz1990}の手法
+   を基にしている. DOL-Systemはある記号の集合と, その記号の置き換え規則
+   の集合からなる. 
+
+   ひとつの樹状突起は以下の表\ref{tree_param}に表されるパラメータセット
+   を持つ.このパラメータセットを用いて確率的に樹状突起が生成される. また
+   このパラメータセットは後に述べる進化的アルゴリズムの遺伝子でもある. 
+
+   \begin{table}[h]
+    \caption{樹状突起パラメータセット}
+    \label{tree_param}
+    \begin{center}
+     \begin{tabular}[t]{|c|c|} \hline
+      パラメータ名 & 説明 \\ \hline \hline
+      Stem elevation MIEW & Stemの仰角決定に用いる平均値 \\ \hline
+      Stem elevation SIGMA & Stemの仰角決定に用いる標準偏差値  \\ \hline
+      Stem rotation MIEW  & Stemの回転角決定に用いる平均値 \\ \hline
+      Stem rotation SIGMA  & Stemの回転角決定に用いる標準偏差値 \\ \hline
+      Stem diameter  & Stemの直径 \\ \hline
+      Segment length  & Stemおよびbranchの長さ \\ \hline
+      Branch elevation MIEW & branchの仰角決定に用いる平均値 \\ \hline
+      Branch elevation SIGMA & branchの仰角決定に用いる標準偏差値 \\ \hline
+      Branch rotation MIEW  & branchの回転角決定に用いる平均値 \\ \hline
+      Branch rotation SIGMA  & branchの回転角決定に用いる標準偏差値  \\ \hline
+      Bifurcation $\alpha$ & 樹状構造の分岐導入判定に用いる$alpha$値 \\ \hline
+      Bifurcation $\beta$  & 樹状構造の分岐導入判定に用いる$beta$値 \\ \hline
+      Termination $\alpha$ & 樹状構造の終端点導入判定に用いる$alpha$値 \\ \hline
+      Termination $\beta$  & 樹状構造の終端点導入判定に用いる$beta$値 \\ \hline
+      K Stem conductance & StemのKaコンダクタンス値 \\ \hline
+      K taper rate  & Kaコンダクタンスの伝搬率 \\ \hline
+      Ca Stem conductance & StemのCaTコンダクタンス値 \\ \hline
+      Ca taper rate  & CaTコンダクタンスの伝搬率 \\ \hline
+     \end{tabular}
+    \end{center}
+   \end{table}
+
+   樹状突起形態生成のアルゴリズムを以下の図\ref{Dendrite-argorythm}に示す.
+
+   \begin{figure}[h]
+    \centering
+    \includegraphics[width=5cm]{./Images/temp.png} 
+    \caption{樹状突起形態生成アルゴリズム}
+  \label{Dendrite-argorythm}
+   \end{figure}
+
+   \begin{enumerate}
+    \item \textbf{細胞体の配置}\\
+	  三次元空間の原点に細胞体を配置する
+    \item \textbf{Stemの生成}\\
+	  以下の表\ref{stem_param}に示される形態パラメータを決定すること
+	  でStemを生成する. 
+	  \begin{table}[h]
+	   \caption{Stem生成}
+	   \label{stem_param}
+	   \begin{center}
+	    \begin{tabular}[t]{|c|c|c|c|} \hline
+	     パラメータ名 & 説明 & 確率分布 & 確率パラメータ(遺伝子) \\ \hline
+	     \hline
+	     length & 長さ & Constant & Segment length \\ \hline
+	     elevation & 仰角 & Gausian & Stem elevation MIEW, Stem elevation SIGMA \\ \hline
+	     rotation  & 回転角 & Gausian & Stem rotation MIEW, Stem rotation
+			 SIGMA \\ \hline
+	    \end{tabular}
+	   \end{center}
+	  \end{table}
+   \end{enumerate}
+   %仰角、回転角についての説明をいれる
+  \subsection{進化的アルゴリズム}
+   \subsubsection{一点交叉}
+   \subsubsection{突然変異}
+  \subsection{シミュレーション}
+ \section{結果}
+ \section{考察}
+ \bibliographystyle{jplain}
+ \bibliography{biblio}
+\end{document}
