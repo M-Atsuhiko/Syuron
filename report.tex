@@ -1,27 +1,53 @@
-\documentclass[]{jarticle}
-\usepackage[dvipdfmx]{graphicx}
-\usepackage{float}
-\usepackage{amsmath}
-\usepackage{subcaption}
-\usepackage[dvipdfmx]{graphicx,xcolor}
+\documentclass[12pt,oneside,openany]{jbook}
+\usepackage{my_settings}
+
+
+% 修士論文(飯田さん 2004)
+% 1,表紙
+% 2,内容概説
+% 3,目次
+% 4,図目次
+% 5,表目次
+% 6,(第一章)序論(研究背景、目的)
+% 7,(第二章)原理および方帆
+% 8,(第三章)結果
+% 9,(第四章)考察
+% 10,謝辞
+% 11,参考文献
 
 \begin{document}
-\title{研究進捗報告}
-\author{計算神経科学研究室}
-\maketitle
- \section{はじめに}
- Torben-Nielsen et al\cite{torben2009systematic}の追試を行っていましたが、
- ある程度妥当な結果が得られたので現段階での状況を報告させていただきます. 
+ \layout%テスト レイアウト表示
+ %1,表紙
+ \maketitle
 
- %方法
+ \frontmatter
+ %2,内容概説
+ \input{./abst.tex}
+
+ % 3,目次
+ \tableofcontents   
+ % 4,図目次
+ \listoffigures     
+ % 5,表目次
+ \listoftables      
+
+ \mainmatter
+
+ %6,第一章 序論
+ \input{./introduction.tex}
+ %7,第二章 方法
  \input{./Method.tex}
- %結果
+ %8,第三章 結果
  \input{./result.tex}
- %考察
+ %9,第四章 考察
  \input{./Discussion.tex}
 
- \section{今後の予定}
+ \backmatter
+ %10,謝辞
+ \input{./Syaji.tex}
 
+ %11,参考文献
+ \addcontentsline{toc}{chapter}{参考文献}
  \bibliographystyle{jplain}
  \bibliography{biblio}
 \end{document}
