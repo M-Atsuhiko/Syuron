@@ -1,8 +1,8 @@
-This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (utf8.euc) (TeX Live 2014/MacPorts 2014_1) (preloaded format=platex 2014.7.9)  5 JAN 2015 18:54
+This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (utf8.euc) (TeX Live 2014/MacPorts 2014_1) (preloaded format=platex 2014.7.9)  13 JAN 2015 10:39
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**report.tex
+**./report.tex
 (./report.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2014/05/01> patch level 0)
 Babel <3.9k> and hyphenation patterns for 43 languages loaded.
@@ -230,9 +230,21 @@ Package caption Info: End \AtBeginDocument code.
 One-sided document style.
 [1
 
-] [1
+] (./Title.tex
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <20.74> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 12.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <20.74> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 12.
 
-] (./abst.tex) [1
+Underfull \vbox (badness 10000) detected at line 12
+ []
+
+
+Overfull \hbox (16.83745pt too wide) in paragraph at lines 10--13
+ []|  [] 
+ []
+
+[2]) (./Abst.tex) [1
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <24.88> not available
@@ -263,7 +275,7 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 
 [4
 
-] (./introduction.tex
+] (./Introduction.tex
 第 1 章
 ) (./Method.tex [1
 
@@ -271,13 +283,13 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 ]
 第 2 章
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 2.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 4.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 2.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 4.
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 9.
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 11.
 LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 9.
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 11.
 File: ./Images/temp.png Graphic file (type bmp)
 <./Images/temp.png>
 File: ./Images/temp.png Graphic file (type bmp)
@@ -292,13 +304,13 @@ File: ./Images/temp.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 147.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 149.
 
 (/opt/local/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 147.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 149.
  [4] [5] [6]
 File: ./Images/temp.png Graphic file (type bmp)
 
@@ -307,21 +319,25 @@ File: ./Images/temp.png Graphic file (type bmp)
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [8] [9]
-Overfull \hbox (10.49059pt too wide) in paragraph at lines 385--392
+Overfull \hbox (10.49059pt too wide) in paragraph at lines 387--394
 \JY1/mc/m/n/12 あり\OT1/cmr/m/n/12 , $\OML/cmm/m/it/12 Neuro size$ \JY1/mc/m/n/
 12 は神経細胞の樹状突起の長さの総和である\OT1/cmr/m/n/12 . \JY1/mc/m/n/12 また 
 $\OML/cmm/m/it/12 Function ratio$
  []
 
-[10]) (./result.tex [11]
+[10]) (./Result.tex [11]
 第 3 章
 ) (./Discussion.tex [12
 
 ]
 第 4 章
-) [13
+) (./Conclusion.tex [13
 
-] (./Syaji.tex) (./report.bbl [14
+]
+第 5 章
+) [14
+
+] (./Syaji.tex) (./report.bbl [15
 
 
 ]
@@ -333,7 +349,7 @@ LaTeX Font Warning: Font shape `JT1/gt/m/it' undefined
 LaTeX Font Warning: Font shape `JY1/gt/m/it' undefined
 (Font)              using `JY1/gt/m/n' instead on input line 7.
 
-) [15
+) [16
 
 ] (./report.aux)
 
@@ -341,12 +357,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 3028 strings out of 494725
- 42342 string characters out of 6169257
+ 3039 strings out of 494725
+ 42497 string characters out of 6169257
  116976 words of memory out of 5000000
- 6416 multiletter control sequences out of 15000+600000
- 19336 words of font info for 76 fonts, out of 8000000 for 9000
+ 6421 multiletter control sequences out of 15000+600000
+ 20107 words of font info for 79 fonts, out of 8000000 for 9000
  218 hyphenation exceptions out of 8191
- 49i,22n,42p,285b,408s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,22n,42p,287b,408s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.dvi (21 pages, 47148 bytes).
+Output written on report.dvi (22 pages, 47548 bytes).

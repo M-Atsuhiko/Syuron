@@ -1,28 +1,28 @@
 \documentclass[12pt,oneside,openany]{jbook}
 \usepackage{my_settings}
 
-
-% 修士論文(飯田さん 2004)
+% 修士論文
 % 1,表紙
 % 2,内容概説
 % 3,目次
 % 4,図目次
 % 5,表目次
 % 6,(第一章)序論(研究背景、目的)
-% 7,(第二章)原理および方帆
+% 7,(第二章)研究手法・原理
 % 8,(第三章)結果
 % 9,(第四章)考察
-% 10,謝辞
-% 11,参考文献
+% 10,(第五章)結論
+% 11,謝辞
+% 12,参考文献
 
 \begin{document}
  \layout%テスト レイアウト表示
  %1,表紙
- \maketitle
+ \input{./Title.tex}
 
  \frontmatter
  %2,内容概説
- \input{./abst.tex}
+ \input{./Abst.tex}
 
  % 3,目次
  \tableofcontents   
@@ -34,22 +34,22 @@
  \mainmatter
 
  %6,第一章 序論
- \input{./introduction.tex}
+ \input{./Introduction.tex}
  %7,第二章 方法
  \input{./Method.tex}
  %8,第三章 結果
- \input{./result.tex}
+ \input{./Result.tex}
  %9,第四章 考察
  \input{./Discussion.tex}
+ %10,第五章 結論
+ \input{./Conclusion.tex}
 
  \backmatter
- %10,謝辞
+ %11,謝辞
  \input{./Syaji.tex}
 
- %11,参考文献
+ %12,参考文献
  \addcontentsline{toc}{chapter}{参考文献}
  \bibliographystyle{jplain}
  \bibliography{biblio}
 \end{document}
-
-%ところどころに改善点, 追加するべき項目をコメントで書いておく
