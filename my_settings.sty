@@ -2,7 +2,7 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{subcaption}
-%\usepackage{fancyhdr}
+%\usepackage{cite}
 \usepackage[dvipdfmx]{graphicx,xcolor}
 
 \usepackage{layout}
@@ -23,3 +23,10 @@
 \pagestyle{headings}
 
 \renewcommand{\bibname}{参考文献}
+
+\makeatletter
+ \DeclareRobustCommand\cite{\unskip
+\@ifnextchar[{\@tempswatrue\@citex}{\@tempswafalse\@citex[]}}
+ \def\@cite#1#2{$^{\hbox{\scriptsize{#1\if@tempswa , #2\fi})}}$}
+ \def\@biblabel#1{#1)}
+\makeatother
