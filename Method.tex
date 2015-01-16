@@ -1,5 +1,10 @@
 %#!platex ./report.tex
 
+%
+% 全体的な小節のたてかたが甘い
+% 内容を書く順番を考えた方がいい
+
+
 \chapter{研究手法・原理}
  \section{手法の概要}
  本研究の手法の概略は, まず単一の神経細胞が持ちうる機能をあらかじめ設定し, 
@@ -52,9 +57,11 @@
    簡単のため神経細胞の形態は細胞体と2本の樹状突起のみからなるとする.
    また細胞体の形態は常に一定の大きさの球形であるとする. 
    よって神経細胞の形態生成は樹状突起の形態を生成することで行われる.
-   樹状突起形態の生成は確率的な手法によって行う. 
+   樹状突起形態の生成は確率的な手法を用いる. また樹状突起上のコンダクタンス分布の決定には
+   線形分布とガウス分布の2つの手法をそれぞれ使用した. 
+
    \subsection{神経細胞形態の表現}
-     神経細胞の形態を3次元空間上に再現する. ここで細胞体は直径25$[{\rm{{\mu}m}}]$の
+     神経細胞の形態を3次元空間上に表現する. 細胞体は直径25$[{\rm{{\mu}m}}]$の
      球とし, 樹状突起は円柱の集合体として表現する. 円柱端部の中心部分
      は他の円柱や細胞体と結合し樹状の構造を形成する. ここで, 細胞体に直接結合
      している円柱をStem, それ以外の円柱をBranchとする. また1つのStemと, 
@@ -69,9 +76,9 @@
      \end{figure}
      \subsection{樹状突起形態生成手法の基本概念}
      樹状突起形態生成手法の基本はL-system\cite{prusinkiewicz1990}である. 
-     L-systemはある記号の集合とその置き換え規則からなり, 初期状態としてある記号列が与え
+     L-systemはある記号の集合とその置き換え規則から定義され, 初期状態としてある記号列が与え
      られると, それを再起的に変更していくシステムである. L-systemの例
-     \cite{torben2007evolving}をあげる. まず記号の集合$\{B,F,X,Y\}$定義す
+     \cite{torben2007evolving}を示す. まず記号の集合$\{B,F,X,Y\}$定義す
      る. 次にその置き換え規則として
      \begin{align*}
        rules: \hspace{0.2cm} & F \to YF\\
@@ -87,7 +94,7 @@
      \end{align*}
      樹状突起形態の生成方法として, 三宮 et al\cite{三宮信夫1998遺伝
        アルゴリズムと最適化}を参考にすると以下のようなL-systemが考えられる.
-     使用する記号の集合として$\{1,2\}$を定義する.置き換え規則としては
+     使用する記号の集合として$\{1,2\}$を定義する.置き換え規則として
      \begin{align*}
        rules: \hspace{0.2cm}
        & 1 \to
@@ -100,144 +107,110 @@
        \end{cases}\\
        & 2 \to 2
      \end{align*}
-     が考えられる. 記号$1,2$を樹状突起の構造に置き換えて考えると, 記号$1$は樹状
+     を定義する. 記号$1,2$を樹状突起の構造に置き換えて考えると, 記号$1$は樹状
      構造における未成長の点を表し, 記号$2$は成長済みの円柱構造を表すと考えられ
-     る. また$<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. 記号$1$の置き換
-     え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
-     される. 1つの樹状突起構造は初期状態$\{1\}$から開始し, 樹状構造が変
+     る. また$<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. すなわちこのL-Systemは
+     初期状態である, ある一点から樹状構造が生成される過程を表現する. 
+     記号$1$の置き換え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
+     される. 1つの樹状突起は初期状態$\{1\}$から, このL-Systemを開始し記号列が変
      化しなくなるまで置き換えを行うことで得られる.\\
      最終的に得られる記号列は記号$2$のみからなり, 最も左端にある記号$2$がStemを表し,
-     それ以外はBranchを表す. 
+     それ以外はBranchを表す. 記号1から記号2が生成される場合には, 以下の手法を用いて
+     新たなStemやBranchが生成される. 
+
    \subsection{パラメータセットからのStem, Branch生成}
      1つの樹状突起は1組のパラメータセットから作成される. よって1つの神経細胞は2組の
      パラメータセットを持ち, 2本の樹状突起が生成される. パラメータセットに含まれる項
-     目を以下の表\ref{parameter_set}に示す. 
-     \begin{table}[h!]
-       \caption{パラメータセット}
-       \label{parameter_set}
+     目を以下に示す. 表\ref{morpho_parameter}は樹状突起形態を生成するために使用する
+     パラメータである. 
+     \begin{table}[H]
+       \caption{形態パラメータ}
+       \label{morpho_parameter}
        \begin{center}
-         \begin{tabular}[h!]{|c|c|} \hline
+         \begin{tabular}[H]{|c|c|} \hline
            パラメータ名 & 説明 \\ \hline \hline
-           Segment Length [${\rm {\mu}m}$]& StemおよびBranchの長さ \\ \hline  \hline
-           Stem diameter  [${\rm {\mu}m}$]& Stemの直径 \\ \hline  \hline
-           Stem elevation MIEW [$^{\circ}$]& Stemの仰角決定に用いる平均値 \\ \hline
-           Stem elevation SIGMA[$^{\circ}$] & Stemの仰角決定に用いる標準偏差値  \\ \hline
-           Stem rotation MIEW  [$^{\circ}$]& Stemの回転角決定に用いる平均値 \\ \hline
-           Stem rotation SIGMA [$^{\circ}$]& Stemの回転角決定に用いる標準偏差値 \\ \hline \hline
-           Branch elevation MIEW [$^{\circ}$]& Branchの仰角決定に用いる平均値 \\ \hline
-           Branch elevation SIGMA[$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 \\ \hline
-           Branch rotation MIEW  [$^{\circ}$]& Branchの回転角決定に用いる平均値 \\ \hline
-           Branch rotation SIGMA [$^{\circ}$] & Branchの回転角決定に用いる標 準偏差値  \\ \hline  \hline
-           Bifurcation $\alpha$ & 樹状構造の分岐導入判定に用いる$k$値 \\ \hline
-           Bifurcation $\beta$  & 樹状構造の分岐導入判定に用いる$\theta$値 \\ \hline  \hline
-           Termination $\alpha$ & 樹状構造の終端点導入判定に用いる$k$値 \\ \hline
-           Termination $\beta$  & 樹状構造の終端点導入判定に用いる$\theta$値\\ \hline  \hline
-           K Stem conductance [${\rm S/cm^2}$]& StemのKaコンダクタンス値 \\ \hline
-           K taper rate  & Kaコンダクタンスの伝搬率 \\ \hline  \hline
-           Ca Stem conductance [${\rm S/cm^2}$]& StemのCaTコンダクタンス値 \\ \hline
-           Ca taper rate  & CaTコンダクタンスの伝搬率 \\ \hline
+           \textit{Segment Length} [${\rm {\mu}m}$]& StemおよびBranchの長さ \\ \hline
+           \textit{Stem diameter}  [${\rm {\mu}m}$]& Stemの直径 \\ \hline
+           \textit{Stem elevation MIEW} [$^{\circ}$]& Stemの仰角決定に用いる平均値 \\ \hline
+           \textit{Stem elevation SIGMA} [$^{\circ}$] & Stemの仰角決定に用いる標準偏差値  \\ \hline
+           \textit{Stem rotation MIEW}  [$^{\circ}$]& Stemの回転角決定に用いる平均値 \\ \hline
+           \textit{Stem rotation SIGMA} [$^{\circ}$]& Stemの回転角決定に用いる標準偏差値 \\ \hline
+           \textit{Branch elevation MIEW} [$^{\circ}$]& Branchの仰角決定に用いる平均値 \\ \hline
+           \textit{Branch elevation SIGMA} [$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 \\ \hline
+           \textit{Branch rotation MIEW}  [$^{\circ}$]& Branchの回転角決定に用いる平均値 \\ \hline
+           \textit{Branch rotation SIGMA} [$^{\circ}$] & Branchの回転角決定に用いる標準偏差値  \\ \hline
+           \textit{Bifurcation} $\alpha$ & 樹状構造の分岐導入判定に用いる$k$値 \\ \hline
+           \textit{Bifurcation} $\beta$  & 樹状構造の分岐導入判定に用いる$\theta$値 \\ \hline
+           \textit{Termination} $\alpha$ & 樹状構造の終端点導入判定に用いる$k$値 \\ \hline
+           \textit{Termination} $\beta$  & 樹状構造の終端点導入判定に用いる$\theta$値\\ \hline
          \end{tabular}
        \end{center}
      \end{table}
 
-   以下にStem, Branchの形態決定方法を述べる. 
+     上記の形態パラメータに加え樹状突起上のコンダクタンスを線形に分布させる場合は表\ref{liner_parameter}に示される
+     パラメータを, ガウス分布に従って分布させる場合には表\ref{gausian_parameter}に示されるパラメータをそれぞれ用いる.
+
+     \begin{table}[H]
+       \caption{線形分布コンダクタンス パラメータ}
+       \label{liner_parameter}
+       \begin{center}
+         \begin{tabular}[H]{|c|c|} \hline
+           パラメータ名 & 説明 \\ \hline \hline
+           Ka \textit{Stem conductance} [${\rm S/cm^2}$]& StemのKaコンダクタンス値 \\ \hline
+           Ka \textit{taper rate}  & Kaコンダクタンスの伝搬率 \\ \hline
+           CaT \textit{Stem conductance} [${\rm S/cm^2}$]& StemのCaTコンダクタンス値 \\ \hline
+           CaT \textit{taper rate}  & CaTコンダクタンスの伝搬率 \\ \hline
+         \end{tabular}
+       \end{center}
+     \end{table}
+
+     \begin{table}[H]
+       \caption{ガウス分布コンダクタンス パラメータ}
+       \label{gausian_parameter}
+       \begin{center}
+         \begin{tabular}[H]{|c|c|} \hline
+           パラメータ名 & 説明 \\ \hline \hline
+           Ka \textit{peak} [${\rm S/cm^2}$]&  Kaコンダクタンス分布の最大値\\ \hline
+           Ka \textit{Gausian MEAN} & Kaコンダクタンス分布が従うガウス分布の平均値 \\ \hline
+           Ka \textit{Gausian SIGMA} & Kaコンダクタンス分布が従うガウス分布の標準偏差値 \\ \hline
+           CaT \textit{peak} [${\rm S/cm^2}$]&  CaTコンダクタンス分布の最大値\\ \hline
+           CaT \textit{Gausian MEAN} & CaTコンダクタンス分布が従うガウス分布の平均値 \\ \hline
+           CaT \textit{Gausian SIGMA} & CaTコンダクタンス分布が従うガウス分布の標準偏差値 \\ \hline
+         \end{tabular}
+       \end{center}
+     \end{table}
+
+   以下にStem, Branchの形態決定方法を述べる. Stem, Branchの形態の決定は以下の長さ, 太さ, 仰角, 回転角
+   の4つを決定することで行う. 
+
    \begin{itemize}
     \item \textbf{長さの決定}\\
-	  Stem, Branchの長さはパラメータセットにある
-	  $Segment\hspace{0.1cm}Length$の値そのものである. 
+      Stem, Branchの長さはパラメータセットにある
+      \textit{Segment Length}の値そのものである. 
     \item \textbf{太さの決定}\\
-	  Stem, Branchの太さを決定する. Stemの場合は, 
-	  \begin{itemize}
-	   \item 太さ: $Stem\hspace{0.1cm}diameter$
-	  \end{itemize}
-	  Branchの場合は, そのBranchの親となるStem, Branchの太さを
-	  $diam_P$とし, 
-	  \begin{itemize}
-	   \item 太さ: $diam_P + diam_P \times taper\hspace{0.1cm}rate$
-	  \end{itemize}
-	  ここで, $taper\hspace{0.1cm}rate = -0.125$である. 
-
+      Stem, Branchで決定方法が異なり, \\
+      \begin{tabular}[c]{ll}
+        - Stemの場合: & \textit{Stem diameter} \\
+        - Branchの場合: & $diam_P \times taper\hspace{0.1cm}rate$ \\
+      \end{tabular} \\
+      ここで$diam_P$はそのBranchの親となるStemまたはBranchの太さであり, 
+      $taper\hspace{0.1cm}rate = 0.875$となる定数である. 
     \item \textbf{仰角の決定}\\
-	  Stem, Branchの仰角は正規分布から確率的に決定する. 使用するパラ
-	  メータはStemの場合,
-	  \begin{itemize}
-	   \item 平均値: $Stem\hspace{0.1cm}elevation\hspace{0.1cm}MIEW$
-	   \item 標準偏差: $Stem\hspace{0.1cm}elevation\hspace{0.1cm}SIGMA$
-	  \end{itemize}
-	  Branchの場合, 
-	  \begin{itemize}
-	   \item 平均値: $Branch\hspace{0.1cm}elevation\hspace{0.1cm}MIEW$
-	   \item 標準偏差: $Branch\hspace{0.1cm}elevation\hspace{0.1cm}SIGMA$
-	  \end{itemize}
-
+      Stem, Branchの仰角は正規分布から確率的に決定する. 使用するパラ
+      メータはStem, Branchで異なり, \\
+      \begin{tabular}[c]{lll}
+        - Stemの場合: & $\mu = $\textit{Stem elevation MIEW} & $\sigma = $\textit{Stem elevation SIGMA} \\
+        - Branchの場合: & $\mu = $\textit{Branch elevation MIEW} & $\sigma = $\textit{Branch elevation SIGMA} \\
+      \end{tabular}
     \item \textbf{回転角の決定}\\
-	  Stem, Branchの回転角は正規分布から確率的に決定する. 使用するパラ
-	  メータはStemの場合,
-	  \begin{itemize}
-	   \item 平均値: $Stem\hspace{0.1cm}rotation\hspace{0.1cm}MIEW$
-	   \item 標準偏差: $Stem\hspace{0.1cm}rotation\hspace{0.1cm}SIGMA$
-	  \end{itemize}
-	  Branchの場合, 
-	  \begin{itemize}
-	   \item 平均値: $Branch\hspace{0.1cm}rotation\hspace{0.1cm}MIEW$
-	   \item 標準偏差: $Branch\hspace{0.1cm}rotation\hspace{0.1cm}SIGMA$
-	  \end{itemize}
-
-    \item \textbf{コンダクタンスの決定}\\
-	  Stem, Branchが持つコンダクタンスの値について決定する. 各種のコ
-	  ンダクタンスについて, Stemのコンダクタンス値は
-	  \begin{itemize}
-	   \item コンダクタンス値: $Stem\hspace{0.1cm}conductance$
-	  \end{itemize}
-	  である. Branchの場合はそのBranchの親のBranchやStemのコンダクタンス
-	  値を$Conductance_{P}$とし、
-	  \begin{itemize}
-	   \item コンダクタンス値: $Conductance_{P} \times taper\hspace{0.1cm}rate$
-	  \end{itemize}
-	  で算出する. 
+      仰角の場合と同様に正規分布から確率的に決定し, \\
+      \begin{tabular}[c]{lll}
+        - Stemの場合: & $\mu = $\textit{Stem rotation MIEW} & $\sigma = $\textit{Stem rotation SIGMA} \\
+        - Branchの場合: & $\mu = $\textit{Branch rotation MIEW} & $\sigma = $\textit{Branch rotation SIGMA} \\
+      \end{tabular}
    \end{itemize}
-   形態生成L-systemにおける記号$2$はStemやBranchなどの形態情報に対応する. 
-   よって記号$1$には3次元空間上の座標情報を設定することができる. 初
-   期状態の記号$1$の座標を原点$(0,0,0)$とする. また原点から記号$1_x$に至
-   るまでに通過するStemやBranchの長さの和を$path(1_x)$とする. ここで記号
-   $1$の置き換え規則($*$)の選択方法を以下に示す.
-   \begin{enumerate}
-    \item \textbf{Termination $ 1 \to 2$} \\
-	  $[0,1]$の範囲で一様乱数を一つ生成し, その値を$rand$とする.
-	  累積ガンマ分布$Cumulative\hspace{0.1cm}\gamma\hspace{0.05cm}(x)$を用いて, 
-	  \begin{equation*}
-	   Cumulative\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
-	  \end{equation*}
-	  のとき慎重停止とする. ただし累積ガンマ分布のパラメータとして, 
-	  \begin{itemize}
-	   \item $k$: $Termination\hspace{0.1cm}alfa$
-	   \item $\theta$: $Termination\hspace{0.1cm}beta$
-	  \end{itemize}	  
-	  を用いる
 
-    \item \textbf{Bifurcation $ 1 \to 21<21>$} \\
-	  上記の条件を満たさなかった場合のみBifurcationの判断を行う. 
-	  $[0,1]$の範囲で一様乱数を一つ生成し, その値を$rand$とする.
-	  最大値が0.8になるように実数倍したガンマ分布
-	  $Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(x))$を用いて,
-	  \begin{equation*}
-	   Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
-	  \end{equation*}
-	  のとき分岐を行う. ただしガンマ分布のパラメータとして, 
-	  \begin{itemize}
-	   \item $k$: $Bifurcation\hspace{0.1cm}alfa$
-	   \item $\theta$: $Bifurcation\hspace{0.1cm}beta$
-	  \end{itemize}	  
-	  を用いる
-
-    \item \textbf{Elongation $1 \to 21$} \\
-	  上記の条件を満たさなかった場合, Stem, Branchを伸張させる.
-
-%
-% ヒューリスティックスについても書く
-%
-   \end{enumerate}
-   \subsection{仰角, 回転角について}
+   \subsubsection{仰角, 回転角について}
    Stem, Branchの角度の設定には, 親となるStem, Branchの向きにあわせた相
    対的な座標軸を用いる. 具体的には以下のようにする. 
    \begin{itemize}
@@ -259,56 +232,138 @@
 	  Stemと同様に行う. ただし, そのBranchの親となるStem, Branchによっ
 	  て回転を与えたx'',y',z'軸を用いる. 
    \end{itemize}
+
+   形態生成L-systemにおける記号$2$はStemやBranchなどの形態情報に対応している. 
+   初期状態の記号$1$の座標を原点$(0,0,0)$とすると, 全ての記号$1$に3次元空間上の
+   座標情報を設定することができる. 原点から, ある記号$1_x$に至
+   るまでに通過するStemやBranchの長さの和を$path(1_x)$とする. ここで記号
+   $1$の置き換え規則($*$)の選択方法を以下に示す.
+   \begin{enumerate}
+     \item \textbf{Termination $ 1 \to 2$} \\
+       %
+       % Terminationのときは 1 -> 2だが、Branchは生成しなかったはず
+       %
+       $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
+       累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて, 
+       \begin{equation}
+	 Cumulative\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
+       \end{equation}
+       のとき慎重停止とする. ただし累積ガンマ分布のパラメータとして, \\
+       \begin{tabular}[c]{ll}
+         - \textit{k} : & \textit{Termination} $\alpha$ \\
+         - $\theta$ : &  \textit{Termination} $\beta$\\
+       \end{tabular}\\
+       を用いる.
+     \item \textbf{Bifurcation $ 1 \to 21<21>$} \\
+       Terminationを行わなかった場合のみBifurcationの判断を行う. 
+       $[0,1]$の範囲で一様分布から乱数を一つ生成し, その値を$rand$とする.
+       最大値が0.8になるように実数倍したガンマ分布
+       \textit{Scaled} $\gamma$(x)を用いて,
+       \begin{equation}
+	 Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
+       \end{equation}
+       のとき分岐を行う. ただしガンマ分布のパラメータとして, \\
+       \begin{tabular}[c]{ll}
+         - \textit{k} : & \textit{Bifurcation} $\alpha$ \\
+         - $\theta$ : &  \textit{Bifurcation} $\beta$\\
+       \end{tabular}\\
+       を用いる
+
+     \item \textbf{Elongation $1 \to 21$} \\
+       上記の条件を満たさなかった場合, Stem, Branchを伸張させる.
+   \end{enumerate}
+%
+% ヒューリスティックスについても書く
+%
+
    最終的に得られた樹状突起形態は, 細胞体の表面までStemの方向に平行移動
-   させる. 
+   させる. \\
+   以下にStem, Branchのコンダクタンス値の決定方法を述べる. コンダクタンス値の決定方法は
+   線形分布かガウス分布かによって異なる. 
+
+   \begin{itemize}
+     \item \textbf{線形分布の場合}\\
+       CaT, Kコンダクタンス値について, diameterと同様の方法で決定する\\
+      \begin{tabular}[c]{ll}
+        - Stemの場合: & \textit{Stem conductance} \\
+        - Branchの場合: & $Conductance_{P} \times$ \textit{Conductance taper rate} \\
+      \end{tabular} \\
+       ここで$Conductance_{P}$はそのBranchの親のBranchやStemのコンダクタンス値である.
+     \item \textbf{ガウス分布の場合}\\
+       CaT, Kコンダクタンス値について, 以下の方法で決定する. \\
+%
+% 5μごとに分割してコンダクタンスを設定する, と書く
+%
+%
+   \end{itemize}
+
    \subsection{シナプティックゾーンとシナプスの付与}
-   3次元空間上の原点に細胞体を配置し, y軸方向の$170 < y < 190$の範囲を
-   Redシナプテックゾーン, y軸方向の$-170 > y > 190$の範囲をBlueシナプテック
-   ゾーンと定義する. 上記の手法で形成した樹状突起が上下のシナプテックゾー
-   ンに入った場合, 樹状突起上の$5{\mu}m$ごとに1つのシナプスを付与する. 上下のシ
-   ナプテックゾーン, シナプスが付与された樹状突起の例を図\ref{synapse}に示す.
-      \begin{figure}[h]
+     3次元空間上の原点に細胞体を配置し, y軸方向の$170 < y < 190$の範囲を
+     Redシナプテックゾーン, y軸方向の$-170 > y > 190$の範囲をBlueシナプテック
+     ゾーンと定義する. 上記の手法で形成した樹状突起が上下のシナプテックゾー
+     ンに入った場合, 樹状突起上の$5{\mu}m$ごとに1つのシナプスを付与する. 上下のシ
+     ナプテックゾーン, シナプスが付与された樹状突起の例を図\ref{synapse}に示す.
+     \begin{figure}[h]
        \centering
        \includegraphics[width=5cm]{./Images/temp.png} 
        \caption{シナプテックゾーン, シナプス}
        \label{synapse}
-      \end{figure}
+     \end{figure}
       
-  \section{シミュレーション}
-  前項の神経細胞形態によって作成した神経細胞に対して, 機能性を検証するた
-  めの数理シミュレーションを行った. このシミュレーションにはNEURONシミュ
-  レータを用いた. 以下にシミュレーションに用いた神経細胞モデルの詳細を述
-  べる
+ \section{シミュレーション}
+   前項の神経細胞形態によって作成した神経細胞に対して, 機能性を検証するた
+   めの数理シミュレーションを行った. このシミュレーションにはNEURONシミュ
+   レータを用いた. 以下にシミュレーションに用いた神経細胞モデルの詳細を述
+   べる
    \subsection{数理モデル}
-   L-systemによって作成された神経細胞形態は, 数理シミュレーションを行える
-   ように$5{\mu}m$ごとに1つのコンパートメントとして, その膜電位の挙動を
-   数理モデル化した. 神経細胞全体ではマルチコンパートモデルを形成してい
-   る. コンパートメントの膜上にシナプスや, 特定のイオンチャネルが分布し
-   ていない場合, 単一コンパートメントの膜電位($V_i$)は以下の式によって計算
-   される.
-   \begin{equation}
-    cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + g_{i,i - 1}(V_{i - 1}
-     %このcmは小文字か大文字か?
-     - V_i) + g_{i,i + 1}(V_{i + 1} - V_i)
-     \label{V_i}
-   \end{equation}
-   コンパートメントの膜上にシナプスが分布している場合は上式\ref{V_i}の右
-   辺に以下の項を追加する.
-   \begin{equation}
-    (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}})g_{syn}(V_i
-     - E_{syn})
-     \label{eq_syn}
-   \end{equation}
-   細胞膜上にKaチャネル, CaTチャネルを分布させる場合は, Migliore et
-   al\cite{migliore1995computer}に示されるイオンチャネルのモデルを用いた. 
+     L-systemによって作成された神経細胞形態は数理シミュレーションを行える
+     よう, $5{\mu}m$ごとに1つのコンパートメントとして, その膜電位の挙動を
+     数理モデル化した. 神経細胞全体ではマルチコンパートモデルを形成してい
+     る. コンパートメントの膜上にシナプスや, 特定のイオンチャネルが分布し
+     ていない場合, 単一コンパートメントの膜電位($V_i$)は以下の式によって計算
+     される.
+     \begin{equation}
+       cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + g_{i,i - 1}(V_{i - 1}
+       %このcmは小文字か大文字か?
+       - V_i) + g_{i,i + 1}(V_{i + 1} - V_i)
+       \label{V_i}
+     \end{equation}
+     コンパートメントの膜上にシナプスが分布している場合は上式\ref{V_i}の右
+     辺に以下の項を追加する.
+     \begin{equation}
+       (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}})g_{syn}(V_i
+       - E_{syn})
+       \label{eq_syn}
+     \end{equation}
 
-   また, シミュレーションに関わるパラメータを以下の表\ref{sim_para}に示す.
-      \begin{table}[h]
+     細胞膜上にKaチャネル, CaTチャネルを分布させる場合は, \ref{V_i}の右辺に
+     Migliore et al\cite{migliore1995computer}に示されるイオンチャネルの
+     モデルを追加した. 
+     \begin{itemize}
+       \item CaTコンダクタンスモデル
+         \begin{align}
+           g_{CaT} &= \overline{g}_{CaT}m^2h  \\
+           I_{CaT} &= g_{CaT}ghk(V_{i},cai,cao) \\
+           KTF &= (\frac{25.0}{293.15}) \times (T + 273.15) \\
+           f &= \frac{KTF}{2} \\
+           nu &= \frac{V_i}{f} \\
+           ghk &= -f(1.0 - \frac{C_i}{C_o}exp(nu))efun(nu) \\
+           efun(z) &=
+           \begin{cases}
+             1 - \frac{z}{2} & \text{$|z| < 10^{-4}$} \\
+             \frac{z}{(e^z - 1)} & \text{Other} \\
+           \end{cases}
+         \end{align}
+         
+     \end{itemize}
+     
+     また, シミュレーションに関わるパラメータを以下の表\ref{sim_para}に示す.
+     \begin{table}[h]
        \caption{シミュレーションパラメータ}
        \label{sim_para}
        \begin{center}
 	\begin{tabular}[t]{|c|c|} \hline
-	 パラメータ名 & 説明 \\ \hline \hline
+	 パラメータ名 & 値 \\ \hline \hline
 	 Simulation time [$ms$]& 50 または 100 \\\hline
 	 $Ra$  [${\Omega}cm$] & 100 \\ \hline
 	 $Cm$  [${\mu}F/cm^2$] & 0.8 \\ \hline
@@ -318,50 +373,52 @@
 	 $g_{pas}$ [$S/cm^2$]& $2.5 \times 10^{-5}$\\ \hline
 	 $E_{pas}$ [$mV$]& -70\\ \hline
 	 $T$ [$^{\circ}C$] & 37\\ \hline
+         $C_i$ & \\ \hline
+         $C_o$ & \\ \hline
 	\end{tabular}
        \end{center}
       \end{table}
       シミュレーションはNEURONを用いて, CVodeアルゴリズムを用いて行った.
       CVodeアルゴリズムを用いる際のエラーは$10^{-5}$未満に設定した. 
-  \section{遺伝アルゴリズム}
-  神経細胞を個体として200個体, 世代数650で遺伝アルゴリズムを用いたパラメー
-  タ最適化を行った. この遺伝アルゴリズムにおける遺伝子とは個体の持つパラ
-  メータセット\ref{parameter_set}である. 遺伝アルゴリズムでは, エリート
-  保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
+ \section{遺伝アルゴリズム}
+   神経細胞を個体として200個体, 世代数650で遺伝アルゴリズムを用いたパラメー
+   タ最適化を行った. この遺伝アルゴリズムにおける遺伝子とは個体の持つパラ
+   メータセット\ref{parameter_set}である. 遺伝アルゴリズムでは, エリート
+   保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
    \subsection{個体評価}
-   上述の通り各神経細胞の形態を生成しシミュレーションを行い, その結果を
-   もとに個体の評価を行う. しかし個体によっては上下のシナプティックゾー
-   ンに樹状突起を伸ばせず, そもそもシミュレーションを行うことができない
-   こともある. また神経細胞をより実物に近づけることと, 妥当なシミュレー
-   ションを行うことを目的としていくつかのヒューリステックスを導入した.\\
-   以下に個体の評価方法を述べる. まず個体の評価としてペナルティが与えられ
-   る場合を以下に示す. 
+     上述の通り各神経細胞の形態を生成しシミュレーションを行い, その結果を
+     もとに個体の評価を行う. しかし個体によっては上下のシナプティックゾー
+     ンに樹状突起を伸ばせず, そもそもシミュレーションを行うことができない
+     こともある. また神経細胞をより実物に近づけることと, 妥当なシミュレー
+     ションを行うことを目的としていくつかのヒューリステックスを導入した.\\
+     以下に個体の評価方法を述べる. まず個体の評価としてペナルティが与えられ
+     る場合を以下に示す. 
 
-   \begin{itemize}
-    \item \textbf{形態的エラー}\\
-	  以下の場合はシミュレーションを行わず, 平均値-100, 標準偏差5の
-	  ガウス分布から乱数を発生させ, その値を評価値とした. 
-	  \begin{itemize}
-	   \item 神経細胞全体でStemとBranchの個数が合計15未満の場合
-	   \item 神経細胞全体で樹状突起の分岐が一つもない場合
-	   \item 上下のシナプティックゾーンにシナプスを作れなかった場合
-	  \end{itemize}
-    \item \textbf{EPSPエラー}\\
-	  シミュレーションを行った場合でも以下の場合は平均値-50, 標準偏
-	  差5のガウス分布から乱数を発生させ, その値を評価値とした.
-	  \begin{itemize}
-	   \item 各シナプティックゾーン単体での発火による細胞体での膜電
-		 位の脱分極が2mV以下の場合
-	  \end{itemize}
-	  以下の項目は神経細胞の膜状にKaチャネル, CaTチャネルを分布させ
-	  る場合にのみ考慮する. これは神経細胞での発火や, 膜電位の振動を
-	  抑制するためである.
-	  \begin{itemize}
-	   \item 細胞体での脱分極量が25mVを超えた場合
-	   \item シミュレーションの最後の5ステップで膜電位の上昇が起こっ
-		 た場合
-	  \end{itemize}
-   \end{itemize}
+     \begin{itemize}
+     \item \textbf{形態的エラー}\\
+       以下の場合はシミュレーションを行わず, 平均値-100, 標準偏差5の
+       ガウス分布から乱数を発生させ, その値を評価値とした. 
+       \begin{itemize}
+         \item 神経細胞全体でStemとBranchの個数が合計15未満の場合
+         \item 神経細胞全体で樹状突起の分岐が一つもない場合
+	 \item 上下のシナプティックゾーンにシナプスを作れなかった場合
+       \end{itemize}
+     \item \textbf{EPSPエラー}\\
+       シミュレーションを行った場合でも以下の場合は平均値-50, 標準偏
+       差5のガウス分布から乱数を発生させ, その値を評価値とした.
+       \begin{itemize}
+         \item 各シナプティックゾーン単体での発火による細胞体での膜電
+	   位の脱分極が2mV以下の場合
+       \end{itemize}
+       以下の項目は神経細胞の膜状にKaチャネル, CaTチャネルを分布させ
+       る場合にのみ考慮する. これは神経細胞での発火や, 膜電位の振動を
+       抑制するためである.
+       \begin{itemize}
+         \item 細胞体での脱分極量が25mVを超えた場合
+	 \item シミュレーションの最後の5ステップで膜電位の上昇が起こっ
+	   た場合
+       \end{itemize}
+     \end{itemize}
 
    以上の場合は個体のinput-order detectionの機能性について考慮することな
    くペナルティを与える. \\
