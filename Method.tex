@@ -194,7 +194,7 @@
         - Stemの場合: & \textit{Stem diameter} \\
         - Branchの場合: & $diam_P \times taper\hspace{0.1cm}rate$ \\
       \end{tabular} \\
-      ここで$diam_P$はそのBranchの親となるStemまたはBranchの太さであり, 
+      ここで$diam_P$はそのBranchの親枝となるStemまたはBranchの太さであり, % <- 親枝っていうのか？
       $taper\hspace{0.1cm}rate = 0.875$となる定数である. 
     \item \textbf{仰角の決定}\\
       Stem, Branchの仰角は正規分布から確率的に決定する. 使用するパラ
@@ -237,14 +237,14 @@
    形態生成L-systemにおける記号$2$はStemやBranchなどの形態情報に対応している. 
    初期状態の記号$1$の座標を原点$(0,0,0)$とすると, 全ての記号$1$に3次元空間上の
    座標情報を設定することができる. 原点から, ある記号$1_x$に至
-   るまでに通過するStemやBranchの長さの和を$path(1_x)$とする. ここで記号
+   るまでに通過するStemやBranchの長さの和を${\rm path(1_x)}$とする. ここで記号
    $1$の置き換え規則($*$)の選択方法を以下に示す.
    \begin{enumerate}
      \item \textbf{Termination $ 1 \to 3$} \\
        $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
        累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて, 
        \begin{equation}
-	 Cumulative\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
+	 {\rm Cumulative}\hspace{0.1cm}\gamma\hspace{0.05cm}({\rm path(1_x)}) > rand
        \end{equation}
        のとき慎重停止とする. ただし累積ガンマ分布のパラメータとして, \\
        \begin{tabular}[c]{ll}
@@ -270,23 +270,33 @@
      \item \textbf{Elongation $1 \to 21$} \\
        上記の条件を満たさなかった場合, Stem, Branchを伸張させる.
    \end{enumerate}
-%
-% ヒューリスティックスについても書く
-%
 
-   最終的に得られた樹状突起形態は, 細胞体の表面までStemの方向に平行移動
-   させる. \\
+   %
+   % ヒューリスティック
+   %
+
+   ただし, 以下の条件に該当する場合は強制的にTerminationとする. これは樹
+   状突起として妥当な形態を得るために導入するヒューリスティックである.
+
+   \begin{itemize}
+    \item ${\rm path(1_x)} > 2000$のとき
+    \item $diam_P <= Minimum diameter$ のとき\\
+	  この場合は$diam_P$をMinimum diameterに設定し直す. 
+   \end{itemize}
+
+   最終的に得られた樹状突起形態は細胞体の表面に接するように, Stemの方向
+   に平行移動させる. \\   
    以下にStem, Branchのコンダクタンス値の決定方法を述べる. コンダクタンス値の決定方法は
-   線形分布かガウス分布かによって異なる. 
+   線形分布を用いるかガウス分布を用いるかによって異なる. 
 
    \begin{itemize}
      \item \textbf{線形分布の場合}\\
-       CaT, Kコンダクタンス値について, diameterと同様の方法で決定する\\
+       CaT, Kコンダクタンス値について, 上記のdiameterと同様の方法で決定する\\
       \begin{tabular}[c]{ll}
         - Stemの場合: & \textit{Stem conductance} \\
         - Branchの場合: & $Conductance_{P} \times$ \textit{Conductance taper rate} \\
       \end{tabular} \\
-       ここで$Conductance_{P}$はそのBranchの親のBranchやStemのコンダクタンス値である.
+       ここで$Conductance_{P}$はそのBranchの親枝となるBranchやStemのコンダクタンス値である.
      \item \textbf{ガウス分布の場合}\\
        CaT, Kコンダクタンス値について, 以下の方法で決定する. \\
 %
@@ -299,8 +309,8 @@
      3次元空間上の原点に細胞体を配置し, y軸方向の$170 < y < 190$の範囲を
      Redシナプテックゾーン, y軸方向の$-170 > y > 190$の範囲をBlueシナプテック
      ゾーンと定義する. 上記の手法で形成した樹状突起が上下のシナプテックゾー
-     ンに入った場合, 樹状突起上の$5{\mu}m$ごとに1つのシナプスを付与する. 上下のシ
-     ナプテックゾーン, シナプスが付与された樹状突起の例を図\ref{synapse}に示す.
+     ンに入った場合, 樹状突起上の$5{\mu}m$ごとに1つのシナプスを付与する. % <- 5マイクロm ってどういう向きの？
+     上下のシナプテックゾーン, シナプスが付与された樹状突起の例を図\ref{synapse}に示す.
      \begin{figure}[h]
        \centering
        \includegraphics[width=5cm]{./Images/temp.png} 
@@ -314,8 +324,8 @@
    レータを用いた. 以下にシミュレーションに用いた神経細胞モデルの詳細を述
    べる
    \subsection{数理モデル}
-     L-systemによって作成された神経細胞形態は数理シミュレーションを行える
-     よう, $5{\mu}m$ごとに1つのコンパートメントとして, その膜電位の挙動を
+     L-systemによって作成された神経細胞形態は数理シミュレーションを行う
+     ために$5{\mu}m$ごとに1つのコンパートメントとして, その膜電位の挙動を
      数理モデル化した. 神経細胞全体ではマルチコンパートモデルを形成してい
      る. コンパートメントの膜上にシナプスや, 特定のイオンチャネルが分布し
      ていない場合, 単一コンパートメントの膜電位($V_i$)は以下の式によって計算
@@ -401,12 +411,9 @@
        Q_{10} &= 3^{(\frac{T - 30}{10})}
      \end{align}
      である.
-
 %
 % gmn gmlは何なのか？ g_{mn}なのか？ 単位は無いようなので、gmnだと思う
 %
-     
-     
      また, シミュレーションに関わるパラメータを以下の表\ref{sim_para}に示す.
      \begin{table}[h]
        \caption{シミュレーションパラメータ}
@@ -414,7 +421,7 @@
        \begin{center}
 	\begin{tabular}[t]{|c|c|} \hline
 	 パラメータ名 & 値 \\ \hline \hline
-	 Simulation time [ms]& 50 または 100 \\\hline %ここ変える
+	 Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える
 	 $Ra$  [${\rm{\Omega}cm}$] & 100 \\ \hline
 	 $Cm$  [${\rm{\mu}F/cm^2}$] & 0.8 \\ \hline
 	 ${\tau}_{1}$ [ms] & 0.5\\ \hline
@@ -451,28 +458,32 @@
      もとに個体の評価を行う. しかし個体によっては上下のシナプティックゾー
      ンに樹状突起を伸ばせず, そもそもシミュレーションを行うことができない
      こともある. また神経細胞をより実物に近づけることと, 妥当なシミュレー
-     ションを行うことを目的としていくつかのヒューリステックスを導入した.\\
-     以下に個体の評価方法を述べる. まず個体の評価としてペナルティが与えられ
-     る場合を以下に示す. 
-
+     ションを行うことを目的としていくつかのヒューリステックスを導入した.
+     以下に個体の評価方法を述べる. \\
+     まず, シミュレーションを行うことができない個体をどのように評価する
+     かを以下に示す.
      \begin{itemize}
      \item \textbf{形態的エラー}\\
-       以下の場合はシミュレーションを行わず, 平均値-100, 標準偏差5の
+       以下の場合はシミュレーションを行わず, $\mu = -100$, $sigma = 5$の
        ガウス分布から乱数を発生させ, その値を評価値とした. 
        \begin{itemize}
          \item 神経細胞全体でStemとBranchの個数が合計15未満の場合
          \item 神経細胞全体で樹状突起の分岐が一つもない場合
-	 \item 上下のシナプティックゾーンにシナプスを作れなかった場合
+	 \item 上下のシナプティックゾーンそれぞれにシナプスを作れなかった場合
        \end{itemize}
+     \end{itemize}
+     次にシミュレーションの結果に対して以下のヒューリスティックを導入す
+     る. 
+     \begin{itemize}
      \item \textbf{EPSPエラー}\\
-       シミュレーションを行った場合でも以下の場合は平均値-50, 標準偏
-       差5のガウス分布から乱数を発生させ, その値を評価値とした.
+	   シミュレーションを行った場合でも以下の場合は$\mu = -50$,
+	   $\sigma = 5$のガウス分布から乱数を発生させ, その値を評価値とした.
        \begin{itemize}
-         \item 各シナプティックゾーン単体での発火による細胞体での膜電
-	   位の脱分極が2mV以下の場合
+         \item 一方のシナプティックゾーンのみでの発火による細胞体での膜
+	       電位の脱分極が2mV以下の場合 % <- ここ書き直す
        \end{itemize}
        以下の項目は神経細胞の膜状にKaチャネル, CaTチャネルを分布させ
-       る場合にのみ考慮する. これは神経細胞での発火や, 膜電位の振動を
+       る場合にのみ考慮する. これは神経細胞での発火や, 膜電位の振動を % <- 細胞体での発火を抑制する意味は? ここコンダクタンスの時のみの考慮にしなくてもよさそう
        抑制するためである.
        \begin{itemize}
          \item 細胞体での脱分極量が25mVを超えた場合
@@ -480,21 +491,13 @@
 	   た場合
        \end{itemize}
      \end{itemize}
-
    以上の場合は個体のinput-order detectionの機能性について考慮することな
    くペナルティを与える. \\
+   
    次にそれ以外の場合を述べる.
    \begin{itemize}
-    \item \textbf{Bad performance}\\
-	  式\ref{F}における$F$の逆数$F^{-1}$が0.9以上の場合, 以下の式により評
-	  価値を与える.
-	  \begin{equation}
-	   評価値: -F^{-1}
-	  \end{equation}
-	  
-    \item \textbf{Good performance}\\
-	  式\ref{F}における$F$の逆数$F^(-1)$が0.9未満の場合, 以下の式により評
-	  価値を与える.
+
+    \item 以下の式により評価値を与える. % <- ここがかなり変わる
 	  \begin{align}
 	   評価値: 100 - Function\hspace{0.1cm}ratio \times F^{-1} -
 	   Morphology \hspace{0.1cm} ratio \times (1 - \frac{L_0}{Neuro\hspace{0.1cm}size})

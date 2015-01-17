@@ -1,8 +1,8 @@
-This is e-pTeX, Version 3.1415926-p3.4-110825-2.6 (utf8.euc) (TeX Live 2013) (format=platex 2013.12.5)  17 JAN 2015 21:05
+This is e-pTeX, Version 3.1415926-p3.4-110825-2.6 (utf8.euc) (TeX Live 2013) (format=platex 2013.12.5)  18 JAN 2015 00:31
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
  %&-line parsing enabled.
-**report.tex
+**./report.tex
 (./report.tex
 pLaTeX2e <2006/11/10> (based on LaTeX2e <2011/06/27> patch level 0)
 Babel <3.9g> and hyphenation patterns for 78 languages loaded.
@@ -232,7 +232,7 @@ Package caption Info: End \AtBeginDocument code.
 One-sided document style.
 [1
 
-] (./Abst.tex) [1
+] (./Title.tex [2]) (./Abst.tex) [1
 
 ]
 LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <24.88> not available
@@ -254,14 +254,14 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 \tf@lof=\write4
 \openout4 = `report.lof'.
 
- [3
+
+[3
 
 ] (./report.lot)
 \tf@lot=\write5
 \openout5 = `report.lot'.
 
-
-[4
+ [4
 
 ] (./Introduction.tex
 第 1 章
@@ -323,27 +323,34 @@ Overfull \hbox (9.66422pt too wide) in paragraph at lines 206--212
 
 [6] [7]
 File: ./Images/temp.png Graphic file (type bmp)
- <./Images/temp.png> [8] [9] [10]
+ <./Images/temp.png>
 
-LaTeX Warning: Reference `parameter_set' on page 11 undefined on input line 447
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8] [9] [10]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+LaTeX Warning: Reference `parameter_set' on page 11 undefined on input line 454
 .
 
 [11] [12]
-Overfull \hbox (10.49059pt too wide) in paragraph at lines 501--508
+Overfull \hbox (10.49059pt too wide) in paragraph at lines 512--519
 \JY1/mc/m/it/12 あり\OT1/cmr/m/n/12 , $\OML/cmm/m/it/12 Neuro size$ \JY1/mc/m/i
 t/12 は神経細胞の樹状突起の長さの総和である\OT1/cmr/m/n/12 . \JY1/mc/m/it/12 ま
 た $\OML/cmm/m/it/12 Function ratio$
  []
 
-) (./Result.tex [13]
+[13]) (./Result.tex [14]
 第 3 章
-) (./Discussion.tex [14
+) (./Discussion.tex [15
 
 ]
 第 4 章
-) [15
+) (./Conclusion.tex [16
 
-] (./Syaji.tex) (./report.bbl [16
+]) (./Syaji.tex) (./report.bbl [17
 
 
 ]
@@ -355,7 +362,7 @@ LaTeX Font Warning: Font shape `JT1/gt/m/it' undefined
 LaTeX Font Warning: Font shape `JY1/gt/m/it' undefined
 (Font)              using `JY1/gt/m/n' instead on input line 7.
 
-) [17
+) [18
 
 ] (./report.aux)
 
@@ -366,12 +373,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3022 strings out of 494001
- 42461 string characters out of 6154384
- 123653 words of memory out of 5000000
+ 3028 strings out of 494001
+ 42532 string characters out of 6154384
+ 120653 words of memory out of 5000000
  6452 multiletter control sequences out of 15000+600000
  18497 words of font info for 73 fonts, out of 8000000 for 9000
  745 hyphenation exceptions out of 8191
- 49i,22n,42p,285b,408s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 49i,22n,42p,287b,408s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.dvi (22 pages, 60748 bytes).
+Output written on report.dvi (24 pages, 61952 bytes).
