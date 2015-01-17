@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (utf8.euc) (TeX Live 2014/MacPorts 2014_1) (preloaded format=platex 2014.7.9)  16 JAN 2015 18:49
+This is e-pTeX, Version 3.14159265-p3.5-130605-2.6 (utf8.euc) (TeX Live 2014/MacPorts 2014_1) (preloaded format=platex 2014.7.9)  17 JAN 2015 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -9,8 +9,8 @@ Babel <3.9k> and hyphenation patterns for 43 languages loaded.
 (/opt/local/share/texmf-texlive/tex/platex/base/jbook.cls
 Document Class: jbook 2006/06/27 v1.6 Standard pLaTeX class
 \c@@paper=\count81
-(/opt/local/share/texmf-texlive/tex/platex/base/jbk12.clo
-File: jbk12.clo 2006/06/27 v1.6 Standard pLaTeX file (size option)
+(/opt/local/share/texmf-texlive/tex/platex/base/jbk10.clo
+File: jbk10.clo 2006/06/27 v1.6 Standard pLaTeX file (size option)
 )
 \c@part=\count82
 \c@chapter=\count83
@@ -210,22 +210,22 @@ LaTeX Info: Redefining \cite on input line 28.
 ) (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
-LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 18.
-LaTeX Font Info:    ... okay on input line 18.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for JY1/mc/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for JT1/mc/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
@@ -233,30 +233,30 @@ One-sided document style.
 [1
 
 ] (./Title.tex
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <20.74> not available
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 12.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <20.74> not available
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 12.
 
 Underfull \vbox (badness 10000) detected at line 12
  []
 
 
-Overfull \hbox (16.83745pt too wide) in paragraph at lines 10--13
+Overfull \hbox (16.44858pt too wide) in paragraph at lines 10--13
  []|  [] 
  []
 
 [2]) (./Abst.tex) [1
 
 ]
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <24.88> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 28.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <24.88> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 28.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <20.74> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 30.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <20.74> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 30.
  (./report.toc
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
 (Font)              Font shape `JT1/gt/m/n' tried instead on input line 1.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
 (Font)              Font shape `JY1/gt/m/n' tried instead on input line 1.
 )
 \tf@toc=\write3
@@ -284,10 +284,10 @@ LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
 
 ]
 第 2 章
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 9.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <17.28> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 9.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 8.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 8.
 File: ./Images/temp.png Graphic file (type bmp)
 <./Images/temp.png>
 File: ./Images/temp.png Graphic file (type bmp)
@@ -295,64 +295,50 @@ File: ./Images/temp.png Graphic file (type bmp)
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[2
-
-]
-LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JT1/gt/m/n' tried instead on input line 63.
-LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <14.4> not available
-(Font)              Font shape `JY1/gt/m/n' tried instead on input line 63.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 62.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <12> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 62.
 File: ./Images/temp.png Graphic file (type bmp)
- <./Images/temp.png> [3]
+<./Images/temp.png> [2
+
+] [3]
 
 LaTeX Font Warning: Font shape `JT1/mc/m/it' undefined
-(Font)              using `JT1/mc/m/n' instead on input line 132.
+(Font)              using `JT1/mc/m/n' instead on input line 133.
 
 
 LaTeX Font Warning: Font shape `JY1/mc/m/it' undefined
-(Font)              using `JY1/mc/m/n' instead on input line 132.
+(Font)              using `JY1/mc/m/n' instead on input line 133.
 
-[4]
-Overfull \hbox (0.82492pt too wide) in paragraph at lines 171--180
- [] 
- []
-
-[5]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 187.
+[4] [5]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 188.
 
  (/opt/local/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 187.
-
-Overfull \hbox (19.56433pt too wide) in paragraph at lines 198--205
-[][] 
- []
-
-
-Overfull \hbox (9.66422pt too wide) in paragraph at lines 205--211
-[][] 
- []
-
-[6] [7]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 188.
+ [6]
 File: ./Images/temp.png Graphic file (type bmp)
- <./Images/temp.png> [8]
+
+<./Images/temp.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
+[7] [8] [9] [10]
 
-LaTeX Warning: Reference `parameter_set' on page 9 undefined on input line 386.
+LaTeX Warning: Reference `parameter_set' on page 11 undefined on input line 447
+.
 
-
-[9] [10]
-Overfull \hbox (10.49059pt too wide) in paragraph at lines 440--447
-\JY1/mc/m/it/12 あり\OT1/cmr/m/n/12 , $\OML/cmm/m/it/12 Neuro size$ \JY1/mc/m/i
-t/12 は神経細胞の樹状突起の長さの総和である\OT1/cmr/m/n/12 . \JY1/mc/m/it/12 ま
-た $\OML/cmm/m/it/12 Function ratio$
+[11]
+Overfull \hbox (4.48816pt too wide) in paragraph at lines 501--508
+\JY1/mc/m/it/10 れ評価値に体する機能性\OT1/cmr/m/n/10 , \JY1/mc/m/it/10 細胞サ
+イズの影響度を表し\OT1/cmr/m/n/10 , $\OML/cmm/m/it/10 Function ratio \OT1/cmr/m
+/n/10 = 75$, $\OML/cmm/m/it/10 Morphology ratio \OT1/cmr/m/n/10 =
  []
 
-[11]) (./Result.tex [12]
+) (./Result.tex [12]
 第 3 章
 ) (./Discussion.tex [13
 
@@ -387,12 +373,12 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3047 strings out of 494725
- 42608 string characters out of 6169257
- 116976 words of memory out of 5000000
- 6429 multiletter control sequences out of 15000+600000
- 20107 words of font info for 79 fonts, out of 8000000 for 9000
+ 3038 strings out of 494725
+ 42457 string characters out of 6169257
+ 118994 words of memory out of 5000000
+ 6420 multiletter control sequences out of 15000+600000
+ 17852 words of font info for 70 fonts, out of 8000000 for 9000
  218 hyphenation exceptions out of 8191
  49i,22n,42p,285b,408s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.dvi (23 pages, 55208 bytes).
+Output written on report.dvi (23 pages, 61636 bytes).

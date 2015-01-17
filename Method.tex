@@ -4,7 +4,6 @@
 % 全体的な小節のたてかたが甘い
 % 内容を書く順番を考えた方がいい
 
-
 \chapter{研究手法・原理}
  \section{手法の概要}
  本研究の手法の概略は, まず単一の神経細胞が持ちうる機能をあらかじめ設定し, 
@@ -94,35 +93,37 @@
      \end{align*}
      樹状突起形態の生成方法として, 三宮 et al\cite{三宮信夫1998遺伝
        アルゴリズムと最適化}を参考にすると以下のようなL-systemが考えられる.
-     使用する記号の集合として$\{1,2\}$を定義する.置き換え規則として
+     使用する記号の集合として$\{1,2,3\}$を定義する.置き換え規則として
      \begin{align*}
        rules: \hspace{0.2cm}
        & 1 \to
        \begin{cases}
-         2 & \text{if-Termination}\\
+         3 & \text{if-Termination}\\
          \begin{cases}
            21<21> &\text{if-Bifurcation} \tag{$*$}\\
            21 &\text{else}
          \end{cases} & \text{else}
        \end{cases}\\
        & 2 \to 2
+       & 3 \to 3
      \end{align*}
-     を定義する. 記号$1,2$を樹状突起の構造に置き換えて考えると, 記号$1$は樹状
-     構造における未成長の点を表し, 記号$2$は成長済みの円柱構造を表すと考えられ
-     る. また$<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. すなわちこのL-Systemは
-     初期状態である, ある一点から樹状構造が生成される過程を表現する. 
+     を定義する. 記号1,2,3を樹状突起の構造に置き換えると, 記号1は樹状
+     構造における未成長の点を表し, 記号2は成長済みの円柱構造, 記号3は枝の終端点に対応する.
+     また, $<$\hspace{0.1cm}$>$は樹状構造の分岐を表す. すなわちこのL-Systemは
+     初期状態のある一点から, 樹状構造が生成されていく過程を表現する. 
      記号$1$の置き換え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
      される. 1つの樹状突起は初期状態$\{1\}$から, このL-Systemを開始し記号列が変
      化しなくなるまで置き換えを行うことで得られる.\\
-     最終的に得られる記号列は記号$2$のみからなり, 最も左端にある記号$2$がStemを表し,
-     それ以外はBranchを表す. 記号1から記号2が生成される場合には, 以下の手法を用いて
-     新たなStemやBranchが生成される. 
+     最終的に得られる記号列は記号2と記号3からなり, 最も左端にある記号2がStemを表し,
+     それ以外の記号2はBranchを表す. 
+     記号1から記号2が生成される場合には, 以下の手法を用いて新たなStemやBranchが生成される. 
 
    \subsection{パラメータセットからのStem, Branch生成}
      1つの樹状突起は1組のパラメータセットから作成される. よって1つの神経細胞は2組の
-     パラメータセットを持ち, 2本の樹状突起が生成される. パラメータセットに含まれる項
-     目を以下に示す. 表\ref{morpho_parameter}は樹状突起形態を生成するために使用する
+     パラメータセットを持ち, そこから2本の樹状突起が生成される. パラメータセットに含まれるパラメータ
+     を以下に示す. 表\ref{morpho_parameter}は樹状突起形態を生成するために使用する
      パラメータである. 
+
      \begin{table}[H]
        \caption{形態パラメータ}
        \label{morpho_parameter}
@@ -147,7 +148,7 @@
        \end{center}
      \end{table}
 
-     上記の形態パラメータに加え樹状突起上のコンダクタンスを線形に分布させる場合は表\ref{liner_parameter}に示される
+     上記の形態パラメータに加え, 樹状突起上のコンダクタンスを線形に分布させる場合は表\ref{liner_parameter}に示される
      パラメータを, ガウス分布に従って分布させる場合には表\ref{gausian_parameter}に示されるパラメータをそれぞれ用いる.
 
      \begin{table}[H]
@@ -239,10 +240,7 @@
    るまでに通過するStemやBranchの長さの和を$path(1_x)$とする. ここで記号
    $1$の置き換え規則($*$)の選択方法を以下に示す.
    \begin{enumerate}
-     \item \textbf{Termination $ 1 \to 2$} \\
-       %
-       % Terminationのときは 1 -> 2だが、Branchは生成しなかったはず
-       %
+     \item \textbf{Termination $ 1 \to 3$} \\
        $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
        累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて, 
        \begin{equation}
@@ -325,6 +323,8 @@
      \begin{equation}
        cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + g_{i,i - 1}(V_{i - 1}
        %このcmは小文字か大文字か?
+       %
+       %ここにあらかじめ I_CaTとI_Kaをおいた方がいい
        - V_i) + g_{i,i + 1}(V_{i + 1} - V_i)
        \label{V_i}
      \end{equation}
@@ -340,22 +340,72 @@
      Migliore et al\cite{migliore1995computer}に示されるイオンチャネルの
      モデルを追加した. 
      \begin{itemize}
-       \item CaTコンダクタンスモデル
+       \item 電位依存型T型${\rm Ca^{2+}}$電流
          \begin{align}
-           g_{CaT} &= \overline{g}_{CaT}m^2h  \\
-           I_{CaT} &= g_{CaT}ghk(V_{i},cai,cao) \\
-           KTF &= (\frac{25.0}{293.15}) \times (T + 273.15) \\
+           I_{CaT} &= g_{CaT} {\cdot} ghk(V_{i},cai,cao) \\
+           g_{CaT} &= \overline{g}_{CaT} {\cdot} m^2 {\cdot} h  \\
+           KTF &= \left(\frac{25.0}{293.15}\right) {\cdot} (T + 273.15) \\
            f &= \frac{KTF}{2} \\
            nu &= \frac{V_i}{f} \\
-           ghk &= -f(1.0 - \frac{C_i}{C_o}exp(nu))efun(nu) \\
+           ghk &= -f {\cdot} \left(1.0 - \frac{C_i}{C_o} {\cdot} \exp(nu) \right) {\cdot} efun(nu) \\
            efun(z) &=
            \begin{cases}
              1 - \frac{z}{2} & \text{$|z| < 10^{-4}$} \\
              \frac{z}{(e^z - 1)} & \text{Other} \\
            \end{cases}
          \end{align}
+
+         また, CaTコンダクタンスのゲート変数($m$および$h$)の挙動は以下の微分方程式によって表現される.
          
+         \begin{align}
+           {\tau}_{m}(V_i)\frac{dm}{dt} &= \frac{{\alpha}_m(V_i)}{{\alpha}_m(V_i) + {\beta}_m(V_i)} - m \\
+           {\tau}_m(V) &= \frac{1}{{\alpha}_m(V) + {\beta}_m(V)} \\
+           {\alpha}_m(V) &= 0.2{\cdot}\frac{-V + 19.26}{\exp(\frac{-V + 19.26}{10}) - 1} \\
+           {\beta}_m(V) &= 0.009{\cdot}\exp(-\frac{V}{22.03})
+         \end{align}
+
+         \begin{align}
+           {\tau}_{h}(V_i)\frac{dh}{dt} &= \frac{{\alpha}_h(V_i)}{{\alpha}_h(V_i) + {\beta}_h(V_i)} - h\\
+           {\tau}_{h}(V) &= \frac{1}{{\alpha}_h(V) + {\beta}_h(V)} \\
+           {\alpha}_h(V) &= 10^{-6}{\cdot}\exp(-\frac{V}{16.26}) \\
+           {\beta}_h(V) &= \frac{1}{\exp(\frac{-V + 29.79}{10}) + 1}
+         \end{align}
+
+       \item A型K$^+$電流
+         \begin{align}
+           I_{K} &= g_{Ka}{\cdot}(V_i - E_{K}) \\
+           g_{Ka} &= \overline{g}_{Ka}{\cdot}n{\cdot}l
+         \end{align}
+         また, Kaコンダクタンスのゲート変数($n$および$l$)の挙動は以下の微分方程式によって表現される.
+         \begin{align}
+           {\tau}_n(V)\frac{dn}{dt} &= \frac{1}{1 + {\alpha}_n(V)} - n \\
+           {\tau}_n(V) &= \frac{{\beta}_n(V)}{Q_{10}{\cdot}{\alpha}_{0n}{\cdot}(1 + {\alpha}_n(V))} \\
+           {\alpha}_n(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_n{\cdot}(V - V_{\frac{1}{2}n}){\cdot}9.648{\cdot}10^4}
+                                             {8.315{\cdot}(273.16 + T)} \right) \\
+           {\beta}_n(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_n{\cdot}gmn{\cdot}(V - V_{\frac{1}{2}n}){\cdot}9.648{\cdot}10^4}
+                                             {8.315{\cdot}(273.16 + T)} \right) \\
+         \end{align}
+
+         \begin{align}
+           {\tau}_l(V)\frac{dn}{dt} &= \frac{1}{1 + {\alpha}_l(V)} - l \\
+           {\tau}_l(V) &= \frac{{\beta}_l(V)}{Q_{10}{\cdot}{\alpha}_{0l}{\cdot}(1 + {\alpha}_l(V))} \\
+           {\alpha}_l(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_l{\cdot}(V - V_{\frac{1}{2}l}){\cdot}9.648{\cdot}10^4}
+                                             {8.315{\cdot}(273.16 + T)} \right) \\
+           {\beta}_l(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_l{\cdot}gml{\cdot}(V - V_{\frac{1}{2}l}){\cdot}9.648{\cdot}10^4}
+                                             {8.315{\cdot}(273.16 + T)} \right) \\
+         \end{align}
      \end{itemize}
+
+     ただし
+     \begin{align}
+       Q_{10} &= 3^{(\frac{T - 30}{10})}
+     \end{align}
+     である.
+
+%
+% gmn gmlは何なのか？ g_{mn}なのか？ 単位は無いようなので、gmnだと思う
+%
+     
      
      また, シミュレーションに関わるパラメータを以下の表\ref{sim_para}に示す.
      \begin{table}[h]
@@ -364,24 +414,35 @@
        \begin{center}
 	\begin{tabular}[t]{|c|c|} \hline
 	 パラメータ名 & 値 \\ \hline \hline
-	 Simulation time [$ms$]& 50 または 100 \\\hline
-	 $Ra$  [${\Omega}cm$] & 100 \\ \hline
-	 $Cm$  [${\mu}F/cm^2$] & 0.8 \\ \hline
-	 ${\tau}_{1}$ [$ms$]& 0.5\\ \hline
-	 ${\tau}_{2}$ [$ms$]& 2\\ \hline
-	 $V_{init}$ [$mV$]& -70\\ \hline
-	 $g_{pas}$ [$S/cm^2$]& $2.5 \times 10^{-5}$\\ \hline
-	 $E_{pas}$ [$mV$]& -70\\ \hline
-	 $T$ [$^{\circ}C$] & 37\\ \hline
-         $C_i$ & \\ \hline
-         $C_o$ & \\ \hline
+	 Simulation time [ms]& 50 または 100 \\\hline %ここ変える
+	 $Ra$  [${\rm{\Omega}cm}$] & 100 \\ \hline
+	 $Cm$  [${\rm{\mu}F/cm^2}$] & 0.8 \\ \hline
+	 ${\tau}_{1}$ [ms] & 0.5\\ \hline
+	 ${\tau}_{2}$ [ms] & 2\\ \hline
+	 $V_{init}$ [mV]& -70\\ \hline
+	 $g_{pas}$ [${\rm S/cm^2}$]& $2.5 \times 10^{-5}$\\ \hline
+	 $E_{pas}$ [mV] & -70\\ \hline
+	 $T$ [${\rm ^{\circ}C}$] & 37\\ \hline
+         $\overline{g}_{CaT}$ [${\rm S/cm^2}$]&\\ \hline
+         $\overline{g}_{Ka}$ [${\rm S/cm^2}$]&\\ \hline
+         ${\alpha}_{0n}$ [${\rm ms^{-1}}$]& 0.02\\ \hline
+         ${\alpha}_{0l}$ [${\rm ms^{-1}}$]& 0.08\\ \hline
+         ${\zeta}_n$ & -3\\ \hline
+         ${\zeta}_l$ & 4\\ \hline
+         $gmn$ & 0.6\\ \hline
+         $gml$ & 1\\ \hline
+         $V_{\frac{1}{2}n}$ [mV]& -33.6\\ \hline
+         $V_{\frac{1}{2}l}$ [mV]& -83\\ \hline
+         $C_i$ [mM]& $50{\times}10^{-6}$\\ \hline
+         $C_o$ [mM]& 2\\ \hline
 	\end{tabular}
        \end{center}
       \end{table}
       シミュレーションはNEURONを用いて, CVodeアルゴリズムを用いて行った.
       CVodeアルゴリズムを用いる際のエラーは$10^{-5}$未満に設定した. 
+
  \section{遺伝アルゴリズム}
-   神経細胞を個体として200個体, 世代数650で遺伝アルゴリズムを用いたパラメー
+   神経細胞を個体として200個体, 世代数500で遺伝アルゴリズムを用いたパラメー
    タ最適化を行った. この遺伝アルゴリズムにおける遺伝子とは個体の持つパラ
    メータセット\ref{parameter_set}である. 遺伝アルゴリズムでは, エリート
    保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
