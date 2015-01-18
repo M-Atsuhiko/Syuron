@@ -4,6 +4,8 @@
 % 全体的な小節のたてかたが甘い
 % 内容を書く順番を考えた方がいい
 
+%親の枝という定義がわかりにくい
+
 \chapter{研究手法・原理}
  \section{手法の概要}
  本研究の手法の概略は, まず単一の神経細胞が持ちうる機能をあらかじめ設定し, 
@@ -58,7 +60,6 @@
    よって神経細胞の形態生成は樹状突起の形態を生成することで行われる.
    樹状突起形態の生成は確率的な手法を用いる. また樹状突起上のコンダクタンス分布の決定には
    線形分布とガウス分布の2つの手法をそれぞれ使用した. 
-
    \subsection{神経細胞形態の表現}
      神経細胞の形態を3次元空間上に表現する. 細胞体は直径25$[{\rm{{\mu}m}}]$の
      球とし, 樹状突起は円柱の集合体として表現する. 円柱端部の中心部分
@@ -120,9 +121,9 @@
 
    \subsection{パラメータセットからのStem, Branch生成}
      1つの樹状突起は1組のパラメータセットから作成される. よって1つの神経細胞は2組の
-     パラメータセットを持ち, そこから2本の樹状突起が生成される. パラメータセットに含まれるパラメータ
-     を以下に示す. 表\ref{morpho_parameter}は樹状突起形態を生成するために使用する
-     パラメータである. 
+     パラメータセットを持ち, そこから2本の樹状突起が生成される.
+     パラメータセットに含まれるパラメータを以下に示す.
+     表\ref{morpho_parameter}は樹状突起形態を生成するために使用するパラメータである. 
 
      \begin{table}[H]
        \caption{形態パラメータ}
@@ -236,17 +237,17 @@
 
    形態生成L-systemにおける記号$2$はStemやBranchなどの形態情報に対応している. 
    初期状態の記号$1$の座標を原点$(0,0,0)$とすると, 全ての記号$1$に3次元空間上の
-   座標情報を設定することができる. 原点から, ある記号$1_x$に至
-   るまでに通過するStemやBranchの長さの和を${\rm path(1_x)}$とする. ここで記号
+   座標情報を設定することができる. 原点から, ある記号$1_i$に至
+   るまでに通過するStemやBranchの長さの和を${\rm path(1_i)}$とする. ここで記号
    $1$の置き換え規則($*$)の選択方法を以下に示す.
    \begin{enumerate}
      \item \textbf{Termination $ 1 \to 3$} \\
        $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
        累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて, 
        \begin{equation}
-	 {\rm Cumulative}\hspace{0.1cm}\gamma\hspace{0.05cm}({\rm path(1_x)}) > rand
+	 {\rm Cumulative}\hspace{0.1cm}\gamma\hspace{0.05cm}({\rm path(1_i)}) > rand
        \end{equation}
-       のとき慎重停止とする. ただし累積ガンマ分布のパラメータとして, \\
+       のとき伸張停止とする. ただし累積ガンマ分布のパラメータとして, \\
        \begin{tabular}[c]{ll}
          - \textit{k} : & \textit{Termination} $\alpha$ \\
          - $\theta$ : &  \textit{Termination} $\beta$\\
@@ -258,7 +259,7 @@
        最大値が0.8になるように実数倍したガンマ分布
        \textit{Scaled} $\gamma$(x)を用いて,
        \begin{equation}
-	 Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_x)) > rand
+	 Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(1_i)) > rand
        \end{equation}
        のとき分岐を行う. ただしガンマ分布のパラメータとして, \\
        \begin{tabular}[c]{ll}
@@ -271,17 +272,13 @@
        上記の条件を満たさなかった場合, Stem, Branchを伸張させる.
    \end{enumerate}
 
-   %
-   % ヒューリスティック
-   %
-
    ただし, 以下の条件に該当する場合は強制的にTerminationとする. これは樹
-   状突起として妥当な形態を得るために導入するヒューリスティックである.
+   状突起として妥当な形態を得るために導入するヒューリスティックスである.    % <- 妥当とは?
 
    \begin{itemize}
-    \item ${\rm path(1_x)} > 2000$のとき
+    \item ${\rm path(1_i)} > 2000$のとき
     \item $diam_P <= Minimum diameter$ のとき\\
-	  この場合は$diam_P$をMinimum diameterに設定し直す. 
+	  また, この場合は$diam_P$をMinimum diameterに設定し直す. 
    \end{itemize}
 
    最終的に得られた樹状突起形態は細胞体の表面に接するように, Stemの方向
@@ -291,14 +288,14 @@
 
    \begin{itemize}
      \item \textbf{線形分布の場合}\\
-       CaT, Kコンダクタンス値について, 上記のdiameterと同様の方法で決定する\\
+       CaT, Kaコンダクタンス値について, 上記のdiameterと同様の方法で決定する\\
       \begin{tabular}[c]{ll}
         - Stemの場合: & \textit{Stem conductance} \\
         - Branchの場合: & $Conductance_{P} \times$ \textit{Conductance taper rate} \\
       \end{tabular} \\
        ここで$Conductance_{P}$はそのBranchの親枝となるBranchやStemのコンダクタンス値である.
      \item \textbf{ガウス分布の場合}\\
-       CaT, Kコンダクタンス値について, 以下の方法で決定する. \\
+       CaT, Kaコンダクタンス値について, 以下の方法で決定する. \\
 %
 % 5μごとに分割してコンダクタンスを設定する, と書く
 %
@@ -306,15 +303,15 @@
    \end{itemize}
 
    \subsection{シナプティックゾーンとシナプスの付与}
-     3次元空間上の原点に細胞体を配置し, y軸方向の$170 < y < 190$の範囲を
-     Redシナプテックゾーン, y軸方向の$-170 > y > 190$の範囲をBlueシナプテック
-     ゾーンと定義する. 上記の手法で形成した樹状突起が上下のシナプテックゾー
-     ンに入った場合, 樹状突起上の$5{\mu}m$ごとに1つのシナプスを付与する. % <- 5マイクロm ってどういう向きの？
-     上下のシナプテックゾーン, シナプスが付与された樹状突起の例を図\ref{synapse}に示す.
+     3次元空間上の原点に細胞体を配置し, y軸方向の$170 < y < 190$の範囲を % <- この辺の座標情報を変数にしたほうがいいかも
+     Redシナプティックゾーン, y軸方向の$-170 > y > -190$の範囲をBlueシナプティック
+     ゾーンと定義する. シナプティックゾーン内に樹状突起が形成された
+     場合, 樹状突起の$5{\mu}m$ごとに1つのシナプスを付与する. % <- 5マイクロm ってどういう向きの？
+     二つのシナプティックゾーンにシナプスが付与された樹状突起の例を図\ref{synapse}に示す.
      \begin{figure}[h]
        \centering
        \includegraphics[width=5cm]{./Images/temp.png} 
-       \caption{シナプテックゾーン, シナプス}
+       \caption{シナプティックゾーン, シナプス}
        \label{synapse}
      \end{figure}
       
@@ -330,6 +327,8 @@
      る. コンパートメントの膜上にシナプスや, 特定のイオンチャネルが分布し
      ていない場合, 単一コンパートメントの膜電位($V_i$)は以下の式によって計算
      される.
+
+     %g_leakは平衡電位 = -70になるように調節している
      \begin{equation}
        cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + g_{i,i - 1}(V_{i - 1}
        %このcmは小文字か大文字か?
@@ -352,7 +351,7 @@
      \begin{itemize}
        \item 電位依存型T型${\rm Ca^{2+}}$電流
          \begin{align}
-           I_{CaT} &= g_{CaT} {\cdot} ghk(V_{i},cai,cao) \\
+           I_{CaT} &= g_{CaT} {\cdot} ghk(V_{i},cai,cao) \\                    %V_iとVが混在してるけど、統一した方がよいと思われる
            g_{CaT} &= \overline{g}_{CaT} {\cdot} m^2 {\cdot} h  \\
            KTF &= \left(\frac{25.0}{293.15}\right) {\cdot} (T + 273.15) \\
            f &= \frac{KTF}{2} \\
@@ -383,25 +382,25 @@
 
        \item A型K$^+$電流
          \begin{align}
-           I_{K} &= g_{Ka}{\cdot}(V_i - E_{K}) \\
+           I_{Ka} &= g_{Ka}{\cdot}(V_i - E_{Ka}) \\
            g_{Ka} &= \overline{g}_{Ka}{\cdot}n{\cdot}l
          \end{align}
          また, Kaコンダクタンスのゲート変数($n$および$l$)の挙動は以下の微分方程式によって表現される.
          \begin{align}
            {\tau}_n(V)\frac{dn}{dt} &= \frac{1}{1 + {\alpha}_n(V)} - n \\
            {\tau}_n(V) &= \frac{{\beta}_n(V)}{Q_{10}{\cdot}{\alpha}_{0n}{\cdot}(1 + {\alpha}_n(V))} \\
-           {\alpha}_n(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_n{\cdot}(V - V_{\frac{1}{2}n}){\cdot}9.648{\cdot}10^4}
+           {\alpha}_n(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_n{\cdot}(V - V_{n\frac{1}{2}}){\cdot}9.648{\cdot}10^4}
                                              {8.315{\cdot}(273.16 + T)} \right) \\
-           {\beta}_n(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_n{\cdot}gmn{\cdot}(V - V_{\frac{1}{2}n}){\cdot}9.648{\cdot}10^4}
+           {\beta}_n(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_n{\cdot}gmn{\cdot}(V - V_{n\frac{1}{2}}){\cdot}9.648{\cdot}10^4}
                                              {8.315{\cdot}(273.16 + T)} \right) \\
          \end{align}
 
          \begin{align}
-           {\tau}_l(V)\frac{dn}{dt} &= \frac{1}{1 + {\alpha}_l(V)} - l \\
+           {\tau}_l(V)\frac{dl}{dt} &= \frac{1}{1 + {\alpha}_l(V)} - l \\
            {\tau}_l(V) &= \frac{{\beta}_l(V)}{Q_{10}{\cdot}{\alpha}_{0l}{\cdot}(1 + {\alpha}_l(V))} \\
-           {\alpha}_l(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_l{\cdot}(V - V_{\frac{1}{2}l}){\cdot}9.648{\cdot}10^4}
+           {\alpha}_l(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_l{\cdot}(V - V_{l\frac{1}{2}}){\cdot}9.648{\cdot}10^4}
                                              {8.315{\cdot}(273.16 + T)} \right) \\
-           {\beta}_l(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_l{\cdot}gml{\cdot}(V - V_{\frac{1}{2}l}){\cdot}9.648{\cdot}10^4}
+           {\beta}_l(V) &= {\exp}\left(\frac{10^{-3}{\cdot}{\zeta}_l{\cdot}gml{\cdot}(V - V_{l\frac{1}{2}}){\cdot}9.648{\cdot}10^4}
                                              {8.315{\cdot}(273.16 + T)} \right) \\
          \end{align}
      \end{itemize}
@@ -415,13 +414,14 @@
 % gmn gmlは何なのか？ g_{mn}なのか？ 単位は無いようなので、gmnだと思う
 %
      また, シミュレーションに関わるパラメータを以下の表\ref{sim_para}に示す.
-     \begin{table}[h]
+
+     \begin{table}[H]
        \caption{シミュレーションパラメータ}
        \label{sim_para}
        \begin{center}
 	\begin{tabular}[t]{|c|c|} \hline
 	 パラメータ名 & 値 \\ \hline \hline
-	 Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える
+	 Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える 2段組みの表にする
 	 $Ra$  [${\rm{\Omega}cm}$] & 100 \\ \hline
 	 $Cm$  [${\rm{\mu}F/cm^2}$] & 0.8 \\ \hline
 	 ${\tau}_{1}$ [ms] & 0.5\\ \hline
@@ -429,18 +429,20 @@
 	 $V_{init}$ [mV]& -70\\ \hline
 	 $g_{pas}$ [${\rm S/cm^2}$]& $2.5 \times 10^{-5}$\\ \hline
 	 $E_{pas}$ [mV] & -70\\ \hline
+	 $E_{Ka}$ [mV] & -91\\ \hline
 	 $T$ [${\rm ^{\circ}C}$] & 37\\ \hline
-         $\overline{g}_{CaT}$ [${\rm S/cm^2}$]&\\ \hline
-         $\overline{g}_{Ka}$ [${\rm S/cm^2}$]&\\ \hline
+         $\overline{g}_{CaT}$ [${\rm S/cm^2}$]& 0.003\\ \hline
+         $\overline{g}_{Ka}$ [${\rm S/cm^2}$]& 0.01\\ \hline
          ${\alpha}_{0n}$ [${\rm ms^{-1}}$]& 0.02\\ \hline
          ${\alpha}_{0l}$ [${\rm ms^{-1}}$]& 0.08\\ \hline
          ${\zeta}_n$ & -3\\ \hline
          ${\zeta}_l$ & 4\\ \hline
          $gmn$ & 0.6\\ \hline
          $gml$ & 1\\ \hline
-         $V_{\frac{1}{2}n}$ [mV]& -33.6\\ \hline
-         $V_{\frac{1}{2}l}$ [mV]& -83\\ \hline
+         $V_{n\frac{1}{2}}$ [mV]& -33.6\\ \hline
+         $V_{l\frac{1}{2}}$ [mV]& -83\\ \hline
          $C_i$ [mM]& $50{\times}10^{-6}$\\ \hline
+         $C_o$ [mM]& 2\\ \hline
          $C_o$ [mM]& 2\\ \hline
 	\end{tabular}
        \end{center}
@@ -448,90 +450,116 @@
       シミュレーションはNEURONを用いて, CVodeアルゴリズムを用いて行った.
       CVodeアルゴリズムを用いる際のエラーは$10^{-5}$未満に設定した. 
 
- \section{遺伝アルゴリズム}
-   神経細胞を個体として200個体, 世代数500で遺伝アルゴリズムを用いたパラメー
-   タ最適化を行った. この遺伝アルゴリズムにおける遺伝子とは個体の持つパラ
-   メータセット\ref{parameter_set}である. 遺伝アルゴリズムでは, エリート
-   保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
+ \section{遺伝アルゴリズム}    % <- 「遺伝アルゴリズム」という名前はどうなのか？
+   2組のパラメータセットを1つの個体として200個体, 世代数500で遺伝アルゴリズムを用いたパラメー
+   タ最適化を行った. 
+   この遺伝アルゴリズムにおける遺伝子とは個体の持つパラメータセットである. 
+   ここで, 2つのパラメータセットをパラメータセットAとパラメータセットBと名付け, 
+   そこから生成される樹状突起をそれぞれ樹状突起Aと樹状突起Bとする. 
+   本研究の遺伝アルゴリズムでは, エリート保存, 一点交叉, 突然変異の手法を用いた. 以下にその詳細を述べる. 
    \subsection{個体評価}
-     上述の通り各神経細胞の形態を生成しシミュレーションを行い, その結果を
-     もとに個体の評価を行う. しかし個体によっては上下のシナプティックゾー
-     ンに樹状突起を伸ばせず, そもそもシミュレーションを行うことができない
-     こともある. また神経細胞をより実物に近づけることと, 妥当なシミュレー
-     ションを行うことを目的としていくつかのヒューリステックスを導入した.
+     上述の通り各神経細胞の形態を生成しシミュレーションを行い, その結果を  % <- シミュレーションという言い方は良くない F値テストとか具体的に
+     もとに個体の評価を行う. 個体の評価には, 個体の機能性\ref{F}のほか個体
+     の体積, 分布するコンダクタンスの量を考慮する. 
+     しかし, 個体によっては上下のシナプティックゾーンに樹状突起を伸ばせず, 
+     そもそもシミュレーションを行うことができないものが発生することもある.
+     また神経細胞をより実物に近づけることと, 妥当なシミュレーションを行うことを % <- 妥当とは？
+     目的としていくつかのヒューリスティックスを導入した.
      以下に個体の評価方法を述べる. \\
-     まず, シミュレーションを行うことができない個体をどのように評価する
-     かを以下に示す.
-     \begin{itemize}
-     \item \textbf{形態的エラー}\\
-       以下の場合はシミュレーションを行わず, $\mu = -100$, $sigma = 5$の
-       ガウス分布から乱数を発生させ, その値を評価値とした. 
-       \begin{itemize}
-         \item 神経細胞全体でStemとBranchの個数が合計15未満の場合
-         \item 神経細胞全体で樹状突起の分岐が一つもない場合
-	 \item 上下のシナプティックゾーンそれぞれにシナプスを作れなかった場合
-       \end{itemize}
-     \end{itemize}
-     次にシミュレーションの結果に対して以下のヒューリスティックを導入す
-     る. 
-     \begin{itemize}
-     \item \textbf{EPSPエラー}\\
-	   シミュレーションを行った場合でも以下の場合は$\mu = -50$,
-	   $\sigma = 5$のガウス分布から乱数を発生させ, その値を評価値とした.
-       \begin{itemize}
-         \item 一方のシナプティックゾーンのみでの発火による細胞体での膜
-	       電位の脱分極が2mV以下の場合 % <- ここ書き直す
-       \end{itemize}
-       以下の項目は神経細胞の膜状にKaチャネル, CaTチャネルを分布させ
-       る場合にのみ考慮する. これは神経細胞での発火や, 膜電位の振動を % <- 細胞体での発火を抑制する意味は? ここコンダクタンスの時のみの考慮にしなくてもよさそう
-       抑制するためである.
-       \begin{itemize}
-         \item 細胞体での脱分極量が25mVを超えた場合
-	 \item シミュレーションの最後の5ステップで膜電位の上昇が起こっ
-	   た場合
-       \end{itemize}
-     \end{itemize}
-   以上の場合は個体のinput-order detectionの機能性について考慮することな
-   くペナルティを与える. \\
-   
-   次にそれ以外の場合を述べる.
-   \begin{itemize}
 
-    \item 以下の式により評価値を与える. % <- ここがかなり変わる
-	  \begin{align}
-	   評価値: 100 - Function\hspace{0.1cm}ratio \times F^{-1} -
-	   Morphology \hspace{0.1cm} ratio \times (1 - \frac{L_0}{Neuro\hspace{0.1cm}size})
-	  \end{align}
-	  ここで$L_0$は細胞体から上下のシナプティックゾーンまでの距離の
-	  和($340{\mu}m$)であり, $Neuro\hspace{0.1cm}size$は神経細胞の
-	  樹状突起の長さの総和である. また$Function\hspace{0.1cm}ratio$
-	  と$Morphology \hspace{0.1cm} ratio$はそれぞれ評価値に体する機
-	  能性, 細胞サイズの影響度を表し, $Function\hspace{0.1cm}ratio =
-	  75$, $Morphology \hspace{0.1cm} ratio = 25$とした. 
-   \end{itemize}
-   よって評価値は100に近いほど良い評価であるとする. 
+     % 主な評価を先に書いて, あとでヒューリスティックを書いた方が良さそう
+     \begin{itemize}
+       \item \textbf{形態的エラー}\\
+         両方のシナプティックゾーンにシナプスを持たずシミュレーションを行えない個体の場合
+         樹状突起Aの$y$座標の最大値をmax($y_A$), 樹状突起Bの$y$座標の最小値をmin($y_B$)とし
+         評価値$E$を
+         \begin{equation}
+           E = -{\rm max}\left(170 - {\rm max}(y_A),0\right) + {\rm min}\left(-170 - {\rm min}(y_B),0\right) - 100
+           \label{Morpho_E}
+         \end{equation}
+         とする. 
+
+       \item シミュレーションを行った個体に関しては以下の評価式によって評価値$E$を与える. 
+         \begin{align}
+           Function Minus &= \frac{F_i}{F_{max}} \\
+           Morphology Minus &= \frac{Volume_i}{Volume_{max}} \\
+           Conductance Minus &= \frac{Conductance ratio_i}{Conductance_{max}} \\ %あとで詳しく書く
+         \end{align}
+
+         \begin{equation}
+           E = 100 - Function Minus - Morphology Minus - Conductance Minus
+         \end{equation}
+     \end{itemize}
+
+     また, 以下のヒューリスティックスに該当する個体は, 以下の式によって評価する. %上の式との関連は?
+     \begin{itemize}
+       \item \textbf{形態的ヒューリスティックス}\\
+         以下の場合はシミュレーションを行わず, 式\ref{Morpho_E}によって評価値$E$を与えた. 
+         \begin{itemize}
+           \item 神経細胞全体でStemとBranchの個数が合計15未満の場合
+           \item 神経細胞全体で樹状突起の分岐が一つもない場合
+         \end{itemize}
+       \item \textbf{シミュレーションヒューリスティックス}\\
+         一方のシナプティックゾーンのみでの発火による細胞体での膜電位の脱分極が2mV以下の場合以下の場合は % <- わかりにくいので書き直す
+         $\mu = -50$, $\sigma = 5$のガウス分布から乱数を1つ発生させ, その値を評価値$E$とした.
+         \begin{equation}
+           E = N(\mu = -50, \sigma = 5) % <- この書き方はあってるのか
+         \end{equation}
+
+         また, 神経細胞の膜状にKaチャネル, CaTチャネルを分布させた場合は以下の場合にも上式によって評価値を与える. 
+         これは神経細胞での発火や, 膜電位の振動を % <- 細胞体での発火を抑制する意味は? ここコンダクタンスの時のみの考慮にしなくてもよさそう
+         抑制するためである.
+         \begin{itemize}
+           \item 細胞体での脱分極量が25mVを超えた場合
+	   \item シミュレーションの最後の5ステップで膜電位の上昇が起こっ
+	     た場合
+         \end{itemize}
+     \end{itemize}
+
+   よって評価値は100に近いほど良い評価である. % <- 評価値の分布について、層になることを図示するか？
+
+   \begin{figure}[h]
+     \centering
+     \includegraphics[width=5cm]{./Images/temp.png} 
+     \caption{評価値}
+     \label{Estimate}
+   \end{figure}
+
    \subsection{エリート保存}
-   各世代において最大の評価値をとった個体の遺伝子はそのまま次世代に引き
-   継がれる. 
+     各世代において最大の評価値をとった個体の遺伝子はそのまま次世代に引き
+     継がれる. 
    \subsection{一点交叉, 突然変異}
    %交叉、突然変異を起こす個体の数は中心極限定理的な考えで求められる
-   次世代の個体は一点交叉または突然変異のどちらかの手法によって作成され
-   る. 一点交叉は評価値上位$\mu$個の個体を親として, $\lambda$個の子個体
-   を生成する. この$\lambda$個の子個体は評価値下位$\lambda$個の個体と交
-   換される. 突然変異は残りの$200 - \lambda$個の個体に対して適用される. 
-   ここで$\mu = 10$
-   \begin{itemize}
-    \item 一点交叉\\
-	  評価値上位の$\mu$個体から確率的に親を2個体選択する. 評価値i番目の
-	  個体が選択される可能性を$P_i$とすると,
-	  \begin{equation}
+     次世代の個体は一点交叉または突然変異のどちらかの手法によって作成され
+     る. 一点交叉は評価値上位$\mu$個の個体を親として, $\lambda$個の子個体 % <- 遺伝的アルゴリズムに関するパラメータも後で表にまとめる
+     を生成する. この$\lambda$個の子個体は評価値下位$\lambda$個の個体と交
+     換される. 突然変異は残りの$200 - \lambda$個の個体に対して適用される. 
+     ここで$\mu = 10$である. 
+     \begin{itemize}
+       \item 一点交叉\\
+         評価値上位の$\mu$個体から確率的に親を2個体選択する. 評価値i番目の
+         個体が選択される可能性を$P_i$とすると,
+         \begin{equation} % 選択確率を円グラフで図示するか？
 	   P_i =  
-	    \begin{cases}
+	   \begin{cases}
 	     (\frac{1}{2})^i & \text{$(i < \mu$)}\\
 	     (\frac{1}{2})^{i - 1} & \text{$(i = \mu)$}
-	    \end{cases}\\
-	  \end{equation}
-	  なお, 同じ個体が重複して選択されないようにした. 
-    \item 突然変異\\
-	  
-   \end{itemize}
+	   \end{cases}\\
+         \end{equation}
+         なお, 同じ個体が重複して選択されないようにした. \\
+         選択された2つの個体のパラメータセットA同士, パラメータセットB同士で以下のようにして一点交叉を行う. %なぜABを分けるのかを書いた方がわかりやすい
+         
+         \begin{itemize}
+           \item \textbf{交差点の決定} %passiveの場合はK,Caコンダクタンスに関する部分は交叉を行っても無意味だった
+             パラメータセットの項目数を$N_{Param}$とする.このとき交差点\textit{Cross}は$[1,N_{Param}]$から
+             一様な確率で整数を1つ返す関数randN(min,max)を用いて
+             \begin{equation}
+               Cross = randN(1,N_{Param})
+             \end{equation}
+           \item どちらが上に行くか決める
+           \item 交叉させて新たなパラメータセットを作る
+         \end{itemize}
+         
+         
+       \item 突然変異\\
+     \end{itemize}
