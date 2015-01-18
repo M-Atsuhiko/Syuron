@@ -1,0 +1,354 @@
+% Time-stamp: <2009-01-15 14:38:12 sakaki>
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% JY1
+\DeclareFontShape{JY1}{mc}{m}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{mc}{bx}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY1}{gt}{m}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY1}{gt}{bx}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JY1}{mc}{b}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{mc}{eb}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{gt}{b}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{gt}{eb}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{gt}{ub}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JY1}{mc}{m}{sc}{<->ssub*mc/m/n}{}
+%%% JT1
+\DeclareFontShape{JT1}{mc}{m}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{mc}{bx}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT1}{gt}{m}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT1}{gt}{bx}{it}{<->ssub*gt/m/n}{}
+\DeclareFontShape{JT1}{mc}{b}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{mc}{eb}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{gt}{b}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{gt}{eb}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{gt}{ub}{it}{<->ssub*mc/m/n}{}
+\DeclareFontShape{JT1}{mc}{m}{sc}{<->ssub*mc/m/n}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\oddsidemargin  = 0.5cm
+\evensidemargin = 0.5cm
+\marginparwidth = 68pt 
+\topmargin      = -0.5cm
+\headheight     = 12pt
+\headsep        = 30pt
+\footskip       = 40pt
+
+\textheight     = 230mm
+\textwidth      = 150mm
+
+\def\baselinestretch{1.15}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% List Compress
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\labelenumi{(\theenumi)} 
+\def\theenumi{\arabic{enumi}} 
+\def\labelenumii{\theenumii.}
+\def\theenumii{\alph{enumii}}
+\def\p@enumii{\theenumi}
+\def\labelenumiii{\theenumiii.}
+\def\theenumiii{\roman{enumiii}}
+\def\p@enumiii{\theenumi(\theenumii)}
+\def\labelenumiv{\theenumiv.}
+\def\theenumiv{\Alph{enumiv}} 
+\def\p@enumiv{\p@enumiii\theenumiii}
+
+\def\labelitemi{$\bullet$}
+\def\labelitemii{\bf --}
+\def\labelitemiii{$\ast$}
+\def\labelitemiv{$\cdot$}
+
+\def\@listI{
+  \leftmargin\leftmargini
+  \topsep 1.0ex plus 0.2ex minus 0.2ex
+  \parsep 0.4ex plus 0.1ex minus 0.1ex
+  \itemsep 0.2ex plus 0.1ex minus 0.1ex
+}
+\let\@listi\@listI
+\@listi 
+\def\@listii{
+  \leftmargin\leftmarginii
+  \labelwidth\leftmarginii\advance\labelwidth-\labelsep
+  \topsep 0.3ex plus 0.2ex minus 0.1ex
+  \parsep 0.3ex plus 0.2ex minus 0.1ex
+  \itemsep \parsep
+}
+\def\@listiii{
+  \leftmargin\leftmarginiii
+  \labelwidth\leftmarginiii\advance\labelwidth-\labelsep
+  \topsep 0.2ex plus 0.1ex minus 0.1ex
+  \parsep \z@
+  \partopsep 0.2ex plus 0.1ex minus 0.1ex
+  \itemsep \topsep
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Chapter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 章．
+% 章題は `第１章 序論' のように．
+% 目次の章題も同様に．
+\def\@makechapterhead#1{%
+  \thispagestyle{plain}
+  \vspace*{20pt}%
+  { \parindent 0pt \raggedright
+    \ifnum \c@secnumdepth >\m@ne
+      \LARGE \bf
+      \setbox\@tempboxa\hbox{\@chapapp{\thechapter}\hskip 10pt} %
+      \setbox\@tempboxa\hbox{\@chapapp{\thechapter}\hskip 10pt} %
+      \box\@tempboxa
+	  \par \vskip 20pt #1
+    \else
+      \LARGE \bf #1\par
+    \fi
+    \nobreak
+    \vskip 40pt }%
+}
+\def\@chapter[#1]#2{%
+  \ifnum \c@secnumdepth >\m@ne
+    \refstepcounter{chapter}%
+    \typeout{\@chapapp{\thechapter}.}%
+    \addcontentsline{toc}{chapter}{%
+      \protect\numberline{\@chapapp{\thechapter}}#1
+    }%
+  \else
+    \addcontentsline{toc}{chapter}{#1}%
+  \fi
+  \chaptermark{#1}%
+  \addtocontents{lof}{\protect\addvspace{10pt}}%
+  \addtocontents{lot}{\protect\addvspace{10pt}}%
+  \if@twocolumn
+    \@topnewpage[\@makechapterhead{#2}] 
+  \else
+    \@makechapterhead{#2}%
+    \@afterheading
+  \fi
+} 
+\def\@chapapp#1{第 \hbox{#1} 章 \ }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Footnote %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Maketitle 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 表紙．
+% titlepage.sty  27 Jan 85
+\def\maketitle{\par
+ \begingroup
+  \@maketitle
+ \endgroup
+ \let\maketitle\relax
+ \let\@maketitle\relax
+ \gdef\@advisor{}\gdef\@idnumber{}
+ \let\thanks\relax}
+
+\def\@maketitle{\begin{titlepage}
+ \setcounter{page}{0}
+  \vbox to \textheight{\hsize\textwidth
+  %\linewidth\hsize 
+  \vskip 1mm 
+  \centering
+  \hspace*{10mm}
+  {\LARGE 修 士 論 文}
+  \vskip 36mm
+  \hspace*{10mm}
+  \vbox to 25mm {\hsize 145mm \centering
+  {\LARGE\bf \@title \par}}
+  \vskip 38mm
+  {\hspace*{-25mm}---\hfill}
+  \vskip 31mm
+  \hspace*{14mm}
+  {\begin{Large}
+   \begin{tabular}{ll}
+   氏　　　名~: & \@author \\
+   学~籍~番~号~: & \@idnumber \\
+   指~導~教~員~: & \@advisor \\
+   提　出　日~: & \@date \\
+  \end{tabular} 
+  \end{Large}
+  \par}
+  \vskip 40mm
+  \hspace*{13mm}
+  {\Large 立命館大学大学院 理工学研究科}
+  \vfil}
+  \end{titlepage}}
+
+\newcommand{\idnumber}[1]{\gdef\@idnumber{#1}}
+\newcommand{\advisor}[1]{\gdef\@advisor{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Table of Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 目次．
+% 目次ページの pagestyle は roman．
+\def\tableofcontents{%
+  \bgroup
+    \def\thepage{\roman{page}}%
+    \baselineskip = \normalbaselineskip
+    \lineskip = \normallineskip
+    \@restonecolfalse
+    \if@twocolumn\@restonecoltrue\onecolumn\fi
+    \chapter*{\thispagestyle{plain}%
+    \contentsname\@mkboth{\contentsname}{\contentsname}}%
+    \@starttoc{toc}\if@restonecol\twocolumn\fi
+    \newpage
+  \egroup
+%  \global\c@page = \@ne
+}
+
+
+\def\listoffigures{%
+  \bgroup
+	\thispagestyle{plain}
+    \def\thepage{\roman{page}}%
+    \baselineskip = \normalbaselineskip
+    \lineskip = \normallineskip
+    \@restonecolfalse
+    \if@twocolumn\@restonecoltrue\onecolumn\fi
+    \chapter*{{図 目 次}\@mkboth{図 目 次}{図 目 次}}%
+    \thispagestyle{plain}%
+    \@starttoc{lof}\if@restonecol\twocolumn\fi
+    \newpage
+  \egroup
+%  \global\c@page = \@ne
+}
+\def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+
+\def\listoftables{%
+  \bgroup
+	\thispagestyle{plain}
+    \def\thepage{\roman{page}}%
+    \baselineskip = \normalbaselineskip
+    \lineskip = \normallineskip
+    \@restonecolfalse
+    \if@twocolumn\@restonecoltrue\onecolumn\fi
+    \chapter*{{表 目 次}\@mkboth{表 目 次}{表 目 次}}%
+    \thispagestyle{plain}%
+    \@starttoc{lot}\if@restonecol\twocolumn\fi
+    \newpage
+    \setcounter{page}{0}
+  \egroup
+  %\global\c@page = \@ne
+}
+\let\l@table\l@figure
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Acknowledgements
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 謝辞．
+% 目次に載せる．
+\def\acknowledgements{%
+  \bgroup
+    \c@secnumdepth = \m@ne
+    \chapter{謝 辞}
+	\thispagestyle{plain}
+  \egroup
+  \relax
+}
+
+\def\ackname{謝 辞}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Bibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 参考文献．
+% 目次に載せる．
+% \bibitem のラベルは `1)' のように．
+% \cite の出力は上付き `1)' のように．
+\def\thebibliography#1{%
+  \bgroup
+    \c@secnumdepth = \m@ne
+    \chapter{参考文献}
+	\thispagestyle{plain}
+  \egroup
+  \list{\arabic{enumi})}{%
+    \settowidth\labelwidth{#1)}%
+    \leftmargin\labelwidth \advance\leftmargin\labelsep
+    \usecounter{enumi}%
+  }%
+  \def\newblock{\hskip .11em plus .33em minus .07em}%
+  \sloppy\sfcode`\.=1000
+  \relax
+}
+\let\endthebibliography=\endlist
+
+\def\@cite#1#2{%
+  \nobreak$^{\mbox{\scriptsize #1\if@tempswa , #2\fi})}$%
+}
+
+\def\refname{参考文献}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Paper list
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% 本研究に関する発表.
+% 目次に載せる．
+\def\paperlist{%
+  \bgroup
+    \c@secnumdepth = \m@ne
+    \chapter{本研究に関する発表}
+	\thispagestyle{plain}
+  \egroup
+  \relax
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TBstruts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\setTBstruts}{%
+ \def\T{\rule{0pt}{2.6ex}}%
+ \def\B{\rule[-1.2ex]{0pt}{0ex}}}
+
+\newcommand{\lw}[1]{\smash{\lower1.5ex\hbox{#1}}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% fancyhdr
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input fancyheadings.sty\relax
+\pagestyle{fancyplain}
+% \lhead[EVEN-LHEAD]{ODD-LHEAD}
+% \rhead[EVEN-RHEAD]{ODD-RHEAD}
+
+% \lhead[\fancyplain{}{\thepage}]{\fancyplain{}{\bf\rightmark}}
+% \rhead[\fancyplain{}{\bf\leftmark}]{\fancyplain{}{\thepage}}
+
+\lhead[\fancyplain{}{\thepage ~~~ {\bf\leftmark}}]{\fancyplain{}}
+\rhead[\fancyplain{}]{\fancyplain{}{{\bf\rightmark} ~~~ \thepage}}
+
+%\lhead[\fancyplain{}{\thepage}]{\fancyplain{}}
+%\rhead[\fancyplain{}]{\fancyplain{}{\thepage}}
+%\chead[\fancyplain{}{\small\bf \leftmark}]{\fancyplain{}{\bf\small \rightmark}}
+
+\cfoot{\fancyplain{\thepage}{}}
+
+\plainheadrulewidth 2pt
+\renewcommand{\chaptermark}[1]
+	{\markboth{第\thechapter 章 \hskip 4pt #1}
+	{第\thechapter 章 \hskip 4pt #1}}
+\renewcommand{\sectionmark}[1]
+	{\markright{\thesection\ #1}}
