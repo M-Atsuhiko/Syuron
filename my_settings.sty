@@ -2,7 +2,6 @@
 \usepackage{float}
 \usepackage{amsmath}
 \usepackage{subcaption}
-%\usepackage{cite}
 \usepackage[dvipdfmx]{graphicx,xcolor}
 
 \usepackage{layout}
@@ -20,7 +19,12 @@
 \textwidth      = 150mm
 
 %ヘッダの設定
-\pagestyle{headings}
+\input fancyheadings.sty\relax
+\pagestyle{fancyplain}
+\lhead[\fancyplain{}{\thepage ~~~ {\bf\leftmark}}]{\fancyplain{}}
+\rhead[\fancyplain{}]{\fancyplain{}{{\bf\rightmark} ~~~ \thepage}}
+\cfoot{\fancyplain{\thepage}{}}
+%\pagestyle{headings}
 
 \renewcommand{\bibname}{参考文献}
 

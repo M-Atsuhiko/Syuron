@@ -547,19 +547,19 @@
 	   \end{cases}\\
          \end{equation}
          なお, 同じ個体が重複して選択されないようにした. \\
-         選択された2つの個体のパラメータセットA同士, パラメータセットB同士で以下のようにして一点交叉を行う. %なぜABを分けるのかを書いた方がわかりやすい
-         
+         選択された2つの親個体を$Parent_1$, $Parent_2$とする. 
+         一点交叉は親のパラメータセットA同士, パラメータセットB同士で以下のようにして一点交叉を行う. %なぜABを分けるのかを書いた方がわかりやすい
          \begin{itemize}
            \item \textbf{交差点の決定} %passiveの場合はK,Caコンダクタンスに関する部分は交叉を行っても無意味だった
-             パラメータセットの項目数を$N_{Param}$とする.このとき交差点\textit{Cross}は$[1,N_{Param}]$から
+             パラメータセットの項目数を$N_{Param}$とする. このとき交差点\textit{Cross}は$[1,N_{Param}]$から
              一様な確率で整数を1つ返す関数randN(min,max)を用いて
              \begin{equation}
                Cross = randN(1,N_{Param})
              \end{equation}
+             とする. 
+
            \item どちらが上に行くか決める
            \item 交叉させて新たなパラメータセットを作る
          \end{itemize}
-         
-         
        \item 突然変異\\
      \end{itemize}
