@@ -518,10 +518,10 @@
    2組のパラメータセットを1つの個体として200個体, 世代数500で遺伝アルゴ
    リズムを用いたパラメー % <- 遺伝アルゴリズムのパラメータもどこかで表にまとめた方がいい
    タ最適化を行った. 
-   1組のパラメータセットをベクトル$\overrightarrow{P_i} = \{p_1,p_2,\dots \}$
-   と表すと, 一つの個体は$u_i = \{\overrightarrow{P_{i,1}},\overrightarrow{P_{i,2}}\}$と表される. 
-   また$\overrightarrow{P_i}$から生成される樹状突起を$Dend_i$とする. よって1つの個体$u_i$から生成される
-   神経細胞は$Neuron_i = \{Dend_{i,1},Dend_{i,2}\}$と表される.
+   1組のパラメータセットをベクトル$\overrightarrow{P}_i = \{p_{i,1},p_{i,2},\dots \}$
+   と表すと, 一つの個体は$u_i = \{\overrightarrow{P}_{i,1},\overrightarrow{P}_{i,2}\}$と表される. 
+   また$\overrightarrow{P}_i$から生成される樹状突起を$Dend_i$とする. よっ
+   て1つの個体$u_i$から生成される神経細胞は$Neuron_i = \{Dend_{i,1},Dend_{i,2}\}$と表される.   
    また, ある世代数$g$での$i$番目の個体を$u_{i,g}$と表すとする.
    この遺伝アルゴリズムにおける遺伝子は個体$u_{i,g}$の持つパラメータセット$P_{i,g,1},P_{i,g,2}$である. 
    本研究の遺伝アルゴリズムでは, エリート保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
@@ -621,7 +621,7 @@
 	u_{r_{1},g}, \\
 	{\rm Cross\hspace{1mm}over(Parent_g)}_{2,g + 1}, \\
 	\dots \\
-	{\rm Cross\hspace{1mm}over(Parent_g)}_{2 + \lambda,g + 1}, \\ % <- これはわかりにくい
+	{\rm Cross\hspace{1mm}over(Parent_g)}_{1 + \lambda,g + 1}, \\ % <- これはわかりにくい
 	{\rm Mutation(u_{r_{1},g})}, \\
 	\dots \\
 	{\rm Mutation(u_{r_{199 - \lambda},g})}
@@ -631,32 +631,46 @@
      
      \begin{itemize}
        \item \textbf{一点交叉 Cross over}\\
-         評価値上位の$\mu$個体から確率的に親を2個体選択する. 評価値が$k$番目の % <- 評価値が負の個体なども存在し、ルーレット選択などが使えないということも書く
-         個体が選択される可能性を$P_k$とすると,
-         \begin{equation} % 選択確率を円グラフで図示するか？
-	   P_k =  
-	   \begin{cases}
-	     (\frac{1}{2})^k &  k < \mu\\
-	     (\frac{1}{2})^{k - 1} & otherwise
-	   \end{cases}\\
-         \end{equation}
-         なお, 同じ個体が重複して選択されないようにした. \\
-         選択された2つの親個体を$Parent_1$, $Parent_2$とする. 
-         一点交叉は親のパラメータセットA同士, パラメータセットB同士で以下のようにして一点交叉を行う. %なぜABを分けるのかを書いた方がわかりやすい
-         これは2つの樹状突起A, Bをそれぞれ別の系統として適応させるためである. 
+	     評価値上位の$\mu$個体から確率的に親を2個体選択する. 親を選択す
+	     る際には以下の式\ref{Parent_P}に定義する確率分布を用いて,
+	     親の添え字を指定する. 評価値が$k$番目の % <- 評価値が負の個体なども存在し、ルーレット選択などが使えないということも書く
+	     個体が選択される可能性を$P_k$とし, 
+	     \begin{equation} % 選択確率を円グラフで図示するか？
+	      P_k =  
+	       \begin{cases}
+		(\frac{1}{2})^k &  k < \mu\\
+		(\frac{1}{2})^{k - 1} & otherwise
+		 \end{cases}\\
+	      \label{Parent_P}
+	     \end{equation}
+	     とする.
+	     なお, 同じ個体が重複して選択されないようにした. \\
+	     選択された2つの親個体の添え字を$x$, $Py$とする. 
+	     一点交叉は親のパラメータセット$P_{i,g,1}$同士, パラメータセッ
+	     ト$P_{i,g,2}$同士で以下のように行う. %なぜABを分けるのかを書いた方がわかりやすい
+	     これは2つの$Dend_{i,1}$, $Dend_{i,2}$をそれぞれ別の系統とし
+	     て適応させるためである.
          \begin{itemize}
            \item \textbf{交差点の決定} \\ %passiveの場合はK,Caコンダクタンスに関する部分は交叉を行っても無意味だった
-             パラメータセットの項目数を$N_{Param}$とする. このとき交差点\textit{Cross}は$[N_{min},N_{max}]$から
+             パラメータセットの項目数を$N_{Param}$とする. このとき交差点
+		 \textit{Cross}は$[N_{min},N_{max}]$から
              一様な確率で整数を1つ返す関数randN($N_{min}$,$N_{max}$)を用いて
              \begin{equation}
                Cross = {\rm randN}(1,N_{Param} - 1)
              \end{equation}
              とする. 
            \item \textbf{交叉の実行} \\
-             新たなパラメータセットを作成する. $Parent_1$のパラメータセットの一つをベクトル$\vec{P_1} = {p}$
-
-新たなパラメータセットはパラメータとして$Parent_1$の1項目目から$Cross$項目目までと
-             $Parent_2$の$Cross + 1$項目目から$N_{Param}$項目目までの値をコピーしたものとする. 
+		 新たなパラメータセットを作成する. 新たなパラメータセットを
+		 $\overrightarrow{P}_{new,i}$とすると, 親のパラメータ
+		 セット$\overrightarrow{P_{x}}_{i}$,
+		 $\overrightarrow{P_{x}}_{i}$を用いて
+		 \begin{equation}
+		  \overrightarrow{P_{new}}_{i} = \{ p_{x,i,1}, p_{x,i,1}
+		   \dots p_{x,i,Cross}, p_{y,i,Cross + 1},
+		   p_{y,i,Cross + 2} \dots p_{y,i,N_{Param}}\} %添え字が非常に煩雑
+		 \end{equation}
+		 と表される. 
+		 
          \end{itemize}
        \item \textbf{突然変異 Mutation}\\
         パ ラメータセットの各項目に対して0.65の確率でガウス分布G($\mu$,${\sigma}_M$)に従う変動を与える. すなわち, あるパラメータ値
