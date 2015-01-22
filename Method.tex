@@ -39,20 +39,32 @@
    また本研究では大きい$F$の値を示す神経細胞について, 機能性の高い神経細胞であると定義する. 
    input-order detectionについての概念図を以下の図\ref{input-order_detection}に示す.
 
-     \begin{figure}[h]
+   \begin{figure}
+     \centering
+     \begin{subfigure}{0.3\columnwidth}
        \centering
-       \includegraphics[width=8cm]{./Images/TREE_sample.pdf} %シナプティックゾーンも例示する
+       \includegraphics[width=\columnwidth]{./Images/pass_neuron.png} 
+       % 背景は白の方が良さそう
+       % rglの三次元画像はepsにしないほうがよい %シナプティックゾーンも例示する
        \caption{神経細胞の例}
        \label{Neuron}
-     \end{figure}
-
-     \begin{figure}[h]
+     \end{subfigure}
+     \begin{subfigure}{0.2\columnwidth}
        \centering
-       \includegraphics[width=10cm]{./Images/input_order_detection.eps} 
+       \includegraphics[width=\columnwidth]{./Images/synaptic_zone.png}
+       \caption{シナプティックゾーン}
+       \label{synaptic-zone}
+     \end{subfigure}
+     \begin{subfigure}{0.4\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images/input_order_detection.eps} 
        \caption{input-order detection}
        \label{input-order_detection}
-     \end{figure}
-   
+     \end{subfigure}
+     \caption{test}
+     \label{test}
+   \end{figure}
+
  \section{神経細胞形態の作成方法}
    簡単のため神経細胞の形態は細胞体と2本の樹状突起のみからなるとする.
    また細胞体の形態は常に一定の大きさの球形であるとする. 
@@ -64,12 +76,12 @@
      球とし, 樹状突起は円柱の集合体として表現する. 円柱端部の中心部分
      は他の円柱や細胞体と結合し, 樹状の構造を形成する. ここで1本の円柱をBranchと定義する.
      また細胞体と直接結合しているBranchを特にStemとする. 1本のStemと, 
-     そのStemに結合しているBranchからなる樹状構造をあわせて1つの樹状突起 % <- この辺わかりにくい
+     そのStemに結合しているBranchからなる樹状構造をあわせて1つの樹状突起(Dendrite) % <- この辺わかりにくい
      であると定義する. よって1つの神経細胞はStemの本数だけの, 複数の樹状突起を持つ.
      この神経細胞形態に関する定義を以下の図\ref{morpho}に示す.
      \begin{figure}[h]
        \centering
-       \includegraphics[width=5cm]{./Images/temp.png} 
+       \includegraphics[width=10cm]{./Images/neuron_morpho.eps}
        \caption{神経細胞形態に関する定義}
        \label{morpho}
      \end{figure}
