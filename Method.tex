@@ -116,23 +116,44 @@
        \begin{cases}
          T & \text{(Termination)}\\
          \begin{cases}
-           BS<BS> &\text{(Bifurcation)} \tag{$*$}\\
+           <BS><BS> &\text{(Bifurcation)} \tag{$*$}\\
            BS &\text{(otherwise)}
          \end{cases} & \text{(otherwise)}
        \end{cases}\\
        & B \to B \\
        & T \to T
-     \end{align*} % <- これの置き換え結果を例示してみる
-
-     を定義する. 記号$S,B,T$を樹状突起の構造に置き換えると, 記号Sは樹状
+     \end{align*}
+     を定義する. このL-systemを形態生成L-systemと呼ぶ. 
+     記号$S,B,T$を樹状突起の構造に置き換えると, 記号Sは樹状
      構造における未成長の点を表し, 記号BはBranch, 記号Tは樹状突起の終端点に対応する.
-     ここで, $<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. よって, 定義したL-Systemは
-     1つの未成長点を初期状態とし, そこから樹状構造が生成されていく過程を表現している. 
+     ここで, $<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. よって,
+     形態生成L-systemは1つの未成長点を初期状態とし, そこから樹状構造が生成されていく過程を表現している. 
      記号Sの置き換え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
-     される. 1つの樹状突起は初期状態$\{S\}$から, このL-Systemを開始し記号列が変
+     される. 1つの樹状突起は初期状態$\{S\}$から, 形態生成L-systemを開始し記号列が変
      化しなくなるまで置き換えを行うことで得られる. また, 最も最初の記号置き換えでは必ず$S \to BS$の
      置き換えが選択されるようにする. \\
-     最終的に得られる記号列は記号$B$と記号$T$からなり, 最も左端にある記号$B$がStemを表す. 
+     最終的に得られる記号列は記号$B$と記号$T$からなり, 最も左端にある記
+     号$B$がStemを表す.
+     形態生成L-systemから一つの樹状突起が生成される過程を例示する. また
+     図\ref{fig:sample_L-system}は例の$initial$, $3^{rd}cycle$, $finish$
+     を樹状構造として例示したものである. 
+     \begin{align*}
+      initial:\hspace{0.2cm} & S \\
+      1^{st} cycle:\hspace{0.2cm} & BS \\
+      2^{nd} cycel:\hspace{0.2cm} & B<BS><BS> \\
+      3^{rd} cycel:\hspace{0.2cm} & B<BBS><BT> \\
+      4^{th} cycel:\hspace{0.2cm} & B<BB<BS><BS>><BT> \\
+      \cdots \\
+      finish:\hspace{0.2cm} & B<BB<BBBT><B<BT><BBT>>><BT> \\
+     \end{align*}
+
+     \begin{figure}[H]
+      \centering
+      \includegraphics[width=10cm]{./Images/L-system.eps}
+      \caption{形態生成L-systemの適用例}
+      \label{fig:sample_L-system}
+     \end{figure}
+     
 
    \subsection{パラメータセット, $Branch$, $Dendrite$, $Neuron$の定義}
      \subsubsection{パラメータセットの定義}
@@ -232,7 +253,7 @@
         length_i = Segment\hspace{1mm} Length
       \end{equation}
     \item \textbf{直径($diam_i$)の決定}\\
-      Branchが分岐(Bifurcation $ 1 \to 21<21>$)によって生成されるか伸張(Elongation $1 \to 21$)によって生成されるか
+      Branchが分岐(Bifurcation $ S \to <BS><BS>$)によって生成されるか伸張(Elongation $1 \to 21$)によって生成されるか
       によって決定方法が異なる. 
       \begin{itemize}
         \item{分岐(Bifurcation)の場合} \\
@@ -277,20 +298,26 @@
    \end{enumerate}
 
  \subsection{記号Sの置き換え規則($*$)}
-   形態生成L-systemにおける記号$B$はBranchに対応し, 文字列は樹状構造を表現する. 
-   文字列中のある記号$S$に至るまでに通過する記号$B$をBranchに置き換え, その$length$の和をとり, % <- これも図をはるか?
-   それを${\rm path(S)}$とする. 
+   形態生成L-systemにおける記号$B$はBranchに対応し, 文字列は図
+   \ref{fig:sample_L-system}に示すように樹状構造を表現する.
+   Stem($B_1$)から樹状構造を辿り, 文字列中のある記号$S_i$に至るまでに通
+   過する記号$B$の添え字の集合を$J = \{1,2,\cdots,n\}$とする.
+   このとき$length_j\hspace{2mm}(j \in J)$の和を${\rm path(S_i)}$とする.
+   すなわち記号$B_j$を対応する$Branch_j$に置き換え構成される樹状構造を根
+   元から記号$S_i$の位置まで辿った距離である. 
    \begin{figure}[H]
      \centering
      \includegraphics[width=5cm]{./Images/temp.png}
-     \caption{${\rm path(S)}$}
-     \label{path(S)}
+     \caption{${\rm path(S_i)}$}
+     \label{path(S_i)}
    \end{figure}
-   以下に記号$S$の置き換え規則($*$)の選択方法と, その際に考慮するヒューリスティックスについて示す. 
+   以下に記号$S_i$の置き換え規則($*$)の選択方法と, その際に考慮するヒュー
+   リスティックスについて示す. ここで$N_B$を各置き換えステップにおいての
+   $Branch$の総本数であるとする. また初期状態は$S_0$である. 
    \begin{enumerate}
-     \item \textbf{停止 Termination $S \to T$} \\
+     \item \textbf{停止 Termination $S_i \to T$} \\
         $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
-        累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて記号$S$の伸張停止
+        累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて記号$S_i$の伸張停止
         の判定を行う. その際, 累積ガンマ分布のパラメータとして, パラメータセットの \\
         \begin{tabular}[c]{ll}
           - \textit{k} : & \textit{Termination} $\alpha$ \\
@@ -300,9 +327,9 @@
         \begin{equation}
 	  {\rm Cumulative}\hspace{0.1cm}\gamma\hspace{0.05cm}({\rm path(1_i)}) > rand
         \end{equation}
-        となる場合, $ S \to T$とする.
+        となる場合, 伸張停止(Termination)とし$ S_i \to T$とする.
 
-      \item \textbf{分岐 Bifurcation $ S \to BS<BS>$} \\
+      \item \textbf{分岐 Bifurcation $ S_i \to B_{N_B + 1}S_{N_B + 1}<B_{N_B + 2}S_{N_B + 2}>$} \\
         Terminationを行わなかった場合のみBifurcationの判断を行う. 
         $[0,1]$の範囲で一様分布から乱数を一つ生成し, その値を$rand$とする.
         最大値が0.8になるように実数倍したガンマ分布
@@ -316,10 +343,12 @@
         \begin{equation}
 	  Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(S)) > rand
         \end{equation}
-        のとき$ S \to BS<BS>$とする. すなわちmakeBranch($diam_i$)より, 新たな$Branch$を2つ生成する. 
-      \item \textbf{伸張 Elongation $S \to BS$} \\
-        上記の条件を満たさなかった場合, $S \to BS$とする. 
-        すなわちmakeBranch($diam_i$)より, 新たな$Branch$を1つ生成する. 
+        のとき分岐(Bifurcation)
+	    とする. すなわちmakeBranch($diam_i$)より, 新たに
+	    $Branch_{N_B + 1}$と$Branch_{N_B + 2}$を生成する.                               	    %添え字の付け方とかがわかりにくい
+      \item \textbf{伸張 Elongation $S_i \to B_{N_B + 1}S_{N_B + 1}$} \\
+        上記の条件を満たさなかった場合, 伸張(Elongation)とする. 
+        すなわちmakeBranch($diam_i$)より, 新たに$Branch_{N_B + 1}$を生成する. 
     \end{enumerate}
 
    \subsubsection{形態的ヒューリスティック}
@@ -328,7 +357,8 @@
     \begin{itemize}
       \item ${\rm path}(S) > 2000$のとき
       \item $diam_{parent} \le Minimum\hspace{1mm}diameter$ のとき\\ % <- パラメータをあとでまとめたほうがいいか？
-       また, この場合, 親$Branch$の$diam$を$Minimum\hspace{1mm}diameter$に設定し直す. 
+       また, この場合, 親$Branch$の$diam$を$Minimum\hspace{1mm}diameter$
+	    に設定し直す.ここで$Minimum\hspace{1mm}diameter = 0.15$[$\mu$m]である. 
     \end{itemize}
 
     \subsection{$Branch$に対する三次元座標の設定}
@@ -378,12 +408,13 @@
      3次元空間上の原点に細胞体を配置し, $y$軸方向の$170 < y < 190$の範囲を % <- この辺の座標情報を変数にしたほうがいいかも
      Redシナプティックゾーン, $y$軸方向の$-170 > y > -190$の範囲をBlueシナプティック
      ゾーンと定義する(図\ref{synaptic-zone}). シナプティックゾーン内に$Branch$が侵入した
-     場合, $Branch$上にシナプスを付与する. 具体的には下記\ref{synapse_setting}にて詳述する. 
+     場合, $Branch$上にシナプスを付与する. 具体的には下記
+     \ref{synapse_setting}節にて詳述する. 
 
   \section{使用する数理モデル}
     \subsection{神経細胞モデル, シナプスモデル}
-     L-systemによって作成された神経細胞はマルチコンパートモデルによって  % Somaのこと書くの忘れてた
-     その膜電位の挙動をシミュレーションする. 
+     形態生成L-systemによって作成された神経細胞はマルチコンパートモデル
+     を用いてその膜電位の挙動をシミュレーションする. 
      単一コンパートメントの膜電位($V_i$)は以下の式によって計算される.
      %g_leakは平衡電位 = -70になるように調節している
      \begin{equation}
@@ -392,21 +423,22 @@
        \label{V_i}
      \end{equation}
      コンパートメントの膜上にシナプスが分布している場合は上式\ref{V_i}の右
-     辺に以下の項を追加する.
+     辺に以下の項を加える.
      \begin{equation}
-       (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}})g_{syn}(V_i
+       (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}}) {\cdot} g_{syn} {\cdot} (V_i
        - E_{syn})
        \label{eq_syn}
      \end{equation}
 
-     また, コンパートメントに他のコンパートメントが結合している場合は以下の式\ref{next_comp}を式\ref{V_i}に追加する. 
+     また, コンパートメントに他のコンパートメントが結合している場合は以下の式\ref{next_comp}を式\ref{V_i}に加える. 
      $i$番目のコンパートメントに$j$番目のコンパートメントが結合しているとすると, 
      \begin{equation}
-       g_{i,j}(V_j - V_i)
+       g_{i,j} {\cdot} (V_j - V_i)
        \label{next_comp}
      \end{equation}
    \subsection{イオンチャネルモデル}
-     また, 式\ref{V_i}の$I_{CaT}$, $I_{Ka}$はMigliore et alに示されるイオンチャネルの
+   式\ref{V_i}のイオンチャネルモデル$I_{CaT}$, $I_{Ka}$は
+   Migliore et alに示されるイオンチャネルの
      モデルを利用している.\cite{migliore1995computer}
      \begin{itemize}
        \item 電位依存型T型${\rm Ca^{2+}}$電流
@@ -473,43 +505,55 @@
 %
 % gmn gmlは何なのか？ g_{mn}なのか？ 単位は無いようなので、gmnだと思う
 %
-     また, シミュレーションに関わるパラメータを以下の表\ref{sim_para}に示す.
-
+     また, 数理モデルのパラメータを以下の表\ref{sim_param}に示す.
      \begin{table}[H]
-       \caption{シミュレーションパラメータ}
-       \label{sim_para}
-       \begin{center}
-	\begin{tabular}[t]{|c|c|} \hline
-          \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{値} \\ \hline \hline
-	 Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える 2段組みの表にする
-	 $Ra$  [${\rm{\Omega}cm}$] & 100 \\ \hline
-	 $Cm$  [${\rm{\mu}F/cm^2}$] & 0.8 \\ \hline
-	 ${\tau}_{1}$ [ms] & 0.5\\ \hline
-	 ${\tau}_{2}$ [ms] & 2\\ \hline
-	 $V_{init}$ [mV]& -70\\ \hline
-	 $g_{pas}$ [${\rm S/cm^2}$]& $2.5 \times 10^{-5}$\\ \hline
-	 $E_{pas}$ [mV] & -70\\ \hline
-	 $E_{K}$ [mV] & -91\\ \hline
-	 $T$ [${\rm ^{\circ}C}$] & 37\\ \hline
-         $\overline{g}_{CaT}$ [${\rm S/cm^2}$]& 0.003\\ \hline
-         $\overline{g}_{Ka}$ [${\rm S/cm^2}$]& 0.01\\ \hline
-         ${\alpha}_{0n}$ [${\rm ms^{-1}}$]& 0.02\\ \hline
-         ${\alpha}_{0l}$ [${\rm ms^{-1}}$]& 0.08\\ \hline
-         ${\zeta}_n$ & -3\\ \hline
-         ${\zeta}_l$ & 4\\ \hline
-         $gm_n$ & 0.6\\ \hline
-         $gm_l$ & 1\\ \hline
-         $V_{n\frac{1}{2}}$ [mV]& -33.6\\ \hline
-         $V_{l\frac{1}{2}}$ [mV]& -83\\ \hline
-         $C_i$ [mM]& $50{\times}10^{-6}$\\ \hline
-         $C_o$ [mM]& 2\\ \hline
-	\end{tabular}
-       \end{center}
-      \end{table}
+       \caption{神経細胞モデル, シナプスモデルパラメータ}
+       \label{sim_param}
+       \centering
+       \begin{subtable}{0.45\columnwidth}
+         \centering
+         \caption{神経細胞モデルパラメータ}
+         \label{neuron_param}
+         \begin{tabular}[h]{|c||c|} \hline
+           \multicolumn{1}{|c||}{パラメータ名} & \multicolumn{1}{c|}{値} \\ \hline \hline
+%	   Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える 2段組みの表にする
+	   $Ra$  [${\rm{\Omega}cm}$] & 100 \\ \hline
+	   $Cm$  [${\rm{\mu}F/cm^2}$] & 0.8 \\ \hline
+	   $V_{init}$ [mV]& -70\\ \hline
+	   $g_{pas}$ [${\rm S/cm^2}$]& $2.5 \times 10^{-5}$\\ \hline
+	   $E_{pas}$ [mV] & -70\\ \hline
+           ${\tau}_{1}$ [ms] & 0.5\\ \hline
+	   ${\tau}_{2}$ [ms] & 2\\ \hline
+         \end{tabular}
+       \end{subtable}
+       \begin{subtable}{0.45\columnwidth}
+         \centering
+         \caption{イオンチャネルモデルパラメータ}
+         \label{cond_param}
+         \begin{tabular}[h]{|c||c|} \hline
+           \multicolumn{1}{|c||}{パラメータ名} & \multicolumn{1}{c|}{値} \\ \hline \hline
+           $T$ [${\rm ^{\circ}C}$] & 37\\ \hline
+           $E_{K}$ [mV] & -91\\ \hline
+           $\overline{g}_{CaT}$ [${\rm S/cm^2}$]& 0.003\\ \hline
+           $\overline{g}_{Ka}$ [${\rm S/cm^2}$]& 0.01\\ \hline
+           ${\alpha}_{0n}$ [${\rm ms^{-1}}$]& 0.02\\ \hline
+           ${\alpha}_{0l}$ [${\rm ms^{-1}}$]& 0.08\\ \hline
+           ${\zeta}_n$ & -3\\ \hline
+           ${\zeta}_l$ & 4\\ \hline
+           $gm_n$ & 0.6\\ \hline
+           $gm_l$ & 1\\ \hline
+           $V_{n\frac{1}{2}}$ [mV]& -33.6\\ \hline
+           $V_{l\frac{1}{2}}$ [mV]& -83\\ \hline
+           $C_i$ [mM]& $50{\times}10^{-6}$\\ \hline
+           $C_o$ [mM]& 2\\ \hline
+         \end{tabular}
+       \end{subtable}
+     \end{table}
+     
 
  \section{作成した神経細胞の数理モデル化}
-   L-Systemによって得られた神経細胞を前節で示した数理モデルに変換する手法を示す. 
-   ひとつの$Branch$は最大5[$mu$m]の大きさに分割してそれぞれに式\ref{V_i}を用いて
+   形態生成L-systemによって得られた神経細胞を前節で示した数理モデルに変換する手法を示す. 
+   ひとつの$Branch$は最大5[$\mu$m]の大きさに分割してそれぞれに式\ref{V_i}を用いて
    膜電位を計算する. ある実数$x$に対して, $x$以上の最小の整数を返す関数をceiling($x$)
    とする. このとき, ある$Branch_i$を分割する個数$d_i$は, $Branch_i$の長さ$length_i$
    を用いて以下のように定義する. 
@@ -523,20 +567,19 @@
    ここで$d_i$を奇数とするのはシミュレーションにNEURONを用いているためである.\\ % <- できたら理由を書きたい
    よって1つの$Branch_i$は$\frac{length_i}{d_i}$の長さごとに1つのコンパートメントに分割され
    $Comp_{i,j}\hspace{1mm}(j = 1,2,\dots,d_i)$となる. 
-   $Comp_{i,j}$のそれぞれのコンパートメントについて式\ref{V_i}を用いて膜電位を計算する. 
-
-   %
-   %
-   % このへんで図をいれるとわかりやすいかもしれない
-   %
-
+   $Comp_{i,j}$のそれぞれのコンパートメントについて式\ref{V_i}を用いて膜
+   電位を計算する.\\
+   また, 細胞体に対しても同様に式\ref{V_i}を用いて膜電位の挙動をシミュレー
+   トする. 
    \subsection{コンパートメント上のコンダクタンス分布設定}
      作成したコンパートメントのそれぞれにコンダクタンスを設定する. 
      コンダクタンス分布は線形な分布とガウス分布の2つを仮定した. 線形なコンダクタンス分布は先行研究で用いられていた
      手法である\cite{torben2009systematic}. ガウス分布を用いるのは, 線形分布の場合よりも細かくコンダクタンス分布の変化
-     を表現し, より多くのコンダクタンス分布パターンを表現するためである. 
+     を表現し, より多くのコンダクタンス分布パターンを表現するためである.
+     また, 細胞体に対してはコンダクタンスを分布させず, $g_{{\rm Ka}} = g_{{\rm CaT}} = 0$とした.
      以下に$Comp_{i,j}$に対するコンダクタンス値の決定方法を述べる. 
-     コンダクタンス値の決定方法は線形分布を用いるかガウス分布を用いるかによって異なる. \\
+     コンダクタンス値の決定方法は線形分布を用いるかガウス分布を用いるか
+     によって異なる. \\
      \begin{itemize}
      \item \textbf{線形分布の場合}\\
        $Branch$単位でコンダクタンスを設定する. つまりある$Branch_i$から分割されたコンパートメント$\{Comp_{i,j}\}$は
@@ -546,38 +589,36 @@
          {g_{\rm CaT}}_{i,j} &= 
          \begin{cases}
            {\rm CaT}\hspace{1mm}Stem\hspace{1mm}conductance & \text{(i = 1)}\\
-           {g_{\rm CaT}}_{{parent_i},j} \times {\rm CaT}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
+           {g_{\rm CaT}}_{parent_i} \times {\rm CaT}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
          \end{cases} \\
                      {g_{\rm Ka}}_{i,j} &= 
                      \begin{cases}
              {\rm Ka}\hspace{1mm}Stem\hspace{1mm}conductance & \text{(i = 1)}\\
-             {g_{\rm Ka}}_{{parent_i},j} \times {\rm Ka}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
+             {g_{\rm Ka}}_{parent_i} \times {\rm Ka}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
            \end{cases}\\
          \end{align}
 
        \item \textbf{ガウス分布の場合}\\
-         コンパートメント単位でコンダクタンス値を設定する. Stemから$Comp_{i,j}$までの$length$の合計をpath($Comp_{i,j}$)とし, 
+         コンパートメント単位でコンダクタンス値を設定する. Stemから$Comp_{i,j}$までの$length$の合計をpath($Comp_{i,j}$)とする. 
          またその樹状突起全体のコンパートメントでの最大のpath($Comp_{i,j}$)をmax(Path($Comp_{i,j}$))とする. このとき平均値$\mu$, 
-         標準偏差$\sigma$のガウス分布から実数$x$に対する確率密度を計算する関数G($x,\mu,{\sigma}^2$)について
+         標準偏差$\sigma$のガウス分布から実数$x$に対する確率密度を返す関数G($x,\mu,{\sigma}^2$)を用いて
          \begin{align}
-           {\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm G}({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2) \\
-           {\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm G}({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)
+           {\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm G}({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2) \\
+           {\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm G}({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)
          \end{align}
          とし, 
 
        \begin{align}
-         {g_{\rm CaT}}_{i,j} &= {\rm G}(\frac{{\rm path}(Comp_{i,j})}{{\rm max(Path}(Comp_{i,j}))},{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2) \\
-         {g_{\rm Ka}}_{i,j} &= {\rm G}(\frac{{\rm path}(Comp_{i,j})}{{\rm max(Path}(Comp_{i,j}))},{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2) \\
+         {g_{\rm Ka}}_{i,j} &=
+         \frac{{\rm G}(\frac{{\rm path}(Comp_{i,j})}{{\rm max(Path}(Comp_{i,j}))},{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+              {{\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max}
+              \times {\rm Ka}\hspace{1mm}peak \\
+         {g_{\rm CaT}}_{i,j} &=
+         \frac{{\rm G}(\frac{{\rm path}(Comp_{i,j})}{{\rm max(Path}(Comp_{i,j}))},{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+              {{\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max}
+              \times {\rm CaT}\hspace{1mm}peak
        \end{align}
-
-
-   \begin{figure}[H]
-     \centering
-     \includegraphics[width=5cm]{./Images/temp.png} %図で説明する
-     \caption{${\rm path(S)}$}
-     \label{path(S)}
-   \end{figure}
-       \end{itemize}
+     \end{itemize}
 
    \subsection{単一コンパートメントへのシナプスの付与} \label{synapse_setting}
      上記のように分割した$Comp_{i,j}$が一部分でも$170 < y < 190$の領域に入っていた場合,  % <- この辺の座標情報を変数にしたほうがいいかも
@@ -620,8 +661,6 @@
 	\end{tabular}
        \end{center}
       \end{table}
-
-
      シミュレーションはNEURONシミュレータを用い, CVodeアルゴリズムを用いて行った. % <- NEURON シミュレータに関して書いた方がいいか？
      CVodeアルゴリズムを用いる際のエラーは$10^{-5}$未満に設定した. 
 
