@@ -74,16 +74,15 @@
    簡単のため神経細胞の形態は細胞体と2本の樹状突起のみからなるとする.
    また細胞体の形態は一定の大きさの球形であるとする. 
    よって神経細胞の形態生成は樹状突起の形態を生成することで行われる.
-   樹状突起形態の生成は確率的な手法を用い, 形態を作成した後にコンダクタンスを
-   分布させる. 
+   樹状突起形態の生成は確率的な手法を用いる. 
    \subsection{神経細胞形態の表現}
      神経細胞の形態を3次元空間上に表現する. 細胞体は直径25$[{\rm{{\mu}m}}]$の
      球とし, 樹状突起は円柱の集合体として表現する. 円柱端部の中心部分
      は他の円柱や細胞体と結合し, 樹状の構造を形成する. ここで, 1本の円柱をBranchと定義する.
-     また細胞体と直接結合しているBranchを特にStemとする. 1本のStemと, 
+     また細胞体と直接結合しているBranchを特にStemと呼ぶ. 1本のStemと, 
      そのStemから伸びているBranchからなる樹状構造をあわせて1つの樹状突起(Dendrite)
-     であると定義する. よって1つの神経細胞はStemの本数だけの樹状突起を持つ.
-     この神経細胞形態に関する定義を以下の図\ref{morpho}に示す.
+     であると定義する. よって1つの神経細胞はStemの本数だけのDendriteを持つ.
+     以上の神経細胞形態に関する定義を図\ref{morpho}に示す.
      \begin{figure}[H]
        \centering
        \includegraphics[width=10cm]{./Images/neuron_morpho.eps}
@@ -92,9 +91,9 @@
      \end{figure}
    \subsection{樹状突起形態生成手法の基本概念}
      樹状突起形態生成手法の基本はL-systemである.\cite{prusinkiewicz1990}
-     L-systemはある記号の集合とその置き換え規則から定義され, 初期状態としてある記号列が与え
-     られると, それを再起的に変更していくシステムである. L-systemの例
-     \cite{torben2007evolving}を示す. まず記号の集合$\{B,F,X,Y\}$定義す
+     L-systemは, ある記号の集合とその置き換え規則から定義され, 初期状態としてある記号列が与え
+     られるとその記号列を再起的に変換していくシステムである. L-systemの例
+     を示す.\cite{torben2007evolving} まず記号の集合$\{B,F,X,Y\}$定義す
      る. 次にその置き換え規則として
      \begin{align*}
        rules: \hspace{0.2cm} & F \to YF\\
@@ -123,11 +122,12 @@
        \end{cases}\\
        & B \to B \\
        & T \to T
-     \end{align*}
+     \end{align*} % <- これの置き換え結果を例示してみる
+
      を定義する. 記号$S,B,T$を樹状突起の構造に置き換えると, 記号Sは樹状
-     構造における未成長の点を表し, 記号BはBranch, 記号Tは樹状突起の端点に対応する.
-     ここで, $<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. このL-Systemは
-     1つの未成長点を初期状態とし, そこから樹状構造が生成されていく過程を表現する. 
+     構造における未成長の点を表し, 記号BはBranch, 記号Tは樹状突起の終端点に対応する.
+     ここで, $<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. よって, 定義したL-Systemは
+     1つの未成長点を初期状態とし, そこから樹状構造が生成されていく過程を表現している. 
      記号Sの置き換え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
      される. 1つの樹状突起は初期状態$\{S\}$から, このL-Systemを開始し記号列が変
      化しなくなるまで置き換えを行うことで得られる. また, 最も最初の記号置き換えでは必ず$S \to BS$の
@@ -135,91 +135,95 @@
      最終的に得られる記号列は記号$B$と記号$T$からなり, 最も左端にある記号$B$がStemを表す. 
 
    \subsection{パラメータセット, $Branch$, $Dendrite$, $Neuron$の定義}
-     1つの樹状突起は1組のパラメータセットから作成される. よって1つの神経細胞は2組の
-     パラメータセットを持ち, そこから2本の樹状突起が生成される. 
-     1つのパラメータセットには樹状突起の形態を決定するためのパラメータと樹状突起上の
-     コンダクタンス分布を決定するためのパラメータが存在する. 前者のパラメータを形態パラメータ, 後者の
-     パラメータをコンダクタンスパラメータとする. 
-     表\ref{morpho_parameter}は樹状突起形態を生成するために使用するパラメータである.
+     \subsubsection{パラメータセットの定義}
+       1つの樹状突起は1組のパラメータセットから作成される. 上述の通り, 1つの神経細胞は2本の樹状突起
+       を持つと定義したため, 1つの神経細胞は2組のパラメータセットから生成される. 
+       1つのパラメータセットには樹状突起の形態を決定するためのパラメータと樹状突起上の
+       コンダクタンス分布を決定するためのパラメータが存在する. 前者のパラメータを形態パラメータ, 後者の
+       パラメータをコンダクタンスパラメータと呼ぶ. 
+       表\ref{morpho_parameter}は樹状突起形態を生成するために使用する形態パラメータである.
 
-     \begin{table}[H]
-       \caption{形態パラメータ}  % <- パラメータは最後にまとめた方がいいかも
-       \label{morpho_parameter}
-       \begin{center}
-         \begin{tabular}[H]{|l|l|c|} \hline
-           \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-           1,  \textit{Segment Length} [${\rm {\mu}m}$]& StemおよびBranchの長さ & [$0,\infty$) \\ \hline
-           2,  \textit{Stem diameter}  [${\rm {\mu}m}$]& Stemの直径 & [$0.15,\infty$) \\ \hline
-           3,  \textit{Stem elevation} [$^{\circ}$]& Stemの仰角 & [$0,360$) \\ \hline
-           4,  \textit{Stem rotation}  [$^{\circ}$]& Stemの回転 & [$0,360$) \\ \hline
-           5,  \textit{Branch elevation $\mu$} [$^{\circ}$]& Branchの仰角決定に用いる平均値 & [$0,360$) \\ \hline
-           6,  \textit{Branch elevation $\sigma$} [$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 & [$0,\infty$) \\ \hline
-           7,  \textit{Branch rotation $\mu$}  [$^{\circ}$]& Branchの回転角決定に用いる平均値 & [$0,360$) \\ \hline
-           8,  \textit{Branch rotation $\sigma$} [$^{\circ}$] & Branchの回転角決定に用いる標準偏差値 & [$0,\infty$)  \\ \hline
-           9,  \textit{Bifurcation} $\alpha$ & 樹状構造の分岐導入判定に用いる$k$値 & [$1,\infty$) \\ \hline
-           10, \textit{Bifurcation} $\beta$  & 樹状構造の分岐導入判定に用いる$\theta$値 & [$1,\infty$) \\ \hline
-           11, \textit{Termination} $\alpha$ & 樹状構造の終端点導入判定に用いる$k$値 & [$1,\infty$) \\ \hline
-           12, \textit{Termination} $\beta$  & 樹状構造の終端点導入判定に用いる$\theta$値 & [$1,\infty$) \\ \hline
-         \end{tabular}
-       \end{center}
-     \end{table}
+       \begin{table}[H]
+         \caption{形態パラメータ}  % <- パラメータは最後にまとめた方がいいかも
+         \label{morpho_parameter}
+         \begin{center}
+           \begin{tabular}[H]{|c|l|l|c|} \hline
+             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
+             1 &  \textit{Segment Length} [${\rm {\mu}m}$]& StemおよびBranchの長さ & [$0,\infty$) \\ \hline
+             2 &  \textit{Stem diameter}  [${\rm {\mu}m}$]& Stemの直径 & [$0.15,\infty$) \\ \hline
+             3 &  \textit{Stem elevation} [$^{\circ}$]& Stemの仰角 & [$0,360$) \\ \hline
+             4 &  \textit{Stem rotation}  [$^{\circ}$]& Stemの回転 & [$0,360$) \\ \hline
+             5 &  \textit{Branch elevation $\mu$} [$^{\circ}$]& Branchの仰角決定に用いる平均値 & [$0,360$) \\ \hline
+             6 &  \textit{Branch elevation $\sigma$} [$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 & [$0,\infty$) \\ \hline
+             7 &  \textit{Branch rotation $\mu$}  [$^{\circ}$]& Branchの回転角決定に用いる平均値 & [$0,360$) \\ \hline
+             8 & \textit{Branch rotation $\sigma$} [$^{\circ}$] & Branchの回転角決定に用いる標準偏差値 & [$0,\infty$)  \\ \hline
+             9 &  \textit{Bifurcation} $\alpha$ & 樹状構造の分岐導入判定に用いる$k$値 & [$1,\infty$) \\ \hline
+             10 & \textit{Bifurcation} $\beta$  & 樹状構造の分岐導入判定に用いる$\theta$値 & [$1,\infty$) \\ \hline
+             11 & \textit{Termination} $\alpha$ & 樹状構造の終端点導入判定に用いる$k$値 & [$1,\infty$) \\ \hline
+             12 & \textit{Termination} $\beta$  & 樹状構造の終端点導入判定に用いる$\theta$値 & [$1,\infty$) \\ \hline
+           \end{tabular}
+         \end{center}
+       \end{table}
 
-     以下にコンダクタンスパラメータを示す. 本研究では樹状突起上のコンダクタンス分布を決定する際に
-     線形分布, またはガウス分布のどちらかを用いる. 樹状突起上のコンダクタンスを線形に分布させる場合は表\ref{liner_parameter}に示される
-     パラメータを, ガウス分布に従って分布させる場合には表\ref{gausian_parameter}に示されるパラメータをそれぞれ用いる.
+       以下にコンダクタンスパラメータを示す. 本研究では樹状突起上のコンダクタンス分布を決定する際に
+       線形分布\cite{torben2009systematic}, またはガウス分布のどちらかの分布様式を用いる. 
+       樹状突起上のコンダクタンスを線形に分布させる場合は
+       表\ref{liner_parameter}に示されるパラメータを, ガウス分布に従って分布させる場合には
+       表\ref{gausian_parameter}に示されるパラメータをそれぞれ用いる.
 
-     \begin{table}[H]
-       \caption{線形分布コンダクタンスパラメータ}
-       \label{liner_parameter}
-       \begin{center}
-         \begin{tabular}[H]{|l|l|c|} \hline
-           \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-           13, Ka \textit{Stem conductance} [${\rm S/cm^2}$]& StemのKaコンダクタンス値 & [$0,0.22$] \\ \hline
-           14, Ka \textit{taper rate}  & Kaコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
-           15, CaT \textit{Stem conductance} [${\rm S/cm^2}$]& StemのCaTコンダクタンス値 & [$0,0.0022$] \\ \hline
-           16, CaT \textit{taper rate}  & CaTコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
-         \end{tabular}
-       \end{center}
-     \end{table}
+       \begin{table}[H]
+         \caption{線形分布コンダクタンスパラメータ}
+         \label{liner_parameter}
+         \begin{center}
+           \begin{tabular}[H]{|c|l|l|c|} \hline
+             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
+             13 & Ka \textit{Stem conductance} [${\rm S/cm^2}$]& StemのKaコンダクタンス値 & [$0,0.22$] \\ \hline
+             14 & Ka \textit{taper rate}  & Kaコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
+             15 & CaT \textit{Stem conductance} [${\rm S/cm^2}$]& StemのCaTコンダクタンス値 & [$0,0.0022$] \\ \hline
+             16 & CaT \textit{taper rate}  & CaTコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
+           \end{tabular}
+         \end{center}
+       \end{table}
 
-     \begin{table}[H]
-       \caption{ガウス分布コンダクタンスパラメータ}
-       \label{gausian_parameter}
-       \begin{center}
-         \hspace*{-4em}
-         \begin{tabular}[H]{|l|l|c|} \hline
-           \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-           13, Ka \textit{peak} [${\rm S/cm^2}$]&  Kaコンダクタンス分布の最大値 & [$0,0.22$] \\ \hline
-           14, Ka \textit{Gausian} $\mu$ & Kaコンダクタンス分布が従うガウス分布の平均値 & [$0,1$] \\ \hline
-           15, Ka \textit{Gausian} $\sigma$ & Kaコンダクタンス分布が従うガウス分布の標準偏差値 & [$0,\infty$) \\ \hline
-           16, CaT \textit{peak} [${\rm S/cm^2}$]&  CaTコンダクタンス分布の最大値 & [$0,0.0022$] \\ \hline
-           17, CaT \textit{Gausian} $\mu$ & CaTコンダクタンス分布が従うガウス分布の平均値 & [$0,1$] \\ \hline
-           18, CaT \textit{Gausian} $\sigma$& CaTコンダクタンス分布が従うガウス分布の標準偏差値 & [$0,\infty$) \\ \hline
-         \end{tabular}
-       \end{center}
-     \end{table}
+       \begin{table}[H]
+         \caption{ガウス分布コンダクタンスパラメータ}
+         \label{gausian_parameter}
+         \begin{center}
+           \hspace*{-4em}
+           \begin{tabular}[H]{|c|l|l|c|} \hline
+             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
+             13 & Ka \textit{peak} [${\rm S/cm^2}$]&  Kaコンダクタンス分布の最大値 & [$0,0.22$] \\ \hline
+             14 & Ka \textit{Gausian} $\mu$ & Kaコンダクタンス分布が従うガウス分布の平均値 & [$0,1$] \\ \hline
+             15 & Ka \textit{Gausian} $\sigma$ & Kaコンダクタンス分布が従うガウス分布の標準偏差値 & [$0,\infty$) \\ \hline
+             16 & CaT \textit{peak} [${\rm S/cm^2}$]&  CaTコンダクタンス分布の最大値 & [$0,0.0022$] \\ \hline
+             17 & CaT \textit{Gausian} $\mu$ & CaTコンダクタンス分布が従うガウス分布の平均値 & [$0,1$] \\ \hline
+             18 & CaT \textit{Gausian} $\sigma$& CaTコンダクタンス分布が従うガウス分布の標準偏差値 & [$0,\infty$) \\ \hline
+           \end{tabular}
+         \end{center}
+       \end{table}
 
-   よって1組のパラメータセットは形態パラメータにコンダクタンスパラメータを加えた16, または18項目で構成されている. \\
-   ひとつのBranchは長さ($length$), 太さ($diam$), 仰角($elevation$), 回転角($rotation$)を
-   パラメータとして持つ. よって, ある$Branch_i$は4つのパラメータからなり, 
-   \begin{equation*}
-    Branch_i = \{length_i, diam_i, elevation_i, rotation_i\}
-   \end{equation*}
-   と表すことができる. またインデックス$i = 1$のとき, すなわち$Branch_1$はStemである.
-   また$Dendrite$は$Branch$の集合であり, 
-   \begin{equation*}
-     Dendrite_i = \{Branch_1,Branch_2,\dots,Branch_{N_i}\}
-   \end{equation*}
-   また, 1つの神経細胞($Neuron$)は2つのDendriteからなる. よって
-   \begin{equation*}
-     Neuron_i = \{Dendrite_1,Dendrite_2\}
-   \end{equation*}
-   である. 
+       よって1組のパラメータセットは形態パラメータにコンダクタンスパラメータを加えた16, または18項目で構成されている.
+     \subsubsection{$Branch,Dendrite,Neuron$の定義}
+       ひとつのBranchは長さ($length$), 底面の直径($diam$), 仰角($elevation$), 回転角($rotation$)を % <- ここも図を入れた方がいい
+       その形態のパラメータとして持つ. よって, ある$Branch_i$は4つの形態パラメータからなり, 
+       \begin{equation*}
+         Branch_i = \{length_i, diam_i, elevation_i, rotation_i\}
+       \end{equation*}
+       と表すことができる. またインデックス$i = 1$のとき, すなわち$Branch_1$はStemである.
+       また$Dendrite$は$Branch$の集合であり, 
+       \begin{equation*}
+         Dendrite_i = \{Branch_1,Branch_2,\dots,Branch_{N_i}\}
+       \end{equation*}
+       また, 1つの神経細胞($Neuron$)は2つのDendriteからなる. よって
+       \begin{equation*}
+         Neuron_i = \{Dendrite_1,Dendrite_2\}
+       \end{equation*}
+       となる. 
 
  \subsection{$Branch$形態パラメータ決定方法}
    以下に$Branch_i$のパラメータ決定方法を述べる. また, 以下の一連のパラメータ決定手法を
-   関数makeBranch($diam_{parent}$)とする. 関数makeBranchは引数として親Branchの直径$diam_{parent}$
-   を取り, 新たなBranchを返す関数である. 
+   関数makeBranch($diam_{parent}$)とする. 関数makeBranchは引数として親$Branch$の直径$diam_{parent}$
+   を取り, 新たな$Branch$を返す関数である. 
    \begin{enumerate}
     \item \textbf{長さ({$length_i$})の決定}\\
       長さ$length_i$はパラメータセットにある
@@ -227,7 +231,7 @@
       \begin{equation}
         length_i = Segment\hspace{1mm} Length
       \end{equation}
-    \item \textbf{太さ($diam_i$)の決定}\\
+    \item \textbf{直径($diam_i$)の決定}\\
       Branchが分岐(Bifurcation $ 1 \to 21<21>$)によって生成されるか伸張(Elongation $1 \to 21$)によって生成されるか
       によって決定方法が異なる. 
       \begin{itemize}
@@ -238,7 +242,7 @@
             diam_i = N(diam_{parent},(0.05)^2)
           \end{equation}
         \item{伸張(Elongation)の場合} \\
-          BranchがStemであるかどうかによって決定方法が異なり, Stemでない場合は親となる$Branch$の太さ($diam_{parent}$)を
+          BranchがStemであるかどうかによって決定方法が異なり, Stemでない場合は親となる$Branch$の直径($diam_{parent}$)を
           実数倍した値を用いる
           \begin{equation}
             diam_i = 
@@ -250,7 +254,9 @@
       ここで, $taper\hspace{0.1cm}rate = 0.875$であり, $diam$の減衰率を表す.
       \end{itemize}
     \item \textbf{仰角($elevation_i$)の決定}\\
-      {\textit diam}と同様にStemであるかどうかで決定方法が異なる. 
+      {\textit diam}と同様にStemであるかどうかで決定方法が異なる. Stemの場合は形態パラメータの\textit{Stem elevation}の値を
+      そのまま用いる. Stemでない場合は平均$\mu = Branch\hspace{1mm}elevation\hspace{1mm}\mu$,
+      標準偏差$\sigma = Branch\hspace{1mm}elevation\hspace{1mm}\sigma$に従うガウス分布から乱数を発生させ, その値を$elevation_i$とする.
       \begin{equation}
         elevation_i = 
         \begin{cases}
@@ -259,7 +265,8 @@
        \end{cases}\\
       \end{equation}
     \item \textbf{回転角($rotation_i$)の決定}\\
-      仰角の場合と同様に,
+      仰角の場合と同様に, 平均$\mu = Branch\hspace{1mm}rotation\hspace{1mm}\mu$,
+      標準偏差$\sigma = Branch\hspace{1mm}rotation\hspace{1mm}\sigma$に従うガウス分布から乱数を発生させ, その値を$rotation_i$とする.
       \begin{equation}
         rotation_i = 
         \begin{cases}
@@ -269,11 +276,17 @@
       \end{equation}
    \end{enumerate}
 
- \subsection{記号1の置き換え規則($*$)}
-   形態生成L-systemにおける記号$B$はBranchに対応する.
-   初期状態の記号$S$の座標を原点$(0,0,0)$とし, ある記号$S$に至
-   るまでに通過するStemやBranchの$length$の和を${\rm path(S)}$とする. 以下に記号
-   $S$の置き換え規則($*$)の選択方法を示す. 
+ \subsection{記号Sの置き換え規則($*$)}
+   形態生成L-systemにおける記号$B$はBranchに対応し, 文字列は樹状構造を表現する. 
+   文字列中のある記号$S$に至るまでに通過する記号$B$をBranchに置き換え, その$length$の和をとり, % <- これも図をはるか?
+   それを${\rm path(S)}$とする. 
+   \begin{figure}[H]
+     \centering
+     \includegraphics[width=5cm]{./Images/temp.png}
+     \caption{${\rm path(S)}$}
+     \label{path(S)}
+   \end{figure}
+   以下に記号$S$の置き換え規則($*$)の選択方法と, その際に考慮するヒューリスティックスについて示す. 
    \begin{enumerate}
      \item \textbf{停止 Termination $S \to T$} \\
         $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
@@ -314,8 +327,8 @@
     状突起として妥当な形態を得るために導入するヒューリスティックスである.    % <- 妥当とは?
     \begin{itemize}
       \item ${\rm path}(S) > 2000$のとき
-      \item $diam_{i} \le Minimum\hspace{1mm}diameter$ のとき\\ % <- パラメータをあとでまとめたほうがいいか？
-       また, この場合$Branch_{i}$の$diam_{i}$を$Minimum\hspace{1mm}diameter$に設定し直す. 
+      \item $diam_{parent} \le Minimum\hspace{1mm}diameter$ のとき\\ % <- パラメータをあとでまとめたほうがいいか？
+       また, この場合, 親$Branch$の$diam$を$Minimum\hspace{1mm}diameter$に設定し直す. 
     \end{itemize}
 
     \subsection{$Branch$に対する三次元座標の設定}
@@ -327,31 +340,49 @@
        \begin{enumerate}
        \item 仰角 \\
 	 仰角を$elevation^{\circ}$とする. 初期状態としてStemは3次元空間
-	 の原点からx軸と同じ方向に伸びているとする. この状態からStemをz軸
+	 の原点からx軸と同じ方向に伸びているとする. この状態からStemを, z軸
 	 を中心として右ねじの方向に$elevation^{\circ}$回転させる.
-	 この際y軸, x軸も同様に回転を行い, それぞれy'軸, z'軸と
-	 する.
+	 この際y軸, x軸も同様に回転を行い, それぞれy'軸, x'軸と
+	 する.この状態を図\ref{elevation}に示す. 
        \item 回転角 \\
 	 次に, 回転角を$rotation^{\circ}$とする. 仰角と同様に,
-	 Stemをy'軸の右ねじの向きに$rotation^{\circ}$回転させる. また
+	 Stemをy'軸の右ねじの方向に$rotation^{\circ}$回転させる. また
 	 x'軸, z軸についても同様の回転を行い, それぞれx''軸, z'
-	 軸とする.
+	 軸とする. この状態を図\ref{rotation}に示す. 
        \end{enumerate}
+       \begin{figure}[h]
+         \centering
+         \begin{subfigure}{0.4\columnwidth}
+           \centering
+           \includegraphics[width=\columnwidth]{./Images/elevation.eps}
+           \caption{elevation}
+           \label{elevation}
+         \end{subfigure}
+         \begin{subfigure}{0.4\columnwidth}
+           \centering
+           \includegraphics[width=\columnwidth]{./Images/rotation.eps}
+           \caption{rotation}
+           \label{rotation}
+         \end{subfigure}
+         \caption{仰角, 回転角の設定}
+         \label{Branch_round}
+       \end{figure}
      \item \textbf{Branchの角度設定} \\
        Stemと同様に行う. ただし, そのBranchの親となるStem, Branchによっ
        て回転を与えたx'',y',z'軸を用いる. 
-     \end{itemize}
-     最終的に得られた樹状突起形態は細胞体の表面に接するように, Stemの方向
-     に平行移動させる. \\   
+   \end{itemize}
+     これらの処理の後, $Dendrite$全体を細胞体の表面に接するようにStemの方向に
+     平行移動させる. 
 
-    \subsection{シナプティックゾーンと, 樹状突起へのシナプスの付与}
+    \subsection{シナプティックゾーン}
      3次元空間上の原点に細胞体を配置し, $y$軸方向の$170 < y < 190$の範囲を % <- この辺の座標情報を変数にしたほうがいいかも
      Redシナプティックゾーン, $y$軸方向の$-170 > y > -190$の範囲をBlueシナプティック
-     ゾーンと定義する(図\ref{synaptic-zone}). シナプティックゾーン内に$Branch$が形成された
-     場合, $Branch$上にシナプスを付与する. % <- 詳しくかけたら書きたい
-      
-  \section{数理モデル}
-     L-systemによって作成された神経細胞はマルチコンパートモデルによって
+     ゾーンと定義する(図\ref{synaptic-zone}). シナプティックゾーン内に$Branch$が侵入した
+     場合, $Branch$上にシナプスを付与する. 具体的には下記\ref{synapse_setting}にて詳述する. 
+
+  \section{使用する数理モデル}
+    \subsection{神経細胞モデル, シナプスモデル}
+     L-systemによって作成された神経細胞はマルチコンパートモデルによって  % Somaのこと書くの忘れてた
      その膜電位の挙動をシミュレーションする. 
      単一コンパートメントの膜電位($V_i$)は以下の式によって計算される.
      %g_leakは平衡電位 = -70になるように調節している
@@ -374,7 +405,7 @@
        g_{i,j}(V_j - V_i)
        \label{next_comp}
      \end{equation}
-
+   \subsection{イオンチャネルモデル}
      また, 式\ref{V_i}の$I_{CaT}$, $I_{Ka}$はMigliore et alに示されるイオンチャネルの
      モデルを利用している.\cite{migliore1995computer}
      \begin{itemize}
@@ -490,8 +521,9 @@
      \end{cases}\\
    \end{align}
    ここで$d_i$を奇数とするのはシミュレーションにNEURONを用いているためである.\\ % <- できたら理由を書きたい
-   よって, 1つの$Branch_i$は$\frac{length_i}{d_i}$の長さごとに1つのコンパートメントに分割され$\{Comp_{i,j}\}$となる. 
-   $\{Comp_{i,j}\}$のそれぞれのコンパートメントについて式\ref{V_i}を用いて膜電位を計算する. 
+   よって1つの$Branch_i$は$\frac{length_i}{d_i}$の長さごとに1つのコンパートメントに分割され
+   $Comp_{i,j}\hspace{1mm}(j = 1,2,\dots,d_i)$となる. 
+   $Comp_{i,j}$のそれぞれのコンパートメントについて式\ref{V_i}を用いて膜電位を計算する. 
 
    %
    %
@@ -539,21 +571,21 @@
        \end{align}
 
 
-         %
-         %
-         %ここも図を入れた方がいい
-         %
-
-
+   \begin{figure}[H]
+     \centering
+     \includegraphics[width=5cm]{./Images/temp.png} %図で説明する
+     \caption{${\rm path(S)}$}
+     \label{path(S)}
+   \end{figure}
        \end{itemize}
 
-   \subsection{単一コンパートメントへのシナプスの付与}
-     上記のように分割したコンパートメント$i$が一部分でも$170 < y < 190$の領域に入っていた場合,  % <- この辺の座標情報を変数にしたほうがいいかも
-     Redシナプスグループに属するシナプスを付与する. 具体的にはコンパートメント$i$の
+   \subsection{単一コンパートメントへのシナプスの付与} \label{synapse_setting}
+     上記のように分割した$Comp_{i,j}$が一部分でも$170 < y < 190$の領域に入っていた場合,  % <- この辺の座標情報を変数にしたほうがいいかも
+     Redシナプスグループに属するシナプスを付与する. 具体的には$Comp_{i,j}$の
      膜電位を示す式\ref{V_i}の右辺に\ref{eq_syn}を加える. また, y軸方向の$-170 > y > -190$に入っていた場合
      はBlueシナプスグループに属するシナプスを付与する. 
 
-   \section{シミュレーション}
+   \section{シミュレーション} % <- シミュレーション、具体的に何やったかについては最後に説明した方がよさそう
      作成した神経細胞の機能性を調べるため, NEURONシミュレータを用いて
      神経細胞膜電位の挙動をシミュレートした. 神経細胞のシナプスをある時刻に活性化
      させることで入力電流を与え, 細胞体における最大脱分極量を観察する. 
@@ -596,8 +628,7 @@
 
  \section{遺伝アルゴリズム}    % <- 「遺伝アルゴリズム」という名前はどうなのか？
    2組のパラメータセットを1つの個体として200個体, 世代数500で遺伝アルゴ
-   リズムを用いたパラメー % <- 遺伝アルゴリズムのパラメータもどこかで表にまとめた方がいい
-   タ最適化を行った. 
+   リズムを用いたパラメータ最適化を行った.  % <- 遺伝アルゴリズムのパラメータもどこかで表にまとめた方がいい
    1組のパラメータセットをベクトル$\overrightarrow{P}_i = \{p_{i,1},p_{i,2},\dots \}$
    と表すと, 一つの個体は$u_i = \{\overrightarrow{P}_{i,1},\overrightarrow{P}_{i,2}\}$と表される. 
    また$\overrightarrow{P}_i$から生成される樹状突起を$Dend_i$とする. よっ
@@ -749,8 +780,6 @@
 		   \dots p_{x,i,Cross}, p_{y,i,Cross + 1},
 		   p_{y,i,Cross + 2} \dots p_{y,i,N_{Param}}\} %添え字が非常に煩雑
 		 \end{equation}
- 
-		 
          \end{itemize}
        \item \textbf{突然変異 Mutation}\\
         パラメータセットの各項目に対して0.65の確率でガウス分布G($\mu$,${\sigma}_M$)に従う変動を与える. すなわち, あるパラメータ値
