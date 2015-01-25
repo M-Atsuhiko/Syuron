@@ -7,12 +7,12 @@
 %親の枝という定義がわかりにくい
 
 \chapter{研究手法・原理}
- \section{手法の概要}
-   本研究の手法の概略は, まず単一の神経細胞が持ちうる機能をあらかじめ設定し, 
-   その機能をうまく実現する神経細胞形態とコンダクタンスの分布を遺伝的アルゴリズム
+ \section{研究手法の概要}
+   本研究の手法の概略は, まず単一の神経細胞が持ちうる機能を1つ設定し, 
+   その機能をうまく実現する神経細胞形態とコンダクタンスの分布を遺伝アルゴリズム
    を用いて探索するというものである.\cite{torben2009systematic}
    神経細胞の形態生成には確率的な手法を用い,その際に用いる確率パラメータを
-   遺伝的アルゴリズムの遺伝子として扱う.
+   遺伝アルゴリズムの遺伝子として扱う.
  \section{神経細胞の機能}
    本研究で神経細胞に設定する機能は, 樹状突起上の異なる2つの部位にある時間
    差${\Delta}t[{\rm ms}]$をもって入力刺激を与えた場合, 入力の順序によって細胞体での
@@ -48,7 +48,7 @@
      \centering
      \begin{subfigure}{0.3\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images/pass_neuron.png} 
+       \includegraphics[width=\columnwidth]{./Images_Method/pass_neuron.png} 
        % 背景は白の方が良さそう
        % rglの三次元画像はepsにしないほうがよい
        \caption{神経細胞の例}
@@ -56,13 +56,13 @@
      \end{subfigure}
      \begin{subfigure}{0.2\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images/synaptic_zone.png}
+       \includegraphics[width=\columnwidth]{./Images_Method/synaptic_zone.png}
        \caption{シナプティックゾーン}
        \label{synaptic-zone}
      \end{subfigure}
      \begin{subfigure}{0.4\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images/input_order_detection.eps} 
+       \includegraphics[width=\columnwidth]{./Images_Method/input_order_detection.eps} 
        \caption{input-order detection}
        \label{input-order_detection}
      \end{subfigure}
@@ -85,7 +85,7 @@
      以上の神経細胞形態に関する定義を図\ref{morpho}に示す.
      \begin{figure}[H]
        \centering
-       \includegraphics[width=10cm]{./Images/neuron_morpho.eps}
+       \includegraphics[width=10cm]{./Images_Method/neuron_morpho.eps}
        \caption{神経細胞形態に関する定義}
        \label{morpho}
      \end{figure}
@@ -149,7 +149,7 @@
 
      \begin{figure}[H]
       \centering
-      \includegraphics[width=10cm]{./Images/L-system.eps}
+      \includegraphics[width=10cm]{./Images_Method/L-system.eps}
       \caption{形態生成L-systemの適用例}
       \label{fig:sample_L-system}
      \end{figure}
@@ -310,7 +310,7 @@
    元から記号$S_i$の位置まで辿った距離である. 
    \begin{figure}[H]
      \centering
-     \includegraphics[width=5cm]{./Images/path_S.eps}
+     \includegraphics[width=5cm]{./Images_Method/path_S.eps}
      \caption{${\rm path}(S_i)$}
      \label{path(S_i)}
    \end{figure}
@@ -386,13 +386,13 @@
          \centering
          \begin{subfigure}{0.4\columnwidth}
            \centering
-           \includegraphics[width=\columnwidth]{./Images/elevation.eps}
+           \includegraphics[width=\columnwidth]{./Images_Method/elevation.eps}
            \caption{elevation}
            \label{elevation}
          \end{subfigure}
          \begin{subfigure}{0.4\columnwidth}
            \centering
-           \includegraphics[width=\columnwidth]{./Images/rotation.eps}
+           \includegraphics[width=\columnwidth]{./Images_Method/rotation.eps}
            \caption{rotation}
            \label{rotation}
          \end{subfigure}
@@ -694,7 +694,8 @@
          \end{equation}
          とする. 
        \item シミュレーションプロトコルを実行した個体に対しては, その世代での相対的な
-         評価値を与える. シミュレーションプロトコルを実行することができた個体の
+         評価値を与える. この評価手法は本研究独自の手法である.
+         シミュレーションプロトコルを実行することができた個体の
          添え字の集合を$S_g$とする.
          ここで個体$u_{g,s}\hspace{1mm}(s \in S_g)$について, 
          その中での最大の$F$値をmax$(F_g)$, また個体$u_{g,s}$から作られた
@@ -743,7 +744,7 @@
      
    \begin{figure}[h] %評価値が層状になることを言うか？
      \centering
-     \includegraphics[width=5cm]{./Images/temp.png} 
+     \includegraphics[width=5cm]{./Images_Method/temp.png} 
      \caption{評価値}
      \label{Estimate}
      
@@ -891,7 +892,8 @@
        \item \textbf{Ka, CaTイオンチャネルの有無} \\
          本実験では神経細胞のイオンチャネルとしてKaチャネル, CaTチャネルを用いるが,
          それぞれを用いるパターンと用いないパターンを用意した. よってパターンとしては
-         表\ref{ion-channel_pattern}の4つがある. なお, チャネルを用いないパターン
+         表\ref{ion-channel_pattern}の4つがある. 両方のイオンチャネルを使用しないパターン
+         をPassiveと呼ぶ. なお, チャネルを用いないパターン
          とは, そのイオンチャネルの最大コンダクタンス量$\overline{g}$
          をすべてのコンパートメントにおいて常に$\overline{g} = 0$としておくことである. 
          \begin{table}[h]
@@ -900,7 +902,7 @@
            \begin{center}
              \begin{tabular}[h]{|c||c|} \hline
                No. & イオンチャネル \\ \hline \hline
-               1 & なし(passive) \\ \hline
+               1 & なし(Passive) \\ \hline
                2 & Ka \\ \hline
                3 & CaT \\ \hline
                4 & Ka, CaT \\ \hline
@@ -942,3 +944,8 @@
            \end{center}
          \end{table}
      \end{enumerate}
+     
+     %
+     % やっぱり解析項目として, どういう携帯量を解析したのかは説明しておいたほうがいい
+     %
+     
