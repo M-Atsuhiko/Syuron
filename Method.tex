@@ -667,13 +667,11 @@
            \label{Morpho_E}
          \end{equation}
          とする. 
-
        \item シミュレーションを行った個体に関しては以下の評価式によって評価値$E_{i,g}$を与える.
              ある世代$g$でシミュレーションを行った個体の添え字の集合を$S_g$とする.
              ここで個体$u_{s,g}\hspace{1mm}(s \in S_g)$とし, その中での最大の$F$値をmax$(F_g)$, また
              個体$u_{s,g}$から作られた神経細胞形態を$Neuron_{s,g}$とし, その中で最小の体積をmin$(V_{s,g})$,
              最小のコンダクタンス量をmin$(Amount Conductance)$
-             
 
              \begin{align}
              \end{align}
@@ -736,7 +734,8 @@
    \subsection{一点交叉, 突然変異}
    %交叉、突然変異を起こす個体の数は中心極限定理的な考えで求められる
      次世代のエリート以外の個体は一点交叉または突然変異のどちらかの手法によって作成され
-     る. 一点交叉は評価値上位$\mu$個の個体($u_{r_{1},g},u_{r_{2},g},\dots,u_{r_{\mu},g}$)を親として, $\lambda$個の子個体 % <- 遺伝的アルゴリズムに関するパラメータも後で表にまとめる
+     る. 一点交叉は評価値上位$\mu$個の個体($u_{r_{1},g},u_{r_{2},g},\dots,u_{r_{\mu},g}$)を親として, $\lambda$個の子個体
+     % <- 遺伝的アルゴリズムに関するパラメータも後で表にまとめる
      を生成する. この$\lambda$個の子個体は評価値下位$\lambda$個の個体と交% <- このλの決め方が問題
      換される. 突然変異は残りの$199 - \lambda$個の個体に対して適用される.
      % <- そもそもこの(μ,λ)法があっているのかどうか？
@@ -809,14 +808,14 @@
          \end{equation}
          となる. ここで用いる${\sigma}_M$はパラメータによって以下の表\ref{sigma_M}に示される
          値を用いる. これはパラメータによって値のレンジが異なるためである. % <- レンジ？
-         ${p'}_i$が表\ref{sigma_M}に示される値域に収まらない場合は再度\ref{Mutation}を用いて
+         ${p'}_i$が表\ref{sigma_M}に示される値域に収まらない場合は再度式\ref{Mutation}を用いて
          ${p'}_i$を取り直す. 
          \begin{table}[H]
            \caption{${\sigma}_M$パラメータ}
            \label{sigma_M}
            \begin{center}
 	     \begin{tabular}[t]{|l|c|c|c|} \hline % <- あとパラメータの初期値
-           \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
+           \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{${\{sigma}_M$} & \multicolumn{1}{c|}{値域}\\ \hline \hline
                \textit{Segment Length}            & 1                 & (0, $\infty$] \\ \hline
 	       \textit{Stem diameter}		  & 0.1		      & (0, 0.15] \\ \hline
 	       \textit{Stem elevation}		  & 		      & \\ \cline{1-1}
