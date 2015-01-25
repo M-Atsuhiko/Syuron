@@ -40,7 +40,7 @@
    上部にある赤い点はRedシナプスグループ, 下部の青い点はBlueシナプスグループを表し, 中央の
    球は細胞体である.  図\ref{synaptic-zone}の中央の緑の点は細胞体であり, 神経細胞とシナプティックゾーンとの
    位置関係を図示している. 図\ref{input-order_detection}は図\ref{Neuron}に示される神経細胞に
-   対し, ${\Delta}t = 15$[ms]としてシナプス入力を与えたときの, 細胞体での膜電位変動を示している. 
+   対し, ${\Delta}t = 15$[ms]としてシナプス入力を与えた際の細胞体での膜電位変動を示している. 
    図\ref{input-order_detection}の場合, $R_{B{\to}R} = 6.29$, $R_{R{\to}B} = 4.75$より
    $F = 1.32$である. 
 
@@ -78,9 +78,9 @@
    \subsection{神経細胞形態の表現}
      神経細胞の形態を3次元空間上に表現する. 細胞体は直径25$[{\rm{{\mu}m}}]$の
      球とし, 樹状突起は円柱の集合体として表現する. 円柱端部の中心部分
-     は他の円柱や細胞体と結合し, 樹状の構造を形成する. ここで, 1本の円柱をBranchと定義する.
-     また細胞体と直接結合しているBranchを特にStemと呼ぶ. 1本のStemと, 
-     そのStemから伸びているBranchからなる樹状構造をあわせて1つの樹状突起(Dendrite)
+     は他の円柱や細胞体と結合し, 樹状の構造を形成する. ここで, 1本の円柱を$Branch$と定義する.
+     また細胞体と直接結合している$Branch$を特にStemと呼ぶ. 1本のStemと, 
+     そのStemから伸びている$Branch$からなる樹状構造をあわせて1つの樹状突起(Dendrite)
      であると定義する. よって1つの神経細胞はStemの本数だけのDendriteを持つ.
      以上の神経細胞形態に関する定義を図\ref{morpho}に示す.
      \begin{figure}[H]
@@ -125,7 +125,7 @@
      \end{align*}
      を定義する. このL-systemを形態生成L-systemと呼ぶ. 
      記号$S,B,T$を樹状突起の構造に置き換えると, 記号Sは樹状
-     構造における未成長の点を表し, 記号BはBranch, 記号Tは樹状突起の終端点に対応する.
+     構造における未成長の点を表し, 記号Bは$Branch$, 記号Tは樹状突起の終端点に対応する.
      ここで, $<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. よって,
      形態生成L-systemは1つの未成長点を初期状態とし, そこから樹状構造が生成されていく過程を表現している. 
      記号Sの置き換え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
@@ -133,18 +133,18 @@
      化しなくなるまで置き換えを行うことで得られる. また, 最も最初の記号置き換えでは必ず$S \to BS$の
      置き換えが選択されるようにする. \\
      最終的に得られる記号列は記号$B$と記号$T$からなり, 最も左端にある記
-     号$B$がStemを表す.
-     形態生成L-systemから一つの樹状突起が生成される過程を例示する. また
+     号$B$がStemを表す. 形態生成L-systemから一つの樹状突起が生成される過程を例示する. また
      図\ref{fig:sample_L-system}は例の$initial$, $3^{rd}cycle$, $finish$
-     を樹状構造として例示したものである. 
+     を樹状構造として例示したものである. ここで各記号の添字は幅優先的につけられていくことに
+     注意されたい. 
      \begin{align*}
-      initial:\hspace{0.2cm} & S \\
-      1^{st} cycle:\hspace{0.2cm} & BS \\
-      2^{nd} cycel:\hspace{0.2cm} & B<BS><BS> \\
-      3^{rd} cycel:\hspace{0.2cm} & B<BBS><BT> \\
-      4^{th} cycel:\hspace{0.2cm} & B<BB<BS><BS>><BT> \\
+      initial:\hspace{0.2cm} & S_0 \\
+      1^{st} cycle:\hspace{0.2cm} & B_1S_1 \\
+      2^{nd} cycel:\hspace{0.2cm} & B_1<B_2S_2><B_3S_3> \\
+      3^{rd} cycel:\hspace{0.2cm} & B_1<B_2B_4S_4><B_3T_1> \\
+      4^{th} cycel:\hspace{0.2cm} & B_1<B_2B_4<B_5S_5><B_6S_6>><B_3T_1> \\
       \cdots \\
-      finish:\hspace{0.2cm} & B<BB<BBBT><B<BT><BBT>>><BT> \\
+      finish:\hspace{0.2cm} & B_1<B_2B_4<B_5B_7B_{10}T_3><B_6<B_8T_2><B_9B_{11}T_4>>><B_3T_1> \\
      \end{align*}
 
      \begin{figure}[H]
@@ -153,7 +153,10 @@
       \caption{形態生成L-systemの適用例}
       \label{fig:sample_L-system}
      \end{figure}
-     
+
+     また, 形態生成L-systemにおいて記号$S_i$の分岐や伸張によって
+     新たな記号$B_j$が生成される際にはそれに対応した$Branch_j$を以下の\ref{makeBranch}節
+     に示す方法で作成する. 
 
    \subsection{パラメータセット, $Branch$, $Dendrite$, $Neuron$の定義}
      \subsubsection{パラメータセットの定義}
@@ -173,7 +176,7 @@
              1 &  \textit{Segment Length} [${\rm {\mu}m}$]& StemおよびBranchの長さ & [$0,\infty$) \\ \hline
              2 &  \textit{Stem diameter}  [${\rm {\mu}m}$]& Stemの直径 & [$0.15,\infty$) \\ \hline
              3 &  \textit{Stem elevation} [$^{\circ}$]& Stemの仰角 & [$0,360$) \\ \hline
-             4 &  \textit{Stem rotation}  [$^{\circ}$]& Stemの回転 & [$0,360$) \\ \hline
+             4 &  \textit{Stem rotation}  [$^{\circ}$]& Stemの回転角 & [$0,360$) \\ \hline
              5 &  \textit{Branch elevation $\mu$} [$^{\circ}$]& Branchの仰角決定に用いる平均値 & [$0,360$) \\ \hline
              6 &  \textit{Branch elevation $\sigma$} [$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 & [$0,\infty$) \\ \hline
              7 &  \textit{Branch rotation $\mu$}  [$^{\circ}$]& Branchの回転角決定に用いる平均値 & [$0,360$) \\ \hline
@@ -241,7 +244,7 @@
        \end{equation*}
        となる. 
 
- \subsection{$Branch$形態パラメータ決定方法}
+ \subsection{$Branch$形態パラメータ決定方法} \label{makeBranch}
    以下に$Branch_i$のパラメータ決定方法を述べる. また, 以下の一連のパラメータ決定手法を
    関数makeBranch($diam_{parent}$)とする. 関数makeBranchは引数として親$Branch$の直径$diam_{parent}$
    を取り, 新たな$Branch$を返す関数である. 
@@ -298,24 +301,24 @@
    \end{enumerate}
 
  \subsection{記号Sの置き換え規則}
-   形態生成L-systemにおける記号$B$はBranchに対応し, 文字列は図
+   形態生成L-systemにおける記号$B$は$Branch$に対応し, 文字列は図
    \ref{fig:sample_L-system}に示すように樹状構造を表現する.
-   Stem($B_1$)から樹状構造を辿り, 文字列中のある記号$S_i$に至るまでに通
+   Stem, ($B_1$)から樹状構造を辿り, 文字列中のある記号$S_i$に至るまでに通
    過する記号$B$の添え字の集合を$J = \{1,2,\cdots,n\}$とする.
    このとき$length_j\hspace{2mm}(j \in J)$の和を${\rm path(S_i)}$とする.
    すなわち記号$B_j$を対応する$Branch_j$に置き換え構成される樹状構造を根
    元から記号$S_i$の位置まで辿った距離である. 
    \begin{figure}[H]
      \centering
-     \includegraphics[width=5cm]{./Images/temp.png}
+     \includegraphics[width=5cm]{./Images/path_S.eps}
      \caption{${\rm path(S_i)}$}
      \label{path(S_i)}
    \end{figure}
    以下に記号$S_i$の置き換え規則($*$)の選択方法と, その際に考慮するヒュー
    リスティックスについて示す. ここで$N_B$を各置き換えステップにおいての
-   $Branch$の総本数であるとする. また初期状態は$S_0$である. 
+   記号$Bh$の総個数, $N_T$を記号$T$の総個数であるとする. また初期状態は$S_0$である. 
    \begin{enumerate}
-     \item \textbf{停止 Termination $S_i \to T$} \\
+     \item \textbf{停止 Termination $S_i \to T_{N_T + 1}$} \\
         $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
         累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて記号$S_i$の伸張停止
         の判定を行う. その際, 累積ガンマ分布のパラメータとして, パラメータセットの \\
@@ -327,7 +330,7 @@
         \begin{equation}
 	  {\rm Cumulative}\hspace{0.1cm}\gamma\hspace{0.05cm}({\rm path(1_i)}) > rand
         \end{equation}
-        となる場合, 伸張停止(Termination)とし$ S_i \to T$とする.
+        となる場合, 伸張停止(Termination)とし$ S_i \to T_{N_T + 1}$とする.
 
       \item \textbf{分岐 Bifurcation $ S_i \to B_{N_B + 1}S_{N_B + 1}<B_{N_B + 2}S_{N_B + 2}>$} \\
         Terminationを行わなかった場合のみBifurcationの判断を行う. 
@@ -343,12 +346,11 @@
         \begin{equation}
 	  Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(S)) > rand
         \end{equation}
-        のとき分岐(Bifurcation)
-	    とする. すなわちmakeBranch($diam_i$)より, 新たに
-	    $Branch_{N_B + 1}$と$Branch_{N_B + 2}$を生成する.                               	    %添え字の付け方とかがわかりにくい
+        のとき分岐(Bifurcation)とする. すなわち$Branch_i$の$diam_i$を用いて\\
+        makeBranch($diam_i$)から新たに$Branch_{N_B + 1}$と$Branch_{N_B + 2}$を生成する.
       \item \textbf{伸張 Elongation $S_i \to B_{N_B + 1}S_{N_B + 1}$} \\
         上記の条件を満たさなかった場合, 伸張(Elongation)とする. 
-        すなわちmakeBranch($diam_i$)より, 新たに$Branch_{N_B + 1}$を生成する. 
+        すなわち$Branch_i$の$diam_i$を用いてmakeBranch($diam_i$)より, 新たに$Branch_{N_B + 1}$を生成する. 
     \end{enumerate}
 
    \subsubsection{形態的ヒューリスティック}
@@ -398,7 +400,7 @@
          \label{Branch_round}
        \end{figure}
      \item \textbf{Branchの角度設定} \\
-       Stemと同様に行う. ただし, そのBranchの親となるStem, Branchによっ
+       Stemと同様に行う. ただし, その$Branch$の親となる$Branch$によっ
        て回転を与えたx'',y',z'軸を用いる. 
    \end{itemize}
      これらの処理の後, $Dendrite$全体を細胞体の表面に接するようにStemの方向に
@@ -574,8 +576,9 @@
    また, 細胞体に対しても同様に式\ref{V_i}を用いて膜電位の挙動をシミュレー
    トする. 
    \subsection{コンパートメント上のコンダクタンス分布設定}
-     作成したコンパートメントのそれぞれにコンダクタンスを設定する. 
-     コンダクタンス分布は線形な分布とガウス分布の2つを仮定した. 線形なコンダクタンス分布は先行研究で用いられていた
+     作成した$Comp_{i,j}$のそれぞれに最大コンダクタンス値${\overline{g}_{\rm CaT}}_{i,j}$, ${\overline{g}_{\rm Ka}}_{i,j}$
+     を設定する. 
+     樹状突起上のコンダクタンス分布は線形な分布とガウス分布の2つを仮定した. 線形なコンダクタンス分布は先行研究で用いられていた
      手法である\cite{torben2009systematic}. ガウス分布を用いるのは, 線形分布の場合よりも細かくコンダクタンス分布の変化
      を表現し, より多くのコンダクタンス分布パターンを表現するためである.
      また, 細胞体に対してはコンダクタンスを分布させず, $\overline{g}_{{\rm Ka}} = \overline{g}_{{\rm CaT}} = 0$とした.
@@ -586,8 +589,8 @@
      \item \textbf{線形分布の場合}\\
        $Branch$単位でコンダクタンスを設定する. つまりある$Branch_i$から分割されたコンパートメント$\{Comp_{i,j}\}$は
        全て同じコンダクタンス値を持つ. $Branch_i$のコンパートメントのコンダクタンス値を
-       ${\overline{g}_{\rm CaT}}_{i,j}$, ${\overline{g}_{\rm Ka}}_{i,j}$とし,
-       上記の$diam$と同様の方法で決定する\\
+       ${\overline{g}_{\rm CaT}}_{i}$, ${\overline{g}_{\rm Ka}}_{i}$とし,
+       上記の$diam$と同様に親$Branch$の実数倍として決定する\\
        \begin{align}
          {\overline{g}_{\rm CaT}}_{i,j} &= 
          \begin{cases}
