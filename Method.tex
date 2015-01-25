@@ -297,7 +297,7 @@
       \end{equation}
    \end{enumerate}
 
- \subsection{記号Sの置き換え規則($*$)}
+ \subsection{記号Sの置き換え規則}
    形態生成L-systemにおける記号$B$はBranchに対応し, 文字列は図
    \ref{fig:sample_L-system}に示すように樹状構造を表現する.
    Stem($B_1$)から樹状構造を辿り, 文字列中のある記号$S_i$に至るまでに通
@@ -418,7 +418,7 @@
      単一コンパートメントの膜電位($V_i$)は以下の式によって計算される.
      %g_leakは平衡電位 = -70になるように調節している
      \begin{equation}
-       cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + I_{CaT} + I_{Ka}
+       Cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + I_{CaT} + I_{Ka}
        %このcmは小文字か大文字か?
        \label{V_i}
      \end{equation}
@@ -505,9 +505,10 @@
 %
 % gmn gmlは何なのか？ g_{mn}なのか？ 単位は無いようなので、gmnだと思う
 %
-     また, 数理モデルのパラメータを以下の表\ref{sim_param}に示す.
+     また, 数理モデルのパラメータを以下の表\ref{sim_param}に示す. % <- tau1 tau2は別のソースコードからとったことを書いたほうがいい
+
      \begin{table}[H]
-       \caption{神経細胞モデル, シナプスモデルパラメータ}
+       \caption{数理モデルパラメータ}
        \label{sim_param}
        \centering
        \begin{subtable}{0.45\columnwidth}
@@ -516,12 +517,13 @@
          \label{neuron_param}
          \begin{tabular}[h]{|c||c|} \hline
            \multicolumn{1}{|c||}{パラメータ名} & \multicolumn{1}{c|}{値} \\ \hline \hline
-%	   Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える 2段組みの表にする
+%	   Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える
 	   $Ra$  [${\rm{\Omega}cm}$] & 100 \\ \hline
 	   $Cm$  [${\rm{\mu}F/cm^2}$] & 0.8 \\ \hline
 	   $V_{init}$ [mV]& -70\\ \hline
 	   $g_{pas}$ [${\rm S/cm^2}$]& $2.5 \times 10^{-5}$\\ \hline
 	   $E_{pas}$ [mV] & -70\\ \hline
+           $g_{syn}$ [${\rm S/cm^2}$]& 0 \\ \hline
            ${\tau}_{1}$ [ms] & 0.5\\ \hline
 	   ${\tau}_{2}$ [ms] & 2\\ \hline
          \end{tabular}
@@ -534,8 +536,8 @@
            \multicolumn{1}{|c||}{パラメータ名} & \multicolumn{1}{c|}{値} \\ \hline \hline
            $T$ [${\rm ^{\circ}C}$] & 37\\ \hline
            $E_{K}$ [mV] & -91\\ \hline
-           $\overline{g}_{CaT}$ [${\rm S/cm^2}$]& 0.003\\ \hline
-           $\overline{g}_{Ka}$ [${\rm S/cm^2}$]& 0.01\\ \hline
+%           $\overline{g}_{CaT}$ [${\rm S/cm^2}$]& 0.003\\ \hline
+%           $\overline{g}_{Ka}$ [${\rm S/cm^2}$]& 0.01\\ \hline
            ${\alpha}_{0n}$ [${\rm ms^{-1}}$]& 0.02\\ \hline
            ${\alpha}_{0l}$ [${\rm ms^{-1}}$]& 0.08\\ \hline
            ${\zeta}_n$ & -3\\ \hline
@@ -544,8 +546,8 @@
            $gm_l$ & 1\\ \hline
            $V_{n\frac{1}{2}}$ [mV]& -33.6\\ \hline
            $V_{l\frac{1}{2}}$ [mV]& -83\\ \hline
-           $C_i$ [mM]& $50{\times}10^{-6}$\\ \hline
-           $C_o$ [mM]& 2\\ \hline
+           $C_i$ [mM]& $5.0{\times}10^{-5}$\\ \hline
+           $C_o$ [mM]& 2.0\\ \hline
          \end{tabular}
        \end{subtable}
      \end{table}
@@ -576,31 +578,37 @@
      コンダクタンス分布は線形な分布とガウス分布の2つを仮定した. 線形なコンダクタンス分布は先行研究で用いられていた
      手法である\cite{torben2009systematic}. ガウス分布を用いるのは, 線形分布の場合よりも細かくコンダクタンス分布の変化
      を表現し, より多くのコンダクタンス分布パターンを表現するためである.
-     また, 細胞体に対してはコンダクタンスを分布させず, $g_{{\rm Ka}} = g_{{\rm CaT}} = 0$とした.
+     また, 細胞体に対してはコンダクタンスを分布させず, $\overline{g}_{{\rm Ka}} = \overline{g}_{{\rm CaT}} = 0$とした.
      以下に$Comp_{i,j}$に対するコンダクタンス値の決定方法を述べる. 
      コンダクタンス値の決定方法は線形分布を用いるかガウス分布を用いるか
      によって異なる. \\
      \begin{itemize}
      \item \textbf{線形分布の場合}\\
        $Branch$単位でコンダクタンスを設定する. つまりある$Branch_i$から分割されたコンパートメント$\{Comp_{i,j}\}$は
-       全て同じコンダクタンス値を持つ. $Branch_i$のコンパートメントのコンダクタンス値を${g_{\rm CaT}}_{i,j}$, ${g_{\rm Ka}}_{i,j}$とし,
+       全て同じコンダクタンス値を持つ. $Branch_i$のコンパートメントのコンダクタンス値を
+       ${\overline{g}_{\rm CaT}}_{i,j}$, ${\overline{g}_{\rm Ka}}_{i,j}$とし,
        上記の$diam$と同様の方法で決定する\\
        \begin{align}
-         {g_{\rm CaT}}_{i,j} &= 
+         {\overline{g}_{\rm CaT}}_{i,j} &= 
          \begin{cases}
            {\rm CaT}\hspace{1mm}Stem\hspace{1mm}conductance & \text{(i = 1)}\\
-           {g_{\rm CaT}}_{parent_i} \times {\rm CaT}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
+           {\overline{g}_{\rm CaT}}_{parent_i} \times {\rm CaT}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
          \end{cases} \\
-                     {g_{\rm Ka}}_{i,j} &= 
-                     \begin{cases}
-             {\rm Ka}\hspace{1mm}Stem\hspace{1mm}conductance & \text{(i = 1)}\\
-             {g_{\rm Ka}}_{parent_i} \times {\rm Ka}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
+         {\overline{g}_{\rm Ka}}_{i,j} &= 
+          \begin{cases}
+            {\rm Ka}\hspace{1mm}Stem\hspace{1mm}conductance & \text{(i = 1)}\\
+            {\overline{g}_{\rm Ka}}_{parent_i} \times {\rm Ka}\hspace{1mm}taper\hspace{1mm}rate & \text{(otherwise)}\\
            \end{cases}\\
          \end{align}
 
        \item \textbf{ガウス分布の場合}\\
-         コンパートメント単位でコンダクタンス値を設定する. Stemから$Comp_{i,j}$までの$length$の合計をpath($Comp_{i,j}$)とする. 
-         またその樹状突起全体のコンパートメントでの最大のpath($Comp_{i,j}$)をmax(Path($Comp_{i,j}$))とする. このとき平均値$\mu$, 
+         コンパートメント単位でコンダクタンス値を設定する. Stemから$Comp_{i,j}$までの
+         $length$の合計をpath($Comp_{i,j}$)とする. 
+         またその樹状突起全体のコンパートメントでの最大のpath($Comp_{i,j}$)を
+         max(Path($Comp_{i,j}$))とする.
+         この二つの長さの比を$path\hspace{1mm}ratio(Comp_{i,j}) = \frac{Comp_{i,j}}{{\rm max(Path(}Comp_{i,j})}$
+         とする. 
+         このとき平均値$\mu$, 
          標準偏差$\sigma$のガウス分布から実数$x$に対する確率密度を返す関数G($x,\mu,{\sigma}^2$)を用いて
          \begin{align}
            {\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm G}({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2) \\
@@ -609,12 +617,12 @@
          とし, 
 
        \begin{align}
-         {g_{\rm Ka}}_{i,j} &=
-         \frac{{\rm G}(\frac{{\rm path}(Comp_{i,j})}{{\rm max(Path}(Comp_{i,j}))},{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+         {\overline{g}_{\rm Ka}}_{i,j} &=
+         \frac{{\rm G}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
               {{\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max}
               \times {\rm Ka}\hspace{1mm}peak \\
-         {g_{\rm CaT}}_{i,j} &=
-         \frac{{\rm G}(\frac{{\rm path}(Comp_{i,j})}{{\rm max(Path}(Comp_{i,j}))},{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+         {\overline{g}_{\rm CaT}}_{i,j} &=
+         \frac{{\rm G}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
               {{\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max}
               \times {\rm CaT}\hspace{1mm}peak
        \end{align}
@@ -626,58 +634,19 @@
      膜電位を示す式\ref{V_i}の右辺に\ref{eq_syn}を加える. また, y軸方向の$-170 > y > -190$に入っていた場合
      はBlueシナプスグループに属するシナプスを付与する. 
 
-   \section{シミュレーション} % <- シミュレーション、具体的に何やったかについては最後に説明した方がよさそう
-     作成した神経細胞の機能性を調べるため, NEURONシミュレータを用いて
-     神経細胞膜電位の挙動をシミュレートした. 神経細胞のシナプスをある時刻に活性化
-     させることで入力電流を与え, 細胞体における最大脱分極量を観察する. 
-     Blueシナプティックゾーンに属するシナプスを活性化させる時間を$t_{Blue}$, 
-     Redシナプティックゾーンに属するシナプスを活性化させる時間を$t_{Red}$, とする.
-     作成した1つの神経細胞に対して以下の表\ref{sim_protcol}に示す4つのシミュレーションを行った. 
-     また, Blueシナプティックゾーン, またはRedシナプティックゾーンに属するシナプスがない神経細胞に
-     ついてはこのシミュレーションを行わなかった. 
-
-     \begin{table}[H]
-       \caption{シミュレーションプロトコル}
-       \label{sim_protcol}
-       \begin{center}
-	\begin{tabular}[t]{|l|c|c|} \hline
-           & $t_{Blue}$ & $t_{Red} $ \\ \hline \hline
-          1, Blueシナプティックゾーン単独での発火 & 5 & - \\ \hline
-          2, Redシナプティックゾーン単独での発火  & - & 5 \\ \hline
-          3, Blueシナプティックゾーン $\to$ Redシナプティックゾーンの発火 & 5 & $5 + {\Delta}t$ \\ \hline
-          4, Redシナプティックゾーン $\to$ Blueシナプティックゾーンの発火 & $5 + {\Delta}t$ & 5 \\ \hline
-	\end{tabular}
-       \end{center}
-      \end{table}
-     
-     ここで${\Delta}t[ms]$は二つのシナプス群からの入力の時間差であり, 以下の表\ref{Delta_t}に示す6つの値をそれぞれ用いた. 
-     
-     \begin{table}[H]
-       \caption{${\Delta}t$}
-       \label{Delta_t}
-       \begin{center}
-	\begin{tabular}[t]{|c|c|c|c|c|c|} \hline
-          5 & 10 & 15 & 20 & 25 & 30 \\ \hline
-	\end{tabular}
-       \end{center}
-      \end{table}
-     シミュレーションはNEURONシミュレータを用い, CVodeアルゴリズムを用いて行った. % <- NEURON シミュレータに関して書いた方がいいか？
-     CVodeアルゴリズムを用いる際のエラーは$10^{-5}$未満に設定した. 
-
-
  \section{遺伝アルゴリズム}    % <- 「遺伝アルゴリズム」という名前はどうなのか？
    2組のパラメータセットを1つの個体として200個体, 世代数500で遺伝アルゴ
    リズムを用いたパラメータ最適化を行った.  % <- 遺伝アルゴリズムのパラメータもどこかで表にまとめた方がいい
    1組のパラメータセットをベクトル$\overrightarrow{P}_i = \{p_{i,1},p_{i,2},\dots \}$
    と表すと, 一つの個体は$u_i = \{\overrightarrow{P}_{i,1},\overrightarrow{P}_{i,2}\}$と表される. 
-   また$\overrightarrow{P}_i$から生成される樹状突起を$Dend_i$とする. よっ
+   また$\overrightarrow{P}_i$から生成される樹状突起を$Dendrite_i$とする. よっ
    て1つの個体$u_i$から生成される神経細胞は$Neuron_i = \{Dend_{i,1},Dend_{i,2}\}$と表される.   
    また, ある世代数$g$での$i$番目の個体を$u_{i,g}$と表すとする.
    この遺伝アルゴリズムにおける遺伝子は個体$u_{i,g}$の持つパラメータセット$P_{i,g,1},P_{i,g,2}$である. 
    本研究の遺伝アルゴリズムでは, エリート保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
    \subsection{個体評価}
-     上述の通り各神経細胞の形態を生成しシミュレーションを行い, その結果を  % <- シミュレーションという言い方は良くない F値テストとか具体的に
-     もとに個体の評価を行う. 個体の評価には, 個体の機能性\ref{F}のほか個体
+     神経細胞の形態を生成した後, 以下の\ref{simulation}節に示すシミュレーションを行う.  % <- シミュレーションという言い方は良くない F値テストとか具体的に
+     その結果をもとに個体の評価を行う. 個体の評価には, 個体の機能性\ref{F}のほか個体
      の体積, 分布するコンダクタンスの量を考慮する. 
      しかし, 個体によっては上下のシナプティックゾーンに樹状突起を伸ばせず, 
      そもそもシミュレーションを行うことができないものが発生することもある.
@@ -688,15 +657,24 @@
      \begin{itemize}
        \item \textbf{形態的エラー}\\
          両方のシナプティックゾーンにシナプスを持たずシミュレーションを行えない個体の場合
-         $Dend_{i,1}$の$y$座標の最大値をmax($y_1$), $Dend_{i,2}$の$y$座標の最小値をmin($y_2$)とし % <- このへんも書き直す
-         評価値$E_{i,g}$を
+         $Dendrite_{i,1}$の$y$座標の最大値をmax($y_1$), $Dendrite_{i,2}$の$y$座標の
+         最小値をmin($y_2$)とし評価値$E_{i,g}$を
          \begin{equation}
            E_{i,g} = -{\rm max}\left(170 - {\rm max}(y_1),0\right) + {\rm min}\left(-170 - {\rm min}(y_2),0\right) - 100
            \label{Morpho_E}
          \end{equation}
          とする. 
 
-       \item シミュレーションを行った個体に関しては以下の評価式によって評価値$E_{i,g}$を与える. 
+       \item シミュレーションを行った個体に関しては以下の評価式によって評価値$E_{i,g}$を与える.
+             ある世代$g$でシミュレーションを行った個体の添え字の集合を$S_g$とする.
+             ここで個体$u_{s,g}\hspace{1mm}(s \in S_g)$とし, その中での最大の$F$値をmax$(F_g)$, また
+             個体$u_{s,g}$から作られた神経細胞形態を$Neuron_{s,g}$とし, その中で最小の体積をmin$(V_{s,g})$,
+             最小のコンダクタンス量をmin$(Amount Conductance)$
+             
+
+             \begin{align}
+             \end{align}
+             
          \begin{align}
            Function Minus_{i,g} &= \frac{F_{i,g}}{F_{max,g}} \\
            Morphology Minus_{i,g} &= \frac{Volume_{i,g}}{Volume_{max,g}} \\
@@ -734,7 +712,6 @@
      \end{itemize}
 
    よって評価値は100に近いほど良い評価である. % <- 評価値の分布について、層になることを図示するか？
-
    
    \begin{figure}[h]
      \centering
@@ -863,3 +840,56 @@
 	   \end{center}						     
          \end{table}
      \end{itemize}
+
+            \begin{table}[h]
+         \caption{遺伝アルゴリズムパラメータ}
+         \label{GA-parameter}
+         \begin{center}
+           \begin{tabular}[H]{|c|l|l|c|} \hline
+             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
+             13 & Ka \textit{Stem conductance} [${\rm S/cm^2}$]& StemのKaコンダクタンス値 & [$0,0.22$] \\ \hline
+             14 & Ka \textit{taper rate}  & Kaコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
+             15 & CaT \textit{Stem conductance} [${\rm S/cm^2}$]& StemのCaTコンダクタンス値 & [$0,0.0022$] \\ \hline
+             16 & CaT \textit{taper rate}  & CaTコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
+           \end{tabular}
+         \end{center}
+       \end{table}
+     
+   \section{シミュレーション} \label{simulation}
+     作成した神経細胞の機能性を調べるため, NEURONシミュレータを用いて
+     神経細胞膜電位の挙動をシミュレートした. 神経細胞のシナプスをある時刻に活性化
+     させることで入力電流を与え, 細胞体における最大脱分極量を観察する. 
+     Blueシナプティックゾーンに属するシナプスを活性化させる時間を$t_{Blue}$, 
+     Redシナプティックゾーンに属するシナプスを活性化させる時間を$t_{Red}$, とする.
+     作成した1つの神経細胞に対して以下の表\ref{sim_protcol}に示す4つのシミュレーションを行った. 
+     また, Blueシナプティックゾーン, またはRedシナプティックゾーンに属するシナプスがない神経細胞に
+     ついてはこのシミュレーションを行わなかった. 
+
+     \begin{table}[H]
+       \caption{シミュレーションプロトコル}
+       \label{sim_protcol}
+       \begin{center}
+	\begin{tabular}[t]{|l|c|c|} \hline
+           & $t_{Blue}$ & $t_{Red} $ \\ \hline \hline
+          1, Blueシナプティックゾーン単独での発火 & 5 & - \\ \hline
+          2, Redシナプティックゾーン単独での発火  & - & 5 \\ \hline
+          3, Blueシナプティックゾーン $\to$ Redシナプティックゾーンの発火 & 5 & $5 + {\Delta}t$ \\ \hline
+          4, Redシナプティックゾーン $\to$ Blueシナプティックゾーンの発火 & $5 + {\Delta}t$ & 5 \\ \hline
+	\end{tabular}
+       \end{center}
+      \end{table}
+     
+     ここで${\Delta}t[ms]$は二つのシナプス群からの入力の時間差であり, 以下の表\ref{Delta_t}に示す6つの値をそれぞれ用いた. 
+     
+     \begin{table}[H]
+       \caption{${\Delta}t$}
+       \label{Delta_t}
+       \begin{center}
+	\begin{tabular}[t]{|c|c|c|c|c|c|} \hline
+          5 & 10 & 15 & 20 & 25 & 30 \\ \hline
+	\end{tabular}
+       \end{center}
+      \end{table}
+     シミュレーションはNEURONシミュレータを用い, CVodeアルゴリズムを用いて行った. % <- NEURON シミュレータに関して書いた方がいいか？
+     CVodeアルゴリズムを用いる際のエラーは$10^{-5}$未満に設定した. 
+
