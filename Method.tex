@@ -702,19 +702,20 @@ S%#!platex ./report.tex
          神経細胞形態を$Neuron_{g,s}$とし, その中で最小の体積をmin$(Vol_{g,s})$,
          最小のコンダクタンス量をmin$(Amount Conductance)$
 
-             \begin{align}
-             \end{align}
-             
-         \begin{align}
-           Function Minus_{g,i} &= \frac{F_{g,i}}{F_{max,g}} \\
-           Morphology Minus_{g,i} &= \frac{Volume_{g,i}}{Volume_{max,g}} \\
-           Conductance Minus_{g,i} &= \frac{Conductance ratio_{g,i}}{Conductance_{max,g}} \\ %あとで詳しく書く
-         \end{align}
+         %あとでちゃんと書く
+         \begin{equation*}
+           Conductance\hspace{1mm}ratio_{g,i} = \left(\frac{Ka\hspace{1mm}amount_{g,i}}{{Ka\hspace{1mm}amount_{max}}_{g}} + \frac{CaT\hspace{1mm}amount_{g,i}}{{CaT\hspace{1mm}amount_{max}}_{g}}\right) / N\hspace{1mm}Conductance
+         \end{equation*}
 
-         \begin{equation}
-           E_{g,i} = 100 - Function\hspace{1mm}Minus_{g,i} - Morphology\hspace{1mm}Minus_{g,i} - Conductance\hspace{1mm}Minus_{g,i}
-         \end{equation}
-     \end{itemize}
+         \begin{align*}
+           Function\hspace{1mm}Minus_{g,i} &= \left(1 - \frac{F_{g,i}}{{F_{max}}_g}\right) \times Function\hspace{1mm}ratio \\
+           Morphology\hspace{1mm}Minus_{g,i} &= \frac{Volume_{g,i}}{{Volume_{max}}_g} \times Morphology\hspace{1mm}ratio \\
+           Conductance\hspace{1mm}Minus_{g,i} &= \frac{Conductance\hspace{1mm}ratio_{g,i}}{{Conductance_{max}}_g} \times Conductance\hspace{1mm}ratio 
+         \end{align*}
+         
+         \begin{equation*}
+  E_{g,i} = 100 - (Function\hspace{1mm}Minus_{g,i} + Morphology\hspace{1mm}Minus_{g,i} + Conductance\hspace{1mm}Minus_{g,i})
+         \end{equation*}
 
      また, 以下のヒューリスティックスに該当する個体は, 以下の式によって評価する. %上の式との関連は?
      \begin{itemize}
