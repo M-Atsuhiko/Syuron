@@ -2,9 +2,45 @@
 
 \chapter{結果}
  \section{Passiveの結果}
-   \subsection{先行研究\cite{torben2009systematic}との比較}
-     
- 
+   \subsection{先行研究手法\cite{torben2009systematic}との比較}
+     先行研究で用いられていた個体評価指標との比較を以下の図\ref{Tsuishi_Rerative}に示す. 
+     \begin{figure}[H]
+       \centering
+       \hspace*{-1cm}
+       \begin{subfigure}{0.4\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_F.eps} 
+         \caption{F値}
+         \label{Tsuishi_Rerative_F}
+       \end{subfigure}
+       \begin{subfigure}{0.4\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_volume.eps} 
+         \caption{体積}
+         \label{Tsuishi_Rerative_volume}
+       \end{subfigure}
+
+       \hspace*{-2.5cm}
+       \begin{subfigure}{0.4\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_length.eps} 
+         \caption{長さ}
+         \label{Tsuishi_Rerative_length}
+       \end{subfigure}
+       \begin{subfigure}{0.3\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
+       \end{subfigure}
+
+     \caption{先行研究手法との比較}
+     \label{Tsuishi_Rerative}
+   \end{figure}
+
+     図中の黒い星印(${\star}$)は, 各${\Delta}t$[ms]において先行研究手法を用いた場合
+     (Torben et al)と本研究手法(Rerative)の間でスチューデントのt検定(${\alpha} = 0.05$)を
+     用い, 有意差ありとなったことを示す. % これあってんの？
+     図\ref{Tsuishi_Rerative_volume}からわかるように本研究の手法の方が明らかに体積の
+     大きさが小さくなっている. 
  \section{Kaチャネルを用いた場合の結果}
  \section{CaTチャネルを用いた場合の結果}
  \section{Kaチャネル, CaTチャネルを用いた場合の結果}
