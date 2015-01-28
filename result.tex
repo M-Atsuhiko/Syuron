@@ -3,45 +3,114 @@
 \chapter{結果}
  \section{Passiveの結果}
    \subsection{先行研究手法\cite{torben2009systematic}との比較}
-     先行研究で用いられていた個体評価指標との比較を以下の図\ref{Tsuishi_Rerative}に示す. 
+     本研究手法と先行研究で用いられていた個体評価指標との比較を以下の
+     図\ref{Tsuishi_Rerative1}, 図\ref{Tsuishi_Rerative2}に示す. 
+
+%subfigure を入れるときに改行すると、実際の文章でも改行が反映され、横に並ばなくなるるので注意
      \begin{figure}[H]
-       \centering
-       \hspace*{-1cm}
-       \begin{subfigure}{0.4\columnwidth}
+       \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_F.eps} 
-         \caption{F値}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_F.eps} 
+         \caption{F}
          \label{Tsuishi_Rerative_F}
        \end{subfigure}
-       \begin{subfigure}{0.4\columnwidth}
+       \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_volume.eps} 
-         \caption{体積}
-         \label{Tsuishi_Rerative_volume}
-       \end{subfigure}
-
-       \hspace*{-2.5cm}
-       \begin{subfigure}{0.4\columnwidth}
-         \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_length.eps} 
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_length.eps} 
          \caption{長さ}
          \label{Tsuishi_Rerative_length}
        \end{subfigure}
-       \begin{subfigure}{0.3\columnwidth}
+
+       \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_volume.eps} 
+         \caption{体積}
+         \label{Tsuishi_Rerative_volume}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.5\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
        \end{subfigure}
 
-     \caption{先行研究手法との比較}
-     \label{Tsuishi_Rerative}
-   \end{figure}
+       \caption{先行研究手法との比較1}
+       \label{Tsuishi_Rerative1}
+     \end{figure}
 
-     図中の黒い星印(${\star}$)は, 各${\Delta}t$[ms]において先行研究手法を用いた場合
-     (Torben et al)と本研究手法(Rerative)の間でスチューデントのt検定(${\alpha} = 0.05$)を
-     用い, 有意差ありとなったことを示す. % これあってんの？
-     図\ref{Tsuishi_Rerative_volume}からわかるように本研究の手法の方が明らかに体積の
-     大きさが小さくなっている. 
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_Upper_Diam.eps} 
+         \caption{Upper Dendriteの直径}
+         \label{Tsuishi_Rerative_Upper_Diam}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_Lower_Diam.eps} 
+         \caption{Lower Dendriteの直径}
+         \label{Tsuishi_Rerative_Lower_Diam}
+       \end{subfigure}
+       %% \begin{subfigure}{0.3\columnwidth}
+       %%   \centering
+       %%   \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
+       %% \end{subfigure}
+       \caption{先行研究手法との比較2}
+       \label{Tsuishi_Rerative2}
+     \end{figure}
+     図中下部の星印(${\star}$)はウェルチのt検定(${\alpha} = 0.05$)を用いて先行研究手法(Torben et al)と本研究手法(Rerative)の平均値を
+     比較し, 有為差があったことを示す. 
+     図\ref{Tsuishi_Rerative_F}と図\ref{Tsuishi_Rerative_volume}からわかるように2つの手法の間で機能性$F$の値はあまり差は見られないが
+     体積は明らかに小さくなっていることがわかる. 
+     また, 2つの手法で生成された神経細胞の例を図\ref{passive_morphos}に示す. 
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.7\columnwidth]{./Images_Result/alfa_sample.png} 
+         \caption{先行研究の手法で作成した神経細胞形態}
+         \label{Tsuishi_sampel}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.7\columnwidth]{./Images_Result/rerative_sample.png}
+         \caption{本研究の手法で作成した神経細胞形態}
+         \label{Rerative_sampel}
+       \end{subfigure}
+       \caption{passive神経細胞形の態例}
+       \label{passive_morphos}
+     \end{figure}
+
  \section{Kaチャネルを用いた場合の結果}
+   図\ref{Ka_Result1}にKaチャネルのみを導入した際の結果を示す. 図中のGausianはコンダクタンス分布に
+   ガウス分布を用い, コンダクタンス分布
+
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_F.eps}
+         \caption{F}
+         \label{k_5cells_F}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_length.eps} 
+         \caption{長さ}
+         \label{k_test_TREE_length}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_volume.eps}
+         \caption{体積}
+         \label{k_test_TREE_volume}
+       \end{subfigure}
+       \begin{subfigure}{0.3\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_test_legend.eps} 
+       \end{subfigure}
+       \caption{Kaチャネルを導入した際の結果}
+       \label{Ka_Result1}
+     \end{figure}
+ 
  \section{CaTチャネルを用いた場合の結果}
+
  \section{Kaチャネル, CaTチャネルを用いた場合の結果}
 
