@@ -1,10 +1,16 @@
 %#!platex ./report.tex
 
+%
+% 解析項目の説明をMethodに入れておく、Upper Dend, Lower Dendの定義をしておきたい
+%
+
+
 \chapter{結果}
  \section{Passiveの結果}
    \subsection{先行研究手法\cite{torben2009systematic}との比較}
      本研究手法と先行研究で用いられていた個体評価指標との比較を以下の
      図\ref{Tsuishi_Rerative1}, 図\ref{Tsuishi_Rerative2}に示す. 
+     図中のTorben et al.は先行研究手法を用いた結果であり, Rerativeは本研究を用いた結果である.
 
 %subfigure を入れるときに改行すると、実際の文章でも改行が反映され、横に並ばなくなるるので注意
      \begin{figure}[H]
@@ -29,7 +35,7 @@
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.5\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
        \end{subfigure}
 
        \caption{先行研究手法との比較1}
@@ -56,11 +62,16 @@
        \caption{先行研究手法との比較2}
        \label{Tsuishi_Rerative2}
      \end{figure}
-     図中下部の星印(${\star}$)はウェルチのt検定(${\alpha} = 0.05$)を用いて先行研究手法(Torben et al)と本研究手法(Rerative)の平均値を
-     比較し, 有為差があったことを示す. 
-     図\ref{Tsuishi_Rerative_F}と図\ref{Tsuishi_Rerative_volume}からわかるように2つの手法の間で機能性$F$の値はあまり差は見られないが
+     各${\Delta}t$において図中上部の星印(${\star}$)は, ウェルチのt検定(${\alpha} = 0.05$)を用いて 
+     先行研究手法(Torben et al)と本研究手法(Rerative)の平均値を比較した際に有為差がみられたことを示す. 
+     図\ref{Tsuishi_Rerative_F}と図\ref{Tsuishi_Rerative_volume}からわかるように, 2つの手法の間で機能性$F$にはあまり差は見られないが
      体積は明らかに小さくなっていることがわかる. 
      また, 2つの手法で生成された神経細胞の例を図\ref{passive_morphos}に示す. 
+
+%
+% 形態例はできたら複数のせたい
+%
+
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
@@ -68,6 +79,7 @@
          \caption{先行研究の手法で作成した神経細胞形態}
          \label{Tsuishi_sampel}
        \end{subfigure}
+
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.7\columnwidth]{./Images_Result/rerative_sample.png}
@@ -79,38 +91,92 @@
      \end{figure}
 
  \section{Kaチャネルを用いた場合の結果}
-   図\ref{Ka_Result1}にKaチャネルのみを導入した際の結果を示す. 図中のGausianはコンダクタンス分布に
-   ガウス分布を用い, コンダクタンス分布
+   図\ref{Ka_Result1}, 図\ref{Ka_Result2}にKaチャネルを導入した際の結果を示す. 図中のGausianはコンダクタンス分布様式に
+   ガウス分布を用いており, Linerは線形分布を用いた場合の結果である. また-reducedはそれぞれのコンダクタンス分布様式で個体評価にコンダクタンス量を
+   考慮した場合の結果である. 結果に対してLinerとLiner-reducedの組, GausianとGausian-reducedの組で
+   ウェルチのt検定($\alpha = 0.05$)による検定を行った. Gausianの組において有為差が見られた際は黒色の星印($\star$), Liner
+   の組に有為差が見られた際には赤い星印を図中上部につけている. 
 
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_F.eps}
          \caption{F}
-         \label{k_5cells_F}
+         \label{k_F}
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_length.eps} 
          \caption{長さ}
-         \label{k_test_TREE_length}
+         \label{k_TREE_length}
        \end{subfigure}
 
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_volume.eps}
          \caption{体積}
-         \label{k_test_TREE_volume}
+         \label{k_TREE_volume}
        \end{subfigure}
-       \begin{subfigure}{0.3\columnwidth}
+       \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_test_legend.eps} 
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_K_ratio.eps}
+         \caption{Kaコンダクタンス含有率}
+         \label{k_TREE_K_ratio}
        \end{subfigure}
-       \caption{Kaチャネルを導入した際の結果}
+
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/k_test_legend.eps} 
+       \end{subfigure}
+
+       \vspace{-2.5cm}
+       \caption{Kaチャネルを導入した際の結果1}
        \label{Ka_Result1}
+     \end{figure}
+
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_Lower_K_ratio.eps}
+         \caption{Lower DendriteのKaコンダクタンス含有率}
+         \label{k_lower_ratio}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_Upper_K_ratio.eps}
+         \caption{Upper DendriteのKaコンダクタンス含有率}
+         \label{k_upper_ratio}
+       \end{subfigure}
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.4\columnwidth]{./Images_Result/k_test_legend.eps} 
+       \end{subfigure}
+       \vspace{-2.5cm}
+       \caption{Kaチャネルを導入した際の結果2}
+       \label{Ka_Result2}
+     \end{figure}
+
+     \begin{figure}[H]
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.75\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt5.eps}
+         \caption{}
+         \label{k_lower_ratio}
+       \end{subfigure}
+
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.75\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt5.eps}
+         \caption{Lower DendriteのKaコンダクタンス含有率}
+         \label{k_lower_ratio}
+       \end{subfigure}
+
+       \caption{${\Delta}t = 5$[ms]でのKaコンダクタンス分布}
+       \label{Ka_Result2}
      \end{figure}
  
  \section{CaTチャネルを用いた場合の結果}
 
  \section{Kaチャネル, CaTチャネルを用いた場合の結果}
 
+% 最後にそれぞれの分布パターン、コンダクタンス考慮の組で、4パターンのコンダクタンスによる結果を一つのグラフにまとめる

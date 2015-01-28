@@ -20,6 +20,22 @@
 
 %ヘッダの設定
 \input fancyheadings.sty\relax
+
+% 柱のアルファベットの大文字化を防ぐ
+\makeatletter
+\def\ps@fancy{%
+%\def\sectionmark##1{\markboth{\ifnum \c@secnumdepth>\z@ \thesection\hskip 1em\relax \fi ##1}{}}%
+\def\chaptermark##1{\markboth{\ifnum \c@secnumdepth>\z@ \thechapter\hskip 0.5em\relax \fi ##1}{}}%
+%\def\subsectionmark##1{\markright {\ifnum \c@secnumdepth >\@ne \thesubsection\hskip 1em\relax \fi ##1}}%
+\def\sectionmark##1{\markright {\ifnum \c@secnumdepth >\@ne \thesection\hskip 0.5em\relax \fi ##1}}%
+\ps@@fancy
+\gdef\ps@fancy{\@fancyplainfalse\ps@@fancy}%
+\ifdim\headwidth<0sp
+\global\advance\headwidth123456789sp\global\advance\headwidth\textwidth
+\fi
+}
+\makeatother
+
 \pagestyle{fancyplain}
 \lhead[\fancyplain{}{\thepage ~~~ {\bf\leftmark}}]{\fancyplain{}}
 \rhead[\fancyplain{}]{\fancyplain{}{{\bf\rightmark} ~~~ \thepage}}
