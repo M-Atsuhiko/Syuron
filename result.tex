@@ -4,6 +4,14 @@
 % 解析項目の説明をMethodに入れておく、Upper Dend, Lower Dendの定義をしておきたい
 %
 
+%
+% それぞれのパターンでの発火の様子もいれておいたほうがいい -> 図が大量になる
+%
+
+% 
+% コンダクタンス量の検定は両側ではなく、「減ったか」どうかをみればいいのでは？
+%
+
 
 \chapter{結果}
  \section{Passiveの結果}
@@ -66,24 +74,21 @@
      先行研究手法(Torben et al)と本研究手法(Rerative)の平均値を比較した際に有為差がみられたことを示す. 
      図\ref{Tsuishi_Rerative_F}と図\ref{Tsuishi_Rerative_volume}からわかるように, 2つの手法の間で機能性$F$にはあまり差は見られないが
      体積は明らかに小さくなっていることがわかる. 
-     また, 2つの手法で生成された神経細胞の例を図\ref{passive_morphos}に示す. 
-
+     また, 2つの手法(${\Delta}t = 15$[ms])で生成された神経細胞の例を図\ref{passive_morphos}に示す. 
 %
-% 形態例はできたら複数のせたい
+% 形態例はできたら複数のせたい, 波形ものせたい
 %
-
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.7\columnwidth]{./Images_Result/alfa_sample.png} 
-         \caption{先行研究の手法で作成した神経細胞形態}
+         \caption{先行研究手法}
          \label{Tsuishi_sampel}
        \end{subfigure}
-
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.7\columnwidth]{./Images_Result/rerative_sample.png}
-         \caption{本研究の手法で作成した神経細胞形態}
+         \includegraphics[width=0.5\columnwidth]{./Images_Result/rerative_sample.png}
+         \caption{本研究手法}
          \label{Rerative_sampel}
        \end{subfigure}
        \caption{passive神経細胞形の態例}
@@ -129,7 +134,7 @@
          \includegraphics[width=0.35\columnwidth]{./Images_Result/k_test_legend.eps} 
        \end{subfigure}
 
-       \vspace{-2.5cm}
+       \vspace{-1.9cm}
        \caption{Kaチャネルを導入した際の結果1}
        \label{Ka_Result1}
      \end{figure}
@@ -147,11 +152,12 @@
          \caption{Upper DendriteのKaコンダクタンス含有率}
          \label{k_upper_ratio}
        \end{subfigure}
+
        \begin{subfigure}{\columnwidth}
          \centering
-         \includegraphics[width=0.4\columnwidth]{./Images_Result/k_test_legend.eps} 
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/k_test_legend.eps} 
        \end{subfigure}
-       \vspace{-2.5cm}
+       \vspace{-1.9cm}
        \caption{Kaチャネルを導入した際の結果2}
        \label{Ka_Result2}
      \end{figure}
