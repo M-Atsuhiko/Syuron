@@ -1,3 +1,29 @@
 %#!platex ./report.tex
 
+
+%
+% 論文にのっている「解析解」のことはどうする？
+%
+
 \chapter{考察}
+  \section{Passiveモデルについて}
+  結果の図\ref{Tsuishi_Rerative_volume}と図\ref{Tsuishi_Rerative_F}からわかるように
+  本研究手法と先行研究手法を比較すると, 各${\Delta}t$の$F$値は${\Delta}t = 5$[ms]
+  のとき以外は有意差がみられかった反面, 体積は大幅に減少した. このことから本研究手法は
+  細胞形態の最適化において, 先行研究手法よりも効果的であることがわかる. 
+  
+  \section{Kaモデルについて}
+    \subsection{${\Delta}t = 5$[ms]の結果について}
+    先行研究ではKaチャネルを導入した場合は$F$の値は${\Delta}t$と反比例する
+    という結果になっていた. 本研究の結果ではこれを再現することはできなかった. これには
+    以下の原因が考えられる.
+    \begin{enumerate}
+      \item 評価式の$Morpho\hspace{1mm}ratio$が大きすぎるため
+      \item Kaコンダクタンスの最大値(0.22)が小さすぎるため
+    \end{enumerate}
+    
+    \subsection{評価式にコンダクタンスへの考慮を加えた場合の変化}
+    
+  
+  \section{CaTモデルについて}
+  \section{Ka, CaTモデルについて}
