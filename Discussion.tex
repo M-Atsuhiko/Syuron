@@ -6,12 +6,11 @@
 %
 
 \chapter{考察}
-  \section{Passiveモデルについて}
+  \section{Passiveモデルについて, 先行研究との比較}
   結果の図\ref{Tsuishi_Rerative_volume}と図\ref{Tsuishi_Rerative_F}からわかるように
   本研究手法と先行研究手法を比較すると, 各${\Delta}t$の$F$値は${\Delta}t = 5$[ms]
   のとき以外は有意差がみられかった反面, 体積は大幅に減少した. このことから本研究手法は
-  細胞形態の最適化において, 先行研究手法よりも効果的であることがわかる. 
-  
+  細胞形態の最適化において, 先行研究手法よりも効果的であることがわかる.
   \section{Kaモデルについて}
     \subsection{${\Delta}t = 5$[ms]の結果について}
     先行研究ではKaチャネルを導入した場合は$F$の値は${\Delta}t$と反比例する
@@ -19,11 +18,15 @@
     以下の原因が考えられる.
     \begin{enumerate}
       \item 評価式の$Morpho\hspace{1mm}ratio$が大きすぎるため
-      \item Kaコンダクタンスの最大値(0.22)が小さすぎるため
+      \item Kaコンダクタンスの最大値(0.22[S/c${\rm m^2}$])が小さすぎるため
     \end{enumerate}
-    
-    \subsection{評価式にコンダクタンスへの考慮を加えた場合の変化}
-    
+    つまり神経細胞, 主にUpper Dendriteに分布するKaコンダクタンスの絶対的な量が減少したため
+    であると考えられる.
+    \subsection{コンダクタンス分布様式による違いについて}
+    図\ref{k_F}より2つの分布様式のどちらであっても$F$の値はあまり変化しないことがわかる. しかし
+    \ref{k_lower_k_ratio}や\ref{k_Ka_dist}をみるとガウス分布の際にはLower Dendriteの根元で
+    高いコンダクタンス分布が見られた. これは神経細胞全体のコンダクタンスを増やすためではないか
+    と考えられる. つまりRed シナプスの入力による細胞体の膜電位上昇
   
   \section{CaTモデルについて}
   \section{Ka, CaTモデルについて}
