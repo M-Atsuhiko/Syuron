@@ -63,7 +63,23 @@
      $F$値が増加していることがわかる. またKaコンダクタンスの場合とは違って${\Delta}t$が
      増加するほど大きな$F$値をとっている.
      これは先行研究でも確認されている事である.\cite{torben2009systematic}
-    
+
+     図\ref{CaT_V}はCaTコンダクタンスを導入した際のシミュレーションの一例である. 実線がCaTコンダクタンスを導入したモデルの膜電位変動波形であり, 
+     破線はその神経細胞からCaTを不活性化($g_{CaT} = 0$)した場合の膜電位変動である. 
+     図\ref{CaT_V}からわかるようにCaTコンダクタンスを導入すると細胞体での脱分極は大きくなり, また電位が高い状態が維持される. 
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_V_dt30_G_C5.eps}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_2simulation_legend.eps}
+       \end{subfigure}
+       \caption{CaT　シミュレーション例(${\Delta}t = 30$[ms])}
+       \label{CaT_V}
+     \end{figure}
+
      % 実際、見た目の形はそんなに大差ないので貼らないでもいいとおもう
      
      %% 図\ref{Ca_morphos}にCaTチャネルを導入した神経細胞の形態例を示す.

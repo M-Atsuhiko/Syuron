@@ -84,18 +84,24 @@
   ことがわかる. 先行研究では${\Delta}t=5$[ms]のときに最も高い$F$値が得られていたが,
   それとは異なる結果となった. 
   図\ref{k_TREE_K_ratio}よりコンダクタンスを考慮する場合でも神経細胞
-  のKaコンダクタンス含有率はあまり変化がないことがわかる. \\
+  のKaコンダクタンス含有率はあまり変化がないことがわかる.
 
-  %
-  % やっぱりコンダクタンスを不活性化した場合との差異を出せた方がいい
-  %
+  図\ref{Ka_V}はKaコンダクタンスを導入した際のシミュレーションの一例である. 実線がKaコンダクタンスを導入したモデルの膜電位変動波形であり, 
+  破線はその神経細胞からKaを不活性化($g_{Ka} = 0$)した場合の膜電位変動である. 
+  図\ref{Ka_V}からわかるようにKaコンダクタンスを導入すると, 細胞体での脱分極は小さくなる.
 
-  図\ref{Ka_V}はKaコンダクタンスを導入した際のシミュレーションの一例である. 
+  \vspace{-0.5cm}
   \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.4\columnwidth]{./Images_Result/k_gaus_somaV_dt5_C0.eps}
-    \caption{Ka シミュレーション例(${\Delta} = 5$[ms])}
-    \label{Ka_V}
+    \begin{subfigure}{0.6\columnwidth}
+      \centering
+      \includegraphics[width=0.7\columnwidth]{./Images_Result/k_V_dt5_G_C5.eps}
+    \end{subfigure}
+    \begin{subfigure}{0.5\columnwidth}
+      \centering
+      \includegraphics[width=0.6\columnwidth]{./Images_Result/k_2simulation_legend.eps}
+    \end{subfigure}
+      \caption{Ka　シミュレーション例(${\Delta}t = 5$[ms])}
+      \label{Ka_V}
   \end{figure}
   %% 図\ref{k_morphos}に作成した神経細胞の形態例を示す. 
      
