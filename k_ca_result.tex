@@ -1,0 +1,257 @@
+%#!platex ./report.tex
+   
+\section{Kaチャネル, CaTチャネルを用いた場合の結果}
+  図\ref{k_ca_result}にKaチャネル, CaTチャネルを両方導入した場合の結果を示す. 図中の
+  凡例や検定手法とその結果の示し方は図\ref{Ka_Result1}と同様である.
+   
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_F.eps}
+         \caption{F}
+         \label{k_ca_F}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_TREE_length.eps} 
+         \caption{長さ}
+         \label{k_ca_TREE_length}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_TREE_volume.eps}
+         \caption{体積}
+         \label{k_ca_TREE_volume}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \hspace*{-1cm}
+         \includegraphics[width=0.5\columnwidth]{./Images_Result/ca_test_legend.eps}
+         \includegraphics[width=0.5\columnwidth]{./Images_Result/test_legend.eps} 
+       \end{subfigure}
+              
+       \caption{Kaチャネル, CaTチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
+       \label{k_ca_result1}
+     \end{figure}
+
+     \begin{figure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_TREE_Ca_ratio.eps}
+         \caption{CaTコンダクタンス含有率}
+         \label{ca_TREE_Ca_ratio}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_TREE_K_ratio.eps}
+         \caption{Kaコンダクタンス含有率}
+         \label{ca_TREE_K_ratio}
+       \end{subfigure}
+       
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_Lower_K_ratio.eps}
+         \caption{Lower DendriteのKaコンダクタンス含有率}
+         \label{k_ca_lower_k_ratio}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_Upper_K_ratio.eps}
+         \caption{Upper DendriteのKaコンダクタンス含有率}
+         \label{k_ca_upper_k_ratio}
+       \end{subfigure}
+       
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_Lower_Ca_ratio.eps}
+         \caption{Lower DendriteのCaTコンダクタンス含有率}
+         \label{k_ca_lower_ca_ratio}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_test_Upper_Ca_ratio.eps}
+         \caption{Upper DendriteのCaTコンダクタンス含有率}
+         \label{k_ca_upper_ca_ratio}
+       \end{subfigure}
+
+       \caption{Kaチャネル, CaTチャネルを導入した際の結果2} %ページレイアウトが決定してから微調整する
+       \label{k_ca_result2}
+     \end{figure}
+
+     %% \begin{figure}[H]
+     %%   \begin{subfigure}{0.5\columnwidth}
+     %%     \centering
+     %%     \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_liner_TREE_sample_dt20_C5.png}
+     %%     \caption{線形分布}
+     %%     \label{k_ca_liner_morpho}
+     %%   \end{subfigure}
+     %%          \begin{subfigure}{0.8\columnwidth}
+     %%     \centering
+     %%     \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_gaus_TREE_sample_dt20_C5.png}
+     %%     \caption{ガウス分布}
+     %%     \label{k_ca_gaus_morpho}
+     %%   \end{subfigure}
+
+     %%   \caption{Kaチャネル, CaTチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
+     %%   \label{k_ca_morpho}
+     %% \end{figure}
+
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt5.eps}
+         \caption{線形分布}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt5.eps}
+         \caption{ガウス分布}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt5.eps} %これの題名がTsuishiになってる
+         \caption{線形分布(reduced)}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt5.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+       
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       
+       \vspace{-3cm}
+       \caption{${\Delta}t = 5$[ms], でのKaコンダクタンス分布}
+       \label{k_Ka_dist}
+     \end{figure}
+
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt5.eps}
+         \caption{線形分布}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt5.eps}
+         \caption{ガウス分布}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt5.eps} %これの題名がTsuishiになってる
+         \caption{線形分布(reduced)}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt5.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+       
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       
+       \vspace{-3cm}
+       \caption{${\Delta}t = 5$[ms], でのCaTコンダクタンス分布}
+       \label{k_CaT_dist}
+     \end{figure}
+
+     %------------------------------------------------------------
+
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt30.eps}
+         \caption{線形分布}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt30.eps}
+         \caption{ガウス分布}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt30.eps} %これの題名がTsuishiになってる
+         \caption{線形分布(reduced)}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt30.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+       
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       
+       \vspace{-3cm}
+       \caption{${\Delta}t = 30$[ms], でのKaコンダクタンス分布}
+       \label{k_Ka_dist}
+     \end{figure}
+
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt30.eps}
+         \caption{線形分布}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt30.eps}
+         \caption{ガウス分布}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt30.eps} %これの題名がTsuishiになってる
+         \caption{線形分布(reduced)}
+         \label{k_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt30.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_gaus_reduced_dist}
+       \end{subfigure}
+       
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       
+       \vspace{-3cm}
+       \caption{${\Delta}t = 30$[ms], でのCaTコンダクタンス分布}
+       \label{k_CaT_dist}
+     \end{figure}
+% 最後にそれぞれの分布パターン、コンダクタンス考慮の組で、4パターンのコンダクタンスによる結果を一つのグラフにまとめる

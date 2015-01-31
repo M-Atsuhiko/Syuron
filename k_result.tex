@@ -1,0 +1,167 @@
+%#!platex ./report.tex
+
+ \section{Kaチャネルを用いた場合の結果}
+   図\ref{Ka_Result1}, 図\ref{Ka_Result2}にKaチャネルを導入した際の結果を示す. 図中のGausianはコンダクタンス分布様式に
+   ガウス分布を用いており, Linerは線形分布を用いた場合の結果である.
+   また-reducedはそれぞれのコンダクタンス分布様式で, 個体評価にコンダクタンス量への考慮を導入した場合の結果である. \\
+   グラフ上部の記号は各${\Delta}t$において, ウェルチのt検定($\alpha = 0.05$)を行い有意差がみられたことを
+   示している. 記号($\star$)は本研究手法のPassiveの結果とGausian, Linerの結果を比較し, それぞれの色で示している.
+   記号($\#$)はGausianとreduced-Gausian, Linerとreduced-Linerの組で検定を行った結果である.
+   また記号($+$)はreduced-Gausianとreduced-Linerの組で検定を行った結果を示している. 
+   \vspace{-0.5cm}
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_F.eps}
+         \caption{F}
+         \label{k_F}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_length.eps} 
+         \caption{長さ}
+         \label{k_TREE_length}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_volume.eps}
+         \caption{体積}
+         \label{k_TREE_volume}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_TREE_K_ratio.eps}
+         \caption{Kaコンダクタンス含有率}
+         \label{k_TREE_K_ratio}
+       \end{subfigure}
+
+       \vspace{-0.3cm}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/k_test_legend.eps} 
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/test_legend.eps} 
+       \end{subfigure}
+
+       \vspace{-1.6cm}
+       \caption{Kaチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
+       \label{Ka_Result1}
+     \end{figure}
+
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_Lower_K_ratio.eps}
+         \caption{Lower DendriteのKaコンダクタンス含有率}
+         \label{k_lower_k_ratio}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_Upper_K_ratio.eps}
+         \caption{Upper DendriteのKaコンダクタンス含有率}
+         \label{k_upper_k_ratio}
+       \end{subfigure}
+
+       \vspace{-0.3cm}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/k_test_legend.eps} 
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/test_legend.eps} 
+       \end{subfigure}
+
+       \vspace{-1.6cm}
+       \caption{Kaチャネルを導入した際の結果2} %ページレイアウトが決定してから微調整する
+       \label{Ka_Result2}
+     \end{figure}
+
+  図\ref{k_F}よりKaコンダクタンスを導入したことでPassiveの場合よりも$F$値が増加している
+  ことがわかる. 先行研究では${\Delta}t=5$[ms]のときに最も高い$F$値が得られていたが,
+  それとは異なる結果となった. 
+  図\ref{k_TREE_K_ratio}よりコンダクタンスを考慮する場合でも神経細胞
+  のKaコンダクタンス含有率はあまり変化がないことがわかる. \\
+
+  %
+  % やっぱりコンダクタンスを不活性化した場合との差異を出せた方がいい
+  %
+
+  図\ref{Ka_V}はKaコンダクタンスを導入した際のシミュレーションの一例である. 
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\columnwidth]{./Images_Result/k_gaus_somaV_dt5_C0.eps}
+    \caption{Ka シミュレーション例(${\Delta} = 5$[ms])}
+    \label{Ka_V}
+  \end{figure}
+  %% 図\ref{k_morphos}に作成した神経細胞の形態例を示す. 
+     
+  %% \begin{figure}[H]
+  %%   \begin{subfigure}{0.5\columnwidth}
+  %%     \centering
+  %%     \includegraphics[width=0.5\columnwidth]{./Images_Result/k_liner_TREE_sample_dt5_C0.png} 
+  %%     \caption{線形分布}
+  %%     \label{k_liner_morpho}
+  %%   \end{subfigure}
+  %%   \begin{subfigure}{0.5\columnwidth}
+  %%     \centering
+  %%     \includegraphics[width=0.5\columnwidth]{./Images_Result/k_gaus_TREE_sample_dt5_C0.png}
+  %%     \caption{ガウス分布}
+  %%     \label{k_gaus_morpho}
+  %%   \end{subfigure}
+  %%   \caption{Kaコンダクタンスを導入した神経細胞の形態例}
+  %%   \label{k_morphos}
+  %% \end{figure}
+
+   また, 図\ref{k_Ka_dist}に${\Delta}t = 5$[ms]として作成した神経細胞の
+   コンダクタンス分布を示す.
+   図\ref{k_liner_dist}は線形分布を用い, 図\ref{k_gaus_dist}
+   はガウス分布を用いている. また図\ref{k_liner_reduced_dist}と
+   図\ref{k_gaus_reduced_dist}はそれぞれのコンダクタンス分布様式で,
+   評価式においてコンダクタンスの考慮を行った場合の結果である. 
+
+      \begin{figure}[H]
+     \hspace*{-2cm}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_0_K_distribution_dt5.eps}
+       \caption{線形分布}
+       \label{k_liner_dist}
+     \end{subfigure}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt5.eps}
+       \caption{ガウス分布}
+       \label{k_gaus_dist}
+     \end{subfigure}
+
+     \hspace*{-2cm}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt5.eps}
+       \caption{線形分布(reduced)}
+       \label{k_liner_reduced_dist}
+     \end{subfigure}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_5_K_distribution_dt5.eps}
+       \caption{ガウス分布(reduced)}
+       \label{k_gaus_reduced_dist}
+     \end{subfigure}
+     
+     \begin{subfigure}{\columnwidth}
+       \centering
+       \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+     \end{subfigure}
+            
+     \vspace{-3cm}
+     \caption{${\Delta}t = 5$[ms], でのKaコンダクタンス分布}
+     \label{k_Ka_dist}
+   \end{figure}
+
+   図\ref{k_gaus_reduced_dist}, 図\ref{k_upper_ratio}からわかるようにガウス分布を用いた場合
+   ではUpper Dendriteの根元付近で高いKaコンダクタンスの分布が見られる.
+   

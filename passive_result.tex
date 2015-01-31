@@ -1,0 +1,197 @@
+%#!platex ./report.tex
+
+%
+% Rerative -> Relative
+%
+\section{Passiveの結果}
+   \subsection{先行研究手法\cite{torben2009systematic}との比較}
+     本研究手法と先行研究で用いられていた個体評価指標との比較を以下の
+     図\ref{Tsuishi_Rerative1}, 図\ref{Tsuishi_Rerative2}に示す. 
+     図中のTorben et al.は先行研究手法を用いた結果であり, Relativeは本研究を用いた結果である.
+
+%subfigure を入れるときに改行すると、実際の文章でも改行が反映され、横に並ばなくなるるので注意
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_F.eps} 
+         \caption{F}
+         \label{Tsuishi_Rerative_F}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_length.eps} 
+         \caption{長さ}
+         \label{Tsuishi_Rerative_length}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_volume.eps} 
+         \caption{体積}
+         \label{Tsuishi_Rerative_volume}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
+       \end{subfigure}
+
+       \caption{先行研究手法との比較1}
+       \label{Tsuishi_Rerative1}
+     \end{figure}
+
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_Upper_Diam.eps} 
+         \caption{Upper Dendriteの直径}
+         \label{Tsuishi_Rerative_Upper_Diam}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/Tsuishi_Rerative_Lower_Diam.eps} 
+         \caption{Lower Dendriteの直径}
+         \label{Tsuishi_Rerative_Lower_Diam}
+       \end{subfigure}
+
+       \caption{先行研究手法との比較2}
+       \label{Tsuishi_Rerative2}
+     \end{figure}
+
+     各${\Delta}t$において図中上部の星印(${\star}$)は, ウェルチのt検定(${\alpha} = 0.05$)
+     を用いて
+     先行研究手法(Torben et al)と本研究手法(Relative)の平均値を比較した際に
+     有為差がみられたことを示す. 
+     図\ref{Tsuishi_Rerative_F}と図\ref{Tsuishi_Rerative_volume}をみると
+     2つの手法の間で機能性$F$にはあまり差は見られないが
+     体積は明らかに小さくなっていることがわかる. 図\ref{Tsuishi_Rerative_Upper_Diam}と
+     \ref{Tsuishi_Rerative_Lower_Diam}は, その原因が樹状突起の直径が小さくなったこと
+     にあると示している. \\
+     図\ref{Rerative_Neuron_result}は本研究手法によって得られた神経細胞
+     の体積について, 図\ref{Rerative_Dend_result}は2つの樹状突起ごとの太さ
+     (図\ref{Rerative_Diam})と形成されたシナプスの個数(図\ref{Rerative_N_Syn})を示す.
+     
+     \begin{figure}[H]
+       \centering
+       \includegraphics[width=0.4\columnwidth]{./Images_Result/passive_one_TREE_volume.eps}
+       \caption{本研究手法で得られた神経細胞の体積}
+       \label{Rerative_Neuron_result}
+     \end{figure}
+
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/passive_one_Dends_diam.eps}
+         \caption{樹状突起の直径}
+         \label{Rerative_Diam}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=1.05\columnwidth]{./Images_Result/passive_one_N_Dends_Syn.eps}
+         \caption{Red シナプス, Blue シナプスの個数}
+         \label{Rerative_N_Syn}
+       \end{subfigure}
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.3\columnwidth]{./Images_Result/passive_one_legend.eps}
+       \end{subfigure}
+
+       \vspace{-2cm}
+       \caption{本研究手法で得られた樹状突起の形態}
+       \label{Rerative_Dend_result}
+     \end{figure}
+     図\ref{Rerative_Diam}でみられるようにUpper Dendriteの直径はすべての${\Delta}t$において
+     明らかにLower Dendriteよりも太い. また図\ref{Rerative_N_Syn}に示されるようにBlue
+     シナプスの個数がRedシナプスのおよそ2倍程度である. この2つの結果は先行研究でも
+     示されている. \\     
+     ${\Delta}t = 15$[ms]において先行研究の手法, 本研究の手法で生成された神経細胞の例
+     を図\ref{passive_morphos}に示す.
+
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.4\columnwidth]{./Images_Result/alfa_sample.png} 
+         \caption{先行研究手法}
+         \label{Tsuishi_sampel}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.3\columnwidth]{./Images_Result/rerative_sample.png}
+         \caption{本研究手法}
+         \label{Relative_sampel}
+       \end{subfigure}
+       \caption{Passiveな神経細胞の形態例}
+       \label{passive_morphos}
+     \end{figure}
+
+     以下の図\ref{passive_syn}は本研究の手法で作成した神経細胞の, 樹状突起上のシナプス形成位置
+     を示している. 図中の横軸は樹状突起上の位置を表し, 0[$\mu$m]は細胞体の位置を表す.
+     図ではシナプスを表す丸印が重なり線のようになっているが, これはシナプスが互いに
+     近い位置に分布しているためである. 図中の斜線の部分はシナプティックゾーンを表している. 
+     %
+     % シナプス位置、長さのグラフはもう少し加工してから出した方がいい
+     %
+     % シナプスの色が違う!
+
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/passive_Rerative_75_0_passive_syn_position_dt5.eps}
+         \vspace{-5cm}
+         \caption{${\Delta}t = 5$}
+         \label{passive_syn_dt=5}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/passive_Rerative_75_0_passive_syn_position_dt10.eps}
+         \vspace{-5cm}
+         \caption{${\Delta}t = 10$}
+         \label{passive_syn_dt=10}
+       \end{subfigure}
+
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/passive_Rerative_75_0_passive_syn_position_dt15.eps}
+         \vspace{-5cm}
+         \caption{${\Delta}t = 15$}
+         \label{passive_syn_dt=15}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/passive_Rerative_75_0_passive_syn_position_dt20.eps}
+         \vspace{-5cm}
+         \caption{${\Delta}t = 20$}
+         \label{passive_syn_dt=20}
+       \end{subfigure}
+
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/passive_Rerative_75_0_passive_syn_position_dt25.eps}
+         \vspace{-5cm}
+         \caption{${\Delta}t = 25$}
+         \label{passive_syn_dt=25}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/passive_Rerative_75_0_passive_syn_position_dt30.eps}
+         \vspace{-5cm}
+         \caption{${\Delta}t = 30$}
+         \label{passive_syn_dt=30}
+       \end{subfigure}
+
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.3\columnwidth]{./Images_Result/Synapse_legend.eps}
+       \end{subfigure}
+       \vspace{-3cm}
+       \caption{Passiveな神経細胞のシナプス位置}
+       \label{passive_syn}
+     \end{figure}
+
+     図\ref{passive_syn}よりUpper Dendriteの形状やシナプス形成位置は,
+     ${\Delta}t$に依らずほぼ一定であることがわかる. 一方でLower Dendriteの形状は
+     Upper Dendriteよりも変化に富んでいる.
+     %最後の方があいまい
+
