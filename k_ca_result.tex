@@ -1,8 +1,8 @@
 %#!platex ./report.tex
    
 \section{Kaチャネル, CaTチャネルを用いた場合の結果}
-  図\ref{k_ca_result}にKaチャネル, CaTチャネルを両方導入した場合の結果を示す. 図中の
-  凡例や検定手法とその結果の示し方は図\ref{Ka_Result1}と同様である.
+図\ref{k_ca_result1}, 図\ref{k_ca_result2}にKaチャネル, CaTチャネルを両方導入した場合の
+結果を示す. 図中の凡例や検定手法とその結果の示し方は図\ref{Ka_Result1}と同様である.
    
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
@@ -81,8 +81,8 @@
 
      図\ref{k_ca_F}を見ると${\Delta}t = 5$[ms]以外の場合, どのコンダクタンス分布パターンでも
      $F$の値は${\Delta}t$によらず1.7から1.8ほどになった. \\
-     以下に${\Delta}t = 15$[ms]で作成した神経細胞のKaコンダクタンスの
-     分布(図\ref{k_ca_Ka_dist_dt15}), CaTの分布(図\ref{k_ca_Ca_dist_dt15})を示す.
+     以下に${\Delta}t = 15$[ms]で作成した神経細胞のKaコンダクタンス
+     分布(図\ref{k_ca_Ka_dist_dt15}), CaTコンダクタンス分布(図\ref{k_ca_Ca_dist_dt15})を示す.
      また同様に${\Delta}t = 30$[ms]で作成した神経細胞のKaコンダクタンス分布を図
      \ref{k_ca_Ka_dist_dt30}に, CaTコンダクタンス分布を図\ref{k_ca_Ca_dist_dt30}に
      示す. 
@@ -140,7 +140,7 @@
        
        \vspace{-3cm}
        \caption{${\Delta}t = 15$[ms]でのKaコンダクタンス分布}
-       \label{k_ca_Ka_dist_dt15}
+       \label{k_ca_K_dist_dt15}
      \end{figure}
 
      \begin{figure}[H]
@@ -179,7 +179,7 @@
        
        \vspace{-3cm}
        \caption{${\Delta}t = 15$[ms]でのCaTコンダクタンス分布}
-       \label{k_ca_CaT_dist_dt15}
+       \label{k_ca_Ca_dist_dt15}
      \end{figure}
 
      %------------------------------------------------------------
@@ -194,7 +194,7 @@
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt30.eps} %これの題名がTsuishiになってる
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt30.eps}
          \caption{線形分布(reduced)}
          \label{k_ca_K_liner_reduced_dist}
        \end{subfigure}
@@ -220,7 +220,7 @@
        
        \vspace{-3cm}
        \caption{${\Delta}t = 30$[ms]でのKaコンダクタンス分布}
-       \label{k_ca_Ka_dist_dt30}
+       \label{k_ca_K_dist_dt30}
      \end{figure}
 
      \begin{figure}[H]
@@ -233,7 +233,7 @@
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt30.eps} %これの題名がTsuishiになってる
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt30.eps}
          \caption{線形分布(reduced)}
          \label{k_ca_Ca_liner_reduced_dist}
        \end{subfigure}
@@ -259,8 +259,78 @@
        
        \vspace{-3cm}
        \caption{${\Delta}t = 30$[ms]でのCaTコンダクタンス分布}
-       \label{k_ca_CaT_dist_dt30}
+       \label{k_ca_Ca_dist_dt30}
      \end{figure}
-
      
+     図\ref{k_ca_K_dist_dt15}を見ると, Kaコンダクタンスのみを導入した際の結果と似た傾向
+     が見られた. 
 % 最後にそれぞれの分布パターン、コンダクタンス考慮の組で、4パターンのコンダクタンスによる結果を一つのグラフにまとめる
+
+     また, 以下の図\ref{Ka_peaks}にガウス分布させたKaコンダクタンスのピークの
+     位置($Gausian\hspace{1mm}\mu$)について解析した結果を示す. コンダクタンスをガウス分布
+     に従って決定する場合, $\mu$, $\sigma$, $peak$の値を用いる. しかし$peak$が小さく0に
+     近い場合は$\mu$, $\sigma$の値は意味をなさない. そのためピーク位置の解析では
+     最大コンダクタンス値の5\%以上の$peak$をとった場合の$mean$のみを用いた. 樹状突起の長さは
+     全て[0, 1]に正規化されており, 1に近いほど細胞体から遠ざかる. また図\ref{Ka_peaks}上部の星印($\star$)は
+     Kaチャネルのみを導入した場合とKa, CaTチャネルを導入した場合をウェルチのt検定
+     ($\alpha = 0.05$)を用いて検定し, 有意差ありとなったことを示す. また十字は個体評価に
+     コンダクタンス分布量を考慮する場合の結果, Ka-reducedとKa, CaT-reducedを同様の検定を用いて
+     検定した結果を示す. この凡例の示し方は図\ref{ca_peaks}についても同様である. 
+
+     \begin{figure}[H]
+       \begin{subfigure}{0.50\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_Gaus_Upper_mean.eps}
+         \caption{Upper DendriteのKaコンダクタンスのピーク位置}
+         \label{k_peak_upper}
+       \end{subfigure}
+       \begin{subfigure}{0.50\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_Gaus_Lower_mean.eps}
+         \caption{Lower DendriteのKaコンダクタンスのピーク位置}
+         \label{k_peak_lower}
+       \end{subfigure}
+       
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.7\columnwidth]{./Images_Result/k_Gaus_mean_legend.eps}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.7\columnwidth]{./Images_Result/Gaus_legend.eps}
+       \end{subfigure}
+
+       \vspace{-2cm}
+       \caption{ガウス分布させたKaコンダクタンスのピーク位置}
+       \label{Ka_peaks}
+     \end{figure}
+     
+     \begin{figure}
+       \begin{subfigure}{0.50\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_Gaus_Upper_mean.eps}
+         \caption{Upper DendriteのCaTコンダクタンスのピーク位置}
+         \label{ca_peaca_upper}
+       \end{subfigure}
+       \begin{subfigure}{0.50\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_Gaus_Lower_mean.eps}
+         \caption{Lower DendriteのCaTコンダクタンスのピーク位置}
+         \label{ca_peaca_lower}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \hspace{-3cm}
+         \includegraphics[width=0.7\columnwidth]{./Images_Result/ca_Gaus_mean_legend.eps}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.7\columnwidth]{./Images_Result/Gaus_legend.eps}
+       \end{subfigure}
+
+       \vspace{-2cm}
+       \caption{ガウス分布させたCaTコンダクタンスのピーク位置}
+       \label{ca_peaks}
+     \end{figure}
+     

@@ -1,9 +1,9 @@
 %#!platex ./report.tex
 
  \section{CaTチャネルを用いた場合の結果}
-   図\ref{ca_result}にCaTチャネルを導入した際の結果を示す.
+   図\ref{ca_result1}, 図\ref{ca_result2}にCaTチャネルを導入した際の結果を示す.
    凡例や検定手法とその結果の示し方は図\ref{Ka_Result1}と同様である.
-    \vspace{-0.5cm}
+   \vspace{-0.5cm}
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
@@ -30,7 +30,26 @@
          \caption{CaTコンダクタンス含有率}
          \label{ca_TREE_Ca_ratio}
        \end{subfigure}
-       
+
+       \vspace{-0.3cm}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/ca_test_legend.eps} 
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/test_legend.eps} 
+       \end{subfigure}
+
+       \vspace{-1.6cm}
+       \caption{CaTチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
+       \label{ca_result1}
+     \end{figure}
+     図\ref{ca_F}より, CaTコンダクタンスを導入したことによりPassiveの場合よりも
+     $F$値が増加していることがわかる. またKaコンダクタンスの場合とは違って${\Delta}t$が
+     増加するほど大きな$F$値をとっている.
+     これは先行研究でも確認されている.\cite{torben2009systematic}
+     \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_test_Lower_Ca_ratio.eps}
@@ -55,18 +74,15 @@
        \end{subfigure}
 
        \vspace{-1.6cm}
-       \caption{CaTチャネルを導入した際の結果} %ページレイアウトが決定してから微調整する
-       \label{ca_result}
+       \caption{CaTチャネルを導入した際の結果2} %ページレイアウトが決定してから微調整する
+       \label{ca_result2}
      \end{figure}
-
-     図\ref{ca_F}より, CaTコンダクタンスを導入したことによりPassiveの場合よりも
-     $F$値が増加していることがわかる. またKaコンダクタンスの場合とは違って${\Delta}t$が
-     増加するほど大きな$F$値をとっている.
-     これは先行研究でも確認されている事である.\cite{torben2009systematic}
 
      図\ref{CaT_V}はCaTコンダクタンスを導入した際のシミュレーションの一例である. 実線がCaTコンダクタンスを導入したモデルの膜電位変動波形であり, 
      破線はその神経細胞からCaTを不活性化($g_{CaT} = 0$)した場合の膜電位変動である. 
-     図\ref{CaT_V}からわかるようにCaTコンダクタンスを導入すると細胞体での脱分極は大きくなり, また電位が高い状態が維持される. 
+     図\ref{CaT_V}からわかるようにCaTコンダクタンスを導入すると細胞体での脱分極は大きくなり, また電位が高い状態が維持される.
+
+     \vspace{-1cm}
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
@@ -104,11 +120,9 @@
      CaTコンダクタンス分布を示す.
      図\ref{ca_liner_dist}と図\ref{ca_liner_reduced_dist}は線形分布を用い,
      図\ref{ca_gaus_dist}と図\ref{ca_gaus_reduced_dist}はガウス分布を用いている.
-     図\ref{ca_line_reduced_dist}と図\ref{ca_gaus_reduced_dist}は個体評価に
+     図\ref{ca_liner_reduced_dist}と図\ref{ca_gaus_reduced_dist}は個体評価に
      コンダクタンスの考慮を入れた場合(reduced)である. 
-          %
-          %　図を作り直す
-          %
+     \vspace{-1cm}
      \begin{figure}[H]
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
@@ -124,6 +138,13 @@
          \label{ca_liner_reduced_dist}
        \end{subfigure}
 
+       \vspace{-1.5cm}
+     \begin{subfigure}{\columnwidth}
+       \centering
+       \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+     \end{subfigure}
+     \vspace{-4cm}
+
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
          \centering
@@ -137,13 +158,7 @@
          \caption{ガウス分布(reduced)} %このガウス分布の図はシナプティックゾーンを作り直したほうがいい
          \label{ca_gaus_reduced_dist}
        \end{subfigure}
-       
-       \begin{subfigure}{\columnwidth}
-         \centering
-         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
-       \end{subfigure}
-       
-       \vspace{-3cm}
+
        \caption{${\Delta}t = 30$[ms], でのCaTコンダクタンス分布}
        \label{ca_Ca_dist}
      \end{figure}

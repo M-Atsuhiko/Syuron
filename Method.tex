@@ -714,22 +714,28 @@
          ここで個体$u_{g,s}\hspace{1mm}(s \in S_g)$について, 
          その中での最大の$F$値をmax$(F_g)$, また個体$u_{g,s}$から作られた
          神経細胞形態を$Neuron_{g,s}$とし, その中で最小の体積をmin$(Vol_{g,s})$,
-         最小のコンダクタンス量をmin$(Amount Conductance)$
-
-         %あとでちゃんと書く
-         \begin{equation*}
+         最小のコンダクタンス量をmin$(Amount Conductance)$とする.
+         このときある個体$u_{g,i}$の評価値$E_{g,i}$は以下のように決定する. 
+         まず個体$u_{g,i}$に分布するコンダクタンスの量を相対的に表す. その値を
+         $Conductance\hspace{1mm}ratio_{g,i}$とし, 以下の式によって求める. 
+         ここで$N\hspace{1mm}Conductance$は神経細胞に導入しているイオンチャネルの
+         種類の個数である. % <-なんかふわっとしてる感がある
+         
+         \begin{equation}
            Conductance\hspace{1mm}ratio_{g,i} = \left(\frac{Ka\hspace{1mm}amount_{g,i}}{{Ka\hspace{1mm}amount_{max}}_{g}} + \frac{CaT\hspace{1mm}amount_{g,i}}{{CaT\hspace{1mm}amount_{max}}_{g}}\right) / N\hspace{1mm}Conductance
-         \end{equation*}
+         \end{equation}
 
-         \begin{align*}
+         その後, 個体の評価値を100からの減点方式で与える. 
+
+         \begin{align}
            Function\hspace{1mm}Minus_{g,i} &= \left(1 - \frac{F_{g,i}}{{F_{max}}_g}\right) \times Function\hspace{1mm}ratio \\
            Morphology\hspace{1mm}Minus_{g,i} &= \frac{Volume_{g,i}}{{Volume_{max}}_g} \times Morphology\hspace{1mm}ratio \\
            Conductance\hspace{1mm}Minus_{g,i} &= \frac{Conductance\hspace{1mm}ratio_{g,i}}{{Conductance_{max}}_g} \times Conductance\hspace{1mm}ratio 
-         \end{align*}
+         \end{align}
          
-         \begin{equation*}
+         \begin{equation}
   E_{g,i} = 100 - (Function\hspace{1mm}Minus_{g,i} + Morphology\hspace{1mm}Minus_{g,i} + Conductance\hspace{1mm}Minus_{g,i})
-         \end{equation*}
+         \end{equation}
 
      \end{itemize}
 
@@ -759,13 +765,13 @@
          とする. 
      \end{itemize}
      
-   \begin{figure}[h] %評価値が層状になることを言うか？
-     \centering
-     \includegraphics[width=5cm]{./Images_Method/temp.png} 
-     \caption{評価値}
-     \label{Estimate}
+   %% \begin{figure}[h] %評価値が層状になることを言うか？
+   %%   \centering
+   %%   \includegraphics[width=5cm]{./Images_Method/temp.png} 
+   %%   \caption{評価値}
+   %%   \label{Estimate}
+     %% \end{figure}
      
-   \end{figure}
    \subsection{エリート保存}
       世代$g$において最大の評価値をとった個体は, そのまま$g + 1$世代の1個体に引き継がれる.
       世代$g$においての個体の添え字を評価値の大きさ順に並べ, 順位$k$の添え字を$r_k$で表す
@@ -888,15 +894,15 @@
          \end{table}
      \end{itemize}
 
-     \begin{table}[H]
-         \caption{遺伝アルゴリズムパラメータ}
-         \label{GA-parameter}
-         \begin{center}
-           \begin{tabular}[H]{|c|l|l|c|} \hline
-             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-           \end{tabular}
-         \end{center}
-       \end{table}
+     %% \begin{table}[H]
+       %%   \caption{遺伝アルゴリズムパラメータ}
+       %%   \label{GA-parameter}
+       %%   \begin{center}
+       %%     \begin{tabular}[H]{|c|l|l|c|} \hline
+       %%       \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
+       %%     \end{tabular}
+       %%   \end{center}
+       %% \end{table}
 
  \section{実験手順}
    以上の方法を用いて行った実験の設定について詳述する. 
