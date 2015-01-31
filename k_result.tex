@@ -122,40 +122,40 @@
   %%   \label{k_morphos}
   %% \end{figure}
 
-   また, 図\ref{k_Ka_dist}に${\Delta}t = 5$[ms]として作成した神経細胞の
+   また, 図\ref{k_Ka_dist}に${\Delta}t = 10$[ms]として作成した神経細胞の
    コンダクタンス分布を示す.
    図\ref{k_liner_dist}は線形分布を用い, 図\ref{k_gaus_dist}
    はガウス分布を用いている. また図\ref{k_liner_reduced_dist}と
    図\ref{k_gaus_reduced_dist}はそれぞれのコンダクタンス分布様式で,
    評価式においてコンダクタンスの考慮を行った場合の結果である. 
 
-      \begin{figure}[H]
+   \begin{figure}[H]
      \hspace*{-2cm}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_0_K_distribution_dt5.eps}
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_0_K_distribution_dt10.eps}
        \caption{線形分布}
-       \label{k_liner_dist}
+       \label{k_liner_dist_dt10}
      \end{subfigure}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt5.eps}
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt10.eps}
        \caption{ガウス分布}
-       \label{k_gaus_dist}
+       \label{k_gaus_dist_dt10}
      \end{subfigure}
 
      \hspace*{-2cm}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt5.eps}
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt10.eps}
        \caption{線形分布(reduced)}
-       \label{k_liner_reduced_dist}
+       \label{k_liner_reduced_dist_dt10x}
      \end{subfigure}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_5_K_distribution_dt5.eps}
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_5_K_distribution_dt10.eps}
        \caption{ガウス分布(reduced)}
-       \label{k_gaus_reduced_dist}
+       \label{k_gaus_reduced_dist_dt10}
      \end{subfigure}
      
      \begin{subfigure}{\columnwidth}
@@ -164,8 +164,47 @@
      \end{subfigure}
             
      \vspace{-3cm}
-     \caption{${\Delta}t = 5$[ms], でのKaコンダクタンス分布}
-     \label{k_Ka_dist}
+     \caption{${\Delta}t = 10$[ms], でのKaコンダクタンス分布}
+     \label{k_Ka_dist_dt10}
+      \end{figure}
+
+      \begin{figure}[H]
+     \hspace*{-2cm}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_0_K_distribution_dt15.eps}
+       \caption{線形分布}
+       \label{k_liner_dist_dt15}
+     \end{subfigure}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt15.eps}
+       \caption{線形分布(reduced)}
+       \label{k_liner_reduced_dist_dt15}
+     \end{subfigure}
+
+     \hspace*{-2cm}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt15.eps}
+       \caption{ガウス分布}
+       \label{k_gaus_dist_dt5}
+     \end{subfigure}
+     \begin{subfigure}{0.62\columnwidth}
+       \centering
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_5_K_distribution_dt15.eps}
+       \caption{ガウス分布(reduced)}
+       \label{k_gaus_reduced_dist_dt15}
+     \end{subfigure}
+     
+     \begin{subfigure}{\columnwidth}
+       \centering
+       \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+     \end{subfigure}
+            
+     \vspace{-3cm}
+     \caption{${\Delta}t = 15$[ms], でのKaコンダクタンス分布}
+     \label{k_Ka_dist_dt15}
    \end{figure}
 
    図\ref{k_gaus_reduced_dist}, 図\ref{k_upper_ratio}からわかるようにガウス分布を用いた場合

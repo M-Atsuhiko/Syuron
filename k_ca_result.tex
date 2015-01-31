@@ -79,6 +79,13 @@
        \label{k_ca_result2}
      \end{figure}
 
+     図\ref{k_ca_F}を見ると${\Delta}t = 5$[ms]以外の場合, どのコンダクタンス分布パターンでも
+     $F$の値は${\Delta}t$によらず1.7から1.8ほどになった. \\
+     以下に${\Delta}t = 15$[ms]で作成した神経細胞のKaコンダクタンスの
+     分布(図\ref{k_ca_Ka_dist_dt15}), CaTの分布(図\ref{k_ca_Ca_dist_dt15})を示す.
+     また同様に${\Delta}t = 30$[ms]で作成した神経細胞のKaコンダクタンス分布を図
+     \ref{k_ca_Ka_dist_dt30}に, CaTコンダクタンス分布を図\ref{k_ca_Ca_dist_dt30}に
+     示す. 
      %% \begin{figure}[H]
      %%   \begin{subfigure}{0.5\columnwidth}
      %%     \centering
@@ -101,29 +108,29 @@
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt5.eps}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt15.eps}
          \caption{線形分布}
-         \label{k_liner_reduced_dist}
+         \label{k_ca_K_liner_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt5.eps}
-         \caption{ガウス分布}
-         \label{k_gaus_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt15.eps}
+         \caption{線形分布(reduced)}
+         \label{k_ca_K_liner_reduced_dist}
        \end{subfigure}
 
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt5.eps} %これの題名がTsuishiになってる
-         \caption{線形分布(reduced)}
-         \label{k_liner_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt15.eps}
+         \caption{ガウス分布}
+         \label{k_ca_K_gaus_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt5.eps}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt15.eps}
          \caption{ガウス分布(reduced)}
-         \label{k_gaus_reduced_dist}
+         \label{k_ca_K_gaus_reduced_dist}
        \end{subfigure}
        
        \begin{subfigure}{\columnwidth}
@@ -132,37 +139,37 @@
        \end{subfigure}
        
        \vspace{-3cm}
-       \caption{${\Delta}t = 5$[ms], でのKaコンダクタンス分布}
-       \label{k_Ka_dist}
+       \caption{${\Delta}t = 15$[ms]でのKaコンダクタンス分布}
+       \label{k_ca_Ka_dist_dt15}
      \end{figure}
 
      \begin{figure}[H]
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt5.eps}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt15.eps}
          \caption{線形分布}
-         \label{k_liner_reduced_dist}
+         \label{k_ca_Ca_liner_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt5.eps}
-         \caption{ガウス分布}
-         \label{k_gaus_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt15.eps}
+         \caption{線形分布(reduced)}
+         \label{k_ca_Ca_liner_reduced_dist}
        \end{subfigure}
 
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt5.eps} %これの題名がTsuishiになってる
-         \caption{線形分布(reduced)}
-         \label{k_liner_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt15.eps}
+         \caption{ガウス分布}
+         \label{k_ca_Ca_gaus_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt5.eps}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt15.eps}
          \caption{ガウス分布(reduced)}
-         \label{k_gaus_reduced_dist}
+         \label{k_ca_Ca_gaus_reduced_dist}
        \end{subfigure}
        
        \begin{subfigure}{\columnwidth}
@@ -171,8 +178,8 @@
        \end{subfigure}
        
        \vspace{-3cm}
-       \caption{${\Delta}t = 5$[ms], でのCaTコンダクタンス分布}
-       \label{k_CaT_dist}
+       \caption{${\Delta}t = 15$[ms]でのCaTコンダクタンス分布}
+       \label{k_ca_CaT_dist_dt15}
      \end{figure}
 
      %------------------------------------------------------------
@@ -183,27 +190,27 @@
          \centering
          \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt30.eps}
          \caption{線形分布}
-         \label{k_liner_reduced_dist}
+         \label{k_ca_K_liner_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt30.eps}
-         \caption{ガウス分布}
-         \label{k_gaus_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt30.eps} %これの題名がTsuishiになってる
+         \caption{線形分布(reduced)}
+         \label{k_ca_K_liner_reduced_dist}
        \end{subfigure}
 
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt30.eps} %これの題名がTsuishiになってる
-         \caption{線形分布(reduced)}
-         \label{k_liner_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt30.eps}
+         \caption{ガウス分布}
+         \label{k_ca_K_gaus_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
          \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt30.eps}
          \caption{ガウス分布(reduced)}
-         \label{k_gaus_reduced_dist}
+         \label{k_ca_K_gaus_reduced_dist}
        \end{subfigure}
        
        \begin{subfigure}{\columnwidth}
@@ -212,8 +219,8 @@
        \end{subfigure}
        
        \vspace{-3cm}
-       \caption{${\Delta}t = 30$[ms], でのKaコンダクタンス分布}
-       \label{k_Ka_dist}
+       \caption{${\Delta}t = 30$[ms]でのKaコンダクタンス分布}
+       \label{k_ca_Ka_dist_dt30}
      \end{figure}
 
      \begin{figure}[H]
@@ -222,27 +229,27 @@
          \centering
          \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt30.eps}
          \caption{線形分布}
-         \label{k_liner_reduced_dist}
+         \label{k_ca_Ca_liner_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt30.eps}
-         \caption{ガウス分布}
-         \label{k_gaus_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt30.eps} %これの題名がTsuishiになってる
+         \caption{線形分布(reduced)}
+         \label{k_ca_Ca_liner_reduced_dist}
        \end{subfigure}
 
        \hspace*{-2cm}
        \begin{subfigure}{0.62\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt30.eps} %これの題名がTsuishiになってる
-         \caption{線形分布(reduced)}
-         \label{k_liner_reduced_dist}
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt30.eps}
+         \caption{ガウス分布}
+         \label{k_ca_Ca_gaus_reduced_dist}
        \end{subfigure}
        \begin{subfigure}{0.62\columnwidth}
          \centering
          \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt30.eps}
          \caption{ガウス分布(reduced)}
-         \label{k_gaus_reduced_dist}
+         \label{k_ca_Ca_gaus_reduced_dist}
        \end{subfigure}
        
        \begin{subfigure}{\columnwidth}
@@ -251,7 +258,9 @@
        \end{subfigure}
        
        \vspace{-3cm}
-       \caption{${\Delta}t = 30$[ms], でのCaTコンダクタンス分布}
-       \label{k_CaT_dist}
+       \caption{${\Delta}t = 30$[ms]でのCaTコンダクタンス分布}
+       \label{k_ca_CaT_dist_dt30}
      \end{figure}
+
+     
 % 最後にそれぞれの分布パターン、コンダクタンス考慮の組で、4パターンのコンダクタンスによる結果を一つのグラフにまとめる
