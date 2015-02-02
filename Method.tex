@@ -10,24 +10,29 @@
 
 \chapter{研究手法・原理}
  \section{研究手法の概要}
-   本研究の手法の概略は, まず単一の神経細胞が持ちうる機能を1つ設定し, 
-   その機能をうまく実現する神経細胞形態とコンダクタンスの分布を遺伝アルゴリズム
-   を用いて探索するというものである.\cite{torben2009systematic}
-   神経細胞の形態生成には確率的な手法を用い,その際に用いる確率パラメータを
-   遺伝アルゴリズムの遺伝子として扱う.
- \section{神経細胞の機能} %もっと詳しく書きたい
+   本研究の手法の概略は以下のようなものである.
+   \begin{enumerate}
+     \item 単一の神経細胞の機能を1つ決める
+     \item その機能をうまく実現する神経細胞の形態とコンダクタンス分布を
+       遺伝アルゴリズムを用いて探索する
+   \end{enumerate}
+   本研究の手法は主にTorben-Nielsen et al. を参考にしている.\cite{torben2009systematic}
+   神経細胞の形態と機能の関係性を探るアプローチとして, 
+   神経細胞の形態からその機能を推定するのではなく, 先に機能を設定しその機能を
+   実現する形態を探すという手法である. 
+ \section{神経細胞の機能}
    本研究で神経細胞に設定する機能は, 樹状突起上の異なる2つの部位にある時間
    差${\Delta}t[{\rm ms}]$をもって入力刺激を与えた場合, 入力の順序によって細胞体での
    脱分極量が変化する機能(input-order detection)である. より具体的には
    次のような機能である. \\
-   ある神経細胞が空間状に分離した2つのシナプティックゾーンに樹状突起を伸ばし, それぞれの
-   シナプティックゾーン中にいくつかのシナプスを形成しているとする. 仮にこ
-   の二つのシナプティックゾーンをBlueシナプティックゾーン, Redシナプティックゾー
-   ンとする. Blueシナプティックゾーンに形成されたシナプス群をBlueシナプスグルー
-   プ, Redシナプティックゾーンについても同様にRedシナプスグループがあるとする.
-   この神経細胞において, 一方のシナプスグループのシナプスが時刻$t$で活性化
-   し, その${\Delta}t[{\rm ms}]$後に他方のシナプスグループのシナプスが活性化す
-   るとする. その際に細胞体で観測される最大の膜電位上昇量を$R$とする. Blueシナプスグループの
+   ある神経細胞が空間上に分離した2つの領域に樹状突起を伸ばし, それぞれの
+   領域中にいくつかのシナプスを形成しているとする. 仮にこ
+   の2つの領域をBlueシナプティックゾーン, Redシナプティックゾー
+   ンとする. Blueシナプティックゾーンに形成されたシナプスをBlueシナプス,
+   Redシナプティックゾーンについても同様にRedシナプスとする. 
+   この神経細胞において, 一方のシナプティックゾーンの全てのシナプスを時刻$t$で活性化
+   させ, その${\Delta}t[{\rm ms}]$後に他方のシナプティックゾーンのシナプスを活性化させる.
+   その際に細胞体で観測される最大の膜電位上昇量を$R$とする. Blueシナプスグループの
    シナプスが先に活性化する場合の$R$を$R_{B{\to}R}$とし, Redシナプスグループのシナプスが
    先に活性化する場合の$R$を$R_{R{\to}B}$とする. このときinput-order detectionの
    機能性($F$)は以下の式によって定量的に評価することができる. 
@@ -39,8 +44,9 @@
 
    また本研究では大きい$F$の値を示す神経細胞について, 機能性の高い神経細胞であると定義する. 
    以下の図\ref{sample}に神経細胞と, シナプティックゾーンを例示する. 図\ref{Neuron}の
-   上部にある赤い点はRedシナプスグループ, 下部の青い点はBlueシナプスグループを表し, 中央の
-   球は細胞体である.  図\ref{synaptic-zone}の中央の緑の点は細胞体であり, 神経細胞とシナプティックゾーンとの
+   上部にある赤い点はRedシナプス, 下部の青い点はBlueシナプスを表し, 中央の
+   球は細胞体である.  図\ref{synaptic-zone}の中央の緑の点は細胞体であり,
+   この図は神経細胞とシナプティックゾーンとの
    位置関係を図示している. 図\ref{input-order_detection}は図\ref{Neuron}に示される神経細胞に
    対し, ${\Delta}t = 15$[ms]としてシナプス入力を与えた際の細胞体での膜電位変動を示している. 
    図\ref{input-order_detection}の場合, $R_{B{\to}R} = 6.29$, $R_{R{\to}B} = 4.75$より
@@ -77,25 +83,30 @@
 %     \subsection{input-order detectionについて}
 %  Passiveモデルを用いると, 膜特性が膜電位によって変化しないため細胞体での膜電位上昇は
    %  入力電流の単純な加算となる. つまりinput-order detectionの$F$値の最大値は2になると考えられる.
-   \subsection{Kaコンダクタンス, CaTコンダクタンスの効果}
-     神経細胞にKaコンダクタンスを導入すると, 膜電位を下げる働きをする. input-order detection
-     では主にRedシナプグループからの入力がこの影響を受ける. つまりRedシナプスグループの
-     入力による細胞体での脱分極がより小さく, 減衰も早くなる.
-     CaTコンダクタンスを導入した場合は逆に膜電位を上昇させる働きをする. input-order detection
-     ではBlueシナプスグループがこの影響を受け, 細胞体での脱分極がより大きく, 減衰も遅くなる. 
+
+   %これは結果の方に書くべきか?
+   
+   %% \subsection{Kaコンダクタンス, CaTコンダクタンスの効果}
+   %%   神経細胞にKaコンダクタンスを導入すると, 膜電位を下げる働きをする. input-order detection
+   %%   では主にRedシナプグループからの入力がこの影響を受ける. つまりRedシナプスグループの
+   %%   入力による細胞体での脱分極がより小さく, 減衰も早くなる.
+   %%   CaTコンダクタンスを導入した場合は逆に膜電位を上昇させる働きをする. input-order detection
+   %%   ではBlueシナプスグループがこの影響を受け, 細胞体での脱分極がより大きく減衰も遅くなる. 
    
  \section{神経細胞形態の作成方法}
-   簡単のため神経細胞の形態は細胞体と2本の樹状突起のみからなるとする.
-   また細胞体の形態は一定の大きさの球形であるとする. 
-   よって神経細胞の形態生成は樹状突起の形態を生成することで行われる.
-   樹状突起形態の生成は確率的な手法を用いる. 
+   簡単のため神経細胞の形態は細胞体と2本の樹状突起からなるとする. すなわち,
+   上下のシナプティックゾーンにのびる2本の樹状突起と, 入力を加算する細胞体である. 
+   細胞体の形態は一定の大きさの球形であるとする. 
+   よって神経細胞形態の作成とは樹状突起の形態を生成することである. 
+   樹状突起形態の生成は確率的な手法を用いている. 
    \subsection{神経細胞形態の表現}
      神経細胞の形態を3次元空間上に表現する. 細胞体は直径25$[{\rm{{\mu}m}}]$の
      球とし, この球を$Soma$とする. 樹状突起は円柱の集合体として表現する. 円柱端部の中心部分
      は他の円柱や細胞体と結合し, 樹状の構造を形成する. ここで, 1本の円柱を$Branch$と定義する.
-     また細胞体と直接結合している$Branch$を特にStemと呼ぶ. 1本のStemと, 
-     そのStemから伸びている$Branch$からなる樹状構造をあわせて1つの樹状突起(Dendrite)
-     であると定義する. よって1つの神経細胞はStemの本数だけのDendriteを持つ.
+     また細胞体と直接結合している$Branch$を特にStemと呼ぶ. 
+     1本のStemと, そのStemから伸びる$Branch$によって構成された樹状構造を
+     1つの樹状突起(Dendrite)と定義する. 
+     よって1つの神経細胞はStemの本数だけのDendriteを持つ.
      以上の神経細胞形態に関する定義を図\ref{morpho}に示す.
      \begin{figure}[H]
        \centering
@@ -121,7 +132,7 @@
        1^{st} cycle:\hspace{0.2cm} & YFBX \\
        2^{nd} cycel:\hspace{0.2cm} & YYFBBX
      \end{align*}
-     樹状突起形態の生成方法として, 三宮 et alを参考にすると以下のようなL-systemが考えられる.\cite{三宮信夫1998遺伝
+     樹状突起形態の生成方法として, 三宮 et al. を参考にすると以下のようなL-systemが考えられる.\cite{三宮信夫1998遺伝
        アルゴリズムと最適化}
      使用する記号の集合として$\{S,B,T\}$を定義する.置き換え規則として
      \begin{align*}
@@ -143,7 +154,7 @@
      ここで, $<$\hspace{0.1cm}$>$は樹状構造の分岐を表している. よって,
      形態生成L-systemは1つの未成長点を初期状態とし, そこから樹状構造が生成されていく過程を表現している. 
      記号Sの置き換え規則($*$)は決定的ではなく, 後に述べる分岐確率や終端確率によって決定
-     される. 1つの樹状突起は初期状態$\{S\}$から, 形態生成L-systemを開始し記号列が変
+     される. 1つの樹状突起は初期状態$\{S\}$から形態生成L-systemを開始し記号列が変
      化しなくなるまで置き換えを行うことで得られる. また, 最も最初の記号置き換えでは必ず$S \to BS$の
      置き換えが選択されるようにする. \\
      最終的に得られる記号列は記号$B$と記号$T$からなり, 最も左端にある記
@@ -204,10 +215,11 @@
        \end{table}
 
        以下にコンダクタンスパラメータを示す. 本研究では樹状突起上のコンダクタンス分布を決定する際に
-       線形分布\cite{torben2009systematic}, またはガウス分布のどちらかの分布様式を用いる. 
+       線形分布, またはガウス分布のどちらかの分布様式を用いる. 
        樹状突起上のコンダクタンスを線形に分布させる場合は
-       表\ref{liner_parameter}に示されるパラメータを, ガウス分布に従って分布させる場合には
-       表\ref{gausian_parameter}に示されるパラメータをそれぞれ用いる.
+       表\ref{liner_parameter}に示される線形コンダクタンスパラメータを,
+       ガウス分布に従って分布させる場合には
+       表\ref{gausian_parameter}に示されるガウス分布コンダクタンスパラメータをそれぞれ用いる.
 
        \begin{table}[H]
          \caption{線形分布コンダクタンスパラメータ}
@@ -242,8 +254,9 @@
 
        よって1組のパラメータセットは形態パラメータにコンダクタンスパラメータを加えた16, または18項目で構成されている.
      \subsubsection{$Branch,Dendrite,Neuron$の定義}
-       ひとつのBranchは長さ($length$), 底面の直径($diam$), 仰角($elevation$), 回転角($rotation$)を % <- ここも図を入れた方がいい
-       その形態のパラメータとして持つ. よって, ある$Branch_i$は4つの形態パラメータからなり, 
+     ひとつのBranchは長さ($length$), 底面の直径($diam$), 仰角($elevation$),
+     回転角($rotation$)を形態を表現するパラメータとして持つ.
+     よって, ある$Branch_i$は4つの形態パラメータからなり,
        \begin{equation*}
          Branch_i = \{length_i, diam_i, elevation_i, rotation_i\}
        \end{equation*}
@@ -270,18 +283,20 @@
         length_i = Segment\hspace{1mm} Length
       \end{equation}
     \item \textbf{直径($diam_i$)の決定}\\
-      Branchが分岐(Bifurcation $ S \to <BS><BS>$)によって生成されるか伸張(Elongation $1 \to 21$)によって生成されるか
-      によって決定方法が異なる. 
+      {\textit Branch}が分岐(Bifurcation $ S \to <BS><BS>$)によって生成されるか
+      伸張(Elongation $1 \to 21$)によって生成されるかによって決定方法が異なる. 
       \begin{itemize}
         \item{分岐(Bifurcation)の場合} \\
-          親となる$Branch$の太さ($diam_{parent}$)を用いて, ガウス分布($\mu = diam_{parent},\sigma=0.05$)
-          に従う乱数を生成し, その値を$diam_i$とする. 
+          親となる$Branch$の太さ($diam_{parent}$)を用いて,
+          ガウス分布($\mu = diam_{parent},\sigma=0.05$)
+          に従う乱数を生成し  , その値を$diam_i$とする. 平均$\mu$, 標準偏差$\sigma$に従う
+          乱数を1つ生成する関数をG($\mu,{\sigma}^2$)とすると
           \begin{equation}
-            diam_i = N(diam_{parent},(0.05)^2)
+            diam_i = G(diam_{parent},(0.05)^2)
           \end{equation}
         \item{伸張(Elongation)の場合} \\
-          BranchがStemであるかどうかによって決定方法が異なり, Stemでない場合は親となる$Branch$の直径($diam_{parent}$)を
-          実数倍した値を用いる
+          {\textit Branch}がStemであるかどうかによって決定方法が異なり, Stemでない場合は
+          親となる$Branch$の直径($diam_{parent}$)を実数倍した値を用いる
           \begin{equation}
             diam_i = 
             \begin{cases}
@@ -299,7 +314,7 @@
         elevation_i = 
         \begin{cases}
           Stem\hspace{1mm}elevation & \text{(i = 1)}\\
-          N(Branch\hspace{1mm}elevation\hspace{1mm}\mu,(Branch\hspace{1mm}elevation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
+          G(Branch\hspace{1mm}elevation\hspace{1mm}\mu,(Branch\hspace{1mm}elevation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
        \end{cases}\\
       \end{equation}
     \item \textbf{回転角($rotation_i$)の決定}\\
@@ -309,7 +324,7 @@
         rotation_i = 
         \begin{cases}
           Stem\hspace{1mm}rotation & \text{(i = 1)}\\
-          N(Branch\hspace{1mm}rotation\hspace{1mm}\mu,(Branch\hspace{1mm}rotation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
+          G(Branch\hspace{1mm}rotation\hspace{1mm}\mu,(Branch\hspace{1mm}rotation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
        \end{cases}\\
       \end{equation}
    \end{enumerate}
@@ -320,7 +335,7 @@
    Stem, ($B_1$)から樹状構造を辿り, 文字列中のある記号$S_i$に至るまでに通
    過する記号$B$の添え字の集合を$J = \{1,2,\cdots,n\}$とする.
    このとき$length_j\hspace{2mm}(j \in J)$の和を${\rm path(S_i)}$とする.
-   すなわち記号$B_j$を対応する$Branch_j$に置き換え構成される樹状構造を根
+   すなわち, 記号$B_j$を対応する$Branch_j$に置き換え構成される樹状構造を根
    元から記号$S_i$の位置まで辿った距離である. 
    \begin{figure}[H]
      \centering
@@ -330,40 +345,33 @@
    \end{figure}
    以下に記号$S_i$の置き換え規則($*$)の選択方法と, その際に考慮するヒュー
    リスティックスについて示す. ここで$N_B$を各置き換えステップにおいての
-   記号$Bh$の総個数, $N_T$を記号$T$の総個数であるとする. また初期状態は$S_0$である. 
+   記号$B$の総個数, $N_T$を記号$T$の総個数であるとする. また, 置き換えの
+   初期状態は$\{S_0\}$と表す. 
    \begin{enumerate}
      \item \textbf{停止 Termination $S_i \to T_{N_T + 1}$} \\
         $[0,1]$の範囲で一様分布に従う乱数を一つ生成し, その値を$rand$とする.
-        累積ガンマ分布\textit{Cumulative} $\gamma$(x)を用いて記号$S_i$の伸張停止
-        の判定を行う. その際, 累積ガンマ分布のパラメータとして, パラメータセットの \\
-        \begin{tabular}[c]{ll}
-          - \textit{k} : & \textit{Termination} $\alpha$ \\
-          - $\theta$ : &  \textit{Termination} $\beta$\\
-        \end{tabular}\\
-        の値を用い, 
+        累積ガンマ分布\textit{Cumulative} $\gamma$($x,k,\theta$)を用いて記号$S_i$の伸張停止
+        の判定を行う. その際, 累積ガンマ分布のパラメータとしてパラメータセットの値を用いる.
         \begin{equation}
-	  {\rm Cumulative}\hspace{0.1cm}\gamma\hspace{0.05cm}({\rm path(1_i)}) > rand
+	  {\rm Cumulative}\hspace{0.1cm}\gamma\hspace{0.05cm}({\rm path(S_i)},
+          Termination\hspace{1mm}{\alpha},Termination\hspace{1mm}{\beta} ) > rand
         \end{equation}
         となる場合, 伸張停止(Termination)とし$ S_i \to T_{N_T + 1}$とする.
 
-      \item \textbf{分岐 Bifurcation $ S_i \to B_{N_B + 1}S_{N_B + 1}<B_{N_B + 2}S_{N_B + 2}>$} \\
+      \item \textbf{分岐 Bifurcation $ S_i \to <B_{N_B + 1}S_{N_B + 1}><B_{N_B + 2}S_{N_B + 2}>$} \\
         Terminationを行わなかった場合のみBifurcationの判断を行う. 
         $[0,1]$の範囲で一様分布から乱数を一つ生成し, その値を$rand$とする.
         最大値が0.8になるように実数倍したガンマ分布
-        \textit{Scaled} $\gamma$(x)を用を用いて分岐の判定を行う. 
-        ただしガンマ分布のパラメータとして, パラメータセットの\\
-        \begin{tabular}[c]{ll}
-          - \textit{k} : & \textit{Bifurcation} $\alpha$ \\
-          - $\theta$ : &  \textit{Bifurcation} $\beta$\\
-        \end{tabular}\\
-        を用い, 
+        \textit{Scaled} $\gamma$($x,k,\theta$)を用を用いて分岐の判定を行う. 
+        ただしガンマ分布のパラメータとして, パラメータセットの値を用いる. 
         \begin{equation}
-	  Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(S)) > rand
+	  Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(S_i),
+          Bifurcation\hspace{1mm}\alpha,Bifurcation\hspace{1mm}\beta) > rand
         \end{equation}
         のとき分岐(Bifurcation)とする. すなわち$Branch_i$の$diam_i$を用いて\\
         makeBranch($diam_i$)から新たに$Branch_{N_B + 1}$と$Branch_{N_B + 2}$を生成する.
       \item \textbf{伸張 Elongation $S_i \to B_{N_B + 1}S_{N_B + 1}$} \\
-        上記の条件を満たさなかった場合, 伸張(Elongation)とする. 
+        上記の2条件を満たさなかった場合, 伸張(Elongation)とする. 
         すなわち$Branch_i$の$diam_i$を用いてmakeBranch($diam_i$)より, 新たに$Branch_{N_B + 1}$を生成する. 
     \end{enumerate}
 
@@ -371,7 +379,7 @@
     以下の条件に該当する場合は強制的に伸張停止(Termination)とする. これは樹
     状突起として妥当な形態を得るために導入するヒューリスティックスである.    % <- 妥当とは?
     \begin{itemize}
-      \item ${\rm path}(S) > 2000$のとき
+      \item ${\rm path}(S_i) > 2000$のとき
       \item $diam_{parent} \le Minimum\hspace{1mm}diameter$ のとき\\ % <- パラメータをあとでまとめたほうがいいか？
        また, この場合, 親$Branch$の$diam$を$Minimum\hspace{1mm}diameter$
 	    に設定し直す.ここで$Minimum\hspace{1mm}diameter = 0.15$[$\mu$m]である. 
@@ -379,10 +387,10 @@
 
     \subsection{$Branch$に対する三次元座標の設定}
      $length_i$, $elevation_i$, $rotation_i$の情報を用いて三次元空間上での$Branch_i$の座標情報を
-     設定する. $Branch$の伸張方向は親となるStem, Branchの向きにあわせた相
+     設定する. $Branch_i$の伸張方向は親となるBranchの向きにあわせた相
      対的な座標軸を用いて考える. 具体的には以下のようにする. 
      \begin{itemize}
-     \item \textbf{Stemの角度設定}
+     \item \textbf{Stemの角度設定($i = 1$)}
        \begin{enumerate}
        \item 仰角 \\
 	 仰角を$elevation^{\circ}$とする. 初期状態としてStemは3次元空間
@@ -427,35 +435,61 @@
      場合, $Branch$上にシナプスを付与する. 具体的には下記
      \ref{synapse_setting}節にて詳述する. 
 
-  \section{使用する数理モデル}
-    \subsection{神経細胞モデル, シナプスモデル}
-     形態生成L-systemによって作成された神経細胞はマルチコンパートモデル
+ \section{数理モデル}
+   \subsection{作成した神経細胞の数理モデル化}
+   形態生成L-systemによって得られた$Neuron$を数理モデルに変換する手法を示す. 
+   1つの$Branch$は最大5[$\mu$m]の大きさに分割して, それぞれに膜電位を計算する.
+   ある実数$x$に対して, $x$以上の最小の整数を返す関数をceiling($x$)とする.
+   このとき, ある$Branch_i$を分割する個数$d_i$は, $Branch_i$の長さ$length_i$
+   を用いて以下のように定義する. 
+   \begin{align}
+     d_i &= 
+     \begin{cases}
+       {\rm ceiling}(\frac{length_i}{5}) & \text{(${\rm ceiling}(\frac{length_i}{5})$ is odd)}\\
+       {\rm ceiling}(\frac{length_i}{5}) + 1 & \text{(${\rm ceiling}(\frac{length_i}{5})$ is even)}
+     \end{cases}
+   \end{align}
+   ここで$d_i$を奇数とするのはシミュレーションにNEURONを用いているためである.% <- できたら理由を書きたい
+   よって$Branch_i$は$\frac{length_i}{d_i}$の長さごとに1つのコンパートメントに分割され
+   $Comp_{i,j}\hspace{1mm}(j = 1,2,\dots,d_i)$となる. 
+   また, $Soma$はコンパートメントへの分割は行わない.
+   \subsection{神経細胞モデル, シナプスモデル}
+     上記の方法で分割された$Comp_{i,j}$と$Soma$は以下の式\ref{V_i}
      を用いてその膜電位の挙動をシミュレーションする. 
      単一コンパートメントの膜電位($V_i$)は以下の式によって計算される.
      %g_leakは平衡電位 = -70になるように調節している
      \begin{equation}
-       Cm\frac{dV_i}{dt} = g_{leak}(V_i - E_{leak}) + I_{CaT} + I_{Ka}
+       Cm\frac{dV}{dt} = g_{leak}(V - E_{leak}) + I_{CaT} + I_{Ka}
        %このcmは小文字か大文字か?
        \label{V_i}
      \end{equation}
      コンパートメントの膜上にシナプスが分布している場合は上式\ref{V_i}の右
      辺に以下の項を加える.
      \begin{equation}
-       (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}}) {\cdot} g_{syn} {\cdot} (V_i
+       (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}}) {\cdot} g_{syn} {\cdot} (V
        - E_{syn})
        \label{eq_syn}
      \end{equation}
 
-     また, コンパートメントに他のコンパートメントが結合している場合は以下の式\ref{next_comp}を式\ref{V_i}に加える. 
-     $i$番目のコンパートメントに$j$番目のコンパートメントが結合しているとすると, 
+     また, 他のコンパートメントが結合している場合は以下の式\ref{next_comp}を
+     式\ref{V_i}に加える.
+      $i$番目のコンパートメントに$j$番目のコンパートメントが結合しているとき,
      \begin{equation}
-       g_{i,j} {\cdot} (V_j - V_i)
+       g_{i,j} {\cdot}(V_j - V_i)
        \label{next_comp}
      \end{equation}
+     ここで$g_{i,j}$は2つのコンパートメント間のコンダクタンスを表し,
+     $i$番目のコンパートメントの半径を${\alpha}_i$, 長さを$L_i$とすると,
+     以下の式で表される.
+     \begin{equation}
+       g_{i,j} = \frac{{\alpha}_i{{\alpha}_j}^2}
+       {Ra{\cdot}L_i(L_i{{\alpha}_j}^2 +  L_j{{\alpha}_i}^2)}
+     \end{equation}
+     
    \subsection{イオンチャネルモデル}
    式\ref{V_i}のイオンチャネルモデル$I_{CaT}$, $I_{Ka}$は
-   Migliore et alに示されるイオンチャネルの
-     モデルを利用している.\cite{migliore1995computer}
+   Migliore et al. に示されるイオンチャネルの
+     モデルを使用している.\cite{migliore1995computer}
      \begin{itemize}
        \item 電位依存型T型${\rm Ca^{2+}}$電流
          \begin{align}
@@ -464,11 +498,11 @@
            KTF &= \left(\frac{25.0}{293.15}\right) {\cdot} (T + 273.15) \\
            f &= \frac{KTF}{2} \\
            nu &= \frac{V}{f} \\
-           ghk &= -f {\cdot} \left(1.0 - \frac{C_i}{C_o} {\cdot} \exp(nu) \right) {\cdot} efun(nu) \\
+           ghk(V,cai,cao) &= -f {\cdot} \left(1.0 - \frac{C_i}{C_o} {\cdot} \exp(nu) \right) {\cdot} efun(nu) \\
            efun(z) &=
            \begin{cases}
-             1 - \frac{z}{2} & |z| < 10^{-4} \\
-             \frac{z}{(e^z - 1)} & otherwise \\
+             1 - \frac{z}{2} & (|z| < 10^{-4}) \\
+             \frac{z}{(e^z - 1)} & (otherwise) \\
            \end{cases}
          \end{align}
 
@@ -521,7 +555,7 @@
 %
 % gmn gmlは何なのか？ g_{mn}なのか？ 単位は無いようなので、gmnだと思う
 %
-     また, 数理モデルのパラメータを以下の表\ref{sim_param}に示す. % <- tau1 tau2は別のソースコードからとったことを書いたほうがいい
+     数理モデルのパラメータを以下の表\ref{sim_param}に示す. % <- tau1 tau2は別のソースコードからとったことを書いたほうがいい
 
      \begin{table}[H]
        \caption{数理モデルパラメータ}
@@ -567,44 +601,24 @@
          \end{tabular}
        \end{subtable}
      \end{table}
-     
- \section{作成した神経細胞の数理モデル化}
-   形態生成L-systemによって得られた神経細胞を前節で示した数理モデルに変換する手法を示す. 
-   ひとつの$Branch$は最大5[$\mu$m]の大きさに分割してそれぞれに式\ref{V_i}を用いて
-   膜電位を計算する. ある実数$x$に対して, $x$以上の最小の整数を返す関数をceiling($x$)
-   とする. このとき, ある$Branch_i$を分割する個数$d_i$は, $Branch_i$の長さ$length_i$
-   を用いて以下のように定義する. 
-   \begin{align}
-     d_i &= 
-     \begin{cases}
-       {\rm ceiling}(\frac{length_i}{5}) & \text{(${\rm ceiling}(\frac{length_i}{5})$ is odd)}\\
-       {\rm ceiling}(\frac{length_i}{5}) + 1 & \text{(${\rm ceiling}(\frac{length_i}{5})$ is even)}
-     \end{cases}
-   \end{align}
-   ここで$d_i$を奇数とするのはシミュレーションにNEURONを用いているためである.\\ % <- できたら理由を書きたい
-   よって1つの$Branch_i$は$\frac{length_i}{d_i}$の長さごとに1つのコンパートメントに分割され
-   $Comp_{i,j}\hspace{1mm}(j = 1,2,\dots,d_i)$となる. 
-   $Comp_{i,j}$のそれぞれのコンパートメントについて式\ref{V_i}を用いて膜
-   電位を計算する.\\
-   また, $Soma_i$に対しても同様に式\ref{V_i}を用いて膜電位の挙動をシミュレー
-   トする. ただし$Soma$に対してはコンパートメントへの分割は行わず, 1つの式\ref{V_i}
-   のみによって膜電位変動をシミュレートする. 
+
    \subsection{コンパートメント上のコンダクタンス分布設定}
      作成した$Comp_{i,j}$のそれぞれに最大コンダクタンス値${\overline{g}_{\rm CaT}}_{i,j}$, ${\overline{g}_{\rm Ka}}_{i,j}$
      を設定する. 
-     樹状突起上のコンダクタンス分布は線形な分布とガウス分布の2つを仮定した. 線形なコンダクタンス分布は先行研究で用いられていた
-     手法である\cite{torben2009systematic}. ガウス分布を用いるのは, 線形分布の場合よりも細かくコンダクタンス分布の変化
-     を表現し, より多くのコンダクタンス分布パターンを表現するためである.
-     また, $Soma$に対してはコンダクタンスを分布させず, $\overline{g_{soma}}_{{\rm Ka}} = \overline{g_{soma}}_{{\rm CaT}} = 0$とした.
+     樹状突起上のコンダクタンス分布は線形分布とガウス分布のどちらかを使用する.
+     線形分布はコンダクタンスは$Branch$ごとに線形に変化させるという手法
+     である.\cite{torben2009systematic}.
+     ガウス分布は$Comp$ごとにコンダクタンスを変化させ, 線形分布の場合よりも細かくコンダクタンス
+     分布を設定できる. 
+     $Soma$に対してはコンダクタンスを分布させず,
+     ${\overline{g}_{soma}}_{{\rm Ka}} = {{\overline{g}}_{soma}}_{\rm CaT} = 0$とした.
      以下に$Comp_{i,j}$に対するコンダクタンス値の決定方法を述べる. 
-     コンダクタンス値の決定方法は線形分布を用いるかガウス分布を用いるか
-     によって異なる. \\
      \begin{itemize}
      \item \textbf{線形分布の場合}\\
-       $Branch$単位でコンダクタンスを設定する. つまりある$Branch_i$から分割されたコンパートメント$\{Comp_{i,j}\}$は
+       $Branch$単位でコンダクタンスを設定する. つまりある$Branch_i$から分割されたコンパートメント$Comp_{i,j}$は
        全て同じコンダクタンス値を持つ. $Branch_i$のコンパートメントのコンダクタンス値を
        ${\overline{g}_{\rm CaT}}_{i}$, ${\overline{g}_{\rm Ka}}_{i}$とし,
-       上記の$diam$と同様に親$Branch$の実数倍として決定する\\
+       上記の$diam$と同様に親$Branch$の持つコンダクタンス$g_{parent_i}$の実数倍として決定する\\
        \begin{align}
          {\overline{g}_{\rm CaT}}_{i,j} &= 
          \begin{cases}
@@ -621,25 +635,25 @@
        \item \textbf{ガウス分布の場合}\\
          コンパートメント単位でコンダクタンス値を設定する. Stemから$Comp_{i,j}$までの
          $length$の合計をpath($Comp_{i,j}$)とする. 
-         またその樹状突起全体のコンパートメントでの最大のpath($Comp_{i,j}$)を
-         max(Path($Comp_{i,j}$))とする.
-         この二つの長さの比を$path\hspace{1mm}ratio(Comp_{i,j}) = \frac{Comp_{i,j}}{{\rm max(Path(}Comp_{i,j})}$
-         とする. 
-         このとき平均値$\mu$, 
-         標準偏差$\sigma$のガウス分布から実数$x$に対する確率密度を返す関数G($x,\mu,{\sigma}^2$)を用いて
+         また$Dendrite_i$での最大のpath($Comp_{i,j'}$)を
+         max(Path($Comp_{i,j'}$))とする.
+         この二つの長さの比を$path\hspace{1mm}ratio(Comp_{i,j}) = \frac{Comp_{i,j}}{{\rm max(Path(}Comp_{i,j'}))}$とする. 
+         このとき平均値$\mu$, 標準偏差$\sigma$のガウス分布から実数$x$に対する確率密度を
+         返す関数N($x,\mu,{\sigma}^2$)を用いて
          \begin{align}
-           {\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm G}({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2) \\
-           {\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm G}({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)
+           {\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm N}({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2) \\
+           {\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max &= {\rm N}({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)
          \end{align}
-         とし, 
-
+         
+         とし,
+         
        \begin{align}
          {\overline{g}_{\rm Ka}}_{i,j} &=
-         \frac{{\rm G}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+         \frac{{\rm N}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
               {{\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max}
               \times {\rm Ka}\hspace{1mm}peak \\
          {\overline{g}_{\rm CaT}}_{i,j} &=
-         \frac{{\rm G}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+         \frac{{\rm N}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
               {{\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max}
               \times {\rm CaT}\hspace{1mm}peak
        \end{align}
@@ -647,29 +661,33 @@
    とする.
    \subsection{単一コンパートメントへのシナプスの付与} \label{synapse_setting}
      上記のように分割した$Comp_{i,j}$が一部分でも$170 < y < 190$の領域に入っていた場合,  % <- この辺の座標情報を変数にしたほうがいいかも
-     Redシナプスグループに属するシナプスを付与する. 具体的には$Comp_{i,j}$の
-     膜電位を示す式\ref{V_i}の右辺に\ref{eq_syn}を加える. また, y軸方向の$-170 > y > -190$に入っていた場合
-     はBlueシナプスグループに属するシナプスを付与する. 
-
+     Redシナプスを付与する. 具体的には$Comp_{i,j}$の
+     膜電位を示す式\ref{V_i}の右辺に\ref{eq_syn}を加える. また, y軸方向の$-170 > y > -190$
+     に入っていた場合はBlueシナプスを付与する.
+     
  \section{遺伝アルゴリズム}    % <- 「遺伝アルゴリズム」という名前はどうなのか？
    2組のパラメータセットを1つの個体として200個体, 世代数500で遺伝アルゴ
    リズムを用いたパラメータ最適化を行った.  % <- 遺伝アルゴリズムのパラメータもどこかで表にまとめた方がいい
    1組のパラメータセットをベクトル$\overrightarrow{P}_i = \{p_{i,1},p_{i,2},\dots \}$
-   と表すと, 一つの個体は$u_i = \{\overrightarrow{P}_{i,1},\overrightarrow{P}_{i,2}\}$と表される. 
+   と表すと, 一つの個体は$u_i = \{\overrightarrow{P}_{i,1},\overrightarrow{P}_{i,2}\}$
+   と表される. 
    また$\overrightarrow{P}_i$から生成される樹状突起を$Dendrite_i$とする. よっ
-   て1つの個体$u_i$から生成される神経細胞は$Neuron_i = \{Dend_{i,1},Dend_{i,2}\}$と表される.   
-   また, ある世代数$g$での$i$番目の個体を$u_{g,i}$と表すとする.
-   この遺伝アルゴリズムにおける遺伝子は個体$u_{g,i}$の持つパラメータセット$P_{g,i,1},P_{g,i,2}$である. 
-   本研究の遺伝アルゴリズムでは, エリート保存, 一点交叉, 突然変異を用いた. 以下にその詳細を述べる. 
+   て1つの個体$u_i$から生成される神経細胞は$Neuron_i = \{Dendrite_{i,1},Dendrite_{i,2}\}$
+   と表される.   
+   また, ある世代数$g$での$i$番目の個体を$u_{g,i}$と表す. 
+   この遺伝アルゴリズムにおける遺伝子は個体$u_{g,i}$の持つパラメータセット$P_{g,i,1},P_{g,i,2}$
+   である. 
+   本研究の遺伝アルゴリズムでは, エリート保存, 一点交叉, 突然変異を用いた.
+   以下にその詳細を述べる. 
    \subsection{個体評価}
      各世代$g$で個体$u_{g,i}$から神経細胞形態$Neuron_{g,i}$を生成した後,
      以下のシミュレーションプロトコルを実行する.
      \subsubsection{シミュレーションプロトコル}
        ある個体$u_{g,i}$から作成された$Neuron_{g,i}$に対して, 以下のシミュレーションを行う.
-       またBlueシナプスグループに属するシナプスを活性化させる時刻を$t_{Blue}$[ms],
-       Redシナプスグループに属すシナプスを活性化させる時刻を$t_{Red}$[ms]とする.
+       またBlueシナプスを活性化させる時刻を$t_{Blue}$[ms],
+       Redシナプスを活性化させる時刻を$t_{Red}$[ms]とする.
        シミュレーション時間はCaTコンダクタンスが単独で分布している場合は100ms, それ以外の場合
-       は50msである. また, $Neuron{g,i}$の細胞体$Soma_{g,i}$で観測される最大の膜電位上昇量を
+       は50msである. また, $Neuron_{g,i}$の細胞体$Soma_{g,i}$で観測される最大の膜電位上昇量を
        $R$とする. シミュレーションは以下の表に示される$t_{Blue}$, $t_{Red}$の組みを用いて,
        1つの$Neuron_{g,i}$につき計4回行われる.
        シミュレーションはNEURONシミュレータで行い, CVodeアルゴリズムを用いた. % <- NEURON シミュレータに関して書いた方がいいか？
@@ -689,7 +707,7 @@
 
    \subsection{評価値$E$の計算}
      上記のシミュレーションの結果をもとに個体の評価を行う.
-     個体の評価には, 個体の機能性\ref{F}のほか個体
+     個体の評価には, 個体の機能性(式\ref{F})のほか$Neuron$
      の体積, 分布するコンダクタンスの量を考慮する. 
      しかし, 個体によっては上下のシナプティックゾーンに樹状突起を伸ばせず, 
      そもそもシミュレーションを行うことができないものが発生することもある.
@@ -699,7 +717,8 @@
      以下に個体の評価方法を述べる. \\
      \begin{itemize}
        \item \textbf{形態的エラー}\\
-         両方のシナプティックゾーンにシナプスを持たずシミュレーションを行えない個体の場合
+         個体から生成した$Neuron$が両方のシナプティックゾーンにシナプスを持たず,
+         シミュレーションを全て行えない場合
          $Dendrite_{i,1}$の$y$座標の最大値をmax($y_1$), $Dendrite_{i,2}$の$y$座標の
          最小値をmin($y_2$)とし評価値$E_{i,g}$を
          \begin{equation}
@@ -707,22 +726,25 @@
            \label{Morpho_E}
          \end{equation}
          とする. 
-       \item シミュレーションプロトコルを実行した個体に対しては, その世代での相対的な
-         評価値を与える. この評価手法は本研究独自の手法である.
-         シミュレーションプロトコルを実行することができた個体の
-         添え字の集合を$S_g$とする.
-         ここで個体$u_{g,s}\hspace{1mm}(s \in S_g)$について, 
+       \item 個体から生成した$Neuron$が両方のシナプティックゾーンにシナプスを持ち, 上記4つの
+         シミュレーションを全て行った場合は, その世代での相対的な評価値を与える. そのような個体
+         の添え字の集合を$S_g$とする. ここで個体$u_{g,s}\hspace{1mm}(s \in S_g)$について,
          その中での最大の$F$値をmax$(F_g)$, また個体$u_{g,s}$から作られた
-         神経細胞形態を$Neuron_{g,s}$とし, その中で最小の体積をmin$(Vol_{g,s})$,
-         最小のコンダクタンス量をmin$(Amount Conductance)$とする.
-         このときある個体$u_{g,i}$の評価値$E_{g,i}$は以下のように決定する. 
+         神経細胞形態を$Neuron_{g,s}$とし, その中で最大の体積を${Volume_{max}}_i$,
+         CaTコンダクタンスの最大のコンダクタンス量を
+         ${\rm CaT}\hspace{1mm}{{amount}_{max}}_g$, Kaコンダクタンスの最大の
+         コンダクタンス量を${\rm Ka}\hspace{1mm}{{amount}_{max}}_g$とする.
+         ここで, コンダクタンス量とはその$Neuron$の各コンパートメントの表面積にコンダクタンス
+         をかけた値の総量である. 
+         このとき, ある個体$u_{g,i}$の評価値$E_{g,i}$は以下のように決定する. \\
          まず個体$u_{g,i}$に分布するコンダクタンスの量を相対的に表す. その値を
          $Conductance\hspace{1mm}ratio_{g,i}$とし, 以下の式によって求める. 
          ここで$N\hspace{1mm}Conductance$は神経細胞に導入しているイオンチャネルの
          種類の個数である. % <-なんかふわっとしてる感がある
          
          \begin{equation}
-           Conductance\hspace{1mm}ratio_{g,i} = \left(\frac{Ka\hspace{1mm}amount_{g,i}}{{Ka\hspace{1mm}amount_{max}}_{g}} + \frac{CaT\hspace{1mm}amount_{g,i}}{{CaT\hspace{1mm}amount_{max}}_{g}}\right) / N\hspace{1mm}Conductance
+           Conductance\hspace{1mm}ratio_{g,i} = \left(\frac{{\rm Ka}\hspace{1mm}amount_{g,i}}{{{\rm Ka}\hspace{1mm}amount_{max}}_{g}} +
+           \frac{{\rm CaT}\hspace{1mm}amount_{g,i}}{{{\rm CaT}\hspace{1mm}amount_{max}}_{g}}\right) / N\hspace{1mm}Conductance
          \end{equation}
 
          その後, 個体の評価値を100からの減点方式で与える. 
@@ -742,7 +764,8 @@
      また, 以下のヒューリスティックスに該当する個体は, 以下の式によって評価する. %上の式との関連は?
      \begin{itemize}
        \item \textbf{形態的ヒューリスティックス}\\
-         以下の場合はシミュレーションを行わず, 式\ref{Morpho_E}によって評価値$E_{g,i}$を与えた. 
+         以下の場合はシミュレーションの結果に依らず, 式\ref{Morpho_E}によって評価値
+         $E_{g,i}$を与えた. 
          \begin{itemize}
            \item 神経細胞全体でStemとBranchの個数が合計15未満の場合
            \item 神経細胞全体で樹状突起の分岐が一つもない場合
@@ -753,13 +776,13 @@
          これは神経細胞での発火や, 膜電位の振動を % <- 細胞体での発火を抑制する意味は? ここコンダクタンスの時のみの考慮にしなくてもよさそう
          抑制するためである.
          \begin{itemize}
-           \item $ 2 > {R_{Blue}}_i$または$ 2 > {R_{Red}}_i$のとき
+           \item $ {R_{Blue}}_i < 2$または$ {R_{Red}}_i < 2$のとき
            \item ${R_{Blue}}_i > 25$または${R_{Red}}_i > 25$のとき
 	   \item シミュレーションの最後の5ステップで膜電位の上昇が起こったとき
          \end{itemize}
-         この条件に当てはまったとき, ヒューリスティックスとして
+         この条件に当てはまったとき, 評価値$E_{g,i}$は
          \begin{equation}
-           E_{g,i} = N(-50,5^2) % <- この書き方はあってるのか
+           E_{g,i} = G(-50,5^2) % <- この書き方はあってるのか
            \label{penalty}
          \end{equation}
          とする. 
@@ -774,8 +797,8 @@
      
    \subsection{エリート保存}
       世代$g$において最大の評価値をとった個体は, そのまま$g + 1$世代の1個体に引き継がれる.
-      世代$g$においての個体の添え字を評価値の大きさ順に並べ, 順位$k$の添え字を$r_k$で表す
-      とする.このときエリート保存は
+      世代$g$においての個体の添え字を評価値の大きさ順に並べ, 順位$k$の個体の添え字を$r_k$で表す
+      とする. このときエリート保存は
       
       \begin{equation}
        u_{g + 1,1} = u_{g,r_1}
@@ -785,11 +808,10 @@
    \subsection{一点交叉, 突然変異}
    %交叉、突然変異を起こす個体の数は中心極限定理的な考えで求められる
      次世代のエリート以外の個体は一点交叉または突然変異のどちらかの手法によって作成され
-     る. 一点交叉は評価値上位$\mu$個の個体($u_{g,r_{1}},u_{g,r_{2}},\dots,u_{g,r_{\mu}}$)を親として, $\lambda$個の子個体
-     % <- 遺伝的アルゴリズムに関するパラメータも後で表にまとめる
-     を生成する. この$\lambda$個の子個体は評価値下位$\lambda$個の個体と交% <- このλの決め方が問題
-     換される. 突然変異は残りの$199 - \lambda$個の個体に対して適用される.
-     % <- そもそもこの(μ,λ)法があっているのかどうか？
+     る. 一点交叉は評価値上位$\mu$個の個体($u_{g,r_{1}},u_{g,r_{2}},\dots,u_{g,r_{\mu}}$)
+     を親として, $\lambda$個の子個体を生成する. ここで$\lambda = 50$とした. 
+     この$\lambda$個の子個体は評価値下位$\lambda$個の個体と交換され, 次世代の個体となる.
+     突然変異は残りの$199 - \lambda$個の個体に対して適用される.
      ここで$\mu = 10$である. ここで$Parents_g =
      \{u_{g,r_{1}},u_{g,r_{2}},\dots,u_{g,r_{\mu}}\}$とし, Cross
      over($Parents$)を一点交差から次世代個体を一つ作成する関数とし,
@@ -801,14 +823,13 @@
 	u_{g,r_{1}}, \\
 	{\rm Cross\hspace{1mm}over(Parent_g)}_{g + 1,2}, \\
 	\dots \\
-	{\rm Cross\hspace{1mm}over(Parent_g)}_{g + 1,1 + \lambda}, \\ % <- これはわかりにくい
-	{\rm Mutation(u_{g,r_{1}})}, \\
+	{\rm Cross\hspace{1mm}over(Parent_g)}_{g + 1,\lambda + 1}, \\ % <- これはわかりにくい
+	{\rm Mutation(u_{g,r_{1}})_{g + 1,\lambda + 2}}, \\
 	\dots \\
-	{\rm Mutation(u_{r_{g,199 - \lambda}})}
+	{\rm Mutation(u_{r_{g,199 - \lambda}})_{g + 1,200}}
        \end{array}
        \right)
      \end{equation}
-     
      \begin{itemize}
        \item \textbf{一点交叉 Cross over}\\
 	     評価値上位の$\mu$個体から確率的に親を2個体選択する. 親を選択す
@@ -825,10 +846,10 @@
 	     \end{equation}
 	     とする.
 	     なお, 同じ個体が重複して選択されないようにした. \\
-	     選択された2つの親個体の添え字を$x$, $Py$とする. 
+	     選択された2つの親個体の添え字を$x$, $y$とする. 
 	     一点交叉は親のパラメータセット$P_{g,i,1}$同士, パラメータセッ
 	     ト$P_{g,i,2}$同士で以下のように行う. %なぜABを分けるのかを書いた方がわかりやすい
-	     これは2つの$Dend_{i,1}$, $Dend_{i,2}$をそれぞれ別の系統とし
+	     これは2つの$Dendrite_{i,1}$, $Dendrite_{i,2}$をそれぞれ別の系統とし
 	     て適応させるためである.
          \begin{itemize}
            \item \textbf{交差点の決定} \\ %passiveの場合はK,Caコンダクタンスに関する部分は交叉を行っても無意味だった
@@ -854,11 +875,11 @@
         パラメータセットの各項目に対して0.65の確率でガウス分布G($\mu$,${\sigma}_M$)に従う変動を与える. すなわち, あるパラメータ値
          $p_i$に対して, 新しいパラメータ値${p'}_i$は
          \begin{equation}
-           {p'}_i = p_i + N(p_i,{{\sigma}_M}^2)
+           {p'}_i = p_i + G(p_i,{{\sigma}_M}^2)
            \label{Mutation}
          \end{equation}
-         となる. ここで用いる${\sigma}_M$はパラメータによって以下の表\ref{sigma_M}に示される
-         値を用いる. これはパラメータによって値のレンジが異なるためである. % <- レンジ？
+         となる. ここで用いる${\sigma}_M$は突然変異を与える対象のパラメータによって以下の表\ref{sigma_M}に示される
+         値を用いる. これはパラメータによって値のレンジが異なるためである. 
          ${p'}_i$が表\ref{sigma_M}に示される値域に収まらない場合は再度式\ref{Mutation}を用いて
          ${p'}_i$を取り直す. 
          \begin{table}[H]
@@ -908,9 +929,9 @@
    以上の方法を用いて行った実験の設定について詳述する. 
    \subsection{実験における独立変数}
      本実験で操作する独立変数について説明する. 独立変数はKa, CaTイオンチャネルの有無,
-     2つのシナプスグループの活性化時間の差${\Delta}t$, 樹状突起上のコンダクタンス分布様式
-     である. それぞれの変数について総当たりで遺伝アルゴリズムを用い, 最適な$Neuron$を求めた.
-     また, いずれの試行においても試行数は10回である. 
+     2種類のシナプスを活性化させる時間差${\Delta}t$, 樹状突起上のコンダクタンス分布様式
+     である. それぞれの変数の組に対して上記の遺伝アルゴリズムを用い, 最適な$Neuron$を求めた.
+     また, いずれの試行においても試行数は10回とした. 
      \begin{enumerate}
        \item \textbf{Ka, CaTイオンチャネルの有無} \\
          本実験では神経細胞のイオンチャネルとしてKaチャネル, CaTチャネルを用いるが,
