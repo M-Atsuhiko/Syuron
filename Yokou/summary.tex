@@ -1,0 +1,152 @@
+\documentclass[a4j,twocolumn, 10.5pt]{jarticle}
+\usepackage{graphicx,color}
+\usepackage{amsmath}
+\renewcommand{\baselinestretch}{1.5}%double spaced%2.0
+\def\Vec#1{\mbox{\boldmath $#1$}}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\tr}{tr}
+\renewcommand{\baselinestretch}{1.0}
+\setlength{\abovecaptionskip}{-5mm}
+\setlength{\belowcaptionskip}{-5mm}
+
+%\pagestyle{empty}
+%\begin{document}
+\topmargin -30mm
+\textheight 270mm
+
+\title{\bf
+{神経細胞における機能と構造の関係性(仮題)\\}}
+\author{村上敦彦\\66612130070-3\\立命館大学大学院 情報理工学研究科\\計算神経科学研究室所属}
+\date{}
+
+\renewcommand{\topmargin}{-10mm}
+\oddsidemargin -15.5mm
+\textwidth 190mm
+\renewcommand{\textheight}{250mm}
+
+\columnsep 5mm
+\begin{document}
+\maketitle
+  %%%%%%%%%%%%%%%%
+  %%　 はじめに 　%%
+  %%%%%%%%%%%%%%%%
+\section{背景・目的}
+現在, 思考や記憶, 学習など脳の持つ高次機能の仕組みを解明することは
+脳研究において注目されているテーマの一つとされている.
+これまでの研究により, 脳が学習をするという機能は, 個々の神経細胞をつなぐ
+シナプスの結合強度が, つながれている前後の細胞の活動度に依存して変化する, シナプス可塑性
+と呼ばれる性質に因るものであると考えられてきている. このとき, 結合強度が強められる場合を
+長期増強(LTP:Long Term Potentiation), 弱められる場合を長期抑制(LTD:Long Term Depression)と呼ぶ.
+さらに, このシナプス可塑性が前後のニューロンの発火タイミングに依存して起こる, 
+スパイクタイミング依存シナプス可塑性(STDP:Spike-Timing Dependent Plasticity)
+が存在することが分かり, モデル化が行われている. \\
+\indent また, STDPが神経回路にどのような影響を与えるかを調べたKitanoらの研究\cite{key1}では, STDP学習により
+神経細胞が自発的に同期発火伝播を起こす, 自己組織化が見られた. 
+しかし, 先行研究で用いたニューロンモデルは生理学的現象に近いモデルでない点と
+生理学的に神経回路を構成するニューロンの数が未知である点が疑問点として挙げられる.\\
+\indent そこで本研究では, 生理学的現象により近いダイナミクスを再現するニューロンモデルを用いて
+神経回路モデルを構築し, STDPによる自己組織化の過程のシミュレーションを行う. 
+これにより, どのように神経回路を形成していくか, また, ニューロン数による回路形成への
+影響について解明することを目的とする.
+
+  %%%%%%%%%%%%
+  %%  方法　 %%
+  %%%%%%%%%%%%
+\section{方法}
+\subsection{ニューロンモデル}
+ニューロンモデルは全てHodgkin-Huxleyタイプの数理モデルにより構築する.
+その際, より生理学的現象に近いモデルを用いることを考慮し, 
+興奮性ニューロンとしてRegular-Spiking(RS)ニューロン\cite{key2}, 抑制性ニューロンとして
+Fast-Spiking(FS)ニューロンモデルを用いる. \cite{key3}
+RS, FSニューロンは電気生理学的に異なる応答特性を持つニューロンである. 
+
+\subsection{シナプスモデル}
+シナプスモデルは開状態と閉状態を持つ2状態モデルを用いた.
+開状態のときに, シナプスを通じてシナプス前細胞からの入力電流が後細胞へ流入する. 
+開状態へ切り替わった後, 1msの間は開状態を維持し, その後閉状態へ移行する. 
+
+\subsection{STDPモデル}
+STDPモデルとして, Songらのモデルを用いる.\cite{key4} 
+このモデルでは, シナプス前細胞→後細胞の順に発火するとLTPが発生する.
+逆にシナプス後細胞→前細胞の順で発火するとLTDが発生する.
+このとき, 前後細胞の発火間隔が小さいほど結合強度の変化が大きくなる.
+
+\subsection{ネットワークモデル}
+2.1$\sim$2.3までのモデルを用いて, 結合の方向性無く相互にニューロンがつながったリカレントネットワークモデルを構築する.
+% その際, 興奮性ニューロンと抑制性ニューロンは4:1の割合で存在するものとするが, その個数については次節で述べる.
+また, STDP学習ルールは興奮性ニューロンと興奮性ニューロンをつなぐシナプスでのみ適用されるものとする.
+
+\subsection{実験}
+本研究では, シナプス結合強度の時間変化が見られなくなるまでシミュレーションを行う.
+結合強度がほぼ変動しなくなった状態を定常状態とし, STDPによる自己組織化が終了したとみなした. 
+定常状態になった神経回路において以下のようなデータをとり, 考察する.\\
+\indent 1. 興奮性, 抑制性ニューロンの発火状態\\
+\indent 2. シナプス結合強度の総和(興奮性ニューロン間)\\
+\indent 3. シナプス結合強度の分布(興奮性ニューロン間)\\
+\indent 1については, 先行研究のような同期発火伝播から自己組織化が見られるかを調べるためであり, 2, 3についてはSTDPがシナプス結合強度に
+どのような影響を及ぼすのかを調べるためである.
+尚, 興奮性ニューロンの個数を128$\sim$1024個まで128個刻みで変化させ, 各データをとった. これは, 実際の大脳皮質の神経回路
+がいくつのニューロンにより構成されているかが未知であり, 個数による依存性の有無を調べるためである.
+尚この際, 興奮性, 抑制性ニューロンの比率が4:1となるよう, 抑制性ニューロンは32$\sim$256個まで変化させている. 
+
+  %%%%%%%%%%%%
+  %%  結果　 %%
+  %%%%%%%%%%%%
+\section{結果}
+\subsection{ニューロンの発火状態}
+図は興奮性ニューロンの発火状態を定常状態時以降を発火順にソートした結果である. 
+先行研究の結果では, 同様のソートを行うと3グループのニューロン集団による同期発火が見てとれるが, 
+現行モデルでは, 見てとれない.
+
+\subsection{シナプス結合強度総和の変化}
+図はニューロン数を変化させてシミュレーションをした際のシナプス結合強度の総和を示したである.
+赤が現行モデル, 緑が先行モデルの結果である. 現行モデルではニューロン数の増加にほぼ比例して総和も増加しており, 
+先行モデルでは冪乗増加が見てとれる.
+
+\subsection{シナプス結合強度分布の変化}
+先行モデルでは, 0とmax(=0.015)の値に分布が二分するのだが, 現行モデルでは概ねガウス分布に従い, 
+ニューロン数が増加するに従って平均が減少していく.
+
+  %%%%%%%%%%%% 
+  %% 考察　 %%
+  %%%%%%%%%%%% 
+ \section{考察・課題}
+今回, 先行研究のモデルから実在するニューロンのダイナミクスに近いニューロンモデルに改良してシミュレーションを行った. 
+その結果, 先行研究で示されたようなニューロン集団の同期発火伝播が起こる傾向には無かった. \\
+\indent また, シナプス結合強度総和の結果から, 先行モデルではニューロン数が増加すると1ニューロンにつながるシナプス結合強度の総和が増加する. 
+一方, 現行モデルではニューロン数を増加しても, 1ニューロンにつながるシナプス結合強度の総和はほぼ変化しない。 加えて, 結合強度の分布が先行研究の結果と異なり, ガウス分布を示しニューロン増加に伴ってその平均が
+減少していくことから, モデルを変更したことで神経回路形成を安定化させるようなはたらきが見られたと考える.\\
+\indent 今後は, より生理学現象に近いダイナミクスを示すニューロンモデルが回路形成にどのような影響を与えるのか解明していく.
+
+  %%%%%%%%%%%%%%%%
+  %%   参考文献  %%
+  %%%%%%%%%%%%%%%%  
+%%\section*{参考文献}
+\begin{thebibliography}{2}
+{\footnotesize
+
+\bibitem[1]{key1}
+ Katsunori Kitano, Hideyuki Cateau, Tomoki Fukai. 2002:
+ ``Self-organization of memory activity through spike-timing-dependent plasticity'',
+  {\it Neuroreport}, {\bf 13}, 795-798
+
+\bibitem[2]{key2}
+  Alain Destexhe, Denis Pare. 1999: 
+  ``Impact of Network Activity on the Integrateive Properties of Neocortical pyramidal Neurons In Vivo'',
+  {\it Journal of Neurophysiology}, {\bf 81}, 1531-1547
+
+\bibitem[3]{key3}
+  Alev Erisir, David Lau, Bernardo Rudy, Christopher S. Leonard. 1999:
+  ``Function of Specific K+ Channels in Sustained High-Frequency Firing of Fast-Spiking Neocortical Interneurons'',
+  {\it Journal of Neurophysiology}, {\bf 82}, 2476-2489
+
+\bibitem[4]{key4}
+  Sen Song, Kenneth D.Miller, Larry F.Abbott. 2000: 
+  ``Competitive Hebbian learning through spike-timing-dependent synaptic plasticity'',
+  {\it Nature Neuroscience}, {\bf 3}, 919-926
+
+}
+
+\end{thebibliography}
+\end{document}

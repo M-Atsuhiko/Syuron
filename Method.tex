@@ -50,8 +50,8 @@
    位置関係を図示している. 図\ref{input-order_detection}は図\ref{Neuron}に示される神経細胞に
    対し, ${\Delta}t = 15$[ms]としてシナプス入力を与えた際の細胞体での膜電位変動を示している. 
    図\ref{input-order_detection}の場合, $R_{B{\to}R} = 6.29$, $R_{R{\to}B} = 4.75$より
-   $F = 1.32$である. 
-
+   $F = 1.32$である.
+   
    \begin{figure}
      \centering
      \begin{subfigure}{0.3\columnwidth}
@@ -196,20 +196,20 @@
          \caption{形態パラメータ}  % <- パラメータは最後にまとめた方がいいかも
          \label{morpho_parameter}
          \begin{center}
-           \begin{tabular}[H]{|c|l|l|c|} \hline
-             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-             1 &  \textit{Segment Length} [${\rm {\mu}m}$]& StemおよびBranchの長さ & [$0,\infty$) \\ \hline
-             2 &  \textit{Stem diameter}  [${\rm {\mu}m}$]& Stemの直径 & [$0.15,\infty$) \\ \hline
-             3 &  \textit{Stem elevation} [$^{\circ}$]& Stemの仰角 & [$0,360$) \\ \hline
-             4 &  \textit{Stem rotation}  [$^{\circ}$]& Stemの回転角 & [$0,360$) \\ \hline
-             5 &  \textit{Branch elevation $\mu$} [$^{\circ}$]& Branchの仰角決定に用いる平均値 & [$0,360$) \\ \hline
-             6 &  \textit{Branch elevation $\sigma$} [$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 & [$0,\infty$) \\ \hline
-             7 &  \textit{Branch rotation $\mu$}  [$^{\circ}$]& Branchの回転角決定に用いる平均値 & [$0,360$) \\ \hline
-             8 & \textit{Branch rotation $\sigma$} [$^{\circ}$] & Branchの回転角決定に用いる標準偏差値 & [$0,\infty$)  \\ \hline
-             9 &  \textit{Bifurcation} $\alpha$ & 樹状構造の分岐導入判定に用いる$k$値 & [$1,\infty$) \\ \hline
-             10 & \textit{Bifurcation} $\beta$  & 樹状構造の分岐導入判定に用いる$\theta$値 & [$1,\infty$) \\ \hline
-             11 & \textit{Termination} $\alpha$ & 樹状構造の終端点導入判定に用いる$k$値 & [$1,\infty$) \\ \hline
-             12 & \textit{Termination} $\beta$  & 樹状構造の終端点導入判定に用いる$\theta$値 & [$1,\infty$) \\ \hline
+           \begin{tabular}[H]{|c|l|l|} \hline
+             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} \\ \hline \hline
+             1 &  \textit{Segment Length} [${\rm {\mu}m}$]& StemおよびBranchの長さ \\ \hline
+             2 &  \textit{Stem diameter}  [${\rm {\mu}m}$]& Stemの直径 \\ \hline
+             3 &  \textit{Stem elevation} [$^{\circ}$]& Stemの仰角 \\ \hline
+             4 &  \textit{Stem rotation}  [$^{\circ}$]& Stemの回転角 \\ \hline
+             5 &  \textit{Branch elevation $\mu$} [$^{\circ}$]& Branchの仰角決定に用いる平均値  \\ \hline
+             6 &  \textit{Branch elevation $\sigma$} [$^{\circ}$] & Branchの仰角決定に用いる標準偏差値 \\ \hline
+             7 &  \textit{Branch rotation $\mu$}  [$^{\circ}$]& Branchの回転角決定に用いる平均値 \\ \hline
+             8 & \textit{Branch rotation $\sigma$} [$^{\circ}$] & Branchの回転角決定に用いる標準偏差値 \\ \hline
+             9 &  \textit{Bifurcation} $\alpha$ & 樹状構造の分岐導入判定に用いる$k$値 \\ \hline
+             10 & \textit{Bifurcation} $\beta$  & 樹状構造の分岐導入判定に用いる$\theta$値 \\ \hline
+             11 & \textit{Termination} $\alpha$ & 樹状構造の終端点導入判定に用いる$k$値 \\ \hline
+             12 & \textit{Termination} $\beta$  & 樹状構造の終端点導入判定に用いる$\theta$値 \\ \hline
            \end{tabular}
          \end{center}
        \end{table}
@@ -225,12 +225,12 @@
          \caption{線形分布コンダクタンスパラメータ}
          \label{liner_parameter}
          \begin{center}
-           \begin{tabular}[H]{|c|l|l|c|} \hline
-             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-             13 & Ka \textit{Stem conductance} [${\rm S/cm^2}$]& StemのKaコンダクタンス値 & [$0,0.22$] \\ \hline
-             14 & Ka \textit{taper rate}  & Kaコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
-             15 & CaT \textit{Stem conductance} [${\rm S/cm^2}$]& StemのCaTコンダクタンス値 & [$0,0.0022$] \\ \hline
-             16 & CaT \textit{taper rate}  & CaTコンダクタンスの伝搬率 & [$0,\infty$) \\ \hline
+           \begin{tabular}[H]{|c|l|l|} \hline
+             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} \\ \hline \hline
+             13 & Ka \textit{Stem conductance} [${\rm S/cm^2}$]& StemのKaコンダクタンス値\\ \hline
+             14 & Ka \textit{taper rate}  & Kaコンダクタンスの伝搬率 \\ \hline
+             15 & CaT \textit{Stem conductance} [${\rm S/cm^2}$]& StemのCaTコンダクタンス値 \\ \hline
+             16 & CaT \textit{taper rate}  & CaTコンダクタンスの伝搬率 \\ \hline
            \end{tabular}
          \end{center}
        \end{table}
@@ -241,13 +241,13 @@
          \begin{center}
            \hspace*{-4em}
            \begin{tabular}[H]{|c|l|l|c|} \hline
-             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-             13 & Ka \textit{peak} [${\rm S/cm^2}$]&  Kaコンダクタンス分布の最大値 & [$0,0.22$] \\ \hline
-             14 & Ka \textit{Gausian} $\mu$ & Kaコンダクタンス分布が従うガウス分布の平均値 & [$0,1$] \\ \hline
-             15 & Ka \textit{Gausian} $\sigma$ & Kaコンダクタンス分布が従うガウス分布の標準偏差値 & [$0,\infty$) \\ \hline
-             16 & CaT \textit{peak} [${\rm S/cm^2}$]&  CaTコンダクタンス分布の最大値 & [$0,0.0022$] \\ \hline
-             17 & CaT \textit{Gausian} $\mu$ & CaTコンダクタンス分布が従うガウス分布の平均値 & [$0,1$] \\ \hline
-             18 & CaT \textit{Gausian} $\sigma$& CaTコンダクタンス分布が従うガウス分布の標準偏差値 & [$0,\infty$) \\ \hline
+             \multicolumn{1}{|c}{No.} & \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{説明} \\ \hline \hline
+             13 & Ka \textit{peak} [${\rm S/cm^2}$]&  Kaコンダクタンス分布の最大値 \\ \hline
+             14 & Ka \textit{Gausian} $\mu$ & Kaコンダクタンス分布が従うガウス分布の平均値 \\ \hline
+             15 & Ka \textit{Gausian} $\sigma$ & Kaコンダクタンス分布が従うガウス分布の標準偏差値 \\ \hline
+             16 & CaT \textit{peak} [${\rm S/cm^2}$]&  CaTコンダクタンス分布の最大値 \\ \hline
+             17 & CaT \textit{Gausian} $\mu$ & CaTコンダクタンス分布が従うガウス分布の平均値 \\ \hline
+             18 & CaT \textit{Gausian} $\sigma$& CaTコンダクタンス分布が従うガウス分布の標準偏差値 \\ \hline
            \end{tabular}
          \end{center}
        \end{table}
@@ -292,7 +292,7 @@
           に従う乱数を生成し  , その値を$diam_i$とする. 平均$\mu$, 標準偏差$\sigma$に従う
           乱数を1つ生成する関数をG($\mu,{\sigma}^2$)とすると
           \begin{equation}
-            diam_i = G(diam_{parent},(0.05)^2)
+            diam_i = {\rm G}(diam_{parent},(0.05)^2)
           \end{equation}
         \item{伸張(Elongation)の場合} \\
           {\textit Branch}がStemであるかどうかによって決定方法が異なり, Stemでない場合は
@@ -314,7 +314,7 @@
         elevation_i = 
         \begin{cases}
           Stem\hspace{1mm}elevation & \text{(i = 1)}\\
-          G(Branch\hspace{1mm}elevation\hspace{1mm}\mu,(Branch\hspace{1mm}elevation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
+          {\rm G}(Branch\hspace{1mm}elevation\hspace{1mm}\mu,(Branch\hspace{1mm}elevation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
        \end{cases}\\
       \end{equation}
     \item \textbf{回転角($rotation_i$)の決定}\\
@@ -324,7 +324,7 @@
         rotation_i = 
         \begin{cases}
           Stem\hspace{1mm}rotation & \text{(i = 1)}\\
-          G(Branch\hspace{1mm}rotation\hspace{1mm}\mu,(Branch\hspace{1mm}rotation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
+          {\rm G}(Branch\hspace{1mm}rotation\hspace{1mm}\mu,(Branch\hspace{1mm}rotation\hspace{1mm}\sigma)^2) & \text{(otherwise)}\\
        \end{cases}\\
       \end{equation}
    \end{enumerate}
@@ -362,10 +362,10 @@
         Terminationを行わなかった場合のみBifurcationの判断を行う. 
         $[0,1]$の範囲で一様分布から乱数を一つ生成し, その値を$rand$とする.
         最大値が0.8になるように実数倍したガンマ分布
-        \textit{Scaled} $\gamma$($x,k,\theta$)を用を用いて分岐の判定を行う. 
+        Scaled $\gamma$($x,k,\theta$)を用を用いて分岐の判定を行う. 
         ただしガンマ分布のパラメータとして, パラメータセットの値を用いる. 
         \begin{equation}
-	  Scaled\hspace{0.1cm}\gamma\hspace{0.05cm}(path(S_i),
+	  {\rm Scaled}\hspace{0.1cm}\gamma\hspace{0.05cm}(path(S_i),
           Bifurcation\hspace{1mm}\alpha,Bifurcation\hspace{1mm}\beta) > rand
         \end{equation}
         のとき分岐(Bifurcation)とする. すなわち$Branch_i$の$diam_i$を用いて\\
@@ -609,7 +609,8 @@
      線形分布はコンダクタンスは$Branch$ごとに線形に変化させるという手法
      である.\cite{torben2009systematic}.
      ガウス分布は$Comp$ごとにコンダクタンスを変化させ, 線形分布の場合よりも細かくコンダクタンス
-     分布を設定できる. 
+     分布を設定できる. さらに線形分布と異なり, 樹状突起の一部のみに高いコンダクタンス分布を
+     持たせるなど, 非線形なコンダクタンス分布を表現できる. 
      $Soma$に対してはコンダクタンスを分布させず,
      ${\overline{g}_{soma}}_{{\rm Ka}} = {{\overline{g}}_{soma}}_{\rm CaT} = 0$とした.
      以下に$Comp_{i,j}$に対するコンダクタンス値の決定方法を述べる. 
@@ -638,9 +639,9 @@
          また$Dendrite_i$での最大のpath($Comp_{i,j'}$)を
          max(Path($Comp_{i,j'}$))とする.
          この二つの長さの比を\\
-         $path\hspace{1mm}ratio(Comp_{i,j})$とし,
+         path\hspace{1mm}ratio($Comp_{i,j}$)とし,
          \begin{equation}
-         path\hspace{1mm}ratio(Comp_{i,j}) = \frac{Comp_{i,j}}{{\rm max(Path(}Comp_{i,j'}))}
+         {\rm path}\hspace{1mm}{\rm ratio}(Comp_{i,j}) = \frac{Comp_{i,j}}{{\rm max(Path(}Comp_{i,j'}))}
          \end{equation}
          とする. 
          このとき平均値$\mu$, 標準偏差$\sigma$のガウス分布から実数$x$に対する確率密度を
@@ -654,11 +655,11 @@
          
        \begin{align}
          {\overline{g}_{\rm Ka}}_{i,j} &=
-         \frac{{\rm N}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+         \frac{{\rm N}({\rm path}\hspace{1mm}{\rm ratio}(Comp_{i,j}),{\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm Ka}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
               {{\rm Ka}\hspace{1mm}Gaus\hspace{1mm}Max}
               \times {\rm Ka}\hspace{1mm}peak \\
          {\overline{g}_{\rm CaT}}_{i,j} &=
-         \frac{{\rm N}(path\hspace{1mm}ratio(Comp_{i,j}),{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
+         \frac{{\rm N}({\rm path}\hspace{1mm}{\rm ratio}(Comp_{i,j}),{\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\mu,({\rm CaT}\hspace{1mm}Gausian\hspace{1mm}\sigma)^2)}
               {{\rm CaT}\hspace{1mm}Gaus\hspace{1mm}Max}
               \times {\rm CaT}\hspace{1mm}peak
        \end{align}
@@ -681,9 +682,11 @@
    と表される.   
    また, ある世代数$g$での$i$番目の個体を$u_{g,i}$と表す. 
    この遺伝アルゴリズムにおける遺伝子は個体$u_{g,i}$の持つパラメータセット$P_{g,i,1},P_{g,i,2}$
-   である. 
+   である. また, 世代数$g = 1$における個体のパラメータの初期値は$P_{1,i,1},P_{1,i,2}$ともに
+   以下の表\ref{sigma_M_init}に示す値を用いる. 表\ref{sigma_M_init}中の記号
+   U($\alpha,\beta$)は$[\alpha,\beta]$から一様乱数を1つ与える関数であるとする. 
    本研究の遺伝アルゴリズムでは, エリート保存, 一点交叉, 突然変異を用いた.
-   以下にその詳細を述べる. 
+   以下にその詳細を述べる.
    \subsection{個体評価}
      各世代$g$で個体$u_{g,i}$から神経細胞形態$Neuron_{g,i}$を生成した後,
      以下のシミュレーションプロトコルを実行する.
@@ -760,7 +763,8 @@
          \end{align}
          
          \begin{equation}
-  E_{g,i} = 100 - (Function\hspace{1mm}Minus_{g,i} + Morphology\hspace{1mm}Minus_{g,i} + Conductance\hspace{1mm}Minus_{g,i})
+           E_{g,i} = 100 - (Function\hspace{1mm}Minus_{g,i} + Morphology\hspace{1mm}Minus_{g,i} + Conductance\hspace{1mm}Minus_{g,i})
+           \label{E_equation}
          \end{equation}
 
      \end{itemize}
@@ -786,7 +790,7 @@
          \end{itemize}
          この条件に当てはまったとき, 評価値$E_{g,i}$は
          \begin{equation}
-           E_{g,i} = G(-50,5^2) % <- この書き方はあってるのか
+           E_{g,i} = {\rm G}(-50,5^2) % <- この書き方はあってるのか
            \label{penalty}
          \end{equation}
          とする. 
@@ -876,10 +880,10 @@
 		 \end{equation}
          \end{itemize}
        \item \textbf{突然変異 Mutation}\\
-        パラメータセットの各項目に対して0.65の確率でガウス分布G($\mu$,${\sigma}_M$)に従う変動を与える. すなわち, あるパラメータ値
+        パラメータセットの各項目に対して0.65の確率でガウス分布G($\mu$,${{\sigma}_M}^2$)に従う変動を与える. すなわち, あるパラメータ値
          $p_i$に対して, 新しいパラメータ値${p'}_i$は
          \begin{equation}
-           {p'}_i = p_i + G(p_i,{{\sigma}_M}^2)
+           {p'}_i = p_i + {\rm G}(p_i,{{\sigma}_M}^2)
            \label{Mutation}
          \end{equation}
          となる. ここで用いる${\sigma}_M$は突然変異を与える対象のパラメータによって以下の表\ref{sigma_M}に示される
@@ -887,33 +891,33 @@
          ${p'}_i$が表\ref{sigma_M}に示される値域に収まらない場合は再度式\ref{Mutation}を用いて
          ${p'}_i$を取り直す. 
          \begin{table}[H]
-           \caption{${\sigma}_M$パラメータ}
-           \label{sigma_M}
+           \caption{${\sigma}_M$と各パラメータの初期値}
+           \label{sigma_M_init}
            \begin{center}
-	     \begin{tabular}[t]{|l|c|c|c|} \hline % <- あとパラメータの初期値
-           \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{${\sigma}_M$} & \multicolumn{1}{c|}{値域}\\ \hline \hline
-               \textit{Segment Length}            & 1                 & (0, $\infty$] \\ \hline
-	       \textit{Stem diameter}		  & 0.1		      & (0, 0.15] \\ \hline
-	       \textit{Stem elevation}		  & 2		      & ($-{\infty}$, ${\infty}$)\\ \cline{1-1}
-	       \textit{Stem rotation}		  & 		      & \\ \cline{1-1}
-	       \textit{Branch elevation} $\mu$	  & 		      &  \\ \cline{1-1}
-	       \textit{Branch rotation} $\mu$	  & 		      & \\ \hline
-	       \textit{Branch elevation} $\sigma$ & 0.5		      & ($-{\infty}$, ${\infty}$) \\ \cline{1-1}
-	       \textit{Branch rotation} $\sigma$  & 		      & \\ \hline
-	       \textit{Bifurcation} $\alpha$	  & 0.1		      & (1, ${\infty}$) \\ \cline{1-1}
-	       \textit{Termination} $\alpha$	  & 		      & \\ \hline
-	       \textit{Bifurcation} $\beta$	  & 3		      & (1, ${\infty}$) \\ \cline{1-1}
-	       \textit{Termination} $\beta$	  & 		      & \\ \hline
-	       Ka \textit{Stem conductance}	  & 0.001	      & [0, 0.22] \\ \cline{1-1}
-	       Ka \textit{peak}			  &      	      & \\ \hline
-	       CaT \textit{Stem conductance}	  & 0.05$\cdot10^{-5}$ & [0, 0.0022] \\ \cline{1-1}
-	       CaT \textit{peak}		  &                   & \\ \hline
-	       Ka \textit{taper rate}		  & 0.1		      & ($-{\infty}$, ${\infty}$) \\ \cline{1-1}
-	       CaT \textit{taper rate}		  &     	      & \\ \hline
-	       Ka \textit{Gausian} $\mu$	  & 0.05	      & [0, 1] \\ \cline{1-1}
-	       CaT \textit{Gausian} $\mu$	  & 	              & \\ \hline
-	       Ka \textit{Gausian} $\sigma$	  & 0.05	      & (0, ${\infty}$)\\ \cline{1-1}
-	       CaT \textit{Gausian} $\sigma$	  &     	      & \\ \hline
+	     \begin{tabular}[t]{|l||c|c|c|c|} \hline
+           \multicolumn{1}{|c}{パラメータ名} & \multicolumn{1}{|c|}{${\sigma}_M$} & \multicolumn{1}{c|}{値域} & \multicolumn{1}{c|}{初期値}\\ \hline \hline
+               \textit{Segment Length}            & 1                 & (0, $\infty$] & U(5,30)\\ \hline
+	       \textit{Stem diameter}		  & 0.1		      & (0, 0.15]     & U(0.2,10)\\ \hline
+	       \textit{Stem elevation}		  & 2		      & ($-{\infty}$, ${\infty}$) & U(-80,80)\\ \hline
+	       \textit{Stem rotation}		  & 2		      & ($-{\infty}$, ${\infty}$) & U(0,360)\\ \hline
+	       \textit{Branch elevation} $\mu$	  & 2		      & ($-{\infty}$, ${\infty}$) & U(0,8)\\ \hline
+	       \textit{Branch rotation} $\mu$	  & 2		      & ($-{\infty}$, ${\infty}$) & U(0,8)\\ \hline
+	       \textit{Branch elevation} $\sigma$ & 0.5		      & ($-{\infty}$, ${\infty}$) & 10 \\ \hline
+	       \textit{Branch rotation} $\sigma$  & 0.5		      & ($-{\infty}$, ${\infty}$) & 10\\ \hline
+	       \textit{Bifurcation} $\alpha$	  & 0.1		      & (1, ${\infty}$) & U(0,4) + 1\\ \hline
+	       \textit{Termination} $\alpha$	  & 0.1		      & (1, ${\infty}$) & U(0,4) + 1\\ \hline
+	       \textit{Bifurcation} $\beta$	  & 3		      & (1, ${\infty}$) & U(90,170)\\ \hline
+	       \textit{Termination} $\beta$	  & 3		      & (1, ${\infty}$)  & U(5,50)\\ \hline
+	       Ka \textit{Stem conductance}	  & 0.001	      & [0, 0.22] & U(0,0.08)\\ \hline
+	       Ka \textit{peak}			  & 0.001     	      & [0, 0.22] & U(0,0.22)\\ \hline
+	       CaT \textit{Stem conductance}	  & 0.05$\cdot10^{-5}$ & [0, 0.0022] & U(0,0.0001)\\ \hline
+	       CaT \textit{peak}		  & 0.05$\cdot10^{-5}$ & [0, 0.0022] & U(0,0.0022)\\ \hline
+	       Ka \textit{taper rate}		  & 0.1		      & ($-{\infty}$, ${\infty}$) & U(0.85,1.15)\\ \hline
+	       CaT \textit{taper rate}		  & 0.1    	      & ($-{\infty}$, ${\infty}$) & U(0.85,1.15)\\ \hline
+	       Ka \textit{Gausian} $\mu$	  & 0.05	      & [0, 1] & U(0,1)\\ \hline
+	       CaT \textit{Gausian} $\mu$	  & 0.05              & [0, 1] & U(0,1)\\ \hline
+	       Ka \textit{Gausian} $\sigma$	  & 0.05	      & (0, ${\infty}$) & U($10^{-3}$,1.5)\\ \hline
+	       CaT \textit{Gausian} $\sigma$	  & 0.05    	      & (0, ${\infty}$) & U($10^{-3},1.5$)\\ \hline
 	     \end{tabular}					     
 	   \end{center}						     
          \end{table}
@@ -933,8 +937,9 @@
    以上の方法を用いて行った実験の設定について詳述する. 
    \subsection{実験における独立変数}
      本実験で操作する独立変数について説明する. 独立変数はKa, CaTイオンチャネルの有無,
-     2種類のシナプスを活性化させる時間差${\Delta}t$, 樹状突起上のコンダクタンス分布様式
-     である. それぞれの変数の組に対して上記の遺伝アルゴリズムを用い, 最適な$Neuron$を求めた.
+     2種類のシナプスを活性化させる時間差${\Delta}t$, 樹状突起上のコンダクタンス分布様式,
+     個体評価(式\ref{E_equation})におけるコンダクタンスへの考慮の有無での4種類である. 
+     それぞれの変数の総当たりの組に対して上記の遺伝アルゴリズムを用い, 最適な$Neuron$を求めた.
      また, いずれの試行においても試行数は10回とした. 
      \begin{enumerate}
        \item \textbf{Ka, CaTイオンチャネルの有無} \\
@@ -949,7 +954,7 @@
            \label{ion-channel_pattern}
            \begin{center}
              \begin{tabular}[h]{|c||c|} \hline
-               No. & イオンチャネル \\ \hline \hline
+                & イオンチャネル \\ \hline \hline
                1 & なし(Passive) \\ \hline
                2 & Ka \\ \hline
                3 & CaT \\ \hline
@@ -966,7 +971,7 @@
            \label{Delta_t_pattern}
            \begin{center}
              \begin{tabular}[h]{|c||c|} \hline
-               No. & ${\Delta}t$[ms] \\ \hline \hline
+                & ${\Delta}t$[ms] \\ \hline \hline
                1 & 5 \\ \hline
                2 & 10 \\ \hline
                3 & 15 \\ \hline
@@ -985,13 +990,37 @@
            \label{conductance_pattern}
            \begin{center}
              \begin{tabular}[h]{|c||c|} \hline
-               No. & コンダクタンス分布様式 \\ \hline \hline
+                & コンダクタンス分布様式 \\ \hline \hline
                1 & 線形分布 \\ \hline
                2 & ガウス分布 \\ \hline
              \end{tabular}
            \end{center}
          \end{table}
-     \end{enumerate}
+         
+       \item \textbf{個体評価におけるコンダクタンス量の評価}
+         個体評価にコンダクタンスの量を考慮する場合と, しない場合で式\ref{E_equation}の
+         $F$値, 細胞形態, コンダクタンス量に対する重みの値に以下の表\ref{E_ratio}の値を
+         用いた.
+         \begin{table}[H]
+           \caption{個体評価に使用する重み}
+           \label{E_ratio}
+           \begin{center}
+             \begin{tabular}[h]{|c||c|c|c|} \hline
+               &{\textit Function ratio}  & {\textit Morpho ratio} & {\textit Conductance ratio} \\ \hline \hline
+               1, コンダクタンスの考慮なし & 75 & 25 & 0\\ \hline
+               2, コンダクタンスの考慮あり & 75 & 20 & 5\\ \hline
+             \end{tabular}
+           \end{center}
+         \end{table}
+         コンダクタンス考慮なしの重みの組は, Passiveタイプの神経細胞のシミュレーションにて先行研究の結果を再現することが
+         できた値の組である. {\textit Morpho ratio}と{\rm Conductance ratio}は大きな値をとるほど, $Neuron$の大きさと
+         コンダクタンス分布の自由度を低下させると考えられ, input-order detectionを実現する上で負の効果を持つと
+         考えられる. よってコンダクタンスの考慮ありの場合の{\textit Function ratio}と,
+         {\textit Morpho ratio}と{\rm Conductance ratio}の和の比はコンダクタンス考慮なしの場合と等しくなるようにした. 
+     \end{enumerate}     
+   \subsection{解析項目}
+     
+     
      
      %
      % やっぱり解析項目として, どういう携帯量を解析したのかは説明しておいたほうがいい
