@@ -7,7 +7,7 @@
    グラフ上部の記号は各${\Delta}t$において, ウェルチのt検定($\alpha = 0.05$)を行い有意差がみられたことを
    示している. 記号($\star$)は本研究手法のPassiveの結果とGausian, Linerの結果を比較し, それぞれの色で示している.
    記号($\#$)はGausianとreduced-Gausian, Linerとreduced-Linerの組で検定を行った結果である.
-   また記号($+$)はreduced-Gausianとreduced-Linerの組で検定を行った結果を示している. 
+   また緑色の記号($+$)はreduced-Gausianとreduced-Linerの組で検定を行った結果を示している. 
    \vspace{-0.5cm}
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
@@ -36,24 +36,6 @@
          \label{k_TREE_K_ratio}
        \end{subfigure}
 
-       \vspace{-0.3cm}
-       \begin{subfigure}{0.5\columnwidth}
-         \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/k_test_legend.eps} 
-       \end{subfigure}
-       \begin{subfigure}{0.5\columnwidth}
-         \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/test_legend.eps} 
-       \end{subfigure}
-
-       \vspace{-1.6cm}
-       \caption{Kaチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
-       \label{Ka_Result1}
-     \end{figure}
-
-     \vspace*{-1.7cm}
-     \begin{figure}[H]
-       
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_Lower_K_ratio.eps}
@@ -78,6 +60,62 @@
        \end{subfigure}
 
        \vspace{-1.6cm}
+       \caption{Kaチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
+       \label{Ka_Result1}
+     \end{figure}
+
+   \vspace{-0.5cm}
+     \begin{figure}[H]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_Lower_Diam.eps} 
+         \caption{Lower Dendriteの直径}
+         \label{k_Lower_Diam}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_Upper_Diam.eps}
+         \caption{Upper Dendriteの直径}
+         \label{k_Upper_Diam}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_N_Lower_bif.eps}
+         \caption{Lower Dendriteの分岐数}
+         \label{k_Lower_bif}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_N_Upper_bif.eps}
+         \caption{Upper Dendriteの分岐数}
+         \label{k_Upper_bif}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_N_Lower_Syn.eps}
+         \caption{Lower Dendriteのシナプス数}
+         \label{k_Lower_Syn}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_test_N_Upper_Syn.eps}
+         \caption{Upper Dendriteのシナプス数}
+         \label{k_Upper_Syn}
+       \end{subfigure}
+
+       \vspace{-0.3cm}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/k_test_legend.eps} 
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/test_legend.eps} 
+       \end{subfigure}
+
+       \vspace{-1.6cm}
        \caption{Kaチャネルを導入した際の結果2} %ページレイアウトが決定してから微調整する
        \label{Ka_Result2}
      \end{figure}
@@ -88,8 +126,12 @@
   図\ref{k_TREE_K_ratio}よりコンダクタンスを考慮する場合でも神経細胞
   のKaコンダクタンス含有率はあまり変化がないことがわかる.
 
-  図\ref{Ka_V}はKaコンダクタンスを導入した際のシミュレーションの一例である. 実線がKaコンダクタンスを導入したモデルの膜電位変動波形であり, 
-  破線はその神経細胞からKaを不活性化($g_{Ka} = 0$)した場合の膜電位変動である. 
+  また図\ref{Ka_Result2}をみると, 神経細胞のシナプスの個数はPassiveの結果と比較して
+  増加する傾向にあることがわかる. 
+
+  図\ref{Ka_V}はKaコンダクタンスを導入した際のシミュレーションの一例である. 
+実線がKaコンダクタンスを導入したモデルの膜電位変動波形であり, 
+  破線はその神経細胞からKaを不活性化($\overline{g}_{Ka} = 0$)した場合の膜電位変動である. 
   図\ref{Ka_V}からわかるようにKaコンダクタンスを導入すると, 細胞体での脱分極は小さくなる.
 
   \vspace{-0.5cm}
@@ -128,7 +170,7 @@
    図\ref{k_liner_dist_dt10}は線形分布を用い, 図\ref{k_gaus_dist_dt10}
    はガウス分布を用いている. また図\ref{k_liner_reduced_dist_dt10}と
    図\ref{k_gaus_reduced_dist_dt10}はそれぞれのコンダクタンス分布様式で,
-   評価式においてコンダクタンスの考慮を行った場合の結果である.
+   評価式においてコンダクタンスの考慮を行い, 有為差があったことを示す. 
    \vspace{-0.5cm}
    \begin{figure}[H]
      \hspace*{-2cm}
@@ -140,9 +182,9 @@
      \end{subfigure}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt10.eps}
-       \caption{ガウス分布}
-       \label{k_gaus_dist_dt10}
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt10.eps}
+       \caption{線形分布(reduced)}
+       \label{k_liner_reduced_dist_dt10}
      \end{subfigure}
 
      \vspace{-1.5cm}
@@ -155,9 +197,9 @@
      \hspace*{-2cm}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt10.eps}
-       \caption{線形分布(reduced)}
-       \label{k_liner_reduced_dist_dt10}
+       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_Gaus_75_0_K_distribution_dt10.eps}
+       \caption{ガウス分布}
+       \label{k_gaus_dist_dt10}
      \end{subfigure}
      \begin{subfigure}{0.62\columnwidth}
        \centering
@@ -166,7 +208,7 @@
        \label{k_gaus_reduced_dist_dt10}
      \end{subfigure}
      
-     \caption{${\Delta}t = 10$[ms], でのKaコンダクタンス分布}
+     \caption{${\Delta}t = 10$[ms]でのKaコンダクタンス分布}
      \label{k_Ka_dist_dt10}
       \end{figure}
 
@@ -206,10 +248,9 @@
        \label{k_gaus_reduced_dist_dt15}
      \end{subfigure}
      
-     \caption{${\Delta}t = 15$[ms], でのKaコンダクタンス分布}
+     \caption{${\Delta}t = 15$[ms]でのKaコンダクタンス分布}
      \label{k_Ka_dist_dt15}
    \end{figure}
 
    図\ref{k_gaus_reduced_dist_dt15}, 図\ref{k_upper_k_ratio}からわかるようにガウス分布を用いた場合
    ではUpper Dendriteの根元付近で高いKaコンダクタンスの分布が見られる.
-   

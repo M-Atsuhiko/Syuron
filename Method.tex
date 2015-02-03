@@ -637,7 +637,12 @@
          $length$の合計をpath($Comp_{i,j}$)とする. 
          また$Dendrite_i$での最大のpath($Comp_{i,j'}$)を
          max(Path($Comp_{i,j'}$))とする.
-         この二つの長さの比を$path\hspace{1mm}ratio(Comp_{i,j}) = \frac{Comp_{i,j}}{{\rm max(Path(}Comp_{i,j'}))}$とする. 
+         この二つの長さの比を\\
+         $path\hspace{1mm}ratio(Comp_{i,j})$とし,
+         \begin{equation}
+         path\hspace{1mm}ratio(Comp_{i,j}) = \frac{Comp_{i,j}}{{\rm max(Path(}Comp_{i,j'}))}
+         \end{equation}
+         とする. 
          このとき平均値$\mu$, 標準偏差$\sigma$のガウス分布から実数$x$に対する確率密度を
          返す関数N($x,\mu,{\sigma}^2$)を用いて
          \begin{align}
@@ -735,8 +740,7 @@
          ${\rm CaT}\hspace{1mm}{{amount}_{max}}_g$, Kaコンダクタンスの最大の
          コンダクタンス量を${\rm Ka}\hspace{1mm}{{amount}_{max}}_g$とする.
          ここで, コンダクタンス量とはその$Neuron$の各コンパートメントの表面積にコンダクタンス
-         をかけた値の総量である. 
-         このとき, ある個体$u_{g,i}$の評価値$E_{g,i}$は以下のように決定する. \\
+         をかけた値の総量である. このとき, ある個体$u_{g,i}$の評価値$E_{g,i}$は以下のように決定する.
          まず個体$u_{g,i}$に分布するコンダクタンスの量を相対的に表す. その値を
          $Conductance\hspace{1mm}ratio_{g,i}$とし, 以下の式によって求める. 
          ここで$N\hspace{1mm}Conductance$は神経細胞に導入しているイオンチャネルの
