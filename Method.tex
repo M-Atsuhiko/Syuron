@@ -32,8 +32,8 @@
    Redシナプティックゾーンについても同様にRedシナプスとする. 
    この神経細胞において, 一方のシナプティックゾーンの全てのシナプスを時刻$t$で活性化
    させ, その${\Delta}t[{\rm ms}]$後に他方のシナプティックゾーンのシナプスを活性化させる.
-   その際に細胞体で観測される最大の膜電位上昇量を$R$とする. Blueシナプスグループの
-   シナプスが先に活性化する場合の$R$を$R_{B{\to}R}$とし, Redシナプスグループのシナプスが
+   その際に細胞体で観測される最大の膜電位上昇量を$R$とする. Blueシナプティックゾーンの
+   シナプスが先に活性化する場合の$R$を$R_{B{\to}R}$とし, Redシナプティックゾーンのシナプスが
    先に活性化する場合の$R$を$R_{R{\to}B}$とする. このときinput-order detectionの
    機能性($F$)は以下の式によって定量的に評価することができる. 
 
@@ -384,6 +384,7 @@
        また, この場合, 親$Branch$の$diam$を$Minimum\hspace{1mm}diameter$
 	    に設定し直す.ここで$Minimum\hspace{1mm}diameter = 0.15$[$\mu$m]である. 
     \end{itemize}
+    これらのヒューリスティックは神経細胞形態を作成するために使用されることが多い. \cite{burke1992parsimonious}
 
     \subsection{$Branch$に対する三次元座標の設定}
      $length_i$, $elevation_i$, $rotation_i$の情報を用いて三次元空間上での$Branch_i$の座標情報を
@@ -459,7 +460,7 @@
      単一コンパートメントの膜電位($V_i$)は以下の式によって計算される.
      %g_leakは平衡電位 = -70になるように調節している
      \begin{equation}
-       Cm\frac{dV}{dt} = g_{leak}(V - E_{leak}) + I_{CaT} + I_{Ka}
+       Cm\frac{dV}{dt} = g_{leak}(V - E_{leak}) + I_{{\rm CaT}} + I_{{\rm Ka}}
        %このcmは小文字か大文字か?
        \label{V_i}
      \end{equation}
@@ -613,6 +614,20 @@
      持たせるなど, 非線形なコンダクタンス分布を表現できる. 
      $Soma$に対してはコンダクタンスを分布させず,
      ${\overline{g}_{soma}}_{{\rm Ka}} = {{\overline{g}}_{soma}}_{\rm CaT} = 0$とした.
+     また, コンダクタンスの取りうるCaTコンダクタンスの最大値を\textit{Max} CaT, Kaの最大値を\textit{Max} Kaとし,
+     以下の表に示す.
+
+     \begin{table}[H]
+       \caption{最大コンダクタンス量}
+       \label{sigma_M_init}
+       \begin{center}
+         \begin{tabular}[H]{c|c}
+           \textit{Max} CaT [${\rm S/cm^2}$]& \textit{Max} Ka [${\rm S/cm^2}$] \\ \hline \hline
+           0.0022 & 0.22 \\ 
+         \end{tabular}
+       \end{center}
+     \end{table}
+
      以下に$Comp_{i,j}$に対するコンダクタンス値の決定方法を述べる. 
      \begin{itemize}
      \item \textbf{線形分布の場合}\\
@@ -696,15 +711,17 @@
        Redシナプスを活性化させる時刻を$t_{Red}$[ms]とする.
        シミュレーション時間はCaTコンダクタンスが単独で分布している場合は100ms, それ以外の場合
        は50msである. また, $Neuron_{g,i}$の細胞体$Soma_{g,i}$で観測される最大の膜電位上昇量を
-       $R$とする. シミュレーションは以下の表に示される$t_{Blue}$, $t_{Red}$の組みを用いて,
+       $R$とする. シミュレーションは以下の表\ref{synapse_time}に示される$t_{Blue}$, $t_{Red}$の組みを用いて,
        1つの$Neuron_{g,i}$につき計4回行われる.
        シミュレーションはNEURONシミュレータで行い, CVodeアルゴリズムを用いた. % <- NEURON シミュレータに関して書いた方がいいか？
        CVodeアルゴリズムを用いる際のエラー許容量は$10^{-5}$に設定した. 
        
        \begin{table}[H]
+         \caption{シナプス活性化時刻}
+         \label{synapse_time}
          \begin{center}
            \begin{tabular}[H]{|c||c|c||c|} \hline
-             No. & $t_{Blue}$[ms] & $t_{Red}$[ms] & $R$ \\ \hline \hline
+               & $t_{Blue}$[ms] & $t_{Red}$[ms] & $R$ \\ \hline \hline
              1 & 5 & Not activated & $R_{Blue}$\\ \hline
              2 & Not activated & 5 & $R_{Red}$\\ \hline
              3 & 5 & ${\Delta}t$ + 5 & $R_{Blue \to Red}$\\ \hline
@@ -782,7 +799,7 @@
          以下に示される場合は$\mu = -50$, $\sigma = 5$のガウス分布から乱数を1つ発生させ,
          その値を評価値$E_{i,g}$とした.
          これは神経細胞での発火や, 膜電位の振動を % <- 細胞体での発火を抑制する意味は? ここコンダクタンスの時のみの考慮にしなくてもよさそう
-         抑制するためである.
+         抑制し, シミュレーションの時間中に最大の上昇幅がとれるようにするためである. 
          \begin{itemize}
            \item $ {R_{Blue}}_i < 2$または$ {R_{Red}}_i < 2$のとき
            \item ${R_{Blue}}_i > 25$または${R_{Red}}_i > 25$のとき
@@ -908,12 +925,12 @@
 	       \textit{Termination} $\alpha$	  & 0.1		      & (1, ${\infty}$) & U(0,4) + 1\\ \hline
 	       \textit{Bifurcation} $\beta$	  & 3		      & (1, ${\infty}$) & U(90,170)\\ \hline
 	       \textit{Termination} $\beta$	  & 3		      & (1, ${\infty}$)  & U(5,50)\\ \hline
-	       Ka \textit{Stem conductance}	  & 0.001	      & [0, 0.22] & U(0,0.08)\\ \hline
-	       Ka \textit{peak}			  & 0.001     	      & [0, 0.22] & U(0,0.22)\\ \hline
-	       CaT \textit{Stem conductance}	  & 0.05$\cdot10^{-5}$ & [0, 0.0022] & U(0,0.0001)\\ \hline
-	       CaT \textit{peak}		  & 0.05$\cdot10^{-5}$ & [0, 0.0022] & U(0,0.0022)\\ \hline
-	       Ka \textit{taper rate}		  & 0.1		      & ($-{\infty}$, ${\infty}$) & U(0.85,1.15)\\ \hline
-	       CaT \textit{taper rate}		  & 0.1    	      & ($-{\infty}$, ${\infty}$) & U(0.85,1.15)\\ \hline
+	       Ka \textit{Stem conductance}	  & 0.001	      & [0, \textit{Max} Ka] & U(0,0.08)\\ \hline
+	       Ka \textit{peak}			  & 0.001     	      & [0, \textit{Max} Ka] & U(0,\textit{Max} Ka)\\ \hline
+	       CaT \textit{Stem conductance}	  & 0.05$\cdot10^{-5}$ & [0, \textit{Max} CaT] & U(0,0.0001)\\ \hline
+	       CaT \textit{peak}		  & 0.05$\cdot10^{-5}$ & [0, \textit{Max} CaT] & U(0,\textit{Max} CaT)\\ \hline
+	       Ka \textit{taper rate}		  & 0.1		      & [0 , ${\infty}$) & U(0.85,1.15)\\ \hline
+	       CaT \textit{taper rate}		  & 0.1    	      & [0 , ${\infty}$) & U(0.85,1.15)\\ \hline
 	       Ka \textit{Gausian} $\mu$	  & 0.05	      & [0, 1] & U(0,1)\\ \hline
 	       CaT \textit{Gausian} $\mu$	  & 0.05              & [0, 1] & U(0,1)\\ \hline
 	       Ka \textit{Gausian} $\sigma$	  & 0.05	      & (0, ${\infty}$) & U($10^{-3}$,1.5)\\ \hline
@@ -1019,10 +1036,35 @@
          {\textit Morpho ratio}と{\rm Conductance ratio}の和の比はコンダクタンス考慮なしの場合と等しくなるようにした. 
      \end{enumerate}     
    \subsection{解析項目}
-     
-     
-     
-     %
-     % やっぱり解析項目として, どういう携帯量を解析したのかは説明しておいたほうがいい
-     %
+     実験によって得られた最終世代における最良個体の形態, コンダクタンス分布について, 以下の項目について解析を行った. 
+     \begin{itemize}
+       \item \textbf{機能性$F$の値}
+       \item \textbf{長さ[${\mu}m$]}\\
+         神経細胞の持つ全ての$Branch$の$length$の和
+       \item \textbf{体積[${\mu}m^3$]}
+         神経細胞の全ての$Branch$の体積の和
+       \item \textbf{CaTコンダクタンス含有率}
+         神経細胞のCaTコンダクタンス含有率は以下のように定義する. 
+         神経細胞の各コンパートメント$Comp_{i}$について, そのCaTコンダクタンスを${\overline{g}_{CaT}}_{i}$, 
+         表面積を$S_{i}$とする. 神経細胞のコンパートメントの個数を$N_C$とする. 
+         神経細胞のCaTコンダクタンス含有率CaT \textit{ratio}は最大CaTコンダクタンスを用いて, 
+         \begin{equation}
+           {\rm CaT}\hspace{1mm}ratio = \frac{{\sum}^{N_C}_{i = 1}S_{i}\cdot{\overline{g}_{CaT}}_{i}}
+           {{\sum}^{N_C}_{i = 1}S_{i}\cdot Max\hspace{1mm}{\rm CaT}}
+         \end{equation}
+
+       \item \textbf{樹状突起の直径}
+         本研究の形態生成では, 樹状突起の$Branch$の太さはStemの値をもとに決定される. そのためStemの直径を
+         その樹状突起の代表的な太さとして用いた. 
+
+       \item \textbf{樹状突起の分岐数}
+         樹状突起に含まれる分岐の個数の合計
+
+       \item \textbf{樹状突起のシナプス数}
+         樹状突起がもつシナプスの個数の合計
+
+       \item \textbf{Kaコンダクタンス含有率}
+         神経細胞のKaコンダクタンス含有率はCaTの場合と同様に定義する. 
+         
+     \end{itemize}
      

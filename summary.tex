@@ -1,0 +1,224 @@
+\documentclass[a4j,twocolumn, 10.5pt]{jarticle}
+\usepackage[dvipdfmx]{graphicx,color}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\renewcommand{\baselinestretch}{1.5}%double spaced%2.0
+\def\Vec#1{\mbox{\boldmath $#1$}}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\tr}{tr}
+\renewcommand{\baselinestretch}{1.0}
+%\setlength{\abovecaptionskip}{-5mm}
+%\setlength{\belowcaptionskip}{-5mm}
+
+\topmargin -60mm
+\textheight 270mm
+
+\title{\bf
+{時差入力に特異応答をみせる単一神経細胞の\\最適形態とコンダクタンス分布について\\}}
+\author{村上敦彦\\66612130070-3\\立命館大学大学院 情報理工学研究科\\計算神経科学研究室所属}
+\date{}
+
+\renewcommand{\topmargin}{-20mm}
+\oddsidemargin -15.5mm
+\textwidth 190mm
+\renewcommand{\textheight}{250mm}
+
+\columnsep 5mm
+\begin{document}
+\maketitle
+  %%%%%%%%%%%%%%%%
+  %%　 はじめに 　%%
+  %%%%%%%%%%%%%%%%
+\section{背景・目的}
+神経細胞の形態はその電気的な活動に影響を及ぼし, 神経の情報処理に対して何らかの意味を持つと
+考えられている\cite{segev2000untangling}. 
+しかし形態と情報処理機能の関係性については明らかになっていない. 
+先行研究ではこのような問題に対して遺伝的アルゴリズムの手法を用いたアプローチが行われている
+\cite{torben2009systematic}. 先行研究では単一の神経細胞に対してある機能を設定し, その機能を実現する
+神経細胞形態とコンダクタンスの分布を探索している.
+しかし問題点として, 神経細胞のコンダクタンスの量は
+考慮されていない点, コンダクタンスの分布は線形な変化を仮定している点, 細胞の体積を考慮していない点があった. 
+本研究ではこの問題点を改善するため神経細胞の持つコンダクタンスの量とその体積を考慮した最適化を行い, 
+コンダクタンス分布様式としてガウス分布に従うパターンも用意した. これらの条件を加えたとき, 
+神経細胞はどのような形態, コンダクタンス分布を示すのかを観察することが本研究の目的である. 
+
+  %%%%%%%%%%%%
+  %%  方法　 %%
+  %%%%%%%%%%%%
+\vspace{-0.7cm}
+\section{方法}
+  \subsection{神経細胞の機能}
+   神経細胞に設定する機能は, 樹状突起上の異なる2つの部位に, ある時間差
+   ${\Delta}t[{\rm ms}]$をもって入力刺激を与えたとき,
+   \begin{wrapfigure}{l}{11zw}
+     \vspace*{-\intextsep}
+     \includegraphics[width=11zw,clip]{./Images_Method/pass_neuron.png} 
+     \caption{神経細胞例}
+     \label{Neuron}
+   \end{wrapfigure}
+   入力の時間的順序によって細胞体での
+   脱分極量が変化する機能(input-order detection)である. 
+   図\ref{Neuron}に示すように, ある神経細胞が上下に樹状突起を伸ばし
+   それぞれにいくつかのシナプスを形成しているとする. 
+   下部の青いシナプス群を時刻$t$に活性化させ, 
+   その${\Delta}t[{\rm ms}]$後に上部の赤いシナプス群を活性化させる. 
+   その際に細胞体で観測される最大の膜電位上昇量を$R_{B{\to}R}$とし, 逆の順番でシナプスを
+   活性化させた場合の最大の膜電位上昇量を$R_{R{\to}B}$とする. 
+   このときinput-order detectionの
+   機能性($F$)は
+   \begin{equation}
+     F = \frac{R_{B{\to}R}}{R_{R{\to}B}}
+     \label{F}
+   \end{equation}
+   と表現できる. また本研究では大きい$F$の値を示す神経細胞について, 機能性の高い神経細胞であると定義する. 
+   図\ref{input-order_detection}は図\ref{Neuron}に示される神経細胞に
+   対し, ${\Delta}t = 15$[ms]としてシナプス入力を与えた際の細胞体の膜電位変動を示している. 
+   この場合, $R_{B{\to}R} = 6.29$, $R_{R{\to}B} = 4.75$より$F = 1.32$である.
+   \vspace{-0.8cm}
+   \begin{figure}[h]
+     \centering
+     \includegraphics[width=0.6\columnwidth]{./Images_Method/input_order_detection.eps} 
+     \vspace{-0.5cm}
+     \caption{input-order detection}
+     \label{input-order_detection}
+   \end{figure}
+   \vspace{-1cm}
+   \subsection{神経細胞形態の作成}
+   神経細胞の形態は確率的に作成した. 基本的な手法としてL-systemを使用し, 初期状態から枝の導入, 分岐, 伸張方向などを
+   確率的に決定する\cite{prusinkiewicz1990}. その際に使用する確率パラメータを遺伝アルゴリズムにおいて個体として扱い, 
+   形態の最適化を行った. 
+   \vspace{-0.5cm}
+   \subsection{シミュレーション}
+   作成した神経細胞をマルチコンパートメントモデルに変換し, NEURONシミュレータを用いてinput-order detectionの機能性を
+   調査した. その際に用いた単一コンパートメントの膜電位を表す式は以下のものである\cite{migliore1995computer}. 
+   \begin{equation}
+     Cm\frac{dV}{dt} = g_{leak}(V - E_{leak}) + I_{{\rm CaT}} + I_{{\rm Ka}}
+     \label{V_i}
+   \end{equation}
+   また, シナプスをもつコンパートメントには, シナプス電流として以下の項を上式の右辺に追加する.
+   \begin{equation}
+     (e^{-\frac{t}{{\tau}2}} - e^{-\frac{t}{{\tau}1}}) {\cdot} g_{syn} {\cdot} (V
+     - E_{syn})
+     \label{eq_syn}
+     \end{equation}
+   \vspace{-1.5cm}
+   \subsection{遺伝アルゴリズム}
+   神経細胞の形態を生成する際に用いる確率パラメータのセットを1つの個体として200個体, 500世代で
+   遺伝アルゴリズムを用いたパラメータ探索を行った. 個体の評価は
+   各世代における相対的な手法を用いた. 各世代における最大の$F$を$Max\hspace{1mm}F$, 形態の最大の体積を
+   $Max\hspace{1mm}Mor$, 最大のコンダクタンス量を$Max\hspace{1mm}Cond$とし, ある個体$u_i$の
+   $F_i$, 体積$Mor_i$, コンダクタンス量$Cond_i$を用いて評価値$E_i$を決定する. 
+   \begin{align}
+     E_i = 100 &- \{F_{ratio}\cdot (1 - \frac{F_i}{Max\hspace{1mm}F}) + Mor_{ratio}\cdot \frac{Mor_i}{Max\hspace{1mm}Mor} \notag\\ 
+     &+ Cond_{ratio}\cdot \frac{Cond_i}{Max\hspace{1mm}Cond}\}
+   \end{align}
+
+   ここで$F_{ratio}$, $Mor_{ratio}$, $Cond_{ratio}$は個体評価における重みを与える定数であり, 
+   $F_{ratio} + Mor_{ratio} + Cond_{ratio} = 100$とする. 本研究では個体評価においてコンダクタンス量の考慮をする場合と しない場合に
+   よって以下の重みを用いた.
+   \begin{tabular}[h]{|c||c|c|c|} \hline
+     & $F_{ratio}$ & $Mor_{ratio}$ & $Cond_{ratio}$ \\ \hline \hline
+     コンダクタンスの考慮なし & 75 & 25 & 0\\ \hline
+     コンダクタンスの考慮あり & 75 & 20 & 5\\ \hline
+   \end{tabular}
+
+  %%%%%%%%%%%%
+  %%  結果　 %%
+  %%%%%%%%%%%%
+\vspace{-0.5cm}
+\section{結果}
+  図\ref{Tsuishi_Relative}は神経細胞にコンダクタンスを分布させていないPassiveな膜特性の場合の結果である. 図中のRelativeは本研究手法による
+  結果であり, Torben et al. は先行研究手法を用いた場合の結果である. 
+  \begin{figure}[h]
+    \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_F.eps} 
+         \caption{$F$}
+         \label{Tsuishi_Relative_F}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/Tsuishi_Rerative_TREE_volume.eps} 
+         \caption{神経細胞の体積}
+         \label{Tsuishi_Relative_volume}
+       \end{subfigure}
+       \begin{subfigure}{\columnwidth}
+       \vspace{-0.5cm}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Tsuishi_Rerative_legend.eps} 
+       \end{subfigure}
+       \vspace{-2cm}
+       \caption{先行研究手法との比較}
+       \label{Tsuishi_Relative}
+     \end{figure}
+
+  以下の図\ref{Ka_CaT_result}は本研究手法においてKa, CaTコンダクタンスを導入した結果である. 樹状突起上のコンダクタンスの分布様式について, 
+  Gausianはガウス分布, Linerは線形分布を使用していることを示す. また-reducedとついているものは個体評価にコンダクタンス量を考慮している場合の
+  結果であることを示す. 
+  \begin{figure}[h]
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_test_TREE_K_ratio.eps}
+         \caption{Kaコンダクタンス含有率}
+         \label{ca_TREE_K_ratio}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_test_TREE_Ca_ratio.eps}
+         \caption{CaTコンダクタンス含有率}
+         \label{ca_TREE_Ca_ratio}
+       \end{subfigure}
+
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_test_F.eps}
+         \caption{$F$}
+         \label{Tsuishi_Relative_F}
+       \end{subfigure}
+       \begin{subfigure}{0.5\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_test_TREE_volume.eps}
+         \caption{神経細胞の体積}
+         \label{Tsuishi_Relative_volume}
+       \end{subfigure}
+
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.4\columnwidth]{./Images_Result/ca_test_legend.eps}
+         \includegraphics[width=0.4\columnwidth]{./Images_Result/test_legend.eps} 
+       \end{subfigure}
+       \vspace{-2cm}
+       \caption{Ka, CaTコンダクタンスを導入したときの結果}
+       \label{Ka_CaT_result}
+     \end{figure}
+
+%基本的な性質は変わらなかった
+%コンダクタンスを減少させることができた
+%Kaのdt=10,15[ms]ではLower Dendrite
+
+% ガウス分布を用いたことに対して, Fの大幅な増加, 減少はみられなかった
+%
+
+  %%%%%%%%%%%% 
+  %% 考察　 %%
+  %%%%%%%%%%%% 
+  \vspace{-1cm}
+ \section{考察}
+ 図\ref{Tsuishi_Relative}より, 本研究手法は先行研究手法とほぼ同様の$F$値の結果を
+ 少ない体積で実現できており, より有効な手法であることがわかる. 一方で図\ref{Ka_CaT_result}をみると, 
+ ガウス分布と線形分布で$F$の値, 神経細胞の体積などの形態特徴量には差がみられず, 
+ 分布様式の変化による細胞形態への影響は観察できなかった. また同様に, 個体評価にコンダクタンスの量への考慮
+ を導入しても, 形態的に変化は見られなかった. 
+  %%%%%%%%%%%%%%%%
+  %%   参考文献  %%
+  %%%%%%%%%%%%%%%%  
+%%\section*{参考文献}
+  \vspace{-0.5cm}
+ \bibliographystyle{jplain}
+ {\scriptsize
+ \bibliography{./biblio}
+ }
+
+\end{document}
