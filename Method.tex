@@ -460,7 +460,7 @@
      単一コンパートメントの膜電位($V_i$)は以下の式によって計算される.
      %g_leakは平衡電位 = -70になるように調節している
      \begin{equation}
-       Cm\frac{dV}{dt} = g_{leak}(V - E_{leak}) + I_{{\rm CaT}} + I_{{\rm Ka}}
+       Cm\frac{dV}{dt} = - g_{leak}{\cdot}(V - E_{leak}) - I_{{\rm CaT}} - I_{{\rm Ka}}
        %このcmは小文字か大文字か?
        \label{V_i}
      \end{equation}
@@ -494,8 +494,8 @@
      \begin{itemize}
        \item 電位依存型T型${\rm Ca^{2+}}$電流
          \begin{align}
-           I_{CaT} &= g_{CaT} {\cdot} ghk(V,cai,cao) \\                   
-           g_{CaT} &= \overline{g}_{CaT} {\cdot} m^2 {\cdot} h  \\
+           I_{{\rm CaT}} &= g_{{\rm CaT}} {\cdot} ghk(V,cai,cao) \\                   
+           g_{{\rm CaT}} &= \overline{g}_{{\rm CaT}} {\cdot} m^2 {\cdot} h  \\
            KTF &= \left(\frac{25.0}{293.15}\right) {\cdot} (T + 273.15) \\
            f &= \frac{KTF}{2} \\
            nu &= \frac{V}{f} \\
@@ -525,8 +525,8 @@
 
        \item A型K$^+$電流
          \begin{align}
-           I_{Ka} &= g_{Ka}{\cdot}(V - E_{K}) \\
-           g_{Ka} &= \overline{g}_{Ka}{\cdot}n{\cdot}l
+           I_{{\rm Ka}} &= g_{{\rm Ka}}{\cdot}(V - E_{{\rm K}}) \\
+           g_{{\rm Ka}} &= \overline{g}_{{\rm Ka}}{\cdot}n{\cdot}l
          \end{align}
          また, Kaコンダクタンスのゲート変数($n$および$l$)の挙動は以下の微分方程式によって表現される.
          \begin{align}
@@ -575,7 +575,7 @@
 	   $g_{pas}$ [${\rm S/cm^2}$]& $2.5 \times 10^{-5}$\\ \hline
 	   $E_{pas}$ [mV] & -70\\ \hline
            $g_{syn}$ [${\rm S/cm^2}$]& 0 \\ \hline
-           ${\tau}_{1}$ [ms] & 0.5\\ \hline
+           $bv {\tau}_{1}$ [ms] & 0.5\\ \hline
 	   ${\tau}_{2}$ [ms] & 2\\ \hline
          \end{tabular}
        \end{subtable}
