@@ -27,7 +27,7 @@
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \hspace*{-1cm}
-         \includegraphics[width=0.5\columnwidth]{./Images_Result/ca_test_legend.eps}
+         \includegraphics[width=0.5\columnwidth]{./Images_Result/k_ca_test_legend.eps}
          \includegraphics[width=0.5\columnwidth]{./Images_Result/test_legend.eps} 
        \end{subfigure}
               
@@ -36,7 +36,7 @@
      \end{figure}
      
      図\ref{k_ca_F}を見ると${\Delta}t = 5$[ms]以外の場合, どのコンダクタンス分布パターンでも
-     $F$の値は${\Delta}t$によらず1.7から1.8ほどになった. \\
+     $F$の値は${\Delta}t$に依らず1.7から1.8ほどになった. \\
 
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
@@ -130,205 +130,202 @@
      \end{figure}
 
 %付録にする
-     %% 以下に${\Delta}t = 15$[ms]で作成した神経細胞のKaコンダクタンス
-     %% 分布(図\ref{k_ca_K_dist_dt15}), CaTコンダクタンス分布(図\ref{k_ca_Ca_dist_dt15})を示す.
-     %% また同様に${\Delta}t = 30$[ms]で作成した神経細胞のKaコンダクタンス分布を図
-     %% \ref{k_ca_K_dist_dt30}に, CaTコンダクタンス分布を図\ref{k_ca_Ca_dist_dt30}に
-     %% 示す. 
-     %% %% \begin{figure}[H]
-     %% %%   \begin{subfigure}{0.5\columnwidth}
-     %% %%     \centering
-     %% %%     \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_liner_TREE_sample_dt20_C5.png}
-     %% %%     \caption{線形分布}
-     %% %%     \label{k_ca_liner_morpho}
-     %% %%   \end{subfigure}
-     %% %%          \begin{subfigure}{0.8\columnwidth}
-     %% %%     \centering
-     %% %%     \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_gaus_TREE_sample_dt20_C5.png}
-     %% %%     \caption{ガウス分布}
-     %% %%     \label{k_ca_gaus_morpho}
-     %% %%   \end{subfigure}
-
-     %% %%   \caption{Kaチャネル, CaTチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
-     %% %%   \label{k_ca_morpho}
-     %% %% \end{figure}
-
+     以下に${\Delta}t = 15$[ms]で作成した神経細胞のKaコンダクタンス
+     分布(図\ref{k_ca_K_dist_dt15}), CaTコンダクタンス分布(図\ref{k_ca_Ca_dist_dt15})を示す.
+     また同様に${\Delta}t = 20$[ms]で作成した神経細胞のKaコンダクタンス分布を図
+     \ref{k_ca_K_dist_dt20}に, CaTコンダクタンス分布を図\ref{k_ca_Ca_dist_dt20}に
+     示す. 
      %% \begin{figure}[H]
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
+     %%   \begin{subfigure}{0.5\columnwidth}
      %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt15.eps}
+     %%     \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_liner_TREE_sample_dt20_C5.png}
      %%     \caption{線形分布}
-     %%     \label{k_ca_K_liner_reduced_dist}
+     %%     \label{k_ca_liner_morpho}
      %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
+     %%          \begin{subfigure}{0.8\columnwidth}
      %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt15.eps}
-     %%     \caption{線形分布(reduced)}
-     %%     \label{k_ca_K_liner_reduced_dist}
-     %%   \end{subfigure}
-
-     %%   \vspace{-1.5cm}
-     %%   \begin{subfigure}{\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
-     %%   \end{subfigure}
-     %%   \vspace{-4cm}
-
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt15.eps}
+     %%     \includegraphics[width=0.8\columnwidth]{./Images_Result/k_ca_gaus_TREE_sample_dt20_C5.png}
      %%     \caption{ガウス分布}
-     %%     \label{k_ca_K_gaus_reduced_dist}
+     %%     \label{k_ca_gaus_morpho}
      %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt15.eps}
-     %%     \caption{ガウス分布(reduced)}
-     %%     \label{k_ca_K_gaus_reduced_dist}
-     %%   \end{subfigure}
+
+     %%   \caption{Kaチャネル, CaTチャネルを導入した際の結果1} %ページレイアウトが決定してから微調整する
+     %%   \label{k_ca_morpho}
+     %% \end{figure}
+
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt15.eps}
+         \caption{線形分布}
+         \label{k_ca_K_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt15.eps}
+         \caption{線形分布(reduced)}
+         \label{k_ca_K_liner_reduced_dist}
+       \end{subfigure}
+
+       \vspace{-1.5cm}
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       \vspace{-4cm}
+
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt15.eps}
+         \caption{ガウス分布}
+         \label{k_ca_K_gaus_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt15.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_ca_K_gaus_reduced_dist}
+       \end{subfigure}
        
-     %%   \caption{${\Delta}t = 15$[ms]でのKaコンダクタンス分布}
-     %%   \label{k_ca_K_dist_dt15}
-     %% \end{figure}
+       \caption{${\Delta}t = 15$[ms]でのKaコンダクタンス分布}
+       \label{k_ca_K_dist_dt15}
+     \end{figure}
 
-     %% \begin{figure}[H]
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt15.eps}
-     %%     \caption{線形分布}
-     %%     \label{k_ca_Ca_liner_reduced_dist}
-     %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt15.eps}
-     %%     \caption{線形分布(reduced)}
-     %%     \label{k_ca_Ca_liner_reduced_dist}
-     %%   \end{subfigure}
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt15.eps}
+         \caption{線形分布}
+         \label{k_ca_Ca_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt15.eps}
+         \caption{線形分布(reduced)}
+         \label{k_ca_Ca_liner_reduced_dist}
+       \end{subfigure}
 
-     %%   \vspace{-1.5cm}
-     %%   \begin{subfigure}{\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
-     %%   \end{subfigure}
-     %%   \vspace{-4cm}
+       \vspace{-1.5cm}
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       \vspace{-4cm}
 
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt15.eps}
-     %%     \caption{ガウス分布}
-     %%     \label{k_ca_Ca_gaus_reduced_dist}
-     %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt15.eps}
-     %%     \caption{ガウス分布(reduced)}
-     %%     \label{k_ca_Ca_gaus_reduced_dist}
-     %%   \end{subfigure}
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt15.eps}
+         \caption{ガウス分布}
+         \label{k_ca_Ca_gaus_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt15.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_ca_Ca_gaus_reduced_dist}
+       \end{subfigure}
 
-     %%   \caption{${\Delta}t = 15$[ms]でのCaTコンダクタンス分布}
-     %%   \label{k_ca_Ca_dist_dt15}
-     %% \end{figure}
+       \caption{${\Delta}t = 15$[ms]でのCaTコンダクタンス分布}
+       \label{k_ca_Ca_dist_dt15}
+     \end{figure}
 
-     %% %------------------------------------------------------------
+     %------------------------------------------------------------
 
-     %% \begin{figure}[H]
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt30.eps}
-     %%     \caption{線形分布}
-     %%     \label{k_ca_K_liner_reduced_dist}
-     %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt30.eps}
-     %%     \caption{線形分布(reduced)}
-     %%     \label{k_ca_K_liner_reduced_dist}
-     %%   \end{subfigure}
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_K_distribution_dt20.eps}
+         \caption{線形分布}
+         \label{k_ca_K_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_K_distribution_dt20.eps}
+         \caption{線形分布(reduced)}
+         \label{k_ca_K_liner_reduced_dist}
+       \end{subfigure}
 
-     %%   \vspace{-1.5cm}
-     %%   \begin{subfigure}{\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
-     %%   \end{subfigure}
-     %%   \vspace{-4cm}
+       \vspace{-1.5cm}
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       \vspace{-4cm}
 
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt30.eps}
-     %%     \caption{ガウス分布}
-     %%     \label{k_ca_K_gaus_reduced_dist}
-     %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt30.eps}
-     %%     \caption{ガウス分布(reduced)}
-     %%     \label{k_ca_K_gaus_reduced_dist}
-     %%   \end{subfigure}
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_K_distribution_dt20.eps}
+         \caption{ガウス分布}
+         \label{k_ca_K_gaus_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_K_distribution_dt20.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_ca_K_gaus_reduced_dist}
+       \end{subfigure}
 
-     %%   \caption{${\Delta}t = 30$[ms]でのKaコンダクタンス分布}
-     %%   \label{k_ca_K_dist_dt30}
-     %% \end{figure}
+       \caption{${\Delta}t = 20$[ms]でのKaコンダクタンス分布}
+       \label{k_ca_K_dist_dt20}
+     \end{figure}
 
-     %% \begin{figure}[H]
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt30.eps}
-     %%     \caption{線形分布}
-     %%     \label{k_ca_Ca_liner_reduced_dist}
-     %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt30.eps}
-     %%     \caption{線形分布(reduced)}
-     %%     \label{k_ca_Ca_liner_reduced_dist}
-     %%   \end{subfigure}
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_0_Ca_distribution_dt20.eps}
+         \caption{線形分布}
+         \label{k_ca_Ca_liner_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_liner_75_5_Ca_distribution_dt20.eps}
+         \caption{線形分布(reduced)}
+         \label{k_ca_Ca_liner_reduced_dist}
+       \end{subfigure}
 
-     %%   \vspace{-1.5cm}
-     %%   \begin{subfigure}{\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
-     %%   \end{subfigure}
-     %%   \vspace{-4cm}
+       \vspace{-1.5cm}
+       \begin{subfigure}{\columnwidth}
+         \centering
+         \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+       \end{subfigure}
+       \vspace{-4cm}
 
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt30.eps}
-     %%     \caption{ガウス分布}
-     %%     \label{k_ca_Ca_gaus_reduced_dist}
-     %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt30.eps}
-     %%     \caption{ガウス分布(reduced)}
-     %%     \label{k_ca_Ca_gaus_reduced_dist}
-     %%   \end{subfigure}
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_0_Ca_distribution_dt20.eps}
+         \caption{ガウス分布}
+         \label{k_ca_Ca_gaus_reduced_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/k_ca_Rerative_Gaus_75_5_Ca_distribution_dt20.eps}
+         \caption{ガウス分布(reduced)}
+         \label{k_ca_Ca_gaus_reduced_dist}
+       \end{subfigure}
        
-     %%   \caption{${\Delta}t = 30$[ms]でのCaTコンダクタンス分布}
-     %%   \label{k_ca_Ca_dist_dt30}
-     %% \end{figure}
+       \caption{${\Delta}t = 20$[ms]でのCaTコンダクタンス分布}
+       \label{k_ca_Ca_dist_dt20}
+     \end{figure}
      
-     %% 図\ref{k_ca_K_dist_dt15}を見ると, Kaコンダクタンスの分布はKaのみを導入した際の結果と似た傾向
-     %% が見られた. 
+     図\ref{k_ca_K_dist_dt15}を見ると, Kaコンダクタンスの分布はKaのみを導入した際の結果と似た傾向
+     が見られた. 
 % 最後にそれぞれの分布パターン、コンダクタンス考慮の組で、4パターンのコンダクタンスによる結果を一つのグラフにまとめる
 
      また, 以下の図\ref{Gaus_peaks}にガウス分布させた各コンダクタンスのピークの
-     位置($Gausian\hspace{1mm}\mu$)について解析した結果を示す. コンダクタンスをガウス分布
-     に従って決定する場合, $\mu$, $\sigma$, $peak$の値を用いる. しかし$peak$が0に
-     近い場合は$\mu$, $\sigma$の値は意味をなさない. そのためピーク位置の解析では
-     最大コンダクタンス値の5\%以上の$peak$をとった場合の$mean$のみを用いた. 樹状突起の長さは
-     全て[0, 1]に正規化されており, 1に近いほど細胞体から遠ざかる. また図\ref{Gaus_peaks}上部の星印($\star$)は
+     位置($Gausian\hspace{1mm}\mu$)について解析した結果を示す. 図\ref{Gaus_peaks}上部の星印($\star$)は
      Kaチャネルのみを導入した場合とKa, CaTチャネルを導入した場合の組, 
      CaTチャネルのみを導入した場合とKa, CaTチャネルを導入した場合の組でウェルチのt検定
      ($\alpha = 0.05$)を用いて検定を行い, 有意差があったことを示す. また十字の記号は
-     コンダクタンス分布
+     個体評価においてコンダクタンス分布量を考慮した場合の結果を, 同様に検定した結果を示す. 
+
      \vspace{-0.5cm}
      \begin{figure}[H]
        \begin{subfigure}{0.50\columnwidth}
@@ -339,16 +336,16 @@
        \end{subfigure}
        \begin{subfigure}{0.50\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_Gaus_Upper_mean.eps}
-         \caption{Upper DendriteのCaTコンダクタンスのピーク位置}
-         \label{ca_peak_ca_upper}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_Gaus_Lower_mean.eps}
+         \caption{Lower DendriteのKaコンダクタンスのピーク位置}
+         \label{k_peak_lower}
        \end{subfigure}
 
        \begin{subfigure}{0.50\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/k_Gaus_Lower_mean.eps}
-         \caption{Lower DendriteのKaコンダクタンスのピーク位置}
-         \label{k_peak_lower}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_Gaus_Upper_mean.eps}
+         \caption{Upper DendriteのCaTコンダクタンスのピーク位置}
+         \label{ca_peak_ca_upper}
        \end{subfigure}
        \begin{subfigure}{0.50\columnwidth}
          \centering
@@ -356,7 +353,8 @@
          \caption{Lower DendriteのCaTコンダクタンスのピーク位置}
          \label{ca_peak_ca_lower}
        \end{subfigure}
-       
+
+
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.5\columnwidth]{./Images_Result/Gaus_legend.eps}
@@ -367,8 +365,6 @@
        \end{subfigure}
 
        \vspace{-1cm}
-       \caption{ガウス分布を用いたKaコンダクタンスのピーク位置}
+       \caption{ガウス分布を用いたコンダクタンスのピーク位置}
        \label{Gaus_peaks}
      \end{figure}
-
-     

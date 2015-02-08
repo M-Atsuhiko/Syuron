@@ -132,8 +132,7 @@
        1^{st} cycle:\hspace{0.2cm} & YFBX \\
        2^{nd} cycel:\hspace{0.2cm} & YYFBBX
      \end{align*}
-     樹状突起形態の生成方法として, 三宮 et al. を参考にすると以下のようなL-systemが考えられる\cite{三宮信夫1998遺伝.
-       アルゴリズムと最適化}
+     樹状突起形態の生成方法として, 三宮 et al. を参考にすると以下のようなL-systemが考えられる\cite{三宮信夫1998遺伝アルゴリズムと最適化}. 
      使用する記号の集合として$\{S,B,T\}$を定義する.置き換え規則として
      \begin{align*}
        rules: \hspace{0.2cm}
@@ -568,7 +567,7 @@
          \label{neuron_param}
          \begin{tabular}[h]{|c||c|} \hline
            \multicolumn{1}{|c||}{パラメータ名} & \multicolumn{1}{c|}{値} \\ \hline \hline
-%	   Simulation time [ms]& 50 または 100 \\\hline % <- ここ変える
+	   Simulation time [ms]& 50 \\\hline
 	   $Ra$  [${\rm{\Omega}cm}$] & 100 \\ \hline
 	   $Cm$  [${\rm{\mu}F/cm^2}$] & 0.8 \\ \hline
 	   $V_{init}$ [mV]& -70\\ \hline
@@ -709,8 +708,7 @@
        ある個体$u_{g,i}$から作成された$Neuron_{g,i}$に対して, 以下のシミュレーションを行う.
        またBlueシナプスを活性化させる時刻を$t_{Blue}$[ms],
        Redシナプスを活性化させる時刻を$t_{Red}$[ms]とする.
-       シミュレーション時間はCaTコンダクタンスが単独で分布している場合は100ms, それ以外の場合
-       は50msである. また, $Neuron_{g,i}$の細胞体$Soma_{g,i}$で観測される最大の膜電位上昇量を
+       シミュレーション時間は50msである. また, $Neuron_{g,i}$の細胞体$Soma_{g,i}$で観測される最大の膜電位上昇量を
        $R$とする. シミュレーションは以下の表\ref{synapse_time}に示される$t_{Blue}$, $t_{Red}$の組みを用いて,
        1つの$Neuron_{g,i}$につき計4回行われる.
        シミュレーションはNEURONシミュレータで行い, CVodeアルゴリズムを用いた. % <- NEURON シミュレータに関して書いた方がいいか？
@@ -798,8 +796,7 @@
        \item \textbf{シミュレーションヒューリスティックス}\\
          以下に示される場合は$\mu = -50$, $\sigma = 5$のガウス分布から乱数を1つ発生させ,
          その値を評価値$E_{i,g}$とした.
-         これは神経細胞での発火や, 膜電位の振動を % <- 細胞体での発火を抑制する意味は? ここコンダクタンスの時のみの考慮にしなくてもよさそう
-         抑制し, シミュレーションの時間中に最大の上昇幅がとれるようにするためである. 
+         これは神経細胞での発火や, 膜電位の振動を抑制し, シミュレーションの時間中に最大の上昇幅がとれるようにするためである. 
          \begin{itemize}
            \item $ {R_{Blue}}_i < 2$または$ {R_{Red}}_i < 2$のとき
            \item ${R_{Blue}}_i > 25$または${R_{Red}}_i > 25$のとき
@@ -908,7 +905,7 @@
          ${p'}_i$が表\ref{sigma_M}に示される値域に収まらない場合は再度式\ref{Mutation}を用いて
          ${p'}_i$を取り直す. 
          \begin{table}[H]
-           \caption{${\sigma}_M$と各パラメータの初期値}
+           \caption{突然変異に用いる標準偏差${\sigma}_M$と各パラメータの初期値}
            \label{sigma_M_init}
            \begin{center}
 	     \begin{tabular}[t]{|l||c|c|c|c|} \hline
@@ -1041,30 +1038,38 @@
        \item \textbf{機能性$F$の値}
        \item \textbf{長さ[${\mu}m$]}\\
          神経細胞の持つ全ての$Branch$の$length$の和
-       \item \textbf{体積[${\mu}m^3$]}
+       \item \textbf{体積[${\mu}m^3$]} \\
          神経細胞の全ての$Branch$の体積の和
-       \item \textbf{CaTコンダクタンス含有率}
-         神経細胞のCaTコンダクタンス含有率は以下のように定義する. 
-         神経細胞の各コンパートメント$Comp_{i}$について, そのCaTコンダクタンスを${\overline{g}_{CaT}}_{i}$, 
-         表面積を$S_{i}$とする. 神経細胞のコンパートメントの個数を$N_C$とする. 
-         神経細胞のCaTコンダクタンス含有率CaT \textit{ratio}は最大CaTコンダクタンスを用いて, 
-         \begin{equation}
-           {\rm CaT}\hspace{1mm}ratio = \frac{{\sum}^{N_C}_{i = 1}S_{i}\cdot{\overline{g}_{CaT}}_{i}}
-           {{\sum}^{N_C}_{i = 1}S_{i}\cdot Max\hspace{1mm}{\rm CaT}}
-         \end{equation}
 
-       \item \textbf{樹状突起の直径}
+       \item \textbf{樹状突起の直径} \\
          本研究の形態生成では, 樹状突起の$Branch$の太さはStemの値をもとに決定される. そのためStemの直径を
          その樹状突起の代表的な太さとして用いた. 
 
-       \item \textbf{樹状突起の分岐数}
+       \item \textbf{樹状突起の分岐数} \\
          樹状突起に含まれる分岐の個数の合計
 
-       \item \textbf{樹状突起のシナプス数}
+       \item \textbf{樹状突起のシナプス数} \\
          樹状突起がもつシナプスの個数の合計
 
-       \item \textbf{Kaコンダクタンス含有率}
-         神経細胞のKaコンダクタンス含有率はCaTの場合と同様に定義する. 
-         
+       \item \textbf{Kaコンダクタンス含有率} \\
+         神経細胞のKaコンダクタンス含有率は以下のように定義する. 
+         神経細胞の各コンパートメント$Comp_{i}$について, そのKaコンダクタンスを${\overline{g}_{Ka}}_{i}$, 
+         表面積を$S_{i}$とする. 神経細胞のコンパートメントの個数を$N_C$とする. 
+         神経細胞のKaコンダクタンス含有率Ka \textit{ratio}は, 最大Kaコンダクタンス量である
+         Max Kaを用いて
+         \begin{equation}
+           {\rm Ka}\hspace{1mm}ratio = \frac{{\sum}^{N_C}_{i = 1}S_{i}\cdot{\overline{g}_{Ka}}_{i}}
+           {{\sum}^{N_C}_{i = 1}S_{i}\cdot Max\hspace{1mm}{\rm Ka}}
+         \end{equation}
+         とする. 
+
+       \item \textbf{CaTコンダクタンス含有率} \\
+         神経細胞のCaTコンダクタンス含有率は, Kaコンダクタンスの場合と同様に定義する. 
+
+        \item \textbf{ガウス分布させたコンダクタンスのピーク位置} \\
+          コンダクタンスをガウス分布に従って分布させた場合のピークの位置($Gausian\hspace{1mm}\mu$)を, 
+          樹状突起の長さを[0,1]に正規化した値で表す. 値が1に近いほど樹状突起の先端にピーク位置があることを表す. 
+          しかし$peak$が0に近い場合は$\mu$, $\sigma$の値は意味をなさない. そのためピーク位置の解析では
+          最大コンダクタンス値の5\%以上の$peak$をとった場合の$Gausian\hspace{1mm}\mu$のみを用いた.
      \end{itemize}
      

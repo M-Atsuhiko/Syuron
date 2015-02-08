@@ -3,30 +3,30 @@
  \section{CaTチャネルを用いた場合の結果}
    図\ref{ca_result1}, 図\ref{ca_result2}にCaTチャネルを導入した際の結果を示す.
    凡例や検定手法とその結果の示し方は図\ref{Ka_Result1}と同様である.
-   \vspace{-0.5cm}
+
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_test_F.eps}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_st50_test_F.eps}
          \caption{$F$}
          \label{ca_F}
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_test_TREE_length.eps} 
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_st50_test_TREE_length.eps} 
          \caption{長さ}
          \label{ca_TREE_length}
        \end{subfigure}
 
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_test_TREE_volume.eps}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_st50_test_TREE_volume.eps}
          \caption{体積}
          \label{ca_TREE_volume}
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_test_TREE_Ca_ratio.eps}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_st50_test_TREE_Ca_ratio.eps}
          \caption{CaTコンダクタンス含有率}
          \label{ca_TREE_Ca_ratio}
        \end{subfigure}
@@ -34,7 +34,7 @@
        \vspace{-0.3cm}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/ca_test_legend.eps} 
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/ca_st50_test_legend.eps} 
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
@@ -46,19 +46,17 @@
        \label{ca_result1}
      \end{figure}
      図\ref{ca_F}より, CaTコンダクタンスを導入したことによりPassiveの場合よりも
-     $F$値が増加していることがわかる. またKaコンダクタンスの場合とは違って${\Delta}t$が
-     増加するほど大きな$F$値をとっている.
-     これは先行研究でも確認されている\cite{torben2009systematic}. 
+     $F$値が増加していることがわかる. 
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_test_Lower_Ca_ratio.eps}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_st50_test_Lower_Ca_ratio.eps}
          \caption{Lower DendriteのCaTコンダクタンス含有率}
          \label{ca_lower_ca_ratio}
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_test_Upper_Ca_ratio.eps}
+         \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_st50_test_Upper_Ca_ratio.eps}
          \caption{Upper DendriteのCaTコンダクタンス含有率}
          \label{ca_upper_ca_ratio}
        \end{subfigure}
@@ -66,7 +64,7 @@
        \vspace{-0.3cm}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/ca_test_legend.eps} 
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/ca_st50_test_legend.eps} 
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
@@ -78,21 +76,21 @@
        \label{ca_result2}
      \end{figure}
 
-     図\ref{CaT_V}はCaTコンダクタンスを導入した際のシミュレーションの一例である. 実線がCaTコンダクタンスを導入したモデルの膜電位変動波形であり, 
-     破線はその神経細胞からCaTを不活性化($\overline{g}_{CaT} = 0$)した場合の膜電位変動である. 
+     図\ref{CaT_V}はCaTコンダクタンスを導入した際のシミュレーションの一例である. 実線がCaTコンダクタンスを導入したモデルの膜電位波形であり, 
+     破線はその神経細胞からCaTを不活性化($\overline{g}_{CaT} = 0$)した場合の膜電位波形である. 
      図\ref{CaT_V}からわかるようにCaTコンダクタンスを導入すると細胞体での脱分極は大きくなり, また電位が高い状態が維持される.
 
      \vspace{-1cm}
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=\columnwidth]{./Images_Result/ca_V_dt30_G_C5.eps}
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_st50_V_dt20_C5.eps}
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
          \includegraphics[width=0.8\columnwidth]{./Images_Result/ca_2simulation_legend.eps}
        \end{subfigure}
-       \caption{CaT シミュレーション例(${\Delta}t = 30$[ms])}
+       \caption{CaT 膜電位波形例(${\Delta}t = 20$[ms])}
        \label{CaT_V}
      \end{figure}
 
@@ -116,54 +114,54 @@
      %%   \label{Ca_morphos}
      %% \end{figure}
 
-     %% 図\ref{ca_Ca_dist}に${\Delta}t = 30$[ms]として作成した神経細胞の
-     %% CaTコンダクタンス分布を示す.
-     %% 図\ref{ca_liner_dist}と図\ref{ca_liner_reduced_dist}は線形分布を用い,
-     %% 図\ref{ca_gaus_dist}と図\ref{ca_gaus_reduced_dist}はガウス分布を用いている.
-     %% 図\ref{ca_liner_reduced_dist}と図\ref{ca_gaus_reduced_dist}は個体評価に
-     %% コンダクタンスの考慮を入れた場合(reduced)である. 
-     %% \vspace{-1cm}
-     %% \begin{figure}[H]
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_liner_75_0_Ca_distribution_dt30.eps}
-     %%     \caption{線形分布}
-     %%     \label{ca_liner_dist}
-     %%   \end{subfigure}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_liner_75_5_Ca_distribution_dt30.eps}
-     %%     \caption{線形分布(reduced)}
-     %%     \label{ca_liner_reduced_dist}
-     %%   \end{subfigure}
+     図\ref{ca_Ca_dist}に${\Delta}t = 30$[ms]として作成した神経細胞の
+     CaTコンダクタンス分布を示す.
+     図\ref{ca_liner_dist}と図\ref{ca_liner_reduced_dist}は線形分布を用い,
+     図\ref{ca_gaus_dist}と図\ref{ca_gaus_reduced_dist}はガウス分布を用いている.
+     図\ref{ca_liner_reduced_dist}と図\ref{ca_gaus_reduced_dist}は個体評価に
+     コンダクタンスの考慮を入れた場合(reduced)である. 
+     \vspace{-0.5cm}
+     \begin{figure}[H]
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_liner_st50_75_0_Ca_distribution_dt20.eps}
+         \caption{線形分布}
+         \label{ca_liner_dist}
+       \end{subfigure}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_liner_st50_75_5_Ca_distribution_dt20.eps}
+         \caption{線形分布(reduced)}
+         \label{ca_liner_reduced_dist}
+       \end{subfigure}
 
-     %%   \vspace{-1.5cm}
-     %% \begin{subfigure}{\columnwidth}
-     %%   \centering
-     %%   \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
-     %% \end{subfigure}
-     %% \vspace{-4cm}
+       \vspace{-1.5cm}
+     \begin{subfigure}{\columnwidth}
+       \centering
+       \includegraphics[width=0.35\columnwidth]{./Images_Result/Synapse_legend.eps} 
+     \end{subfigure}
+     \vspace{-4cm}
 
-     %%   \hspace*{-2cm}
-     %%   \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_Gaus_75_0_Ca_distribution_dt30.eps}
-     %%     \caption{ガウス分布} %このガウス分布の図はシナプティックゾーンを作り直したほうがいい
-     %%     \label{ca_gaus_dist}
-     %%   \end{subfigure}
-     %%          \begin{subfigure}{0.62\columnwidth}
-     %%     \centering
-     %%     \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_Gaus_75_5_Ca_distribution_dt30.eps}
-     %%     \caption{ガウス分布(reduced)} %このガウス分布の図はシナプティックゾーンを作り直したほうがいい
-     %%     \label{ca_gaus_reduced_dist}
-     %%   \end{subfigure}
+       \hspace*{-2cm}
+       \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_Gaus_st50_75_0_Ca_distribution_dt20.eps}
+         \caption{ガウス分布} %このガウス分布の図はシナプティックゾーンを作り直したほうがいい
+         \label{ca_gaus_dist}
+       \end{subfigure}
+              \begin{subfigure}{0.62\columnwidth}
+         \centering
+         \includegraphics[width=\columnwidth]{./Images_Result/ca_Rerative_Gaus_st50_75_5_Ca_distribution_dt20.eps}
+         \caption{ガウス分布(reduced)} %このガウス分布の図はシナプティックゾーンを作り直したほうがいい
+         \label{ca_gaus_reduced_dist}
+       \end{subfigure}
 
-     %%   \caption{${\Delta}t = 30$[ms], でのCaTコンダクタンス分布}
-     %%   \label{ca_Ca_dist}
-     %% \end{figure}
+       \caption{${\Delta}t = 20$[ms], でのCaTコンダクタンス分布}
+       \label{ca_Ca_dist}
+     \end{figure}
 
-     %% 図\ref{ca_Ca_dist}より, コンダクタンス分布様式に限らずCaTコンダクタンスはLower Dendriteの%樹状突起の呼び方をどうするか
-     %% 先端に多く分布していることがわかる. 個体評価にてコンダクタンス量を評価しない場合はUpper
-     %% DendriteでもCaTコンダクタンスの分布が見られるが, 評価にコンダクタンスの考慮を導入すると
-     %% ほとんど見られなくなった.
+     図\ref{ca_Ca_dist}より, コンダクタンス分布様式に限らずCaTコンダクタンスはLower Dendriteの
+     先端に多く分布していることがわかる. 個体評価にてコンダクタンス量を評価しない場合はUpper
+     DendriteでもCaTコンダクタンスの分布が見られるが, 評価にコンダクタンスの考慮を導入すると
+     ほとんど見られなくなった.
