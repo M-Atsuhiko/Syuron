@@ -16,7 +16,7 @@
      \item その機能をうまく実現する神経細胞の形態とコンダクタンス分布を
        遺伝アルゴリズムを用いて探索する
    \end{enumerate}
-   本研究の手法は主にTorben-Nielsen et al. を参考にしている.\cite{torben2009systematic}
+   本研究の手法は主にTorben-Nielsen et al. を参考にしている\cite{torben2009systematic}.
    神経細胞の形態と機能の関係性を探るアプローチとして, 
    神経細胞の形態からその機能を推定するのではなく, 先に機能を設定しその機能を
    実現する形態を探すという手法である. 
@@ -115,10 +115,10 @@
        \label{morpho}
      \end{figure}
    \subsection{樹状突起形態生成手法の基本概念}
-     樹状突起形態生成手法の基本はL-systemである.\cite{prusinkiewicz1990}
+     樹状突起形態生成手法の基本はL-systemである\cite{prusinkiewicz1990}.
      L-systemは, ある記号の集合とその置き換え規則から定義され, 初期状態としてある記号列が与え
      られるとその記号列を再起的に変換していくシステムである. L-systemの例
-     を示す.\cite{torben2007evolving} まず記号の集合$\{B,F,X,Y\}$定義す
+     を示す\cite{torben2007evolving}. まず記号の集合$\{B,F,X,Y\}$定義す
      る. 次にその置き換え規則として
      \begin{align*}
        rules: \hspace{0.2cm} & F \to YF\\
@@ -132,7 +132,7 @@
        1^{st} cycle:\hspace{0.2cm} & YFBX \\
        2^{nd} cycel:\hspace{0.2cm} & YYFBBX
      \end{align*}
-     樹状突起形態の生成方法として, 三宮 et al. を参考にすると以下のようなL-systemが考えられる.\cite{三宮信夫1998遺伝
+     樹状突起形態の生成方法として, 三宮 et al. を参考にすると以下のようなL-systemが考えられる\cite{三宮信夫1998遺伝.
        アルゴリズムと最適化}
      使用する記号の集合として$\{S,B,T\}$を定義する.置き換え規則として
      \begin{align*}
@@ -384,7 +384,7 @@
        また, この場合, 親$Branch$の$diam$を$Minimum\hspace{1mm}diameter$
 	    に設定し直す.ここで$Minimum\hspace{1mm}diameter = 0.15$[$\mu$m]である. 
     \end{itemize}
-    これらのヒューリスティックは神経細胞形態を作成するために使用されることが多い. \cite{burke1992parsimonious}
+    これらのヒューリスティックは神経細胞形態を作成するために使用されることが多い\cite{burke1992parsimonious}. 
 
     \subsection{$Branch$に対する三次元座標の設定}
      $length_i$, $elevation_i$, $rotation_i$の情報を用いて三次元空間上での$Branch_i$の座標情報を
@@ -490,7 +490,7 @@
    \subsection{イオンチャネルモデル}
    式\ref{V_i}のイオンチャネルモデル$I_{CaT}$, $I_{Ka}$は
    Migliore et al. に示されるイオンチャネルの
-     モデルを使用している.\cite{migliore1995computer}
+     モデルを使用している\cite{migliore1995computer}. 
      \begin{itemize}
        \item 電位依存型T型${\rm Ca^{2+}}$電流
          \begin{align}
@@ -608,7 +608,7 @@
      を設定する. 
      樹状突起上のコンダクタンス分布は線形分布とガウス分布のどちらかを使用する.
      線形分布はコンダクタンスは$Branch$ごとに線形に変化させるという手法
-     である.\cite{torben2009systematic}.
+     である\cite{torben2009systematic}. 
      ガウス分布は$Comp$ごとにコンダクタンスを変化させ, 線形分布の場合よりも細かくコンダクタンス
      分布を設定できる. さらに線形分布と異なり, 樹状突起の一部のみに高いコンダクタンス分布を
      持たせるなど, 非線形なコンダクタンス分布を表現できる. 
