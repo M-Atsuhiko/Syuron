@@ -1,0 +1,67 @@
+\documentclass[a4j,twocolumn, 10.5pt]{jarticle}
+\usepackage[dvipdfmx]{graphicx,color}
+\usepackage{subcaption}
+\usepackage{amsmath}
+\usepackage{wrapfig}
+\renewcommand{\baselinestretch}{1.5}%double spaced%2.0
+\def\Vec#1{\mbox{\boldmath $#1$}}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\tr}{tr}
+\renewcommand{\baselinestretch}{1.0}
+%\setlength{\abovecaptionskip}{-5mm}
+%\setlength{\belowcaptionskip}{-5mm}
+
+\topmargin -60mm
+\textheight 270mm
+
+\title{\bf
+{時差入力に特異応答を見せる単一神経細胞の\\最適形態とコンダクタンス分布\\}}
+\author{村上敦彦\\66612130070-3\\立命館大学大学院 情報理工学研究科\\計算神経科学研究室所属}
+\date{}
+
+\renewcommand{\topmargin}{-20mm}
+\oddsidemargin -15.5mm
+\textwidth 190mm
+\renewcommand{\textheight}{250mm}
+
+\columnsep 5mm
+\begin{document}
+\maketitle
+
+\section{2枚目 研究背景}
+生き物の脳は多数の神経細胞によって構成されており、それらは電気的なネットワーク
+を構成している. このネットワークの活動によって記憶、学習、身体制御などの脳の
+機能は実現されていると考えられています. 
+
+一方で単一の神経細胞についても、その形やコンダクタンスの分布のしかたが
+神経細胞内の電位, 「膜電位」の変動に影響すると考えられています。
+
+膜電位とは, 細胞外を0としたときの細胞内の電位のこと。-70mVなら、外と比べて
+細胞内が70mV低い電位であることを表す。
+
+\section{3枚目 コンダクタンス分布とは?}
+神経細胞の内部や外部には様々な種類のイオンが存在する。
+このイオンが細胞の内部に入ったり、出て行ったりすることで膜電位が変動する。
+
+膜電位の挙動は微分方程式によって表現することができる。
+右辺の項はそれぞれ、イオンが神経細胞から流入出することによって発生するイオン電流を
+あらわしている。leakはその他もろもろの電流。
+
+まずKイオンに作用する電位差について
+Kイオンは濃度的には細胞外に流出しようとする。しかしの膜電位が-91mVのとき、イオンの
+流出入がつり合う。この膜電位を基準に、Kイオンに作用する電位を考える。
+平常時-70mVの膜電位なら、Kイオンは細胞外に流出しようとする。
+
+次にコンダクタンスは、細胞膜上にあるチャネルが開いている状態の割合をnとlで表し, 
+細胞膜がどれだけイオンを透過させることができるかを表す。n、lは時間tと膜電位Vに依存し、
+時々刻々変化する。gバーは全てのチャネルが開になっているときに、1mVの電位差で流れる
+電流の量を表す。同時にチャネルの分布量とも言える。
+
+電流は電位差とコンダクタンスの積によって表されるが、ポイントはいくら電位差が大きくてもチャネルが開いていなければ電流は流れないということ。
+
+コンダクタンス分布とは神経細胞の最大コンダクタンスの分布のことであり、同時にそれは
+細胞膜上のイオンチャネルの分布を表している。
+
+\section{4枚目}
+\end{document}
