@@ -1,10 +1,20 @@
 \begin{thebibliography}{1}
 
+\bibitem{segev2000untangling}
+I~Segev and M~London.
+\newblock Untangling dendrites with quantitative models.
+\newblock {\em Science}, Vol. 290, No. 5492, pp. 744--750, 2000.
+
 \bibitem{torben2009systematic}
 B~Torben-Nielsen and KM~Stiefel.
 \newblock Systematic mapping between dendritic function and structure.
 \newblock {\em Network: Computation in Neural Systems}, Vol.~20, No.~2, pp.
   69--105, 2009.
+
+\bibitem{stiefel2007mapping}
+KM~Stiefel and TJ~Sejnowski.
+\newblock Mapping function onto neuronal morphology.
+\newblock {\em Journal of neurophysiology}, Vol.~98, No.~1, pp. 513--526, 2007.
 
 \bibitem{prusinkiewicz1990}
 P~Prusinkiewicz and A~Lindenmayer.
