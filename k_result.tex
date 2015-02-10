@@ -3,14 +3,14 @@
  \section{Kaチャネルを用いた場合の結果}
    図\ref{Ka_Result1}, 図\ref{Ka_Result2}にKaチャネルを導入した際の結果を示す.
    図中のGausianはコンダクタンス分布様式に
-   ガウス分布を用いており, Linerは線形分布を用いた場合の結果である.
+   ガウス分布を用いており, Expは指数関数分布を用いた場合の結果である.
    また-reducedはそれぞれのコンダクタンス分布様式で, 個体評価にコンダクタンス量への考慮
    を導入した場合の結果である. \\
    グラフ上部の記号は各${\Delta}t$において, ウェルチのt検定($\alpha = 0.05$)
    を行い有意差がみられたことを
-   示している. 記号($\star$)はGausianとLinerの結果を比較している. 
-   記号($\#$)はGausianとreduced-Gausian, Linerとreduced-Linerの組で検定を行った結果である.
-   また緑色の記号($+$)はreduced-Gausianとreduced-Linerの組で検定を行った結果を示している. 
+   示している. 記号($\star$)はGausianとExpの結果を比較している. 
+   記号($\#$)はGausianとreduced-Gausian, ExpとExp-Linerの組で検定を行った結果である.
+   また緑色の記号($+$)はreduced-Gausianとreduced-Expの組で検定を行った結果を示している. 
    \vspace{-0.5cm}
      \begin{figure}[H]
        \begin{subfigure}{0.5\columnwidth}
@@ -55,11 +55,11 @@
        \vspace{-0.3cm}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/k_test_legend.eps} 
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/exp_k_test_legend.eps} 
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/test_legend.eps} 
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/exp_test_legend.eps} 
        \end{subfigure}
 
        \vspace{-1.6cm}
@@ -111,11 +111,11 @@
        \vspace{-0.3cm}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/k_test_legend.eps} 
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/exp_k_test_legend.eps} 
        \end{subfigure}
        \begin{subfigure}{0.5\columnwidth}
          \centering
-         \includegraphics[width=0.6\columnwidth]{./Images_Result/test_legend.eps} 
+         \includegraphics[width=0.6\columnwidth]{./Images_Result/exp_test_legend.eps} 
        \end{subfigure}
 
        \vspace{-1.6cm}
@@ -126,7 +126,7 @@
   図\ref{k_F}よりKaコンダクタンスを導入したことでPassiveの場合よりも$F$値が増加している
   ことがわかる. 先行研究では${\Delta}t=5$[ms]のときに最も高い$F$値が得られていたが,
   それとは異なる結果となった. 
-  図\ref{k_TREE_K_ratio}より個体評価にてコンダクタンス量を考慮する場合でも神経細胞s
+  図\ref{k_TREE_K_ratio}より個体評価にてコンダクタンス量を考慮する場合でも神経細胞
   のKaコンダクタンス含有率はあまり変化がないことがわかる.
 
   図\ref{Ka_V}はKaコンダクタンスを導入した際のシミュレーションの一例である. 
@@ -169,7 +169,7 @@
 %これは付録にしたほうがよさそう
    また, 図\ref{k_Ka_dist_dt10}に${\Delta}t = 10$[ms]として作成した神経細胞の
    コンダクタンス分布を示す.
-   図\ref{k_liner_dist_dt10}は線形分布を用い, 図\ref{k_gaus_dist_dt10}
+   図\ref{k_liner_dist_dt10}は指数関数分布を用い, 図\ref{k_gaus_dist_dt10}
    はガウス分布を用いている. また図\ref{k_liner_reduced_dist_dt10}と
    図\ref{k_gaus_reduced_dist_dt10}はそれぞれのコンダクタンス分布様式で,
    評価式においてコンダクタンスの考慮を行った場合の結果である. 
@@ -178,14 +178,14 @@
      \hspace*{-2cm}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_0_K_distribution_dt10.eps}
-       \caption{線形分布}
+       \includegraphics[width=\columnwidth]{./Images_Result/exp_k_Rerative_liner_75_0_K_distribution_dt10.eps}
+       \caption{指数関数分布}
        \label{k_liner_dist_dt10}
      \end{subfigure}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt10.eps}
-       \caption{線形分布(reduced)}
+       \includegraphics[width=\columnwidth]{./Images_Result/exp_k_Rerative_liner_75_5_K_distribution_dt10.eps}
+       \caption{指数関数分布(reduced)}
        \label{k_liner_reduced_dist_dt10}
      \end{subfigure}
 
@@ -218,14 +218,14 @@
      \hspace*{-2cm}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_0_K_distribution_dt15.eps}
-       \caption{線形分布}
+       \includegraphics[width=\columnwidth]{./Images_Result/exp_k_Rerative_liner_75_0_K_distribution_dt15.eps}
+       \caption{指数関数分布}
        \label{k_liner_dist_dt15}
      \end{subfigure}
      \begin{subfigure}{0.62\columnwidth}
        \centering
-       \includegraphics[width=\columnwidth]{./Images_Result/k_Rerative_liner_75_5_K_distribution_dt15.eps}
-       \caption{線形分布(reduced)}
+       \includegraphics[width=\columnwidth]{./Images_Result/exp_k_Rerative_liner_75_5_K_distribution_dt15.eps}
+       \caption{指数関数分布(reduced)}
        \label{k_liner_reduced_dist_dt15}
      \end{subfigure}
 
